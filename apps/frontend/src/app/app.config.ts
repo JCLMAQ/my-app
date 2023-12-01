@@ -23,24 +23,35 @@ import {
 import { LetDirective, PushPipe } from '@ngrx/component';
 import { provideEffects } from '@ngrx/effects';
 import { routerReducer } from '@ngrx/router-store';
-import { provideStore } from '@ngrx/store';
+import { provideStore, provideState } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpLoaderFactory } from './app.component';
 import { appRoutes } from './app.routes';
+import * as fromAppStore from './+state/app-store.reducer';
+import { AppStoreEffects } from './+state/app-store.effects';
 // import { reducers } from './reducers';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideStoreDevtools({ 
-      maxAge: 25, 
-      logOnly: !isDevMode(),  
+    provideEffects(AppStoreEffects),
+    provideState(
+      fromAppStore.APP_STORE_FEATURE_KEY,
+      fromAppStore.appStoreReducer,
+    ),
+    provideStoreDevtools({ logOnly: !isDevMode() }),
+    provideEffects(),
+    provideStore(),
+    provideStoreDevtools({
+      maxAge: 25,
+      logOnly: !isDevMode(),
       autoPause: true,
       trace: false,
-      traceLimit: 75, }),
+      traceLimit: 75,
+    }),
     provideEffects(),
     provideStore({ router: routerReducer }),
-      // provideState(),
+    // provideState(),
     provideRouter(
       appRoutes,
       withComponentInputBinding(),
