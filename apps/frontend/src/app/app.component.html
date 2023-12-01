@@ -65,6 +65,15 @@
         </span>
       </a>
 
+      <a mat-list-item routerLink="tasks">
+        <span class="entry">
+          <mat-icon>tasks</mat-icon>
+          @if (!isCollapsed) {
+            <span>Tasks</span>
+          }
+        </span>
+      </a>
+
       <a mat-list-item routerLink="page/aboutpage">
         <span class="entry">
           <mat-icon>question_answer</mat-icon>
