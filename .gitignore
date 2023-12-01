@@ -1,0 +1,79 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+dist
+tmp
+/out-tsc
+
+# dependencies
+node_modules
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+
+# System Files
+.DS_Store
+Thumbs.db
+
+.angular
+
+# Package files
+package-lock.json
+pnpm-lock.yaml
+
+# .env
+.env
+
+# Primsa Migration
+/prisma/migrations
+# Prisma utils generated files
+/prisma/generated
+
+# Tests
+/coverage
+/.nyc_output
+
+#Uploaded files
+/uploaded
+/uploadedimages
+/uploadedfiles
+/uploadedtempimages
+
+# Angular cache
+/.angular
+
+.angular
+
+# Documentation by CompDoc
+/Documentation
+
+# proxy setting
+proxy.conf.json
+
+# pnpm
+pnpm-lock.yaml
+
+.nx/cache

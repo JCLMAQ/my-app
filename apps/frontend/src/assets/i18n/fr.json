@@ -1,0 +1,24 @@
+{
+  "User": {
+    "title": "Titre",
+    "lastName": "Nom",
+    "firstName": "Prénom",
+    "dob": "Date de naissance"
+  },
+  "DatePicker": {
+    "datePlaceholder": "Choisissez une date",
+    "dateLabel": "Jour"
+  },
+    "HEADER.CHOOSE": "Choix de la langue",
+    "SITETITLE": "Angular Site multilangue",
+    "Name": "Nom",
+    "NameError": "Je suis certain que vous avez un nom!",
+    "Email": "Adresse email",
+    "PhoneNo": "Numéro de téléphone",
+    "Password": "Mot de passe",
+    "Bio": "Votre bio",
+    "TermsConditions": "J'acczepter les termes et conditions.",
+    "Submit": "Soumettre"
+
+
+}

@@ -1,0 +1,6 @@
+-- AlterTable
+ALTER TABLE "Organization" ALTER COLUMN "address" SET DATA TYPE JSON;
+
+-- AlterTable
+ALTER TABLE "User" ALTER COLUMN "social" SET DATA TYPE JSON,
+ALTER COLUMN "address" SET DATA TYPE JSON;

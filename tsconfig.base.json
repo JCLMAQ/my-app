@@ -1,0 +1,44 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2017", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@my-app/api-interfaces": ["zmodel/libs/api-interfaces/src/index.ts"],
+      "@my-app/data/auths": ["libs/data/auths/src/index.ts"],
+      "@my-app/data/changestracking": [
+        "libs/data/utilities/changestracking/src/index.ts"
+      ],
+      "@my-app/data/common": ["libs/data/common/src/index.ts"],
+      "@my-app/data/db-config": ["libs/data/utilities/db-config/src/index.ts"],
+      "@my-app/data/files": ["libs/data/utilities/files/src/index.ts"],
+      "@my-app/data/iam": ["libs/data/iam/src/index.ts"],
+      "@my-app/data/mails": ["libs/data/utilities/mails/src/index.ts"],
+      "@my-app/data/posts": ["libs/data/posts/src/index.ts"],
+      "@my-app/data/time-util": ["libs/data/utilities/time-util/src/index.ts"],
+      "@my-app/data/users": ["libs/data/users/src/index.ts"],
+      "@my-app/material": ["libs/material/src/index.ts"],
+      "@my-app/prisma": ["libs/prisma/src/index.ts"],
+      "@my-app/test": ["libs/test/src/index.ts"],
+      "@my-app/ui/auth": ["libs/ui/auth/src/index.ts"],
+      "@my-app/ui/i18n": ["libs/ui/i18n/src/index.ts"],
+      "@my-app/ui/language-selector": ["libs/ui/i18n/src/index.ts"],
+      "@my-app/ui/pages": ["libs/ui/pages/src/index.ts"],
+      "@my-app/ui/user": ["libs/ui/user/src/index.ts"],
+      "@my-app/ui/utilities": ["libs/ui/utilities/src/index.ts"],
+      "usersbis": ["libs/ui/usersbis/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}

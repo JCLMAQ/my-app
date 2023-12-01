@@ -1,0 +1,26 @@
+{
+  "name": "ui-utilities",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/ui/utilities/src",
+  "prefix": "my-app",
+  "targets": {
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/ui/utilities/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/ui/utilities/**/*.ts",
+          "libs/ui/utilities/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
