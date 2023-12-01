@@ -2,10 +2,6 @@ import { Route } from '@angular/router';
 import { PageNotFoundComponent } from '@my-app/ui/pages';
 
 export const appRoutes: Route[] = [
-  {
-    path: 'users',
-    loadChildren: () => import('@my-app/ui/user').then((m) => m.uiUserRoutes),
-  },
 
   {
     path: 'page',
