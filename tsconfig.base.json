@@ -36,6 +36,8 @@
       "@my-app/ui/language-selector": ["libs/ui/i18n/src/index.ts"],
       "@my-app/ui/pages": ["libs/ui/pages/src/index.ts"],
       "@my-app/ui/utilities": ["libs/ui/utilities/src/index.ts"],
+      "task": ["libs/feature/task/src/index.ts"],
+      "user": ["libs/feature/user/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

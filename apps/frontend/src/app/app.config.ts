@@ -32,16 +32,22 @@ import { appRoutes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
+    provideStoreDevtools({ 
+      maxAge: 25, 
+      logOnly: !isDevMode(),  
+      autoPause: true,
+      trace: false,
+      traceLimit: 75, }),
     provideEffects(),
     provideStore({ router: routerReducer }),
-
+      // provideState(),
     provideRouter(
       appRoutes,
       withComponentInputBinding(),
       withDebugTracing(),
       withEnabledBlockingInitialNavigation(),
     ),
+    provideHttpClient(withInterceptorsFromDi()),
     importProvidersFrom(
       BrowserModule,
       FormsModule,
@@ -81,7 +87,5 @@ export const appConfig: ApplicationConfig = {
       useValue: { appearance: 'fill' },
     },
     provideAnimations(),
-    provideHttpClient(withInterceptorsFromDi()),
-    provideHttpClient(withInterceptorsFromDi()),
   ],
 };
