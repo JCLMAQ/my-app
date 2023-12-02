@@ -199,3 +199,4 @@
     "seed": "ts-node zmodel/prisma/seed.ts"
   }
 }
+
