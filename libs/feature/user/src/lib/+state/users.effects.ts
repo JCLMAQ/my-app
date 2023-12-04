@@ -37,11 +37,12 @@ export const loadUsers = createEffect(
             of(UsersActions.usersAPIActions.loadUsersFailure({ error }))
           )
         )
+      },
+      {
+        functional: true,
       }
     );
 
-  // {
-  //   functional: true,
-  // }
+
 // );
 
