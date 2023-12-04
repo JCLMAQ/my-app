@@ -23,13 +23,14 @@ import {
 import { LetDirective, PushPipe } from '@ngrx/component';
 import { provideEffects } from '@ngrx/effects';
 import { routerReducer } from '@ngrx/router-store';
-import { provideStore, provideState } from '@ngrx/store';
+import { provideState, provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import * as fromUsers from 'user';
+import { AppStoreEffects } from './+state/app-store.effects';
+import * as fromAppStore from './+state/app-store.reducer';
 import { HttpLoaderFactory } from './app.component';
 import { appRoutes } from './app.routes';
-import * as fromAppStore from './+state/app-store.reducer';
-import { AppStoreEffects } from './+state/app-store.effects';
 // import { reducers } from './reducers';
 
 export const appConfig: ApplicationConfig = {
@@ -49,9 +50,10 @@ export const appConfig: ApplicationConfig = {
       trace: false,
       traceLimit: 75,
     }),
+    //  provideState(),
     provideEffects(),
     provideStore({ router: routerReducer }),
-    // provideState(),
+    provideState(fromUsers.userFeature),
     provideRouter(
       appRoutes,
       withComponentInputBinding(),

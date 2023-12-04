@@ -1,20 +1,18 @@
 import { NgModule } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { EffectsModule } from '@ngrx/effects';
-import { StoreModule, Store } from '@ngrx/store';
+import { Store, StoreModule } from '@ngrx/store';
 import { readFirst } from '@nx/angular/testing';
 
 import * as UsersActions from './users.actions';
-import { UsersEffects } from './users.effects';
 import { UsersFacade } from './users.facade';
 import { UsersEntity } from './users.models';
+import { UsersEffects } from './usersbase.effects';
 import {
   USERS_FEATURE_KEY,
   UsersState,
-  initialUsersState,
-  usersReducer,
-} from './users.reducer';
-import * as UsersSelectors from './users.selectors';
+  usersReducer
+} from './usersbase.reducer';
 
 interface TestSchema {
   users: UsersState;

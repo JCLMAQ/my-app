@@ -1,10 +1,10 @@
 import { Route } from '@angular/router';
-import { UserComponent } from './user/user.component';
-import { provideStore, provideState } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
-import * as fromUsers from './+state/users.reducer';
-import { UsersEffects } from './+state/users.effects';
+import { provideState } from '@ngrx/store';
 import { UsersFacade } from './+state/users.facade';
+import { UsersEffects } from './+state/usersbase.effects';
+import * as fromUsers from './+state/usersbase.reducer';
+import { UserComponent } from './user/user.component';
 
 export const userRoutes: Route[] = [
   {

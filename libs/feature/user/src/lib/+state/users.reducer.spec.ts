@@ -2,7 +2,7 @@ import { Action } from '@ngrx/store';
 
 import * as UsersActions from './users.actions';
 import { UsersEntity } from './users.models';
-import { UsersState, initialUsersState, usersReducer } from './users.reducer';
+import { UsersState, initialUsersState, usersReducer } from './usersbase.reducer';
 
 describe('Users Reducer', () => {
   const createUsersEntity = (id: string, name = ''): UsersEntity => ({

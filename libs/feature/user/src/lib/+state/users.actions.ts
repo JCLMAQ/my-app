@@ -1,8 +1,27 @@
-import { createAction, props } from '@ngrx/store';
-import { UsersEntity } from './users.models';
+import { createAction, createActionGroup, emptyProps, props } from '@ngrx/store';
+import { IUser, UsersEntity } from './users.models';
 
 export const initUsers = createAction('[Users Page] Init');
 
+
+
+export const usersAPIActions = createActionGroup({
+  source: 'Users API',
+  events: {
+    'Load Users Success': props<{ users: IUser[] }>(),
+    'Load Users Failure': props<{ error: string }>(),
+  },
+});
+
+export const usersPageActions = createActionGroup({
+  source: 'Users Page',
+  events: {
+    load: emptyProps(),
+    select: props<IUser>(),
+  },
+});
+
+// Used by usersBaseReducer
 export const loadUsersSuccess = createAction(
   '[Users/API] Load Users Success',
   props<{ users: UsersEntity[] }>(),

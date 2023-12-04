@@ -1,10 +1,10 @@
 import { UsersEntity } from './users.models';
+import * as UsersSelectors from './users.selectors';
 import {
-  usersAdapter,
   UsersPartialState,
   initialUsersState,
-} from './users.reducer';
-import * as UsersSelectors from './users.selectors';
+  usersAdapter,
+} from './usersbase.reducer';
 
 describe('Users Selectors', () => {
   const ERROR_MSG = 'No Error Available';

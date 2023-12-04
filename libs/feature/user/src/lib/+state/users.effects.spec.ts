@@ -6,7 +6,7 @@ import { hot } from 'jasmine-marbles';
 import { Observable } from 'rxjs';
 
 import * as UsersActions from './users.actions';
-import { UsersEffects } from './users.effects';
+import { UsersEffects } from './usersbase.effects';
 
 describe('UsersEffects', () => {
   let actions: Observable<Action>;
