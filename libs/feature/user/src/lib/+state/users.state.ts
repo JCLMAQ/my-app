@@ -7,12 +7,14 @@ export interface UserState {
   users: IUser[];
   isLoading: boolean;
   selectedUserId: string | null;
+  loaded: boolean;
 }
 
 export const initialState: UserState = {
   users: [],
   isLoading: false,
   selectedUserId: null,
+  loaded: false
 };
 
 const reducer = createReducer(
