@@ -9,6 +9,7 @@ export * from './lib/+state/users.facade';
 export * from './lib/+state/users.models';
 
 export { UsersActions, UsersFeature, UsersSelectors };
-export * from './lib/lib.routes';
+
+  export * from './lib/lib.routes';
 
 export * from './lib/user/user.component';
