@@ -4,7 +4,6 @@ import { Organization, Prisma, PrismaClient, User } from "@prisma/client";
 const prisma = new PrismaClient();
 
 
-
 export const dataTodo = (i: number, user: User, organization: Organization): Prisma.TodoCreateInput => {
   const content = faker.lorem.paragraph();
   const title = 'todo ' + i.toString();

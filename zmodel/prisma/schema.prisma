@@ -325,8 +325,8 @@ model Task {
     mainTaskId String? @map("mainTask")
     SubTasks Task[] @relation("MainSubTask")
     Users UserTaskLink[]
-    todo Todo @relation(fields: [todoId], references: [id], onDelete: Cascade)
-    todoId String
+    todo Todo? @relation(fields: [todoId], references: [id], onDelete: Cascade)
+    todoId String?
 }
 
 model UserTaskLink {
