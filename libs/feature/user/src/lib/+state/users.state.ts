@@ -28,10 +28,12 @@ const reducer = createReducer(
     ...state,
     users,
     isLoading: false,
+    loaded: true,
   })),
   on(usersAPIActions.loadUsersFailure, (state) => ({
     ...state,
     isLoading: false,
+    loaded: false,
   }))
 );
 

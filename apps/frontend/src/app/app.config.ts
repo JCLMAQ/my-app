@@ -21,24 +21,19 @@ import {
   withEnabledBlockingInitialNavigation,
 } from '@angular/router';
 import { LetDirective, PushPipe } from '@ngrx/component';
-import { provideState, provideStore } from '@ngrx/store';
+import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import * as fromAppStore from './+state/app-store.reducer';
+
 // import * as fromUsers from 'user';
 import { provideEffects } from '@ngrx/effects';
-import { AppStoreEffects } from './+state/app-store.effects';
 import { HttpLoaderFactory } from './app.component';
 import { appRoutes } from './app.routes';
 // import { reducers } from './reducers';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideEffects(AppStoreEffects),
-    provideState(
-      fromAppStore.APP_STORE_FEATURE_KEY,
-      fromAppStore.appStoreReducer,
-    ),
+    provideEffects(),
     provideStoreDevtools({ logOnly: !isDevMode() }),
     provideStore(),
     provideStoreDevtools({
@@ -48,9 +43,6 @@ export const appConfig: ApplicationConfig = {
       trace: false,
       traceLimit: 75,
     }),
-    // provideEffects(fromUsers.usersEffects),
-    // provideState(fromUsers.userFeature),
-    // provideStore({ router: routerReducer }),
 
     provideRouter(
       appRoutes,
@@ -74,21 +66,6 @@ export const appConfig: ApplicationConfig = {
           deps: [HttpClient],
         },
       }),
-      // StoreModule.forRoot(reducers, {
-      //     metaReducers: [],
-      //     runtimeChecks: {
-      //         strictActionImmutability: true,
-      //         strictStateImmutability: true,
-      //         strictActionSerializability: true,
-      //         strictStateSerializability: true
-      //     },
-      // }),
-      // StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-      // EffectsModule.forRoot([]),
-      // EntityDataModule.forRoot({}),
-      // StoreRouterConnectingModule.forRoot({
-      //     stateKey: 'router'
-      // })
     ),
     MatNativeDateModule,
     MatDatepickerModule,

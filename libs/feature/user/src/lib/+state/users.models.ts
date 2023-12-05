@@ -3,10 +3,10 @@ import { User } from "@prisma/client";
 /**
  * Interface for the 'Users' data
  */
-export interface UsersEntity {
-  id: string | number; // Primary ID
-  name: string;
-}
+// export interface UsersEntity {
+//   id: string | number; // Primary ID
+//   name: string;
+// }
 
 export interface IUser extends Partial<User>{
   // id: string | number; // Primary ID

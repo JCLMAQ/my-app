@@ -40,14 +40,15 @@ export const loadUsers = createEffect(
   ) => {
     return actions$.pipe(
       ofType(usersPageActions.load),
-      switchMap(() => usersService.getAllUserItems()),
+      switchMap(() => usersService.getAllUserItems().pipe(
+      // concatMap(() => usersService.getAllUserItems()),
           map((users: IUser[]) =>
             usersAPIActions.loadUsersSuccess({ users })
           ),
           catchError((error) =>
             of(usersAPIActions.loadUsersFailure({ error }))
           )
-        )
+        )))
       },
       {
         functional: true,
