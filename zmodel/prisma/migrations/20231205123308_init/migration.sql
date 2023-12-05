@@ -204,7 +204,7 @@ CREATE TABLE "Task" (
     "content" TEXT,
     "state" "TaskState" NOT NULL DEFAULT 'CREATION',
     "mainTask" TEXT,
-    "todoId" TEXT NOT NULL,
+    "todoId" TEXT,
 
     CONSTRAINT "Task_pkey" PRIMARY KEY ("id")
 );

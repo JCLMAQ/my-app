@@ -13,7 +13,7 @@
     "seed-org": "dotenv -e ../.env ts-node zmodel/prisma/seedOrg.ts",
     "seed": "pnpx prisma db seed",
     "db-reset": "dotenv -e ../.env ts-node zmodel/prisma/resetdb.ts",
-    "start:frontend": "pnpm run configangular -- --environment=dev && nx serve frontend --proxy-config ./proxy.conf.json --host 127.0.0.1 --port 4100 --verbose",
+    "start:frontend": "pnpm run configangular -- --environment=dev && nx serve frontend --proxy-config ./proxy.conf.json --host 127.0.0.1 --port 4100",
     "nx": "pnpm nx",
     "nxupdate": "nx migrate latest",
     "nxmigrate": "nx migrate --run-migrations",

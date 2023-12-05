@@ -21,14 +21,13 @@ import {
   withEnabledBlockingInitialNavigation,
 } from '@angular/router';
 import { LetDirective, PushPipe } from '@ngrx/component';
-import { provideEffects } from '@ngrx/effects';
-import { routerReducer } from '@ngrx/router-store';
 import { provideState, provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import * as fromUsers from 'user';
-import { AppStoreEffects } from './+state/app-store.effects';
 import * as fromAppStore from './+state/app-store.reducer';
+// import * as fromUsers from 'user';
+import { provideEffects } from '@ngrx/effects';
+import { AppStoreEffects } from './+state/app-store.effects';
 import { HttpLoaderFactory } from './app.component';
 import { appRoutes } from './app.routes';
 // import { reducers } from './reducers';
@@ -41,7 +40,6 @@ export const appConfig: ApplicationConfig = {
       fromAppStore.appStoreReducer,
     ),
     provideStoreDevtools({ logOnly: !isDevMode() }),
-    provideEffects(),
     provideStore(),
     provideStoreDevtools({
       maxAge: 25,
@@ -50,10 +48,10 @@ export const appConfig: ApplicationConfig = {
       trace: false,
       traceLimit: 75,
     }),
-    //  provideState(),
-    provideEffects(),
-    provideStore({ router: routerReducer }),
-    provideState(fromUsers.userFeature),
+    // provideEffects(fromUsers.usersEffects),
+    // provideState(fromUsers.userFeature),
+    // provideStore({ router: routerReducer }),
+
     provideRouter(
       appRoutes,
       withComponentInputBinding(),

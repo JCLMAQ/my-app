@@ -6,8 +6,9 @@
 import { inject } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { catchError, map, of, switchMap } from "rxjs";
-import { IUser, UsersActions } from "user";
 import { UserService } from "../services/user.service";
+import { usersAPIActions, usersPageActions } from "./users.actions";
+import { IUser, } from "./users.models";
 
 //   init$ = createEffect(() =>
 //     this.actions$.pipe(
@@ -22,10 +23,10 @@ import { UserService } from "../services/user.service";
 // }
 
 // @Effect()
-// loadItems$ = this.actions$.pipe(
-//   ofType(loadItems),
+// const loadItems$ = this.actions$.pipe(
+//   ofType(UsersActions.usersPageActions.load),
 //   switchMap(() =>
-//     this.itemService.getItems().pipe(
+//     this.usersService.getAllUserItems().pipe(
 //       map(items => loadItemsSuccess({ items })),
 //       catchError(error => of(loadItemsFailure({ error })))
 //     )
@@ -38,13 +39,13 @@ export const loadUsers = createEffect(
     usersService = inject(UserService)
   ) => {
     return actions$.pipe(
-      ofType(UsersActions.usersPageActions.load),
+      ofType(usersPageActions.load),
       switchMap(() => usersService.getAllUserItems()),
           map((users: IUser[]) =>
-            UsersActions.usersAPIActions.loadUsersSuccess({ users })
+            usersAPIActions.loadUsersSuccess({ users })
           ),
           catchError((error) =>
-            of(UsersActions.usersAPIActions.loadUsersFailure({ error }))
+            of(usersAPIActions.loadUsersFailure({ error }))
           )
         )
       },
