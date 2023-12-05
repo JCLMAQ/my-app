@@ -19,6 +19,13 @@ enum TaskState {
     DONE
 }
 
+enum TodoState {
+    CREATION
+    STANDBY
+    RUNNING
+    DONE
+}
+
 enum Gender {
     MALE
     FEMELE
@@ -94,6 +101,7 @@ model Organization {
     Groups Group[]
     Files File[]
     Tasks Task[]
+    Todos Todo[]
 }
 
 /// @@allow('all', auth() != null && published)
@@ -169,6 +177,8 @@ model User {
     Posts Post[]
     Comments Comment[]
     Stories Story[]
+    Todo UserTodoLink[]
+    TodosAuthor Todo[]
     Tasks UserTaskLink[]
     TasksAuthor Task[]
     Files File[]
@@ -233,10 +243,57 @@ model Group {
     isActiv DateTime?
     Users User[]
     Tasks Task[]
+    Todos Todo[]
     Posts Post[]
     Files File[]
     org Organization @relation(fields: [orgId], references: [id])
     orgId String
+}
+
+/// @@allow('all', auth() != null && published)
+/// @@allow('create', owner == auth() && org.Members?[this == auth()])
+/// @@allow('update', owner == auth() && org.Members?[this == auth()] && future().owner == owner)
+/// @@allow('read,delete', owner == auth())
+/// @@allow('read', groups?[Users?[this == auth()]])
+/// @@allow('read', isPublic && org.Members?[this == auth()])
+/// @@deny('read', isDeleted != 0)
+model Todo {
+    id String @default(uuid()) @id()
+    numSeq Int @default(autoincrement())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @default(now()) @updatedAt()
+    published Boolean @default(true)
+    /// @omit
+    isDeleted Int @default(0)
+    isPublic Boolean @default(false)
+    owner User @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+    ownerId String
+    org Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+    orgId String
+    groups Group[]
+    orderTodo Int
+    title String
+    content String?
+    state TodoState @default(CREATION)
+    mainTodo Todo? @relation("MainSubTodo", fields: [mainTodoId], references: [id])
+    mainTodoId String? @map("mainTodo")
+    SubTodos Todo[] @relation("MainSubTodo")
+    Users UserTodoLink[]
+    Tasks Task[]
+}
+
+model UserTodoLink {
+    user User @relation(fields: [userId], references: [id])
+    userId String
+    todo Todo @relation(fields: [todoId], references: [id])
+    todoId String
+    isAuthor Boolean @default(true)
+    isAssigned Boolean @default(true)
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt()
+    comment String
+
+    @@id([userId, todoId])
 }
 
 /// @@allow('all', auth() != null && published)
@@ -268,6 +325,8 @@ model Task {
     mainTaskId String? @map("mainTask")
     SubTasks Task[] @relation("MainSubTask")
     Users UserTaskLink[]
+    todo Todo @relation(fields: [todoId], references: [id], onDelete: Cascade)
+    todoId String
 }
 
 model UserTaskLink {

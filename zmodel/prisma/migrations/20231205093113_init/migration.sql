@@ -2,6 +2,9 @@
 CREATE TYPE "TaskState" AS ENUM ('CREATION', 'STANDBY', 'RUNNING', 'DONE');
 
 -- CreateEnum
+CREATE TYPE "TodoState" AS ENUM ('CREATION', 'STANDBY', 'RUNNING', 'DONE');
+
+-- CreateEnum
 CREATE TYPE "Gender" AS ENUM ('MALE', 'FEMELE', 'UNKNOWN');
 
 -- CreateEnum
@@ -153,6 +156,39 @@ CREATE TABLE "Group" (
 );
 
 -- CreateTable
+CREATE TABLE "Todo" (
+    "id" TEXT NOT NULL,
+    "numSeq" SERIAL NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "published" BOOLEAN NOT NULL DEFAULT true,
+    "isDeleted" INTEGER NOT NULL DEFAULT 0,
+    "isPublic" BOOLEAN NOT NULL DEFAULT false,
+    "ownerId" TEXT NOT NULL,
+    "orgId" TEXT NOT NULL,
+    "orderTodo" INTEGER NOT NULL,
+    "title" TEXT NOT NULL,
+    "content" TEXT,
+    "state" "TodoState" NOT NULL DEFAULT 'CREATION',
+    "mainTodo" TEXT,
+
+    CONSTRAINT "Todo_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "UserTodoLink" (
+    "userId" TEXT NOT NULL,
+    "todoId" TEXT NOT NULL,
+    "isAuthor" BOOLEAN NOT NULL DEFAULT true,
+    "isAssigned" BOOLEAN NOT NULL DEFAULT true,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "comment" TEXT NOT NULL,
+
+    CONSTRAINT "UserTodoLink_pkey" PRIMARY KEY ("userId","todoId")
+);
+
+-- CreateTable
 CREATE TABLE "Task" (
     "id" TEXT NOT NULL,
     "numSeq" SERIAL NOT NULL,
@@ -168,6 +204,7 @@ CREATE TABLE "Task" (
     "content" TEXT,
     "state" "TaskState" NOT NULL DEFAULT 'CREATION',
     "mainTask" TEXT,
+    "todoId" TEXT NOT NULL,
 
     CONSTRAINT "Task_pkey" PRIMARY KEY ("id")
 );
@@ -484,6 +521,12 @@ CREATE TABLE "_GroupToTask" (
 );
 
 -- CreateTable
+CREATE TABLE "_GroupToTodo" (
+    "A" INTEGER NOT NULL,
+    "B" TEXT NOT NULL
+);
+
+-- CreateTable
 CREATE TABLE "_GroupToPost" (
     "A" INTEGER NOT NULL,
     "B" TEXT NOT NULL
@@ -565,6 +608,12 @@ CREATE UNIQUE INDEX "_GroupToTask_AB_unique" ON "_GroupToTask"("A", "B");
 CREATE INDEX "_GroupToTask_B_index" ON "_GroupToTask"("B");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "_GroupToTodo_AB_unique" ON "_GroupToTodo"("A", "B");
+
+-- CreateIndex
+CREATE INDEX "_GroupToTodo_B_index" ON "_GroupToTodo"("B");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "_GroupToPost_AB_unique" ON "_GroupToPost"("A", "B");
 
 -- CreateIndex
@@ -607,6 +656,21 @@ ALTER TABLE "UserSecret" ADD CONSTRAINT "UserSecret_userId_fkey" FOREIGN KEY ("u
 ALTER TABLE "Group" ADD CONSTRAINT "Group_orgId_fkey" FOREIGN KEY ("orgId") REFERENCES "Organization"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "Todo" ADD CONSTRAINT "Todo_ownerId_fkey" FOREIGN KEY ("ownerId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Todo" ADD CONSTRAINT "Todo_orgId_fkey" FOREIGN KEY ("orgId") REFERENCES "Organization"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Todo" ADD CONSTRAINT "Todo_mainTodo_fkey" FOREIGN KEY ("mainTodo") REFERENCES "Todo"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "UserTodoLink" ADD CONSTRAINT "UserTodoLink_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "UserTodoLink" ADD CONSTRAINT "UserTodoLink_todoId_fkey" FOREIGN KEY ("todoId") REFERENCES "Todo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "Task" ADD CONSTRAINT "Task_ownerId_fkey" FOREIGN KEY ("ownerId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
@@ -614,6 +678,9 @@ ALTER TABLE "Task" ADD CONSTRAINT "Task_orgId_fkey" FOREIGN KEY ("orgId") REFERE
 
 -- AddForeignKey
 ALTER TABLE "Task" ADD CONSTRAINT "Task_mainTask_fkey" FOREIGN KEY ("mainTask") REFERENCES "Task"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Task" ADD CONSTRAINT "Task_todoId_fkey" FOREIGN KEY ("todoId") REFERENCES "Todo"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "UserTaskLink" ADD CONSTRAINT "UserTaskLink_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -689,6 +756,12 @@ ALTER TABLE "_GroupToTask" ADD CONSTRAINT "_GroupToTask_A_fkey" FOREIGN KEY ("A"
 
 -- AddForeignKey
 ALTER TABLE "_GroupToTask" ADD CONSTRAINT "_GroupToTask_B_fkey" FOREIGN KEY ("B") REFERENCES "Task"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_GroupToTodo" ADD CONSTRAINT "_GroupToTodo_A_fkey" FOREIGN KEY ("A") REFERENCES "Group"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_GroupToTodo" ADD CONSTRAINT "_GroupToTodo_B_fkey" FOREIGN KEY ("B") REFERENCES "Todo"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "_GroupToPost" ADD CONSTRAINT "_GroupToPost_A_fkey" FOREIGN KEY ("A") REFERENCES "Group"("id") ON DELETE CASCADE ON UPDATE CASCADE;

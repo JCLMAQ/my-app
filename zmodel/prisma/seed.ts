@@ -8,7 +8,7 @@ import { create2Orgs } from '../factories-bis/org';
 import { createPost } from '../factories-bis/post';
 import { dataPostLike } from '../factories-bis/postLike';
 import { createStory } from '../factories-bis/story';
-import { createTask } from '../factories-bis/task';
+import { createTodo } from '../factories-bis/todo';
 import { create4Users } from '../factories-bis/user';
 import { dataUserFollower } from '../factories-bis/userFollower';
 
@@ -54,9 +54,9 @@ async function main() {
             };
         };
 
-        // each user has 2 tasks
+        // each user has 2 todo
         for (let x = 0; x < 2; x++) {
-          const task = await createTask(iOrg, iUser , x, org, user)
+          const todo = await createTodo(iOrg, iUser , x, org, user)
         };
 
 
