@@ -48,9 +48,9 @@ pnpm-lock.yaml
 .env
 
 # Primsa Migration
-/prisma/migrations
+/zmodel/prisma/migrations
 # Prisma utils generated files
-/prisma/generated
+/zmodel/prisma/generated
 
 # Tests
 /coverage
