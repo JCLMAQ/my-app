@@ -21,6 +21,16 @@ import { UserService } from "../services/user.service";
 //   );
 // }
 
+// @Effect()
+// loadItems$ = this.actions$.pipe(
+//   ofType(loadItems),
+//   switchMap(() =>
+//     this.itemService.getItems().pipe(
+//       map(items => loadItemsSuccess({ items })),
+//       catchError(error => of(loadItemsFailure({ error })))
+//     )
+//   )
+// );
 
 export const loadUsers = createEffect(
   (
