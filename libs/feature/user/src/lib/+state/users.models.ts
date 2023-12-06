@@ -1,4 +1,3 @@
-import { User } from "@prisma/client";
 
 /**
  * Interface for the 'Users' data
@@ -8,14 +7,16 @@ import { User } from "@prisma/client";
 //   name: string;
 // }
 
-export interface IUser extends Partial<User>{
-  // id: string | number; // Primary ID
-  // name: string;
+import { User } from "@prisma/client";
+
+// export interface IUser extends User{
+  export interface IUser extends Partial<User>{
 }
 
-export type ICreateUser = Pick<IUser, 'firstName' | 'lastName'>;
+export type ICreateUser =Partial<Omit<IUser, 'id'>>;
+// export type ICreateUser = Pick<IUser, 'firstName' | 'lastName'>;
 export type IUpdateUser = Partial<Omit<IUser, 'id'>>;
-export type IUpsertUser = IUser;
+export type IUpsertUser = Partial<Omit<IUser, 'id'>>;
 
 export class CreateUserDto implements ICreateUser {
   //

@@ -20,7 +20,7 @@
       class="mini-card"
       *ngFor="let user of users$ | async"
     >
-      <h4>{{ user.lastName }}</h4>
+      <h4>{{ user?.lastName }}</h4>
       <!-- <button
         color="primary"
         mat-stroked-button

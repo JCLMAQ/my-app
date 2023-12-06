@@ -18,5 +18,7 @@ export const usersPageActions = createActionGroup({
   events: {
     load: emptyProps(),
     select: props<IUser>(),
+    addUser: props<{ user: IUser }>(),
+    selectUser: props<{ userId: string }>(),
   },
 });

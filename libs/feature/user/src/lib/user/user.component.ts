@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { MATERIAL } from 'material';
 import { usersPageActions } from '../+state/users.actions';
 import { IUser } from '../+state/users.models';
-import { userFeature } from '../+state/users.state';
+import { usersFeature } from '../+state/users.state';
 
 @Component({
   selector: 'lib-user',
@@ -20,9 +20,13 @@ export class UserComponent {
 
   store = inject(Store);
 
-  users$ = this.store.select(userFeature.selectUsers);
-  selectedUser$ = this.store.select( userFeature.selectSelectedUser );
-  isLoading$ = this.store.select(userFeature.selectIsLoading);
+  readonly users$ = this.store.select(usersFeature.selectAll);
+  readonly isUserSelected$ = this.store.select(usersFeature.selectIsUserSelected);
+  readonly selectedUser$ = this.store.select(usersFeature.selectSelectedUser);
+
+  // users$ = this.store.select(usersFeature.selectUsers);
+  // selectedUser$ = this.store.select( usersFeature.selectSelectedUserId );
+  isLoading$ = this.store.select(usersFeature.selectIsLoading);
 
   ngOnInit() {
     this.store.dispatch(usersPageActions.load());
