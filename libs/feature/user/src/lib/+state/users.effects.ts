@@ -5,9 +5,9 @@
 
 import { inject } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { catchError, concatMap, map, of } from "rxjs";
+import { catchError, concatMap, delay, map, of } from "rxjs";
 import { UserService } from "../services/user.service";
-import { usersAPIActions, usersPageActions } from "./users.actions";
+import { usersAPIActions } from "./users.actions";
 
 //   init$ = createEffect(() =>
 //     this.actions$.pipe(
@@ -31,6 +31,7 @@ import { usersAPIActions, usersPageActions } from "./users.actions";
 //     )
 //   )
 // );
+// delay(1500)
 
 export const loadUsers = createEffect(
   (
@@ -38,9 +39,11 @@ export const loadUsers = createEffect(
     usersService = inject(UserService)
   ) => {
     return actions$.pipe(
-      ofType(usersPageActions.load),
+      ofType(usersAPIActions.loadUsers),
+      // ofType(usersPageActions.load),
       // switchMap(() => usersService.getAllUserItems().pipe(
       concatMap(() => usersService.getAllUserItems().pipe(
+        (delay(1500)),
           map((users) =>
             usersAPIActions.loadUsersSuccess({ users })
           ),
@@ -54,3 +57,48 @@ export const loadUsers = createEffect(
       {
         functional: true,
       });
+
+  // export const getUsers = createEffect(
+  //   (
+  //     actions$ = inject(Actions),
+  //     usersService = inject(UserService)
+  //   ) => {
+  //     return actions$.pipe(
+  //       ofType(usersAPIActions.loadUsers),
+  //       mergeMapMap(()=> {
+  //         return usersService.getAllUserItems().pipe(
+  //           map((users) => usersAPIActions.loadUsersSuccess({ users })),
+  //           catchError((error) =>
+  //             of(usersAPIActions.loadUsersFailure({ error: error.message }))
+  //         )
+  //         )
+  //       }
+
+  //       )
+
+  //     )
+  //   }
+  // );
+      /*
+       Example:
+
+@Injectable()
+export class PostsEffects {
+  getPosts$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PostsActions.getPosts),
+      mergeMap(() => {
+        return this.postsService.getPosts().pipe(
+          map((posts) => PostsActions.getPostsSuccess({ posts })),
+          catchError((error) =>
+            of(PostsActions.getPostsFailure({ error: error.message }))
+          )
+        );
+      })
+    )
+  );
+
+  constructor(private actions$: Actions, private postsService: PostsService) {}
+}
+
+      */

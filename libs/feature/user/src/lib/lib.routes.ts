@@ -14,6 +14,7 @@ export const userRoutes: Route[] = [
     //   provideEffects(usersEffects),
     // ],
     providers: [
+      // provideEffects(fromUsers.getUsers),
       provideEffects(fromUsers.usersEffects),
       provideState(fromUsers.usersFeature),
     ]
