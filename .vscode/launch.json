@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
       {
-        "name": "debug my-app",
+        "name": "debug backend my-app",
         "port": 9229,
         "request": "launch",
         "type": "node",
@@ -30,7 +30,7 @@
         "name": "Launch Chrome",
         "request": "launch",
         "type": "chrome",
-        "url": "http://localhost:4500",
+        "url": "http://localhost:4100",
         "webRoot": "${workspaceFolder}",
         "sourceMaps": true,
       },

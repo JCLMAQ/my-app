@@ -5,10 +5,9 @@
 
 import { inject } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { catchError, map, of, switchMap } from "rxjs";
+import { catchError, concatMap, map, of } from "rxjs";
 import { UserService } from "../services/user.service";
 import { usersAPIActions, usersPageActions } from "./users.actions";
-import { IUser, } from "./users.models";
 
 //   init$ = createEffect(() =>
 //     this.actions$.pipe(
@@ -40,21 +39,18 @@ export const loadUsers = createEffect(
   ) => {
     return actions$.pipe(
       ofType(usersPageActions.load),
-      switchMap(() => usersService.getAllUserItems().pipe(
-      // concatMap(() => usersService.getAllUserItems()),
-          map((users: IUser[]) =>
+      // switchMap(() => usersService.getAllUserItems().pipe(
+      concatMap(() => usersService.getAllUserItems().pipe(
+          map((users) =>
             usersAPIActions.loadUsersSuccess({ users })
           ),
           catchError((error) =>
             of(usersAPIActions.loadUsersFailure({ error }))
           )
-        )))
+        )
+        )
+        );
       },
       {
         functional: true,
-      }
-    );
-
-
-// );
-
+      });
