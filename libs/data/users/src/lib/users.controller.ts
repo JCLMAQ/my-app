@@ -36,6 +36,7 @@ export class UsersController {
   async getUsers(@ActiveUser() user: ActiveUserData): Promise<User[]>{
     console.log('from Users controlors: ', user)
     const users: User[] = await this.usersService.getAllUsers()
+    console.log('from Users controlors: ', users)
     return users
   }
 
