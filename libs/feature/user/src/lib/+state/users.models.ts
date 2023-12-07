@@ -13,7 +13,8 @@ export interface IUser extends Partial<User>{
   // name: string;
 }
 
-export type ICreateUser = Pick<IUser, 'firstName' | 'lastName'>;
+// export type ICreateUser = Pick<IUser, 'firstName' | 'lastName'>;
+export type ICreateUser =Partial<Omit<IUser, 'id'>>;
 export type IUpdateUser = Partial<Omit<IUser, 'id'>>;
 export type IUpsertUser = IUser;
 
