@@ -8,7 +8,6 @@ export const initUsers = createAction('[Users Page] Init');
 export const usersAPIActions = createActionGroup({
   source: 'Users API',
   events: {
-
     'Load Users Success': props<{ users: IUser[] }>(),
     'Load Users Failure': props<{ error: string }>(),
     'Load Users': props<{ users: IUser[] }>,

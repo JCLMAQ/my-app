@@ -35,7 +35,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideEffects(),
     provideStoreDevtools({ logOnly: !isDevMode() }),
-    provideStore(),
+    provideStore({}),
     provideStoreDevtools({
       maxAge: 25,
       logOnly: !isDevMode(),

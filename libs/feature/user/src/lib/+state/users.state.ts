@@ -24,13 +24,17 @@ export const initialState: UserStateInterface= adapter.getInitialState({
 /// Reducer
 const reducer = createReducer(
   initialState,
-  on(usersPageActions.load, (state: any) => ({ ...state, isLoading: true })),
+  on(usersPageActions.load, (state: any, actions) => ({
+    ...state,
+    isLoading: true,
+    // users: actions.type,
+  })),
   on(usersPageActions.select, (state: any, { id }: any) => ({
     ...state,
     selectedId: id,
   })),
   on(usersPageActions.addUser, (state, { user }) =>
-  adapter.addOne(user, state)
+    adapter.addOne(user, state)
   ),
   on(usersPageActions.selectUser, (state, { userId }) => ({
     ...state,
@@ -56,11 +60,11 @@ export const usersFeature = createFeature({
   reducer,
   extraSelectors: ({ selectSelectedUserId, selectUsersState, selectEntities }) => ({
     selectSelectedUserBis: createSelector(
-    selectSelectedUserId,
-    // selectUsers,
-    (selectedUserId: any, users: any[]) => users.find((s) => s.id === selectedUserId),
+      selectSelectedUserId,
+      // selectUsers,
+      (selectedUserId: any, users: any[]) => users.find((s) => s.id === selectedUserId),
     ),
-    ...adapter.getSelectors(selectUsersState),
+      ...adapter.getSelectors(selectUsersState),
     selectIsUserSelected: createSelector(
       selectSelectedUserId,
       (selectedId) => selectedId !== null
