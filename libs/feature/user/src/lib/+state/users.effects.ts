@@ -5,7 +5,7 @@
 
 import { inject } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { catchError, concatMap, delay, map, of } from "rxjs";
+import { catchError, concatMap, delay, map, of, tap } from "rxjs";
 import { UserService } from "../services/user.service";
 import { usersAPIActions, usersPageActions } from "./users.actions";
 
@@ -43,6 +43,7 @@ export const loadUsers = createEffect(
       // ofType(usersPageActions.load),
       // switchMap(() => usersService.getAllUserItems().pipe(
       concatMap(() => usersService.getAllUserItems().pipe(
+        tap((value) => console.log('Après: ' + value)),
         (delay(1500)),
           map((users) =>
             usersAPIActions.loadUsersSuccess({ users })

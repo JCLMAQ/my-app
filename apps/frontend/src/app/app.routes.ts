@@ -2,8 +2,14 @@ import { Route } from '@angular/router';
 import { PageNotFoundComponent } from 'pages';
 
 export const appRoutes: Route[] = [
-  { path: 'tasks',
-    loadChildren: () => import('task').then((m) => m.taskRoutes), },
+  {
+    path: 'todo',
+    loadChildren: () => import('todo').then((m) => m.todoRoutes),
+  },
+  {
+    path: 'tasks',
+    loadChildren: () => import('task').then((m) => m.taskRoutes),
+  },
   {
     path: 'users',
     loadChildren: () => import('user').then((m) => m.userRoutes),
