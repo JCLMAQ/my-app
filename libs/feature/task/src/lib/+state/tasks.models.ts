@@ -1,14 +1,15 @@
-import { EntityState } from "@ngrx/entity";
 import { Task } from "@prisma/client";
 
 /**
  * Interface for the 'Tasks' data
  */
-export interface TasksEntity extends Partial<Task> {
+export interface TaskInterface extends Partial<Task> {
 
 }
 
-export interface TasksStateInterface extends EntityState<TasksEntity> {
+export interface TasksStateInterface {
  isLoading: boolean;
- error: string;
+ error: string | null;
+ loaded: boolean;
+ tasks: TaskInterface []
 }

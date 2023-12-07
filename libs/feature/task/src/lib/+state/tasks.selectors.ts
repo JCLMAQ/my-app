@@ -1,5 +1,10 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { AppStateInterface } from 'apps/frontend/src/app/appState.interface';
 import { TASKS_FEATURE_KEY, TasksState, tasksAdapter } from './tasks.reducer';
+
+export const selectFeature = (state: AppStateInterface ) => state.tasks;
+ export const isLoadingSelector = createSelector(selectFeature, (state) => state.isLoading )
+
 
 // Lookup the 'Tasks' feature state managed by NgRx
 export const selectTasksState =
