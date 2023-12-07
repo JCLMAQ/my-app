@@ -1,5 +1,5 @@
 import { EntityState } from "@ngrx/entity";
-import { Task } from "@prisma/client";
+// import { Task } from "@prisma/client";
 
 /**
  * Interface for the 'Tasks' data

@@ -1,8 +1,7 @@
 import { Injectable, inject } from '@angular/core';
-import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { switchMap, catchError, of } from 'rxjs';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { catchError, of, switchMap } from 'rxjs';
 import * as TasksActions from './tasks.actions';
-import * as TasksFeature from './tasks.reducer';
 
 @Injectable()
 export class TasksEffects {
@@ -10,11 +9,11 @@ export class TasksEffects {
 
   init$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(TasksActions.initTasks),
-      switchMap(() => of(TasksActions.loadTasksSuccess({ tasks: [] }))),
+      ofType(TasksActions.tasksPageActions.init),
+      switchMap(() => of(TasksActions.tasksAPIActions.loadTasksSuccess({ tasks: [] }))),
       catchError((error) => {
         console.error('Error', error);
-        return of(TasksActions.loadTasksFailure({ error }));
+        return of(TasksActions.tasksAPIActions.loadTasksFailure({ error }));
       }),
     ),
   );

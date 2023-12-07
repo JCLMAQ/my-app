@@ -26,15 +26,15 @@ export const initialTasksState: TasksState = tasksAdapter.getInitialState({
 
 const reducer = createReducer(
   initialTasksState,
-  on(TasksActions.initTasks, (state) => ({
+  on(TasksActions.tasksPageActions.init, (state) => ({
     ...state,
     loaded: false,
     error: null,
   })),
-  on(TasksActions.loadTasksSuccess, (state, { tasks }) =>
+  on(TasksActions.tasksAPIActions.loadTasksSuccess, (state, { tasks }) =>
     tasksAdapter.setAll(tasks, { ...state, loaded: true }),
   ),
-  on(TasksActions.loadTasksFailure, (state, { error }) => ({
+  on(TasksActions.tasksAPIActions.loadTasksFailure, (state, { error }) => ({
     ...state,
     error,
   })),
