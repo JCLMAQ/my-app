@@ -2,7 +2,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, catchError, delay, map, of, throwError } from "rxjs";
-import { ITask, TaskInterface } from "../+state/tasks.models";
+import { TaskInterface } from "../+state/tasks.models";
 
 
 
@@ -36,7 +36,6 @@ export class TasksService {
     }
 
 
-
 	private handleError(error: HttpErrorResponse) {
 		if (error.error instanceof ErrorEvent) {
 			// A client-side or network error occured. Handle it accordingly
@@ -52,38 +51,38 @@ export class TasksService {
 		return throwError(() => new Error('Something bad happened; please try again later.'));
 	}
 
-  getAllTaskItems(): Observable<ITask[]> {
+  getAllTaskItems(): Observable<TaskInterface[]> {
     return this.http
-      .get<ITask[]>(this.baseUrl, httpOptions)
+      .get<TaskInterface[]>(this.baseUrl, httpOptions)
       .pipe(
         map((results: any) => results.tasks),
         catchError(this.handleError));
   }
 
-  getTaskById(taskId: string): Observable<ITask> {
+  getTaskById(taskId: string): Observable<TaskInterface> {
     const url = `${this.baseUrl}/${taskId}`;
     return this.http
-    .get<ITask>(url, httpOptions)
+    .get<TaskInterface>(url, httpOptions)
     .pipe(catchError(this.handleError));
   }
 
-  createTask(userData: ITask): Observable<ITask> {
+  createTask(userData: TaskInterface): Observable<TaskInterface> {
     return this.http
-      .post<ITask>(this.baseUrl, userData, httpOptions)
+      .post<TaskInterface>(this.baseUrl, userData, httpOptions)
       .pipe(catchError(this.handleError));
   }
 
-  updateTask(taskId: string, taskData: ITask): Observable<ITask> {
+  updateTask(taskId: string, taskData: TaskInterface): Observable<TaskInterface> {
     const url = `${this.baseUrl}/${taskId}`;
     return this.http
-      .patch<ITask>(url, taskData, httpOptions)
+      .patch<TaskInterface>(url, taskData, httpOptions)
       .pipe(catchError(this.handleError));
   }
 
-  createOrUpdateTask(taskId: string, taskData: ITask): Observable<ITask> {
+  createOrUpdateTask(taskId: string, taskData: TaskInterface): Observable<TaskInterface> {
     const url = `${this.baseUrl}/${taskId}`;
     return this.http
-      .put<ITask>(url, taskData, httpOptions)
+      .put<TaskInterface>(url, taskData, httpOptions)
       .pipe(catchError(this.handleError));
   }
 

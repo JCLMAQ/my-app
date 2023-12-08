@@ -27,9 +27,22 @@ export const initialTasksState: TasksStateInterface = {
   loaded: false,
 };
 
-export const reducer = createReducer(
+export const reducers = createReducer(
   initialTasksState,
   on(TasksActions.getTasks,(state) => ({ ...state, isLoading: true }) ),
+  on(TasksActions.getTasksSuccess,(state , action) => ({
+    ...state,
+    isLoading: false,
+    tasks: action.tasks,
+
+  }) ),
+  on(TasksActions.getTasksFailure,(state, action) => ({
+    ...state,
+    isLoading: false,
+    error: action.error,
+   }) ),
+
+
   on(TasksActions.initTasks, (state) => ({
     ...state,
     loaded: false,
@@ -38,12 +51,12 @@ export const reducer = createReducer(
   // on(TasksActions.loadTasksSuccess, (state, { tasks }) =>
   //   tasksAdapter.setAll(tasks, { ...state, loaded: true }),
   // ),
-  on(TasksActions.loadTasksFailure, (state, { error }) => ({
-    ...state,
-    error,
-  })),
+//   on(TasksActions.loadTasksFailure, (state, { error }) => ({
+//     ...state,
+//     error,
+//   })),
 );
 
-export function tasksReducer(state: TasksStateInterface | undefined, action: Action) {
-  return reducer(state, action);
+export function tasksReducer(state: TasksStateInterface, action: Action) {
+  return reducers(state, action);
 }
