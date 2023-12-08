@@ -1,7 +1,7 @@
 
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, catchError, delay, map, of, throwError } from "rxjs";
+import { Observable, catchError, map, throwError } from "rxjs";
 import { TaskInterface } from "../+state/tasks.models";
 
 
@@ -26,13 +26,20 @@ export class TasksService {
     { }
 
 
+    // getTasks(): Observable<TaskInterface[]> {
+    //     const tasks = [
+    //       { id: '1', title: 'First Task'},
+    //       { id: '2', title: 'Second Task'},
+    //       { id: '3', title: 'Third Task'},
+    //     ];
+    //     return of(tasks).pipe(delay(2000))
+    // }
     getTasks(): Observable<TaskInterface[]> {
-        const tasks = [
-          { id: '1', title: 'First Task'},
-          { id: '2', title: 'Second Task'},
-          { id: '3', title: 'Third Task'},
-        ];
-        return of(tasks).pipe(delay(2000))
+       return this.http.get<TaskInterface[]>(this.baseUrl, httpOptions)
+      //  .pipe(
+
+      //   catchError(this.handleError)
+      //  )
     }
 
 

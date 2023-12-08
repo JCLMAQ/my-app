@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, throwError } from 'rxjs';
-import { ICreateUser, IUpdateUser, IUpsertUser, IUser } from '../+state/users.models';
+import { ICreateUser, IUpdateUser, IUpsertUser, UserInterface } from '../+state/users.models';
 
 // const httpOptions = {
 // 	headers: new HttpHeaders({
@@ -43,38 +43,47 @@ export class UserService {
 		return throwError(() => new Error('Something bad happened; please try again later.'));
 	}
 
-  getAllUserItems(): Observable<IUser[]> {
+
+  getUsers(): Observable<UserInterface[]> {
+    return this.http.get<UserInterface[]>(this.baseUrl, httpOptions)
+   //  .pipe(
+
+   //   catchError(this.handleError)
+   //  )
+  }
+
+  getAllUserItems(): Observable<UserInterface[]> {
     return this.http
-      .get<IUser[]>(this.baseUrl, httpOptions)
+      .get<UserInterface[]>(this.baseUrl, httpOptions)
       .pipe(
         map((results: any) => results.users),
         catchError(this.handleError));
   }
 
-  getUserById(userId: string): Observable<IUser> {
+  getUserById(userId: string): Observable<UserInterface> {
     const url = `${this.baseUrl}/${userId}`;
     return this.http
-    .get<IUser>(url, httpOptions)
+    .get<UserInterface>(url, httpOptions)
     .pipe(catchError(this.handleError));
   }
 
-  createToDo(userData: ICreateUser): Observable<IUser> {
+  createToDo(userData: ICreateUser): Observable<UserInterface> {
     return this.http
-      .post<IUser>(this.baseUrl, userData, httpOptions)
+      .post<UserInterface>(this.baseUrl, userData, httpOptions)
       .pipe(catchError(this.handleError));
   }
 
-  updateUser(userId: string, userData: IUpdateUser): Observable<IUser> {
+  updateUser(userId: string, userData: IUpdateUser): Observable<UserInterface> {
     const url = `${this.baseUrl}/${userId}`;
     return this.http
-      .patch<IUser>(url, userData, httpOptions)
+      .patch<UserInterface>(url, userData, httpOptions)
       .pipe(catchError(this.handleError));
   }
 
-  createOrUpdateUser(userId: string, userData: IUpsertUser): Observable<IUser> {
+  createOrUpdateUser(userId: string, userData: IUpsertUser): Observable<UserInterface> {
     const url = `${this.baseUrl}/${userId}`;
     return this.http
-      .put<IUser>(url, userData, httpOptions)
+      .put<UserInterface>(url, userData, httpOptions)
       .pipe(catchError(this.handleError));
   }
 

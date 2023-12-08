@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { User } from '@prisma/client';
 import { MATERIAL } from 'material';
 import { usersPageActions } from '../+state/users.actions';
-import { IUser } from '../+state/users.models';
+import { UserInterface } from '../+state/users.models';
 import { usersFeature } from '../+state/users.state';
 import { UserService } from '../services/user.service';
 
@@ -43,7 +43,7 @@ users: User[]= [];
     console.log(this.userService.getAllUserItems())
   }
 
-  selectUser(user: IUser) {
+  selectUser(user: UserInterface) {
     this.store.dispatch(usersPageActions.select(user));
   }
 

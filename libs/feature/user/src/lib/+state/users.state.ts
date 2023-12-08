@@ -1,17 +1,17 @@
 import { EntityAdapter, EntityState, createEntityAdapter } from "@ngrx/entity";
 import { createFeature, createReducer, createSelector, on } from "@ngrx/store";
 import { usersAPIActions, usersPageActions } from "./users.actions";
-import { IUser } from "./users.models";
+import { UserInterface } from "./users.models";
 
-export interface UserStateInterface extends EntityState <IUser>{
-  // users: IUser[];
+export interface UserStateInterface extends EntityState <UserInterface>{
+  // users: UserInterface[];
   isLoading: boolean;
   selectedUserId: string | null;
   loaded: boolean;
   error: string | null;
 }
 
-export const adapter: EntityAdapter<IUser> = createEntityAdapter<IUser>();
+export const adapter: EntityAdapter<UserInterface> = createEntityAdapter<UserInterface>();
 
 export const initialState: UserStateInterface= adapter.getInitialState({
   // users: [],

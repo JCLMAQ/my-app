@@ -33,6 +33,35 @@ import { usersAPIActions, usersPageActions } from "./users.actions";
 // );
 // delay(1500)
 
+// export class UsersEffects {
+
+//   // constructor(private actions$: Actions, private tasksService: TasksService) {}
+//   private actions$ = inject(Actions);
+//   private usersService = inject(UserService);
+  export const getUsers = createEffect(
+    (
+      actions$ = inject(Actions),
+      usersService = inject(UserService)
+    ) => {
+       return actions$.pipe(
+          ofType(usersAPIActions.loadUsers),
+          mergeMap( () => {
+            return usersService.getUsers().pipe(
+              map( (users) => usersAPIActions.loadUsersSuccess({users})),
+              catchError((error) =>
+                of(usersAPIActions.loadUsersFailure({error: error.message}))
+              )
+            );
+            }
+          )
+       )
+    },
+    {
+      functional: true,
+    });
+
+
+
 export const loadUsers = createEffect(
   (
     actions$ = inject(Actions),
