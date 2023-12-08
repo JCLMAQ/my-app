@@ -4,10 +4,10 @@ import { Store, select } from '@ngrx/store';
 import { AppStateInterface } from 'apps/frontend/src/app/appState.interface';
 import { MATERIAL } from 'material';
 import { Observable } from 'rxjs';
-import { errorSelector, isLoadingSelector } from 'user';
-import { usersAPIActions } from '../+state/users.actions';
+import * as UsersActions from '../+state/users.actions';
 import { UserInterface } from '../+state/users.models';
-import { usersSelector } from '../+state/users.selectors';
+import { errorSelector, isLoadingSelector, usersSelector } from '../+state/users.selectors';
+
 
 
 @Component({
@@ -32,7 +32,7 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.store.dispatch(usersAPIActions.loadUsers())
+    this.store.dispatch(UsersActions.usersAPIActions.loadUsers());
   }
 
 }
