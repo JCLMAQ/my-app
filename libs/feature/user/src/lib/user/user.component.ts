@@ -35,8 +35,4 @@ export class UserComponent implements OnInit {
     this.store.dispatch(usersAPIActions.loadUsers())
   }
 
-  // selectUser(user: UserInterface) {
-  //   this.store.dispatch(usersPageActions.select(user));
-  // }
-
 }
