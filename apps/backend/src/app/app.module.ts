@@ -11,6 +11,7 @@ import { FilesModule } from '@my-app/data/files';
 import { IamModule } from '@my-app/data/iam';
 import { MailsModule } from '@my-app/data/mails';
 import { PostsModule } from '@my-app/data/posts';
+import { TasksModule } from '@my-app/data/tasks';
 import { TimeUtilModule } from '@my-app/data/time-util';
 import { UsersModule } from '@my-app/data/users';
 import { PrismaModule } from '@my-app/prisma';
@@ -99,7 +100,8 @@ import path = require('path');
       MailsModule,
       CommonModule,
       UsersModule,
-      PostsModule
+      PostsModule,
+      TasksModule
   ],
   controllers: [AppController],
   providers: [AppService],
