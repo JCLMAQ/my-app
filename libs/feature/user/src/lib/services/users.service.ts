@@ -3,24 +3,17 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { ICreateUser, IUpdateUser, IUpsertUser, UserInterface } from '../+state/users.models';
 
-// const httpOptions = {
-// 	headers: new HttpHeaders({
-// 		'Content-Type': 'application/json',
-// 		Authorization: 'my-auth-token'
-// 	})
-// };
-
 const httpOptions = {
 	headers: new HttpHeaders({
-		'Content-Type': 'application/json'
+		'Content-Type': 'application/json',
+    // Authorization: 'my-auth-token'
 	})
 };
-
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class UsersService {
 
   private baseUrl = 'api/users'; // URL to web api
 
@@ -51,6 +44,8 @@ export class UserService {
    //   catchError(this.handleError)
    //  )
   }
+
+  // To be tested
 
   getAllUserItems(): Observable<UserInterface[]> {
     return this.http

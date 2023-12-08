@@ -6,50 +6,44 @@
 import { inject } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { catchError, map, mergeMap, of, tap } from "rxjs";
-import { UsersService } from "../services/users.service";
+import { UserService } from "../services/user.service";
 import { usersAPIActions, usersPageActions } from "./users.actions";
 
 
 
-export class UsersEffects {
+//   init$ = createEffect(() =>
+//     this.actions$.pipe(
+//       ofType(UsersActions.initUsers),
+//       switchMap(() => of(UsersActions.loadUsersSuccess({ users: [] }))),
+//       catchError((error) => {
+//         console.error('Error', error);
+//         return of(UsersActions.loadUsersFailure({ error }));
+//       }),
+//     ),
+//   );
+// }
 
-  private actions$ = inject(Actions);
-  private tasksService = inject(UsersService);
+// @Effect()
+// const loadItems$ = this.actions$.pipe(
+//   ofType(UsersActions.usersPageActions.load),
+//   switchMap(() =>
+//     this.usersService.getAllUserItems().pipe(
+//       map(items => loadItemsSuccess({ items })),
+//       catchError(error => of(loadItemsFailure({ error })))
+//     )
+//   )
+// );
+// delay(1500)
 
-  getUsers$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(usersAPIActions.loadUsers),
-      mergeMap( () => {
-        return this.tasksService.getUsers().pipe(
-          map( (users) => usersAPIActions.loadUsersSuccess({users})),
-          catchError((error) =>
-          of(usersAPIActions.loadUsersFailure({error: error.message}))
-          )
-        );
-      }
-    )
-    )
-  )
+// export class UsersEffects {
 
-  // init$ = createEffect(() =>
-  //     this.actions$.pipe(
-  //       ofType(usersPageActions.init),
-  //       switchMap(() => of(usersAPIActions.loadUsersSuccess({ users: [] }))),
-
-  //     ),
-  //   );
-
-
-
-}
-
-
-
-
+//   // constructor(private actions$: Actions, private tasksService: TasksService) {}
+//   private actions$ = inject(Actions);
+//   private usersService = inject(UserService);
   export const getUsers = createEffect(
     (
       actions$ = inject(Actions),
-      usersService = inject(UsersService)
+      usersService = inject(UserService)
     ) => {
        return actions$.pipe(
           ofType(usersAPIActions.loadUsers),
@@ -73,7 +67,7 @@ export class UsersEffects {
 export const loadUsers = createEffect(
   (
     actions$ = inject(Actions),
-    usersService = inject(UsersService)
+    usersService = inject(UserService)
   ) => {
     return actions$.pipe(
       ofType(usersPageActions.load),

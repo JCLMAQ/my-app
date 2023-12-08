@@ -1,5 +1,4 @@
 import { JwtAuthGuard } from '@my-app/data/auths';
-import { ActiveUser, ActiveUserData } from '@my-app/data/common';
 import { Roles } from '@my-app/data/iam';
 
 import { Public } from '@my-app/data/common';
@@ -32,13 +31,23 @@ export class UsersController {
   @Public()
   @Auth(AuthType.None)
   @Get('users')
-  @ApiOkResponse({ type: [UserEntity] })
-  async getUsers(@ActiveUser() user: ActiveUserData): Promise<User[]>{
-    console.log('from Users controlors: ', user)
+  async getUsers(): Promise<User[]>{
     const users: User[] = await this.usersService.getAllUsers()
     console.log('from Users controlors: ', users)
     return users
   }
+
+    // Get all users
+    // @Public()
+    // @Auth(AuthType.None)
+    // @Get('users')
+    // @ApiOkResponse({ type: [UserEntity] })
+    // async getUsers(@ActiveUser() user: ActiveUserData): Promise<User[]>{
+    //   // console.log('from Users controlors: ', user)
+    //   const users: User[] = await this.usersService.getAllUsers()
+    //   console.log('from Users controlors: ', users)
+    //   return users
+    // }
 
   // Get one user by id
   @Get('user/:id')

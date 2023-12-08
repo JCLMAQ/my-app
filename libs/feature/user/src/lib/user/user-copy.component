@@ -1,0 +1,55 @@
+<p>user works!</p>
+
+<!-- <mat-progress-bar
+  *ngIf="isLoading$ | async; else usersBlock"
+  mode="indeterminate"
+  class="loader"
+></mat-progress-bar> -->
+
+<ng-template #usersBlock>
+  <section class="list">
+    <h2>List</h2>
+    <!-- <mat-card
+      class="mini-card"
+      [ngClass]="{
+        'selected-card': user.id === (selectedUser$ | async)?.id
+      }"
+      *ngFor="let user of users$ | async"
+    > -->
+    <mat-card
+      class="mini-card"
+      *ngFor="let user of users$ | async"
+    >
+      <h4>{{ user?.lastName }}</h4>
+      <!-- <button
+        color="primary"
+        mat-stroked-button
+        (click)="selectUser(user)"
+      >
+        Select
+      </button> -->
+    </mat-card>
+  </section>
+  <!-- <section class="selected">
+    <div
+      *ngIf="selectedUser$ | async as user; else emptySelected"
+      class="card"
+    >
+      <mat-card class="user-card">
+        <mat-card-header>
+          <mat-card-title
+            ><h2>{{ user.firstName }}</h2></mat-card-title
+          >
+        </mat-card-header>
+
+        <mat-card-content>
+          {{ user.firstName }}
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </section> -->
+</ng-template>
+
+<ng-template #emptySelected>
+  <div class="selected-placeholder"></div>
+</ng-template>

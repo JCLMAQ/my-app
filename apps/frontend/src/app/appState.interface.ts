@@ -1,8 +1,8 @@
 import { TasksStateInterface } from "task";
-import { UserStateInterface } from "user";
+import { UsersStateInterface } from "user";
 
 
 export interface AppStateInterface {
-  users: UserStateInterface;
+  users: UsersStateInterface;
   tasks: TasksStateInterface;
 }

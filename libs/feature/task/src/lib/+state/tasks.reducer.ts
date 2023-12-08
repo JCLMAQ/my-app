@@ -7,7 +7,7 @@ import { TaskInterface, TasksStateInterface } from './tasks.models';
 export const TASKS_FEATURE_KEY = 'tasks';
 
 export interface TasksState extends EntityState<TaskInterface> {
-  selectedId?: string | number; // which Tasks record has been selected
+  selectedTaskId?: string | number; // which Tasks record has been selected
   loaded: boolean; // has the Tasks list been loaded
   error?: string | null; // last known error (if any)
 }
@@ -16,8 +16,7 @@ export interface TasksPartialState {
   readonly [TASKS_FEATURE_KEY]: TasksState;
 }
 
-export const tasksAdapter: EntityAdapter<TaskInterface> =
-  createEntityAdapter<TaskInterface>();
+export const tasksAdapter: EntityAdapter<TaskInterface> = createEntityAdapter<TaskInterface>();
 
 export const initialTasksState: TasksStateInterface = {
   // set initial required properties
@@ -40,7 +39,7 @@ export const reducers = createReducer(
     ...state,
     isLoading: false,
     error: action.error,
-   }) ),
+  }) ),
 
 
   on(TasksActions.initTasks, (state) => ({

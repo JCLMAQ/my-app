@@ -1,8 +1,5 @@
 import { Task } from "@prisma/client";
 
-/**
- * Interface for the 'Tasks' data
-//  */
 // export interface TaskInterface extends Task {};
 export interface TaskInterface extends Partial<Task> {}
 
