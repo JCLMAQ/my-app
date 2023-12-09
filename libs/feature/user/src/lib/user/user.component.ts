@@ -6,7 +6,7 @@ import { MATERIAL } from 'material';
 import { Observable } from 'rxjs';
 import * as UsersActions from '../+state/users.actions';
 import { UserInterface } from '../+state/users.models';
-import { usersFeature } from '../+state/users.reducer';
+import { usersFeature } from '../+state/users.state';
 
 
 
@@ -32,7 +32,7 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.store.dispatch(UsersActions.usersAPIActions.loadUsers());
+    this.store.dispatch(UsersActions.usersPageActions.load());
   }
 
 }

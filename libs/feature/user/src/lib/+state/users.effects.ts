@@ -18,7 +18,7 @@ export class UsersEffects {
 
   getUsers$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(usersAPIActions.loadUsers),
+      ofType(usersPageActions.load),
       mergeMap( () => {
         return this.tasksService.getUsers().pipe(
           map( (users) => usersAPIActions.loadUsersSuccess({users})),

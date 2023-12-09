@@ -31,7 +31,7 @@ export const initialUsersState: UsersStateInterface = {
 
 export const reducer = createReducer(
   initialUsersState,
-  on(usersAPIActions.loadUsers,(state) => ({ ...state, isLoading: true }) ),
+  on(usersPageActions.load,(state) => ({ ...state, isLoading: true }) ),
   on(usersAPIActions.loadUsersSuccess,(state , action) => ({
     ...state,
     isLoading: false,
