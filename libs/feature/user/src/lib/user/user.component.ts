@@ -6,7 +6,7 @@ import { MATERIAL } from 'material';
 import { Observable } from 'rxjs';
 import * as UsersActions from '../+state/users.actions';
 import { UserInterface } from '../+state/users.models';
-import { errorSelector, isLoadingSelector, usersSelector } from '../+state/users.selectors';
+import { usersFeature } from '../+state/users.reducer';
 
 
 
@@ -26,9 +26,9 @@ export class UserComponent implements OnInit {
   users$: Observable<UserInterface[]> | undefined;
 
   constructor( private store: Store<AppStateInterface>) {
-    this.isLoading$ = this.store.pipe(select(isLoadingSelector));
-    this.error$ = this.store.pipe(select(errorSelector));
-    this.users$ = this.store.pipe(select(usersSelector));
+    this.isLoading$ = this.store.pipe(select(usersFeature.selectIsLoading));
+    this.error$ = this.store.pipe(select(usersFeature.selectError));
+    this.users$ = this.store.pipe(select(usersFeature.selectUsers));
   }
 
   ngOnInit() {

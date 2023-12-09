@@ -3,12 +3,13 @@ import { User } from "@prisma/client";
 
 export interface UserInterface extends Partial<User>{}
 
-export interface UsersStateInterface {
-  isLoading: boolean;
-  error: string | null;
-  loaded: boolean;
-  users: UserInterface []
-}
+// export interface UsersStateInterface {
+//   isLoading: boolean;
+//   error: string | null;
+//   loaded: boolean;
+//   users: UserInterface [];
+//   selectedUserId: string | null;
+// }
 
 
 export type ICreateUser =Partial<Omit<UserInterface, 'id'>>;
