@@ -4,7 +4,6 @@ import { UserInterface } from './users.models';
 export const usersAPIActions = createActionGroup({
   source: 'Users API',
   events: {
-    // 'Load Users': emptyProps(),
     'Load Users Success': props<{ users: UserInterface[]}>(),
     'Load Users Failure': props<{ error: string }>(),
   },
