@@ -14,7 +14,7 @@ export interface UsersState extends EntityState <UserInterface>{
 }
 
 export interface UsersPartialState {
-  readonly [USERS_FEATURE_KEY]: UsersStateInterface;
+  readonly [USERS_FEATURE_KEY]: UsersState;
 }
 
 export const usersAdapter: EntityAdapter<UserInterface> = createEntityAdapter<UserInterface>();
@@ -68,7 +68,7 @@ export const reducers = createReducer(
   on(usersAPIActions.loadUsersSuccess,(state , action) => ({
     ...state,
     isLoading: false,
-    tasks: action.users,
+    users: action.users,
 
   }) ),
   on(usersAPIActions.loadUsersFailure,(state, action) => ({
@@ -80,12 +80,13 @@ export const reducers = createReducer(
 
   on(usersPageActions.init, (state) => ({
     ...state,
+    isLoading: false,
     loaded: false,
     error: null,
   })),
 )
 
-export function tasksReducer(state: UsersStateInterface, action: Action) {
+export function usersReducer(state: UsersStateInterface, action: Action) {
   return reducers(state, action);
 }
 

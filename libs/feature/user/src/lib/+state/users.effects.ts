@@ -1,15 +1,15 @@
 
-// @Injectable()
+
 // export class UsersEffects {
 //   private actions$ = inject(Actions);
 
-import { inject } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { catchError, map, mergeMap, of, switchMap } from "rxjs";
 import { UsersService } from "../services/users.service";
 import { usersAPIActions, usersPageActions } from "./users.actions";
 
-
+@Injectable()
 
 export class UsersEffects {
 

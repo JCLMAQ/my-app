@@ -38,6 +38,8 @@ export const reducers = createReducer(
   on(TasksActions.getTasksFailure,(state, action) => ({
     ...state,
     isLoading: false,
+
+    loaded: false,
     error: action.error,
   }) ),
 
