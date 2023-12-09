@@ -14,10 +14,6 @@ export interface UsersStateInterface {
   selectedUserId: string | undefined | null;
 }
 
-// export interface UsersPartialState {
-//   readonly [USERS_FEATURE_KEY]: UsersState;
-// }
-
 // export const usersAdapter: EntityAdapter<UserInterface> = createEntityAdapter<UserInterface>();
 
 export const initialUsersState: UsersStateInterface = {
@@ -28,7 +24,7 @@ export const initialUsersState: UsersStateInterface = {
   selectedUserId: null,
 };
 
-export const reducer = createReducer(
+const reducer = createReducer(
   initialUsersState,
   on(usersPageActions.load,(state) => ({
     ...state,
@@ -74,38 +70,3 @@ export const usersFeature = createFeature({
     )
   })
   })
-
-
-
-// export const usersFeature = createFeature({
-//   name: 'users',
-//   reducers,
-
-  // extraSelectors: ({ selectSelectedUserId, selectUsersState, selectEntities }) => ({
-  //   selectSelectedUserBis: createSelector(
-  //     selectSelectedUserId,
-  //     // selectUsers,
-  //     (selectedUserId: any, users: any[]) => users.find((s) => s.id === selectedUserId),
-  //   ),
-  //     ...adapter.getSelectors(selectUsersState),
-  //   selectIsUserSelected: createSelector(
-  //     selectSelectedUserId,
-  //     (selectedId) => selectedId !== null
-  //   ),
-  //   selectSelectedUser: createSelector(
-  //     selectSelectedUserId,
-  //     selectEntities,
-  //     (selectedId, entities) => selectedId ? entities[selectedId] : null
-  //   ),
-  // })
-// })
-
-// export const {
-//   name: usersFeatureKey,
-//   reducer: usersReducer,
-//   selectError,
-//   selectEntities,
-//   selectIsLoading,
-//   selectLoaded,
-//   selectSelectedUserId
-// } = usersFeature;
