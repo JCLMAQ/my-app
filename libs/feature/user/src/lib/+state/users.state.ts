@@ -11,7 +11,7 @@ export interface UsersStateInterface {
   error: string | null;
   loaded: boolean;
   users: UserInterface [];
-  selectedUserId: string | null;
+  selectedUserId: string | undefined | null;
 }
 
 // export interface UsersPartialState {
@@ -28,16 +28,31 @@ export const initialUsersState: UsersStateInterface = {
   selectedUserId: null,
 };
 
-
 export const reducer = createReducer(
   initialUsersState,
-  on(usersPageActions.load,(state) => ({ ...state, isLoading: true }) ),
+  on(usersPageActions.load,(state) => ({
+    ...state,
+    isLoading: true,
+    loaded: false,
+    error: null,
+  }) ),
+  on(usersPageActions.init, (state) => ({
+    ...state,
+    isLoading: false,
+    loaded: false,
+    error: null,
+  })),
+
+  on(usersPageActions.select, (state, action) => ({
+    ...state,
+    selectedUserId: action.id,
+  })),
+
   on(usersAPIActions.loadUsersSuccess,(state , action) => ({
     ...state,
     isLoading: false,
     loaded: true,
     users: action.users,
-
   }) ),
   on(usersAPIActions.loadUsersFailure,(state, action) => ({
     ...state,
@@ -45,14 +60,6 @@ export const reducer = createReducer(
     loaded: false,
     error: action.error,
   }) ),
-
-
-  on(usersPageActions.init, (state) => ({
-    ...state,
-    isLoading: false,
-    loaded: false,
-    error: null,
-  })),
 )
 
 // Create Feature
