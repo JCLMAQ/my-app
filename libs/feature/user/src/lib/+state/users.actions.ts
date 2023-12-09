@@ -1,7 +1,7 @@
-import { createActionGroup, emptyProps, props } from '@ngrx/store';
+import { createAction, createActionGroup, emptyProps, props } from '@ngrx/store';
 import { UserInterface } from './users.models';
 
-// export const initUsers = createAction('[Users Page] Init');
+export const initUsers = createAction('[Users Pagebis] Init');
 
 export const usersAPIActions = createActionGroup({
   source: 'Users API',
