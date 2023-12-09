@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { AppStateInterface } from 'apps/frontend/src/app/appState.interface';
 import { MATERIAL } from 'material';
-import { Observable } from 'rxjs';
+import { Observable, delay } from 'rxjs';
 import * as UsersActions from '../+state/users.actions';
 import { UserInterface } from '../+state/users.models';
 import { usersFeature } from '../+state/users.state';
@@ -24,11 +24,13 @@ export class UserComponent implements OnInit {
   isLoading$: Observable<boolean>;
   error$: Observable<string | null> | undefined;
   users$: Observable<UserInterface[]> | undefined;
+  selectedUser$: Observable<UserInterface | null | undefined> | undefined;
 
   constructor( private store: Store<AppStateInterface>) {
-    this.isLoading$ = this.store.pipe(select(usersFeature.selectIsLoading));
+    this.isLoading$ = this.store.pipe(delay(1500), select(usersFeature.selectIsLoading) );
     this.error$ = this.store.pipe(select(usersFeature.selectError));
     this.users$ = this.store.pipe(select(usersFeature.selectUsers));
+    this.selectedUser$ = this.store.pipe(select(usersFeature.selectSelectedUser))
   }
 
   ngOnInit() {

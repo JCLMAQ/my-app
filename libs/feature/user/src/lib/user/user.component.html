@@ -1,6 +1,11 @@
 <p>user works! Well</p>
 
 <div *ngIf="isLoading$ | async">Loading...</div>
+<mat-progress-bar
+  *ngIf="isLoading$ | async"
+  mode="indeterminate"
+  class="loader"
+></mat-progress-bar>
 <div *ngIf="error$ | async as error ">{{ error }}</div>
 <!-- <div *ngfor="let task of tasks$ | async">{{ task.title }}</div> -->
 @for (user of users$ | async; track user) {
