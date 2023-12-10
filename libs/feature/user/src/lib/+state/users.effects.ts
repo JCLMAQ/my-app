@@ -10,13 +10,13 @@ import { usersAPIActions, usersPageActions } from "./users.actions";
 export class UsersEffects {
 
   private actions$ = inject(Actions);
-  private tasksService = inject(UsersService);
+  private userService = inject(UsersService);
 
   getUsers$ = createEffect(() =>
     this.actions$.pipe(
       ofType(usersPageActions.load),
       mergeMap( () => {
-        return this.tasksService.getUsers().pipe(
+        return this.userService.getUsers().pipe(
           map( (users) => usersAPIActions.loadUsersSuccess({users})),
           catchError((error) =>
           of(usersAPIActions.loadUsersFailure({error: error.message}))

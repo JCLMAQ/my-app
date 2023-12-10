@@ -5,7 +5,7 @@ import { AppStateInterface } from 'apps/frontend/src/app/appState.interface';
 import { Observable } from 'rxjs';
 import * as TasksActions from '../+state/tasks.actions';
 import { TaskInterface } from '../+state/tasks.models';
-import { errorSelector, isLoadingSelector, tasksSelector } from '../+state/tasks.selectors';
+import { tasksFeature } from '../+state/tasks.state';
 
 @Component({
   selector: 'lib-task',
@@ -20,13 +20,13 @@ export class TaskComponent implements OnInit {
   tasks$: Observable<TaskInterface[]> | undefined;
 
   constructor( private store: Store<AppStateInterface>) {
-    this.isLoading$ = this.store.pipe(select(isLoadingSelector));
-    this.error$ = this.store.pipe(select(errorSelector));
-    this.tasks$ = this.store.pipe(select(tasksSelector));
+    this.isLoading$ = this.store.pipe(select(tasksFeature.selectIsLoading));
+    this.error$ = this.store.pipe(select(tasksFeature.selectError));
+    this.tasks$ = this.store.pipe(select(tasksFeature.selectTasks));
   }
 
   ngOnInit(): void {
-    this.store.dispatch(TasksActions.getTasks()) ;
+    this.store.dispatch(TasksActions.tasksPageActions.load()) ;
   }
 
 

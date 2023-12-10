@@ -1,5 +1,3 @@
-// import * as UsersActions from './lib/+state/users.actions';
-
 export * from './lib/+state/users.effects';
 export * as usersEffects from './lib/+state/users.effects';
 export * from './lib/+state/users.models';
