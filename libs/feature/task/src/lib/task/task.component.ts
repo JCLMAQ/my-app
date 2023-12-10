@@ -16,13 +16,6 @@ export class TaskComponent implements OnInit{//
 
   private readonly store = inject(Store);
 
-  // constructor( private store: Store) {
-  //   this.isLoading$ = this.store.pipe(select(tasksFeature.selectIsLoading));
-  //   this.error$ = this.store.pipe(select(tasksFeature.selectError));
-  //   this.tasks$ = this.store.pipe(select(tasksFeature.selectTasks));
-  // }
-
-
   readonly tasks$ = this.store.select(tasksFeature.selectAll);
   readonly istaskSelected$ = this.store.select(tasksFeature.selectIsTaskSelected);
   readonly selectedtask$ = this.store.select(tasksFeature.selectSelectedTask);

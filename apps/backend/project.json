@@ -22,7 +22,8 @@
             }
           }
         ],
-        "assets": ["apps/backend/src/assets"]
+        "assets": ["apps/backend/src/assets"],
+        "webpackConfig": "apps/backend/webpack.config.js",
       },
       "configurations": {
         "production": {
