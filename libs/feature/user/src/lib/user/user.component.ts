@@ -1,10 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { MATERIAL } from 'material';
-import { Observable, delay } from 'rxjs';
+import { delay } from 'rxjs';
 import * as UsersActions from '../+state/users.actions';
-import { UserInterface } from '../+state/users.models';
 import { usersFeature } from '../+state/users.state';
 
 
@@ -20,17 +19,15 @@ import { usersFeature } from '../+state/users.state';
   styleUrl: './user.component.css',
 })
 export class UserComponent implements OnInit {
-  isLoading$: Observable<boolean>;
-  error$: Observable<string | null> | undefined;
-  users$: Observable<UserInterface[]> | undefined;
-  selectedUser$: Observable<UserInterface | null | undefined> | undefined;
 
-  constructor( private store: Store) {
-    this.isLoading$ = this.store.pipe(delay(1500), select(usersFeature.selectIsLoading) );
-    this.error$ = this.store.pipe(select(usersFeature.selectError));
-    this.users$ = this.store.pipe(select(usersFeature.selectUsers));
-    this.selectedUser$ = this.store.pipe(select(usersFeature.selectSelectedUser))
-  }
+  private readonly store = inject(Store);
+
+  readonly users$ = this.store.select(usersFeature.selectAll);
+  readonly isUserSelected$ = this.store.select(usersFeature.selectIsUserSelected);
+  readonly selectedUser$ = this.store.select(usersFeature.selectSelectedUser);
+  readonly loaded$ = this.store.select(usersFeature.selectLoaded)
+  readonly isLoading$ = this.store.pipe(delay(1500), select(usersFeature.selectIsLoading) );
+  readonly error$ = this.store.pipe(select(usersFeature.selectError));
 
   ngOnInit() {
     this.store.dispatch(UsersActions.usersPageActions.load());
