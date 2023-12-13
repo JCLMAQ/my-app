@@ -12,7 +12,7 @@ const httpOptions = {
 	})
 };
 
-const apiUrl = `api/Todos`;
+const apiUrl = `api/`;
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +20,7 @@ const apiUrl = `api/Todos`;
 export class TodoService {
   private readonly http = inject(HttpClient);
 
-  private baseUrl = `${apiUrl}Todos`;
+  private baseUrl = `${apiUrl}todos`;
 
 
   private handleError(error: HttpErrorResponse) {
