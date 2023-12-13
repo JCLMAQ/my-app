@@ -12,7 +12,9 @@ export class TodosService {
   ) {}
 
   async getAllTodos(): Promise<Todo[]> {
-    return await this.prisma.todo.findMany()
+    const todosReturn = await this.prisma.todo.findMany()
+    console.log(todosReturn)
+    return todosReturn
   }
 
 }

@@ -3,6 +3,6 @@
 <div *ngIf="todoStore.isLoading">Loading...</div>
 <div *ngIf="todoStore.error">{{ todoStore.error }}</div>
 
-@for (todo of todoStore.items(); track todo.id ) {
+@for (todo of todoStore.items(); track todo ) {
   <div>{{ todo.title }}</div>
 }

@@ -22,35 +22,35 @@ export const initialTodoState: TodoStateInterface = {
 Base on: https://offering.solutions/blog/articles/2023/12/03/ngrx-signal-store-getting-started/
 */
 // With Promises methods
-export const TodoStore = signalStore(
-    { providedIn: 'root' },
-    withState(initialTodoState),
-    withTodosSelectors(),
-    withTodosMethods(),
-    withHooks({
-      onInit({ loadAllTodosByPromise }) {
-        console.log('on init');
-        loadAllTodosByPromise();
-      },
-      onDestroy() {
-        console.log('on destroy');
-      },
-    })
-  );
+// export const TodoStore = signalStore(
+//     { providedIn: 'root' },
+//     withState(initialTodoState),
+//     withTodosSelectors(),
+//     withTodosMethods(),
+//     withHooks({
+//       onInit({ loadAllTodosByPromise }) {
+//         console.log('on init');
+//         loadAllTodosByPromise();
+//       },
+//       onDestroy() {
+//         console.log('on destroy');
+//       },
+//     })
+//   );
 
 // The same but with RxJS methods
-// export const TodoStore = signalStore(
-//   { providedIn: 'root' },
-//   withState(initialTodoState),
-//   withTodosSelectors(),
-//   withTodosMethods(),
-//   withHooks({
-//     onInit({ loadAllTodos }) {
-//       console.log('on init');
-//       loadAllTodos();
-//     },
-//     onDestroy() {
-//       console.log('on destroy');
-//     },
-//   })
-// );
+export const TodoStore = signalStore(
+  { providedIn: 'root' },
+  withState(initialTodoState),
+  withTodosSelectors(),
+  withTodosMethods(),
+  withHooks({
+    onInit({ loadAllTodos }) {
+      console.log('on init');
+      loadAllTodos();
+    },
+    onDestroy() {
+      console.log('on destroy');
+    },
+  })
+);
