@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { TodoStore } from './store/todo.state';
 
 @Component({
   selector: 'lib-todo',
@@ -7,5 +8,23 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   templateUrl: './todo.component.html',
   styleUrl: './todo.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [TodoStore],
 })
-export class TodoComponent {}
+export class TodoComponent  {
+  readonly store = inject(TodoStore);
+
+  // This ngOnInit is included directly within the store hoocks
+// ngOnInit(): void {
+//   this.store.loadAllTodos();
+// }
+
+
+
+
+  // addTodo() {
+  //   this.store.addTodo(this.form.value.todoValue);
+  //   this.form.reset();
+  // }
+
+}
