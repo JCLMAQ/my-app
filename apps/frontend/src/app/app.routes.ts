@@ -11,6 +11,10 @@ export const appRoutes: Route[] = [
     loadChildren: () => import('task').then((m) => m.taskRoutes),
   },
   {
+    path: 'todos',
+    loadChildren: () => import('todo').then((m) => m.todoRoutes),
+  },
+  {
     path: 'users',
     loadChildren: () => import('user').then((m) => m.userRoutes),
   },

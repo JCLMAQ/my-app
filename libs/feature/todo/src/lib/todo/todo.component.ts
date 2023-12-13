@@ -12,7 +12,7 @@ import { TodoStore } from '../store/todo.state';
   providers: [TodoStore],
 })
 export class TodoComponent  {
-  readonly store = inject(TodoStore);
+  readonly todoStore = inject(TodoStore);
 
   // This ngOnInit is included directly within the store hoocks
 // ngOnInit(): void {

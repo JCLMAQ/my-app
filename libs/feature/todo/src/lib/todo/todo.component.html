@@ -1,7 +1,8 @@
 <p>todo works!</p>
 
-<div *ngIf="isLoading$ | async">Loading...</div>
-<div *ngIf="error$ | async as error ">{{ error }}</div>
+<div *ngIf="todoStore.isLoading">Loading...</div>
+<div *ngIf="todoStore.error">{{ todoStore.error }}</div>
 
-@for (todo of todos$ | async; track todo) {
+@for (todo of todoStore.items(); track todo.id ) {
   <div>{{ todo.title }}</div>
+}

@@ -59,32 +59,32 @@ export function withTodosMethods() {
       ),
 
       // Todo state to "done"
-      moveToDone: rxMethod<TodoInterface>(
-        pipe(
-          switchMap((todo) => {
-            patchState(store, { isLoading: true, loaded: false});
+      // moveToDone: rxMethod<TodoInterface>(
+      //   pipe(
+      //     switchMap((todo) => {
+      //       patchState(store, { isLoading: true, loaded: false});
 
-            const toSend = { ...todo, todoState: ['DONE'] };
+      //       const toSend = { ...todo, todoState: 'DONE' };
 
-            return todoService.updateItem(toSend).pipe(
-              tapResponse({
-                next: (updatedTodo) => {
-                  const allItems = [...store.items()];
-                  const index = allItems.findIndex((x) => x.id === todo.id);
+      //       return todoService.updateItem(toSend).pipe(
+      //         tapResponse({
+      //           next: (updatedTodo) => {
+      //             const allItems = [...store.items()];
+      //             const index = allItems.findIndex((x) => x.id === todo.id);
 
-                  allItems[index] = updatedTodo;
+      //             allItems[index] = updatedTodo;
 
-                  patchState(store, {
-                    items: allItems,
-                  });
-                },
-                error: console.error,
-                finalize: () => patchState(store, { isLoading: false, loaded: true }),
-              })
-            );
-          })
-        )
-      ),
+      //             patchState(store, {
+      //               items: allItems,
+      //             });
+      //           },
+      //           error: console.error,
+      //           finalize: () => patchState(store, { isLoading: false, loaded: true }),
+      //         })
+      //       );
+      //     })
+      //   )
+      // ),
 
       deleteTodo: rxMethod<TodoInterface>(
         pipe(

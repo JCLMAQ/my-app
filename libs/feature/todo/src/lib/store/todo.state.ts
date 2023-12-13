@@ -7,13 +7,15 @@ export interface TodoStateInterface {
   items: TodoInterface[];
   isLoading: boolean;
   loaded: boolean;
+  error: string | null;
 
 }
 
 export const initialTodoState: TodoStateInterface = {
   items: [],
   isLoading: false,
-  loaded: false
+  loaded: false,
+  error: null
 };
 
 /*

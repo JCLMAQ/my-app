@@ -28,6 +28,7 @@
       "@my-app/data/posts": ["libs/data/posts/src/index.ts"],
       "@my-app/data/tasks": ["libs/data/tasks/src/index.ts"],
       "@my-app/data/time-util": ["libs/data/utilities/time-util/src/index.ts"],
+      "@my-app/data/todos": ["libs/data/todos/src/index.ts"],
       "@my-app/data/users": ["libs/data/users/src/index.ts"],
       "@my-app/prisma": ["libs/prisma/src/index.ts"],
       "auth": ["libs/ui/auth/src/index.ts"],
@@ -38,7 +39,6 @@
       "task": ["libs/feature/task/src/index.ts"],
       "test": ["libs/test/src/index.ts"],
       "todo": ["libs/feature/todo/src/index.ts"],
-      "todos": ["libs/data/todos/src/index.ts"],
       "user": ["libs/feature/user/src/index.ts"],
       "utilities": ["libs/ui/utilities/src/index.ts"]
     }
