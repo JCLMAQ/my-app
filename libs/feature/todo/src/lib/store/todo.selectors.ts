@@ -6,10 +6,10 @@ export function withTodosSelectors() {
   return signalStoreFeature(
     { state: type<TodoStateInterface>() },
     withComputed(({ items }) => ({
-      doneCount: computed(() => items().filter((x) => x.state = 'DONE').length),
-      undoneCount: computed(() => items().filter((x) => x.state !== 'DONE').length),
+      doneCount: computed(() => items().filter((x) => x.todoState = 'DONE').length),
+      undoneCount: computed(() => items().filter((x) => x.todoState !== 'DONE').length),
       percentageDone: computed(() => {
-        const done = items().filter((x) => x.state = 'DONE').length;
+        const done = items().filter((x) => x.todoState = 'DONE').length;
         const total = items().length;
 
         if (total === 0) {

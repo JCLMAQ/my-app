@@ -64,7 +64,7 @@ export function withTodosMethods() {
           switchMap((todo) => {
             patchState(store, { isLoading: true, loaded: false});
 
-            const toSend = { ...todo, todoState: 'DONE' };
+            const toSend = { ...todo, todoState: ['DONE'] };
 
             return todoService.updateItem(toSend).pipe(
               tapResponse({
