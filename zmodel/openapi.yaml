@@ -61891,9 +61891,9 @@ paths:
           explode: false
           schema:
             type: string
-        - name: filter[state]
+        - name: filter[todoState]
           required: false
-          description: Equality filter for "state"
+          description: Equality filter for "todoState"
           in: query
           style: form
           explode: false
@@ -62783,9 +62783,9 @@ paths:
           explode: false
           schema:
             type: string
-        - name: filter[state]
+        - name: filter[todoState]
           required: false
-          description: Equality filter for "state"
+          description: Equality filter for "todoState"
           in: query
           style: form
           explode: false
@@ -63311,9 +63311,9 @@ paths:
           explode: false
           schema:
             type: string
-        - name: filter[state]
+        - name: filter[todoState]
           required: false
-          description: Equality filter for "state"
+          description: Equality filter for "todoState"
           in: query
           style: form
           explode: false
@@ -64050,9 +64050,9 @@ paths:
           explode: false
           schema:
             type: string
-        - name: filter[state]
+        - name: filter[todoState]
           required: false
-          description: Equality filter for "state"
+          description: Equality filter for "todoState"
           in: query
           style: form
           explode: false
@@ -64578,9 +64578,9 @@ paths:
           explode: false
           schema:
             type: string
-        - name: filter[state]
+        - name: filter[todoState]
           required: false
-          description: Equality filter for "state"
+          description: Equality filter for "todoState"
           in: query
           style: form
           explode: false
@@ -65200,9 +65200,9 @@ paths:
           explode: false
           schema:
             type: string
-        - name: filter[state]
+        - name: filter[todoState]
           required: false
-          description: Equality filter for "state"
+          description: Equality filter for "todoState"
           in: query
           style: form
           explode: false
@@ -65728,9 +65728,9 @@ paths:
           explode: false
           schema:
             type: string
-        - name: filter[state]
+        - name: filter[todoState]
           required: false
-          description: Equality filter for "state"
+          description: Equality filter for "todoState"
           in: query
           style: form
           explode: false
@@ -66350,9 +66350,9 @@ paths:
           explode: false
           schema:
             type: string
-        - name: filter[state]
+        - name: filter[todoState]
           required: false
-          description: Equality filter for "state"
+          description: Equality filter for "todoState"
           in: query
           style: form
           explode: false
@@ -66878,9 +66878,9 @@ paths:
           explode: false
           schema:
             type: string
-        - name: filter[state]
+        - name: filter[todoState]
           required: false
-          description: Equality filter for "state"
+          description: Equality filter for "todoState"
           in: query
           style: form
           explode: false
@@ -68062,9 +68062,9 @@ paths:
           explode: false
           schema:
             type: string
-        - name: filter[state]
+        - name: filter[taskState]
           required: false
-          description: Equality filter for "state"
+          description: Equality filter for "taskState"
           in: query
           style: form
           explode: false
@@ -68952,9 +68952,9 @@ paths:
           explode: false
           schema:
             type: string
-        - name: filter[state]
+        - name: filter[taskState]
           required: false
-          description: Equality filter for "state"
+          description: Equality filter for "taskState"
           in: query
           style: form
           explode: false
@@ -69478,9 +69478,9 @@ paths:
           explode: false
           schema:
             type: string
-        - name: filter[state]
+        - name: filter[taskState]
           required: false
-          description: Equality filter for "state"
+          description: Equality filter for "taskState"
           in: query
           style: form
           explode: false
@@ -70215,9 +70215,9 @@ paths:
           explode: false
           schema:
             type: string
-        - name: filter[state]
+        - name: filter[taskState]
           required: false
-          description: Equality filter for "state"
+          description: Equality filter for "taskState"
           in: query
           style: form
           explode: false
@@ -70741,9 +70741,9 @@ paths:
           explode: false
           schema:
             type: string
-        - name: filter[state]
+        - name: filter[taskState]
           required: false
-          description: Equality filter for "state"
+          description: Equality filter for "taskState"
           in: query
           style: form
           explode: false
@@ -71361,9 +71361,9 @@ paths:
           explode: false
           schema:
             type: string
-        - name: filter[state]
+        - name: filter[taskState]
           required: false
-          description: Equality filter for "state"
+          description: Equality filter for "taskState"
           in: query
           style: form
           explode: false
@@ -71887,9 +71887,9 @@ paths:
           explode: false
           schema:
             type: string
-        - name: filter[state]
+        - name: filter[taskState]
           required: false
-          description: Equality filter for "state"
+          description: Equality filter for "taskState"
           in: query
           style: form
           explode: false
@@ -92819,7 +92819,7 @@ components:
               type: string
             content:
               type: string
-            state:
+            todoState:
               $ref: "#/components/schemas/TodoState"
             mainTodoId:
               type: string
@@ -92887,7 +92887,7 @@ components:
                   type: string
                 content:
                   type: string
-                state:
+                todoState:
                   $ref: "#/components/schemas/TodoState"
                 mainTodoId:
                   type: string
@@ -92955,7 +92955,7 @@ components:
                   type: string
                 content:
                   type: string
-                state:
+                todoState:
                   $ref: "#/components/schemas/TodoState"
                 mainTodoId:
                   type: string
@@ -93262,7 +93262,7 @@ components:
               type: string
             content:
               type: string
-            state:
+            taskState:
               $ref: "#/components/schemas/TaskState"
             mainTaskId:
               type: string
@@ -93332,7 +93332,7 @@ components:
                   type: string
                 content:
                   type: string
-                state:
+                taskState:
                   $ref: "#/components/schemas/TaskState"
                 mainTaskId:
                   type: string
@@ -93402,7 +93402,7 @@ components:
                   type: string
                 content:
                   type: string
-                state:
+                taskState:
                   $ref: "#/components/schemas/TaskState"
                 mainTaskId:
                   type: string

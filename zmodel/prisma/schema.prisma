@@ -274,7 +274,7 @@ model Todo {
     orderTodo Int
     title String
     content String?
-    state TodoState @default(CREATION)
+    todoState TodoState @default(CREATION)
     mainTodo Todo? @relation("MainSubTodo", fields: [mainTodoId], references: [id])
     mainTodoId String? @map("mainTodo")
     SubTodos Todo[] @relation("MainSubTodo")
@@ -320,7 +320,7 @@ model Task {
     orderTask Int
     title String
     content String?
-    state TaskState @default(CREATION)
+    taskState TaskState @default(CREATION)
     mainTask Task? @relation("MainSubTask", fields: [mainTaskId], references: [id])
     mainTaskId String? @map("mainTask")
     SubTasks Task[] @relation("MainSubTask")
