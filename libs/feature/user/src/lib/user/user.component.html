@@ -11,7 +11,7 @@
   {{ error$ }}
 }
 <!-- <div *ngIf="error$ | async as error "></div> -->
-@for (user of users$ | async; track user) {
+@for (user of usersbis$ | async; track user) {
   <div>{{ user.email }}</div>
 }
 

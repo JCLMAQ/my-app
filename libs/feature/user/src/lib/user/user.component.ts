@@ -46,7 +46,7 @@ export class UserComponent implements OnInit,  AfterViewInit {
   private readonly router = inject(Router);
 
 
-  // readonly users$ = this.store.select(usersFeature.selectAll);
+  readonly usersbis$ = this.store.select(usersFeature.selectAll);
   readonly isUserSelected$ = this.store.select(usersFeature.selectIsUserSelected);
   readonly selectedUser$ = this.store.select(usersFeature.selectSelectedUser);
   readonly loaded$ = this.store.select(usersFeature.selectLoaded)
