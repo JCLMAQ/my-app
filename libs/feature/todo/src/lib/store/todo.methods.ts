@@ -85,6 +85,24 @@ export function withTodosMethods() {
       //   )
       // ),
 
+      /* Example:
+          addPost(title: string) {
+      const newPost: PostInterface = {
+        id: crypto.randomUUID(),
+        title,
+      };
+      const updatedPosts = [...store.posts(), newPost];
+      patchState(store, { posts: updatedPosts });
+    },
+    removePost(id: string) {
+      const updatedPosts = store.posts().filter((post) => post.id !== id);
+      patchState(store, { posts: updatedPosts });
+    },
+    addPosts(posts: PostInterface[]) {
+      patchState(store, { posts });
+    },
+      */
+
       deleteTodo: rxMethod<TodoInterface>(
         pipe(
           switchMap((todo) => {
