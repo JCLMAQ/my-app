@@ -22,9 +22,10 @@ export class TodoComponent  {
 // readonly istaskSelected$ = this.store.select(tasksFeature.selectIsTaskSelected);
 // readonly selectedtask$ = this.store.select(tasksFeature.selectSelectedTask);
 // readonly loaded$ = this.store.select(tasksFeature.selectLoaded)
-// readonly isLoading$ = this.store.pipe(delay(1500),select(tasksFeature.selectIsLoading) );
+// readonly isLoading$ = this.todoStore.pipe(delay(1500),select(tasksFeature.selectIsLoading) );
 // readonly error$ = this.store.pipe(select(tasksFeature.selectError));
 
+ readonly isLoading$ = this.todoStore.isLoading;
 
 
   // addTodo() {

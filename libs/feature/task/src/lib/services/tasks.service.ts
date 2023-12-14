@@ -38,11 +38,12 @@ export class TasksService {
   }
 
   getTasks(): Observable<TaskInterface[]> {
-      return this.http.get<TaskInterface[]>(this.baseUrl, httpOptions)
-    //  .pipe(
+      return this.http
+        .get<TaskInterface[]>(this.baseUrl, httpOptions)
+     .pipe(
 
-    //   catchError(this.handleError)
-    //  )
+      catchError(this.handleError)
+     )
   }
 
 // To be tested

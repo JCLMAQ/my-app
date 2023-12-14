@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Injectable } from '@angular/core';
 // import { Todo } from '@prisma/client';
 
-import { Observable, lastValueFrom, throwError } from 'rxjs';
+import { Observable, catchError, lastValueFrom, throwError } from 'rxjs';
 import { TodoInterface } from '../store/todo.model';
 
 const httpOptions = {
@@ -46,9 +46,8 @@ export class TodoService {
   getItems(): Observable<TodoInterface[]> {
     return this.http
       .get<TodoInterface[]>(this.baseUrl, httpOptions)
-      // .pipe(
-      //   map((results: any) => results.todos),
-      //   catchError(this.handleError));;
+      .pipe(
+        catchError(this.handleError));;
   }
 
   getItemsAsPromise() {
