@@ -13,6 +13,7 @@ import { MailsModule } from '@my-app/data/mails';
 import { PostsModule } from '@my-app/data/posts';
 import { TasksModule } from '@my-app/data/tasks';
 import { TimeUtilModule } from '@my-app/data/time-util';
+import { TodosModule } from '@my-app/data/todos';
 import { UsersModule } from '@my-app/data/users';
 import { PrismaModule } from '@my-app/prisma';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -101,7 +102,8 @@ import path = require('path');
       CommonModule,
       UsersModule,
       PostsModule,
-      TasksModule
+      TasksModule,
+      TodosModule
   ],
   controllers: [AppController],
   providers: [AppService],

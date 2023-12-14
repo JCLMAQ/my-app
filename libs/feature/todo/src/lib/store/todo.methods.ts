@@ -21,7 +21,6 @@ export function withTodosMethods() {
         pipe(
           switchMap(() => {
             patchState(store, { isLoading: true, loaded: false });
-
             return todoService.getItems().pipe(
               tapResponse({
                 next: (items: any) => patchState(store, { items }),

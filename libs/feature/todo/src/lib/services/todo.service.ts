@@ -1,8 +1,8 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 // import { Todo } from '@prisma/client';
 
-import { Observable, catchError, lastValueFrom, map, throwError } from 'rxjs';
+import { Observable, lastValueFrom, throwError } from 'rxjs';
 import { TodoInterface } from '../store/todo.model';
 
 const httpOptions = {
@@ -18,10 +18,13 @@ const apiUrl = `api/`;
   providedIn: 'root',
 })
 export class TodoService {
-  private readonly http = inject(HttpClient);
+  // private readonly http = inject(HttpClient);
 
-  private baseUrl = `${apiUrl}todos`;
+  private baseUrl = `api/todos`;
 
+  constructor(
+    private readonly http: HttpClient)
+    { }
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -43,9 +46,9 @@ export class TodoService {
   getItems(): Observable<TodoInterface[]> {
     return this.http
       .get<TodoInterface[]>(this.baseUrl, httpOptions)
-      .pipe(
-        map((results: any) => results.todos),
-        catchError(this.handleError));;
+      // .pipe(
+      //   map((results: any) => results.todos),
+      //   catchError(this.handleError));;
   }
 
   getItemsAsPromise() {
