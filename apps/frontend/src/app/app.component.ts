@@ -163,4 +163,8 @@ export class AppComponent implements OnInit, OnDestroy {
     this.i18nService.destroy();
   }
 
+  navigate(route: string) {
+    this.router.navigate([`/${route}`]);
+  }
+
 }

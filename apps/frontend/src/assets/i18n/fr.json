@@ -18,7 +18,23 @@
     "Password": "Mot de passe",
     "Bio": "Votre bio",
     "TermsConditions": "J'acczepter les termes et conditions.",
-    "Submit": "Soumettre"
-
-
+    "Submit": "Soumettre",
+    "portal": {
+      "title": "Translation demo",
+      "text": "This is a simple demonstration app for ngx-translate"
+    },
+    "SideNavMenu": {
+      "About": "A propos de",
+      "Home": "Acceuil",
+      "Users": "Utilisateurs",
+      "Todos": "A Faire",
+      "Tasks": "Tâches"
+    },
+    "ToolBarMenu": {
+      "Users": "Utilisateurs",
+      "Choices": "Paramétres",
+      "Pictos": "Photos",
+      "Carrousel": "Carrousel",
+      "Images": "Images"
+    }
 }

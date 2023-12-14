@@ -34,7 +34,8 @@ export default {
       portal: {
           title: "Translation demo",
           text: "This is a simple demonstration app for ngx-translate"
-      }
+      },
+      About: "A propos de"
     }
   }
 

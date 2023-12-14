@@ -23,5 +23,20 @@
     "portal": {
         "title": "Translation demo",
         "text": "This is a simple demonstration app for ngx-translate"
-    }
+    },
+  "SideNavMenu": {
+    "About": "About",
+    "Home": "Home",
+    "Users": "Users",
+    "Todos": "Todos",
+    "Tasks": "Tasks"
+  },
+  "ToolBarMenu": {
+    "Users": "Users",
+    "Choices": "Choices",
+    "Pictos": "Pictures",
+    "Carrousel": "Caroussel",
+    "Images": "Images"
+  }
+
 }
