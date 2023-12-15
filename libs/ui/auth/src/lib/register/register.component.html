@@ -4,7 +4,7 @@
       Formulaire d'enregistrement
     </mat-card-title>
     <mat-card-content>
-      <my-app-language-selector [icon]="false"></my-app-language-selector>
+      <!-- <my-app-language-selector [icon]="false"></my-app-language-selector> -->
       <form class="register-form">
         <mat-form-field>
           <mat-label>Enter your email</mat-label>
@@ -46,8 +46,8 @@
                 autocomplete="of"
                 formControlName="confirmPassword">
           @if (confirmPassword.errors?.['required']) {
-<mat-error>Confirmation of password is mandatory.</mat-error>
-}
+            <mat-error>Confirmation of password is mandatory.</mat-error>
+            }
           <button mat-icon-button matSuffix (click)="hideConfirmPassword = !hideConfirmPassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideConfirmPassword">
           <mat-icon>{{hideConfirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>

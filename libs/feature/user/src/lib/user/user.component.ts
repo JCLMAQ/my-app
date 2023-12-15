@@ -33,7 +33,7 @@ export class UserComponent implements OnInit,  AfterViewInit {
   users?: UserInterface[];
   index: number | undefined
   users$?: Observable<UserInterface[]>;
-  routeToDetail = 'users/usersdetail';
+  routeToDetail = 'users/userprofile'; //
 
   mode: 'Edit' | 'View' | 'Update' | undefined ;
   master = false; // true : button is disable

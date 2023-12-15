@@ -62,13 +62,13 @@ export class UsersService {
     .pipe(catchError(this.handleError));
   }
 
-  createToDo(userData: ICreateUser): Observable<UserInterface> {
+  createUser(userData: ICreateUser): Observable<UserInterface> {
     return this.http
       .post<UserInterface>(this.baseUrl, userData, httpOptions)
       .pipe(catchError(this.handleError));
   }
 
-  updateUser(userId: string, userData: IUpdateUser): Observable<UserInterface> {
+  updateUser(userId: string | undefined, userData: IUpdateUser): Observable<UserInterface> {
     const url = `${this.baseUrl}/${userId}`;
     return this.http
       .patch<UserInterface>(url, userData, httpOptions)
