@@ -1,14 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { AbstractControlOptions, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 // import * as MATERIAL from
+import { Store, select } from '@ngrx/store';
 import { MATERIAL } from 'material';
 import { map } from 'rxjs';
 import { UserInterface } from '../+state/users.models';
+import { usersFeature } from '../+state/users.state';
 import { UsersService } from '../services/users.service';
-import { MustMatch } from '../validators/mustMatch.validator';
 import { createPasswordStrengthValidator } from '../validators/password-strength.validator';
 import { userEmailValidator, userNickNameValidator } from '../validators/user-async.validator';
 
@@ -30,12 +31,15 @@ import { userEmailValidator, userNickNameValidator } from '../validators/user-as
 })
 export class UserProfileComponent implements OnInit {
 
+
   private errorMsg?: string;
 
-  public user?: UserInterface;
+  public user: UserInterface | undefined | null;
+
+
 
   form!: FormGroup;
-  id!: string;
+  userId!: string;
   isAddMode!: boolean;
   isAdmin!: boolean; // Needed to be sure that the user has an Id
   loading = false;
@@ -43,6 +47,10 @@ export class UserProfileComponent implements OnInit {
   hidePassword = true;
   mode: 'create' | 'update' | 'view' | undefined;
   formControls = {};
+
+  private readonly store = inject(Store);
+  // readonly selectedUser$ = this.store.select(usersFeature.selectSelectedUser);
+  readonly selectedUser$ = this.store.pipe(select(usersFeature.selectSelectedUser));
 
   constructor(
     private fb: FormBuilder,
@@ -56,8 +64,8 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit(){
-    this.id = this.route.snapshot.params['id'];
-    this.isAddMode = !this.id; // Only for User profil
+    this.userId = this.route.snapshot.params['id'];
+    this.isAddMode = !this.userId; // Only for User profil
     this.mode = this.route.snapshot.params['mode'];
     // if(this.mode == 'view' ) { this.form.disable()}
   // console.log("mode: ", this.mode);
@@ -68,7 +76,7 @@ export class UserProfileComponent implements OnInit {
     if (this.isAddMode) {
         passwordValidators.push(Validators.required);
     }
-    const formOptions: AbstractControlOptions = { validators: MustMatch('password', 'confirmPassword') };
+    // const formOptions: AbstractControlOptions = { validators: MustMatch('password', 'confirmPassword') };
 
     this.formControls = {
       title: ['', []],
@@ -88,15 +96,13 @@ export class UserProfileComponent implements OnInit {
       dob: ['', []],
     };
 
-    if (this.mode == 'update' || 'view') {
+    if (this.mode === 'update' || this.mode ===  'view'){
       this.form = this.fb.group(this.formControls);
-      //   this.form.patchValue({...data.course});
-      this.usersService.getAllUserItems()
-          .pipe(
-            map((users :UserInterface[]) => users.find((user :UserInterface)=> user.id === this.id)))
-          .subscribe((result) => {this.user = result} );
+
+      this.selectedUser$.subscribe(event => this.user = event)
       this.form.patchValue({
-        id: this.user?.id,
+        // id: this.user?.id,
+        id: this.userId,
         title: this.user?.title,
         nickName: this.user?.nickName,
         firstName: this.user?.firstName,
@@ -104,16 +110,17 @@ export class UserProfileComponent implements OnInit {
         email: this.user?.email,
         dob: this.user?.dob
       });
-      if(this.mode == 'view' ) { this.form.disable()}
-    } else if (this.mode == 'create' || this.isAddMode ) {
-      this.form = this.fb.group({
-          ...this.formControls,
-          password: ['', [Validators.minLength(8), this.isAddMode ? Validators.required : Validators.nullValidator,  createPasswordStrengthValidator(),]],
-          confirmPassword: ['', this.isAddMode ? Validators.required : Validators.nullValidator],
-          role: ['USER', this.isAdmin ? Validators.required : Validators.nullValidator],
-          acceptTerms: [false, Validators.requiredTrue]
-      });
-    }
+      // if(this.mode == 'view' ) { this.form.disable()}
+    } else
+        if (this.mode == 'create' || this.isAddMode ) {
+        this.form = this.fb.group({
+            ...this.formControls,
+            password: ['', [Validators.minLength(8), this.isAddMode ? Validators.required : Validators.nullValidator,  createPasswordStrengthValidator(),]],
+            confirmPassword: ['', this.isAddMode ? Validators.required : Validators.nullValidator],
+            role: ['USER', this.isAdmin ? Validators.required : Validators.nullValidator],
+            acceptTerms: [false, Validators.requiredTrue]
+        });
+      }
 
     // this.form.valueChanges
     // .subscribe(val => {
@@ -149,30 +156,30 @@ export class UserProfileComponent implements OnInit {
   }
 
   reload(id: string | undefined) {
-    // this.userEntityService.entities$
-    // .pipe(
-    //   map((users :UserInterface[]) => users.find((user :UserInterface)=> user.id === this.id)))
-    // .subscribe((result) => {this.user = result} );
-    // if (this.mode == 'update' || 'view') {
-    // //   this.form.patchValue({...data.course})
-    //   this.form.patchValue({
-    //     id: this.user?.id,
-    //     title: this.user?.title,
-    //     nickName: this.user?.nickName,
-    //     firstName: this.user?.firstName,
-    //     lastName: this.user?.lastName,
-    //     email: this.user?.email,
-    //     dob: this.user?.dob
-    //   });
-    // } else if (this.mode == 'create' || this.isAddMode ) {
-    //   this.form = this.fb.group({
-    //       ...this.formControls,
-    //       password: ['', [Validators.minLength(8), this.isAddMode ? Validators.required : Validators.nullValidator,  createPasswordStrengthValidator(),]],
-    //       confirmPassword: ['', this.isAddMode ? Validators.required : Validators.nullValidator],
-    //       role: ['USER', this.isAdmin ? Validators.required : Validators.nullValidator],
-    //       acceptTerms: [false, Validators.requiredTrue]
-    //   });
-    // }
+    this.usersService.getAllUserItems()
+    .pipe(
+      map((users :UserInterface[]) => users.find((user :UserInterface)=> user.id === this.userId)))
+    .subscribe((result) => {this.user = result} );
+    if (this.mode == 'update' || 'view') {
+    //   this.form.patchValue({...data.course})
+      this.form.patchValue({
+        id: this.user?.id,
+        title: this.user?.title,
+        nickName: this.user?.nickName,
+        firstName: this.user?.firstName,
+        lastName: this.user?.lastName,
+        email: this.user?.email,
+        dob: this.user?.dob
+      });
+    } else if (this.mode == 'create' || this.isAddMode ) {
+      this.form = this.fb.group({
+          ...this.formControls,
+          password: ['', [Validators.minLength(8), this.isAddMode ? Validators.required : Validators.nullValidator,  createPasswordStrengthValidator(),]],
+          confirmPassword: ['', this.isAddMode ? Validators.required : Validators.nullValidator],
+          role: ['USER', this.isAdmin ? Validators.required : Validators.nullValidator],
+          acceptTerms: [false, Validators.requiredTrue]
+      });
+    }
   }
 
 

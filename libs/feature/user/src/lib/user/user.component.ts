@@ -94,9 +94,6 @@ export class UserComponent implements OnInit,  AfterViewInit {
 
   navigateButton(id: string, mode: string) {
     // mode: 'view' | 'update' | 'create';
-
-    // this.userListService.changeUserList(this.dataSource.filteredData);
-    // const filterData = this.dataSource.filteredData
     this.router.navigate([this.routeToDetail, id, mode]);
   }
 
@@ -146,4 +143,7 @@ export class UserComponent implements OnInit,  AfterViewInit {
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'}`;
   }
 
+  onUserSelect(id:string){
+    this.store.dispatch(UsersActions.usersPageActions.selectUser({userId: id}))
+  }
 }

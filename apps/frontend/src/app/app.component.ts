@@ -1,6 +1,6 @@
-import { BreakpointObserver } from '@angular/cdk/layout';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { OverlayContainer } from '@angular/cdk/overlay';
-import { Component, HostBinding, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, HostBinding, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSidenav } from '@angular/material/sidenav';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterLink, RouterOutlet } from '@angular/router';
@@ -14,6 +14,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { I18nService } from 'i18n';
 import { LanguageSelectorComponent } from 'language-selector';
 import { MATERIAL } from 'material';
+import { map, shareReplay } from 'rxjs';
 import { GeolocationComponent } from 'utilities';
 import { environment } from '../environments/environment';
 import { StyleManager } from './style-manager.service';
@@ -38,6 +39,14 @@ export function HttpLoaderFactory(http: HttpClient) {
     ],
 })
 export class AppComponent implements OnInit, OnDestroy {
+
+  isHandset$ = this.breakpointObserver.observe(Breakpoints.Handset)
+    .pipe(
+      map(result => result.matches),
+      shareReplay()
+    );
+
+
 
   title = 'my-app MonoRepo';
   loading : boolean = true;
@@ -67,9 +76,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private observer: BreakpointObserver,
     public translateService: TranslateService,
     private i18nService: I18nService,
-    // private entityDefinitionService: EntityDefinitionService,
+    @Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver
   ) {
-    // entityDefinitionService.registerMetadataMap(entityUserMetadata);
     translateService.setDefaultLang(this.defaultLang);
     // translateService.use('en');
     translateService.addLangs(['en','fr']);

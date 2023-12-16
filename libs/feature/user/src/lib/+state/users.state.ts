@@ -16,6 +16,7 @@ export interface UsersStateInterface extends EntityState<UserInterface>{
 
 export const usersAdapter: EntityAdapter<UserInterface> = createEntityAdapter<UserInterface>();
 
+
 export const initialUsersState: UsersStateInterface = usersAdapter.getInitialState ({
   isLoading: false,
   loaded: false,
@@ -38,9 +39,9 @@ const reducer = createReducer(
     loaded: false,
     error: null,
   })),
-  on(usersPageActions.select, (state, action) => ({
+  on(usersPageActions.selectUser, (state, action) => ({
     ...state,
-    selectedUserId: action.id,
+    selectedUserId: action.userId,
   })),
   on(usersPageActions.addUser, (state, { user }) =>
   usersAdapter.addOne(user, state)
@@ -65,15 +66,22 @@ export const usersFeature = createFeature({
     selectSelectedUserId,
     selectUsersFeatureState,
     selectEntities}) => ({
-    ...usersAdapter.getSelectors(selectUsersFeatureState),
-    selectIsUserSelected: createSelector(
-      selectSelectedUserId,
-      (selectedId) => selectedId !== null
-    ),
-    selectSelectedUser: createSelector(
-      selectSelectedUserId,
-      selectEntities,
-      (selectedId, entities) => selectedId ? entities[selectedId] : null
-    )
+      ...usersAdapter.getSelectors(selectUsersFeatureState),
+      selectIsUserSelected: createSelector(
+        selectSelectedUserId,
+        (selectedId) => selectedId !== null
+      ),
+      selectSelectedUser: createSelector(
+        selectSelectedUserId,
+        selectEntities,
+        (selectedId, entities) => selectedId ? entities[selectedId] : null
+      )
+    })
   })
-  })
+
+
+  // export const selectCurrentBook=createSelector(
+  //   selectBookEntities,
+  //   selectCurrentBookId,
+  //   (bookEntities,bookId)=>bookId && bookEntities[bookId]
+  // )
