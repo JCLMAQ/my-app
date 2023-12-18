@@ -11,7 +11,6 @@ import { UserInterface } from '../+state/users.models';
 import { usersFeature } from '../+state/users.state';
 import { UsersService } from '../services/users.service';
 import { createPasswordStrengthValidator } from '../validators/password-strength.validator';
-import { userEmailValidator, userNickNameValidator } from '../validators/user-async.validator';
 
 
 @Component({
@@ -82,12 +81,12 @@ export class UserProfileComponent implements OnInit {
       title: ['', []],
       email: ['', {
             validators: [ Validators.required, Validators.email, ],
-            asyncValidators: [userEmailValidator(this.usersService)],
+            // asyncValidators: [userEmailValidator(this.usersService)],
             updateOn: 'blur'
             }],
       nickName: ['', {
             validators: [Validators.required, Validators.maxLength(10), Validators.minLength(3)],
-            asyncValidators: [userNickNameValidator(this.usersService)],
+            // asyncValidators: [userNickNameValidator(this.usersService)],
             updateOn: 'blur'
             }],
       lastName: ['', ],
@@ -218,6 +217,7 @@ export class UserProfileComponent implements OnInit {
     }
     this.router.navigate(['users']);
 }
+
   add() {}
 
   create() {}

@@ -11,7 +11,8 @@ export const userRoutes: Route[] = [
     path: '',
     component: UserComponent,
     providers: [
-      provideState(fromUsers.usersFeature),
+      // provideState(fromUsers.usersFeature),
+      provideState(fromUsers.usersFeatureKey, fromUsers.usersReducer),
       provideEffects(fromUsers.UsersEffects),
     ],
   },

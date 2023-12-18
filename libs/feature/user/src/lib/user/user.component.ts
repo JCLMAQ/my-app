@@ -10,7 +10,7 @@ import { MATERIAL } from 'material';
 import { Observable, delay } from 'rxjs';
 import * as UsersActions from '../+state/users.actions';
 import { UserInterface } from '../+state/users.models';
-import { usersFeature } from '../+state/users.state';
+import { UsersStateInterface, usersFeature } from '../+state/users.state';
 
 
 
@@ -42,7 +42,7 @@ export class UserComponent implements OnInit,  AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  private readonly store = inject(Store);
+  private readonly store = inject(Store<{ users: UsersStateInterface}>);
   private readonly router = inject(Router);
 
 
@@ -62,7 +62,6 @@ export class UserComponent implements OnInit,  AfterViewInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     }
-
   reload() {
     this.store.select(usersFeature.selectAll)
       .subscribe((objectResult) => {
@@ -83,6 +82,7 @@ export class UserComponent implements OnInit,  AfterViewInit {
   navigateid(id: string, index: string) {
     // this.dataSource.data.values()
     console.log(this.routeToDetail, id)
+    // this.store.dispatch(UsersActions.usersPageActions.selectUser({userId: id}))
     const indexrun = index
     this.router.navigate([this.routeToDetail, id, 'view']);
   }
@@ -94,6 +94,7 @@ export class UserComponent implements OnInit,  AfterViewInit {
 
   navigateButton(id: string, mode: string) {
     // mode: 'view' | 'update' | 'create';
+    this.store.dispatch(UsersActions.usersPageActions.selectUser({userId: id}))
     this.router.navigate([this.routeToDetail, id, mode]);
   }
 

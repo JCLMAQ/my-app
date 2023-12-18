@@ -34,7 +34,6 @@ import { appRoutes } from './app.routes';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideEffects(),
-    provideStoreDevtools({ logOnly: !isDevMode() }),
     provideStore({}),
     provideStoreDevtools({
       maxAge: 25,
