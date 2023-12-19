@@ -27,6 +27,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
 // import * as fromUsers from 'user';
 import { provideEffects } from '@ngrx/effects';
+import { provideMarkdown } from 'ngx-markdown';
 import { HttpLoaderFactory } from './app.component';
 import { appRoutes } from './app.routes';
 // import { reducers } from './reducers';
@@ -74,5 +75,8 @@ export const appConfig: ApplicationConfig = {
       useValue: { appearance: 'fill' },
     },
     provideAnimations(),
+    provideMarkdown(),
   ],
 };
+
+
