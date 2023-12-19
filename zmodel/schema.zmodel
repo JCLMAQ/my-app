@@ -41,14 +41,14 @@ generator client {
 //     fileNamingStyle = "camel"
 // }
 
-// plugin openapi {
-//   provider = '@zenstackhq/openapi'
-//   flavor = 'rest'
-//   output = 'openapi.yaml'
-//   summary = 'Created with ZenStack'
-//   description = 'My awesome API created with ZenStack'
-//   prefix = '/apizen'
-// }
+plugin openapi {
+  provider = '@zenstackhq/openapi'
+  flavor = 'rest'
+  output = 'openapi.yaml'
+  summary = 'Created with ZenStack'
+  description = 'My awesome API created with ZenStack'
+  prefix = '/apizen'
+}
 
 enum TaskState {
     CREATION
