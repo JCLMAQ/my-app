@@ -2,7 +2,7 @@ import { JsonPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MATERIAL } from 'material';
+import { MATERIAL } from '@fe/material';
 import { IUserRegister } from '../auth.model';
 import { RegisterService } from '../services/register.service';
 import { MustMatch } from '../validators/mustMatch.validator';

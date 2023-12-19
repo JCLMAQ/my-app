@@ -4,8 +4,8 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { DateAdapter } from '@angular/material/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 // import * as MATERIAL from
+import { MATERIAL } from '@fe/material';
 import { Store, select } from '@ngrx/store';
-import { MATERIAL } from 'material';
 import { map } from 'rxjs';
 import { UserInterface } from '../+state/users.models';
 import { usersFeature } from '../+state/users.state';

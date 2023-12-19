@@ -4,18 +4,18 @@ import { Component, HostBinding, Inject, OnDestroy, OnInit, ViewChild } from '@a
 import { MatDialog } from '@angular/material/dialog';
 import { MatSidenav } from '@angular/material/sidenav';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterLink, RouterOutlet } from '@angular/router';
+import { SimpledialogComponent } from '@fe/utilities';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { SimpledialogComponent } from 'utilities';
 
 import { NgClass } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 
+import { I18nService } from '@fe/i18n';
+import { LanguageSelectorComponent } from '@fe/language-selector';
+import { MATERIAL } from '@fe/material';
+import { GeolocationComponent } from '@fe/utilities';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { I18nService } from 'i18n';
-import { LanguageSelectorComponent } from 'language-selector';
-import { MATERIAL } from 'material';
 import { map, shareReplay } from 'rxjs';
-import { GeolocationComponent } from 'utilities';
 import { environment } from '../environments/environment';
 import { StyleManager } from './style-manager.service';
 // AoT requires an exported function for factories
