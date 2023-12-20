@@ -7,7 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { MATERIAL } from '@fe/material';
 import { Store, select } from '@ngrx/store';
-import { Observable, delay, map } from 'rxjs';
+import { Observable, delay } from 'rxjs';
 import * as UsersActions from '../+state/users.actions';
 import { UserInterface } from '../+state/users.models';
 import { UsersStateInterface, usersFeature } from '../+state/users.state';
@@ -31,7 +31,7 @@ export class UserComponent implements OnInit,  AfterViewInit {
   selection = new SelectionModel<UserInterface>(true, []);
   tableColumns  :  string[] = [ 'num','select','nickName', 'lastName', 'firstName', 'email', 'tools'];
 
-  // items?: UserInterface[];
+  items?: UserInterface[];
   index: number | undefined
   routeToDetail = 'users/userprofile'; //
 
@@ -73,13 +73,13 @@ export class UserComponent implements OnInit,  AfterViewInit {
     }
 
   reload() {
-    // this.store.select(usersFeature.selectAll)
-    //   .subscribe((objectResult) => {
-    //     this.items = Object.values(objectResult)
-    //     this.dataSource  =  new MatTableDataSource(this.items);
-    //     this.dataSource.paginator = this.paginator;
-    //     this.dataSource.sort = this.sort;
-    //   });
+    this.store.select(usersFeature.selectAll)
+      .subscribe((objectResult) => {
+        this.items = Object.values(objectResult)
+        this.dataSource  =  new MatTableDataSource(this.items);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      });
   // const usersBis$ = this.store.select(usersFeature.selectAll);
   // const items = this.store.select(usersFeature.selectAll);
   // this.items = Object.values(usersBis$);
@@ -95,15 +95,15 @@ export class UserComponent implements OnInit,  AfterViewInit {
   //   })
   }
 
- dataSource$: Observable<MatTableDataSource<UserInterface>>  =
-  this.store.select(usersFeature.selectAll).pipe(
-    map(items => {
-      const dataSource = new MatTableDataSource<UserInterface>();
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-      dataSource.data = items;
-      return dataSource;
-}));
+//  dataSource$: Observable<MatTableDataSource<UserInterface>>  =
+//   this.store.select(usersFeature.selectAll).pipe(
+//     map(items => {
+//       const dataSource = new MatTableDataSource<UserInterface>();
+//       this.dataSource.paginator = this.paginator;
+//       this.dataSource.sort = this.sort;
+//       dataSource.data = items;
+//       return dataSource;
+// }));
 
 
 

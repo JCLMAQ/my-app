@@ -32,8 +32,8 @@
         <mat-label>Filter</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
       </mat-form-field>
-      <!-- <mat-table [dataSource]="dataSource$ | async" matSort> -->
-        <mat-table [dataSource]="dataSource$ | async">
+      <mat-table [dataSource]="dataSource" matSort>
+        <!-- <mat-table [dataSource]="dataSource$ | async"> -->
 
         <!-- Checkbox Column -->
         <ng-container matColumnDef="select">
