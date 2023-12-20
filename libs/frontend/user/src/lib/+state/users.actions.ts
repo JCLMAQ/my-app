@@ -1,4 +1,4 @@
-import { EntityMap, EntityMapOne, Predicate, Update } from '@ngrx/entity';
+import { Predicate, Update } from '@ngrx/entity';
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import { UserInterface } from './users.models';
 
@@ -21,14 +21,13 @@ export const usersPageActions = createActionGroup({
     setUser: props<{ user: UserInterface }>(),
     setUsers: props<{ users: UserInterface[] }>(),
     addUser: props<{ user: UserInterface }>(),
-    satisfiesetUser: props<{ user: UserInterface }>(),
-    upsertUser: props<{ user: UserInterface }>(),
     addUsers: props<{ users: UserInterface[] }>(),
+    upsertUser: props<{ user: UserInterface }>(),
     upsertUsers: props<{ users: UserInterface[] }>(),
     updateUser: props<{ update: Update<UserInterface> }>(),
     updateUsers: props<{ updates: Update<UserInterface>[] }>(),
-    mapUser: props<{ entityMap: EntityMapOne<UserInterface> }>(),
-    mapUsers: props<{ entityMap: EntityMap<UserInterface> }>(),
+    // mapUser: props<{ entityMap: EntityMapOne<UserInterface> }>(),
+    // mapUsers: props<{ entityMap: EntityMap<UserInterface> }>(),
     deleteUser: props<{ id: string }>(),
     deleteUsers: props<{ ids: string[] }>(),
     deleteUsersByPredicate: props<{ predicate: Predicate<UserInterface> }>(),

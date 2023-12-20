@@ -7,7 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { MATERIAL } from '@fe/material';
 import { Store, select } from '@ngrx/store';
-import { Observable, delay } from 'rxjs';
+import { Observable, delay, map } from 'rxjs';
 import * as UsersActions from '../+state/users.actions';
 import { UserInterface } from '../+state/users.models';
 import { UsersStateInterface, usersFeature } from '../+state/users.state';
@@ -27,12 +27,12 @@ import { UsersStateInterface, usersFeature } from '../+state/users.state';
 export class UserComponent implements OnInit,  AfterViewInit {
 
   dataSource!: MatTableDataSource<UserInterface>;
+  // dataSource$: Observable<MatTableDataSource<UserInterface>> | undefined;
   selection = new SelectionModel<UserInterface>(true, []);
   tableColumns  :  string[] = [ 'num','select','nickName', 'lastName', 'firstName', 'email', 'tools'];
 
-  users?: UserInterface[];
+  // items?: UserInterface[];
   index: number | undefined
-  users$?: Observable<UserInterface[]>;
   routeToDetail = 'users/userprofile'; //
 
   mode: 'Edit' | 'View' | 'Update' | undefined ;
@@ -46,31 +46,65 @@ export class UserComponent implements OnInit,  AfterViewInit {
   private readonly router = inject(Router);
 
 
-  readonly usersbis$ = this.store.select(usersFeature.selectAll);
-  readonly isUserSelected$ = this.store.select(usersFeature.selectIsUserSelected);
-  readonly selectedUser$ = this.store.select(usersFeature.selectSelectedUser);
+  readonly users$: Observable<UserInterface[]>= this.store.select(usersFeature.selectAll);
+  // readonly isUserSelected$ = this.store.select(usersFeature.selectIsUserSelected);
+  // readonly selectedUser$ = this.store.select(usersFeature.selectSelectedUser);
   readonly loaded$ = this.store.select(usersFeature.selectLoaded)
   readonly isLoading$ = this.store.pipe(delay(1500), select(usersFeature.selectIsLoading) );
   readonly error$ = this.store.pipe(select(usersFeature.selectError));
 
+
+  // readonly userbis$ = this.store.select(state => {
+  //   this.items = Object.values(state)
+  //       this.dataSource  =  new MatTableDataSource(this.items);
+  //       this.dataSource.paginator = this.paginator;
+  //       this.dataSource.sort = this.sort;
+  // })
+
   ngOnInit() {
     this.store.dispatch(UsersActions.usersPageActions.load());
     this.reload();
+
   }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     }
+
   reload() {
-    this.store.select(usersFeature.selectAll)
-      .subscribe((objectResult) => {
-        this.users = Object.values(objectResult)
-        this.dataSource  =  new MatTableDataSource(this.users);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      });
+    // this.store.select(usersFeature.selectAll)
+    //   .subscribe((objectResult) => {
+    //     this.items = Object.values(objectResult)
+    //     this.dataSource  =  new MatTableDataSource(this.items);
+    //     this.dataSource.paginator = this.paginator;
+    //     this.dataSource.sort = this.sort;
+    //   });
+  // const usersBis$ = this.store.select(usersFeature.selectAll);
+  // const items = this.store.select(usersFeature.selectAll);
+  // this.items = Object.values(usersBis$);
+  // this.items = Object.values(usersBis$);
+  // this.dataSource  =  new MatTableDataSource(this.items);
+  //         this.dataSource.paginator = this.paginator;
+  //         this.dataSource.sort = this.sort;
+  // this.store.select(state => {
+  //     this.items = Object.values(state)
+  //         this.dataSource  =  new MatTableDataSource(this.items);
+  //         this.dataSource.paginator = this.paginator;
+  //         this.dataSource.sort = this.sort;
+  //   })
   }
+
+ dataSource$: Observable<MatTableDataSource<UserInterface>>  =
+  this.store.select(usersFeature.selectAll).pipe(
+    map(items => {
+      const dataSource = new MatTableDataSource<UserInterface>();
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+      dataSource.data = items;
+      return dataSource;
+}));
+
 
 
 

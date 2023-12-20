@@ -71,12 +71,12 @@ const reducer = createReducer(
   on(usersPageActions.updateUsers, (state, { updates }) => {
     return usersAdapter.updateMany(updates, state);
   }),
-  on(usersPageActions.mapUser, (state, { entityMap }) => {
-    return usersAdapter.mapOne(entityMap, state);
-  }),
-  on(usersPageActions.mapUsers, (state, { entityMap }) => {
-    return usersAdapter.map(entityMap, state);
-  }),
+  // on(usersPageActions.mapUser, (state, { entityMap }) => {
+  //   return usersAdapter.mapOne(entityMap, state);
+  // }),
+  // on(usersPageActions.mapUsers, (state, { entityMap }) => {
+  //   return usersAdapter.map(entityMap, state);
+  // }),
   on(usersPageActions.deleteUser, (state, { id }) => {
     return usersAdapter.removeOne(id, state);
   }),
