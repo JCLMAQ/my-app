@@ -1,13 +1,13 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, OnInit, ViewChild, inject } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { MATERIAL } from '@fe/material';
 import { Store, select } from '@ngrx/store';
-import { Observable, delay } from 'rxjs';
+import { Observable, Subject, delay, map, takeUntil } from 'rxjs';
 import * as UsersActions from '../+state/users.actions';
 import { UserInterface } from '../+state/users.models';
 import { UsersStateInterface, usersFeature } from '../+state/users.state';
@@ -21,13 +21,13 @@ import { UsersStateInterface, usersFeature } from '../+state/users.state';
     CommonModule,
     ...MATERIAL,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './user.component.html',
   styleUrl: './user.component.css',
 })
-export class UserComponent implements OnInit,  AfterViewInit {
+export class UserComponent implements OnInit,  AfterViewInit, OnDestroy {
+  private unsubscribe$ = new Subject<void>();
 
-  dataSource!: MatTableDataSource<UserInterface>;
-  // dataSource$: Observable<MatTableDataSource<UserInterface>> | undefined;
   selection = new SelectionModel<UserInterface>(true, []);
   tableColumns  :  string[] = [ 'num','select','nickName', 'lastName', 'firstName', 'email', 'tools'];
 
@@ -45,7 +45,6 @@ export class UserComponent implements OnInit,  AfterViewInit {
   private readonly store = inject(Store<{ users: UsersStateInterface}>);
   private readonly router = inject(Router);
 
-
   readonly users$: Observable<UserInterface[]>= this.store.select(usersFeature.selectAll);
   // readonly isUserSelected$ = this.store.select(usersFeature.selectIsUserSelected);
   // readonly selectedUser$ = this.store.select(usersFeature.selectSelectedUser);
@@ -54,12 +53,39 @@ export class UserComponent implements OnInit,  AfterViewInit {
   readonly error$ = this.store.pipe(select(usersFeature.selectError));
 
 
-  // readonly userbis$ = this.store.select(state => {
-  //   this.items = Object.values(state)
-  //       this.dataSource  =  new MatTableDataSource(this.items);
-  //       this.dataSource.paginator = this.paginator;
-  //       this.dataSource.sort = this.sort;
-  // })
+  // userDataSource: MatTableDataSource<UserInterface> = new MatTableDataSource;
+  userDataSource = new MatTableDataSource<UserInterface>();
+
+  // userDataSource$: Observable<MatTableDataSource<UserInterface>> = this.users$
+  // .pipe(
+  //   map((data) => {
+  //     this.userDataSource.data = data;
+  //     // this.userDataSource.paginator = this.paginator;
+  //     // this.userDataSource.sort = this.sort;
+  //     return this.userDataSource
+  //   })
+  // );
+
+  usersAsMatTableDataSource$: Observable<MatTableDataSource<UserInterface>> =
+    this.users$.pipe(
+      map((data) => {
+        const dataSource = this.userDataSource;
+        dataSource.data = data;
+        return dataSource;
+      })
+    );
+
+
+    // private dataSource = new MatTableDataSource<Thing>();
+
+    // thingsAsMatTableDataSource$: Observable<MatTableDataSource<Thing>> =
+    //   this.thingService.things.pipe(
+    //     map((things) => {
+    //       const dataSource = this.dataSource;
+    //       dataSource.data = things;
+    //       return dataSource;
+    //     })
+    //   );
 
   ngOnInit() {
     this.store.dispatch(UsersActions.usersPageActions.load());
@@ -68,45 +94,45 @@ export class UserComponent implements OnInit,  AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    this.userDataSource.paginator = this.paginator;
+    this.userDataSource.sort = this.sort;
     }
 
-  reload() {
-    this.store.select(usersFeature.selectAll)
-      .subscribe((objectResult) => {
-        this.items = Object.values(objectResult)
-        this.dataSource  =  new MatTableDataSource(this.items);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      });
-  // const usersBis$ = this.store.select(usersFeature.selectAll);
-  // const items = this.store.select(usersFeature.selectAll);
-  // this.items = Object.values(usersBis$);
-  // this.items = Object.values(usersBis$);
-  // this.dataSource  =  new MatTableDataSource(this.items);
-  //         this.dataSource.paginator = this.paginator;
-  //         this.dataSource.sort = this.sort;
-  // this.store.select(state => {
-  //     this.items = Object.values(state)
-  //         this.dataSource  =  new MatTableDataSource(this.items);
-  //         this.dataSource.paginator = this.paginator;
-  //         this.dataSource.sort = this.sort;
-  //   })
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
-//  dataSource$: Observable<MatTableDataSource<UserInterface>>  =
-//   this.store.select(usersFeature.selectAll).pipe(
-//     map(items => {
-//       const dataSource = new MatTableDataSource<UserInterface>();
-//       this.dataSource.paginator = this.paginator;
-//       this.dataSource.sort = this.sort;
-//       dataSource.data = items;
-//       return dataSource;
-// }));
+  // async reload() {
+    // this.items = await lastValueFrom(this.users$)
+    // this.userDataSource  =  new MatTableDataSource(this.items);
+    // this.userDataSource.paginator = this.paginator;
+    // this.userDataSource.sort = this.sort;
+    // }
+
+  reload() {
+      this.store.select(usersFeature.selectAll)
+    .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((objectResult) => {
+        this.items = Object.values(objectResult)
+        this.userDataSource  =  new MatTableDataSource(this.items);
+        this.userDataSource.paginator = this.paginator;
+        this.userDataSource.sort = this.sort;
+      });
+
+      // this.store.select(usersFeature.selectAll)
+      // .pipe(
+      //   map((objectResult) => {
+      //     this.items = Object.values(objectResult)
+      //     this.userDataSource  =  new MatTableDataSource(this.items);
+      //     this.userDataSource.paginator = this.paginator;
+      //     this.userDataSource.sort = this.sort;
+      //   })
+      // );
 
 
 
+  }
 
   changeUserList() {
     // this.userListService.changeUserList(this.dataSource.filteredData);
@@ -152,23 +178,23 @@ export class UserComponent implements OnInit,  AfterViewInit {
   // Filter the list
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
+    this.userDataSource.filter = filterValue.trim().toLowerCase();
+    if (this.userDataSource.paginator) {
+      this.userDataSource.paginator.firstPage();
     }
   }
   // Selection
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
     const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
+    const numRows = this.userDataSource.data.length;
     return numSelected === numRows;
   }
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
     this.isAllSelected() ?
         this.selection.clear() :
-        this.dataSource.data.forEach(row => this.selection.select(row));
+        this.userDataSource.data.forEach(row => this.selection.select(row));
   }
   /** The label for the checkbox on the passed row */
   checkboxLabel(row: UserInterface): string {

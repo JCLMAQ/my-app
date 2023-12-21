@@ -1,4 +1,5 @@
 import { signalStore, withHooks, withState } from '@ngrx/signals';
+import { withEntities } from '@ngrx/signals/entities';
 import { withTodosMethods } from './todo.methods';
 import { TodoInterface } from './todo.model';
 import { withTodosSelectors } from './todo.selectors';
@@ -35,8 +36,16 @@ export const TodoStore = signalStore(
       onDestroy() {
         console.log('on destroy');
       },
-    })
+    }),
+      withEntities<TodoInterface>(),
   );
+
+
+  // withEntities<Flight>(),
+  // withCallState(),
+  // withDataService(FlightService, { from: 'Graz', to: 'Hamburg'} ),
+  // withUndoRedo(),
+
 
 // The same but with RxJS methods
 // export const TodoStore = signalStore(

@@ -1,36 +1,139 @@
+import { SelectionModel } from '@angular/cdk/collections';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, OnInit, ViewChild, inject } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
+import { MATERIAL } from '@fe/material';
+import { TodoInterface } from '../store/todo.model';
 import { TodoStore } from '../store/todo.state';
+
 
 @Component({
   selector: 'lib-todo',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    ...MATERIAL,
+  ],
   templateUrl: './todo.component.html',
   styleUrl: './todo.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [TodoStore],
 })
-export class TodoComponent  {
+
+// export class TodoComponent { // implements OnInit,  AfterViewInit {
+  export class TodoComponent implements OnInit,  AfterViewInit {
   readonly todoStore = inject(TodoStore);
+  readonly router = inject(Router)
 
-  // This ngOnInit is included directly within the store hoocks
-// ngOnInit(): void {
-//   this.store.loadAllTodos();
-// }
-// readonly todos$ = this.store.select(tasksFeature.selectAll);
-// readonly istaskSelected$ = this.store.select(tasksFeature.selectIsTaskSelected);
-// readonly selectedtask$ = this.store.select(tasksFeature.selectSelectedTask);
-// readonly loaded$ = this.store.select(tasksFeature.selectLoaded)
-// readonly isLoading$ = this.todoStore.pipe(delay(1500),select(tasksFeature.selectIsLoading) );
-// readonly error$ = this.store.pipe(select(tasksFeature.selectError));
+  dataSource!: MatTableDataSource<TodoInterface>;
 
- readonly isLoading$ = this.todoStore.isLoading;
+  selection = new SelectionModel<TodoInterface>(true, []);
+  tableColumns: string[]= [ 'numSeq','title'];
+
+  todos?: TodoInterface[] | undefined;
+
+  todosEntities = this.todoStore.entities;
+
+  index: number | undefined
+  routeToDetail = "todos/tododetail";
 
 
+  mode: 'Edit' | 'View' | 'Update' | undefined ;
+  master = false; // true : button is disable
+  owner = false; // true button is disable
+
+  @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
+  @ViewChild(MatSort) sort: MatSort | undefined;
+
+  readonly isLoading$ = this.todoStore.isLoading;
+  readonly loaded$ = this.todoStore.loaded;
+  readonly error$ = this.todoStore.error;
+
+//   todoDataSource  =  new MatTableDataSource<TodoInterface>();
+//  this.todoDataSource.
+//   this.todoDataSource.paginator = this.paginator;
+  // this.todoDataSource.sort = this.sort;
+
+  ngOnInit(): void{
+  this.todoStore.loadAllTodos();
+  this.todoStore.loadAllTodosByPromise();
+
+};
+
+
+ngAfterViewInit(): void {
+  // this.todoDataSource.paginator = this.paginator;
+  // this.todoDataSource.sort = this.sort;
+  }
+
+
+  // this.todos= this.todoStore.items();
   // addTodo() {
   //   this.store.addTodo(this.form.value.todoValue);
   //   this.form.reset();
   // }
 
+ // Selection
+  /** Whether the number of selected elements matches the total number of rows. */
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+ /** Selects all rows if they are not all selected; otherwise clear selection. */
+ masterToggle() {
+  this.isAllSelected() ?
+      this.selection.clear() :
+      this.dataSource.data.forEach(row => this.selection.select(row));
 }
+
+ // Filter the list
+ applyFilter(event: Event) {
+  const filterValue = (event.target as HTMLInputElement).value;
+  this.dataSource.filter = filterValue.trim().toLowerCase();
+  if (this.dataSource.paginator) {
+    this.dataSource.paginator.firstPage();
+  }
+}
+
+onNavigate() {
+
+}
+
+// Goto the detail page for view only
+// navigate(id: String, index: String) {
+//   this.router.navigate([this.routeToDetail, id, 'view']);
+// }
+navigate(todo: TodoInterface, index: string) {
+  // console.log("route transfert" , user)
+  this.router.navigate([this.routeToDetail,todo, 'view']);
+}
+
+navigateButton(id: string, mode: string) {
+  // mode: 'view' | 'update' | 'create';
+    this.router.navigate([this.routeToDetail, id, mode]);
+}
+
+addOneUser() {
+  this.router.navigate([this.routeToDetail, '', 'create']);
+}
+// Delete the selected item
+async remove( id: string ) {
+  // const user = this.userEntityService.delete(user.id = id)
+}
+
+virtualRemove(id: string) {
+
+}
+// MatTable mgt
+// On click row action
+onRowClicked(row: number) {
+  // console.log('Row clicked: ', row);
+}
+
+}
+
+

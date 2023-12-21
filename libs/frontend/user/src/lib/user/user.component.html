@@ -26,14 +26,14 @@
 <span class="selected-text"> ({{selection.selected.length}} items selected)</span>
 }
         <br>
-        <span> {{dataSource.data.length}} data length </span>
+        <span> {{userDataSource.data.length}} data length </span>
       </div>
       <mat-form-field>
         <mat-label>Filter</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
       </mat-form-field>
-      <mat-table [dataSource]="dataSource" matSort>
-        <!-- <mat-table [dataSource]="dataSource$ | async"> -->
+
+      <table mat-table [dataSource]="userDataSource" matSort>
 
         <!-- Checkbox Column -->
         <ng-container matColumnDef="select">
@@ -88,10 +88,10 @@
               <mat-icon>delete</mat-icon>
             </button>
             @if (owner) {
-<button mat-icon-button [disabled]=owner (click)="virtualRemove(row)">
-                <mat-icon>delete</mat-icon>
-              </button>
-}
+              <button mat-icon-button [disabled]=owner (click)="virtualRemove(row)">
+                              <mat-icon>delete</mat-icon>
+                            </button>
+            }
             <button mat-icon-button [disabled]=master (click)="remove(row)">
                 <mat-icon>delete_forever</mat-icon>
               </button>
@@ -105,7 +105,8 @@
           <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
         </tr>
 
-      </mat-table>
+      </table>
+
       <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
     </mat-card-content>
     <mat-card-footer>

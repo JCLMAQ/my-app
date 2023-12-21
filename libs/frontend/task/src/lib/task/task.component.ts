@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
+import { MatTableModule } from '@angular/material/table';
+import { MATERIAL } from '@fe/material';
 import { Store, select } from '@ngrx/store';
 import { delay } from 'rxjs';
 import * as TasksActions from '../+state/tasks.actions';
@@ -8,11 +10,17 @@ import { tasksFeature } from '../+state/tasks.state';
 @Component({
   selector: 'lib-task',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    MatTableModule,
+    ...MATERIAL
+  ],
   templateUrl: './task.component.html',
   styleUrl: './task.component.css',
 })
 export class TaskComponent implements OnInit{//
+
+  displayedColumns: string[] = ['a', 'b', 'c'];
 
   private readonly store = inject(Store);
 
