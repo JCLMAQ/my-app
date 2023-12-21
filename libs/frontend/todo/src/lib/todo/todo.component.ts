@@ -51,16 +51,17 @@ import { TodoStore } from '../store/todo.state';
   readonly isLoading$ = this.todoStore.isLoading;
   readonly loaded$ = this.todoStore.loaded;
   readonly error$ = this.todoStore.error;
-
-//   todoDataSource  =  new MatTableDataSource<TodoInterface>();
-//  this.todoDataSource.
-//   this.todoDataSource.paginator = this.paginator;
-  // this.todoDataSource.sort = this.sort;
+  todos$ = this.todoStore.items;
 
   ngOnInit(): void{
-  this.todoStore.loadAllTodos();
-  this.todoStore.loadAllTodosByPromise();
+  // this.todoStore.loadAllTodos();
+  // this.todoStore.loadAllTodosByPromise();
 
+//  this.dataSource = new MatTableDataSource(this.todoStore.items());
+ this.dataSource = new MatTableDataSource(Object.values(this.todoStore.items()));
+
+//  this.dataSource.paginator = this.paginator;
+//  this.dataSource.sort = this.sort;
 };
 
 
