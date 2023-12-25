@@ -23,23 +23,22 @@ export const initialTodoState: TodoStateInterface = {
 Base on: https://offering.solutions/blog/articles/2023/12/03/ngrx-signal-store-getting-started/
 */
 // With Promises methods
-// const TodoStore = signalStore(withEntities<Todo>());
-// export const TodoStore = signalStore(
-//     { providedIn: 'root' },
-//     withState(initialTodoState),
-//     withTodosSelectors(),
-//     withTodosMethods(),
-//     withHooks({
-//       onInit({ loadAllTodosByPromise }) {
-//         console.log('on init');
-//         loadAllTodosByPromise();
-//       },
-//       onDestroy() {
-//         console.log('on destroy');
-//       },
-//     }),
-//       withEntities<TodoInterface>(),
-//   );
+export const TodoStore = signalStore(
+    { providedIn: 'root' },
+    withState(initialTodoState),
+    withTodosSelectors(),
+    withTodosMethods(),
+    withHooks({
+      onInit({ loadAllTodosByPromise }) {
+        console.log('on init');
+        loadAllTodosByPromise();
+      },
+      onDestroy() {
+        console.log('on destroy');
+      },
+    }),
+      withEntities<TodoInterface>(),
+  );
 
 
   // withEntities<Flight>(),
@@ -49,19 +48,19 @@ Base on: https://offering.solutions/blog/articles/2023/12/03/ngrx-signal-store-g
 
 
 // The same but with RxJS methods
-export const TodoStore = signalStore(
-  { providedIn: 'root' },
-  withState(initialTodoState),
-  withTodosSelectors(),
-  withTodosMethods(),
-  withHooks({
-    onInit({ loadAllTodos }) {
-      console.log('on init');
-      loadAllTodos();
-    },
-    onDestroy() {
-      console.log('on destroy');
-    },
-  }),
-withEntities<TodoInterface>(),
-);
+// export const TodoStore = signalStore(
+//   { providedIn: 'root' },
+//   withState(initialTodoState),
+//   withTodosSelectors(),
+//   withTodosMethods(),
+//   withHooks({
+//     onInit({ loadAllTodos }) {
+//       console.log('on init');
+//       loadAllTodos();
+//     },
+//     onDestroy() {
+//       console.log('on destroy');
+//     },
+//   }),
+// withEntities<TodoInterface>(),
+// );
