@@ -59,8 +59,6 @@ import { TodoStore } from '../store/todo.state';
   todos$ = this.todoStore.items;
 
   ngOnInit(): void{
-  const loaded = this.todoStore.loadAllTodos();
-  console.log(loaded)
   this.dataSource = new MatTableDataSource(this.todoStore.entities());
   // this.dataSource = this.todoStore.items();
   console.log("Entities: ",this.todoStore.entities());
