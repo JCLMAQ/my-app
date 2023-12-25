@@ -28,14 +28,19 @@ import { TodoStore } from '../store/todo.state';
   readonly todoStore = inject(TodoStore);
   readonly router = inject(Router)
 
-  dataSource!: MatTableDataSource<TodoInterface>;
+  dataSource!: MatTableDataSource<TodoInterface> ;
 
   selection = new SelectionModel<TodoInterface>(true, []);
   tableColumns: string[]= [ 'numSeq','title'];
 
   todos?: TodoInterface[] | undefined;
 
-  todosEntities = this.todoStore.entities;
+  todosEntities = this.todoStore.entities();
+  todosItems = this.todoStore.items();
+
+  // console.log("Entities: ", todosEntities());
+  // console.log("Entities to String: ",this.todoStore.entities.toString())
+  // console.log("Items: ", this.todoStore.items())
 
   index: number | undefined
   routeToDetail = "todos/tododetail";
@@ -54,20 +59,35 @@ import { TodoStore } from '../store/todo.state';
   todos$ = this.todoStore.items;
 
   ngOnInit(): void{
-  // this.todoStore.loadAllTodos();
-  // this.todoStore.loadAllTodosByPromise();
+  const loaded = this.todoStore.loadAllTodos();
+  console.log(loaded)
+  this.dataSource = new MatTableDataSource(this.todoStore.entities());
+  // this.dataSource = this.todoStore.items();
+  console.log("Entities: ",this.todoStore.entities());
+  console.log("Entities to String: ",this.todoStore.entities.toString())
+  console.log("Items: ", this.todoStore.items())
+  //  this.dataSource = new MatTableDataSource(Object.values(this.todoStore.items()));
+  console.log("Data Source for MatTable:", this.dataSource)
+  this.dataSource.paginator = this.paginator!;
+  this.dataSource.sort = this.sort!;
 
-//  this.dataSource = new MatTableDataSource(this.todoStore.items());
- this.dataSource = new MatTableDataSource(Object.values(this.todoStore.items()));
 
-//  this.dataSource.paginator = this.paginator;
-//  this.dataSource.sort = this.sort;
+
+  // this.store.select(usersFeature.selectAll)
+      // .pipe(
+      //   map((objectResult) => {
+      //     this.items = Object.values(objectResult)
+      //     this.userDataSource  =  new MatTableDataSource(this.items);
+      //     this.userDataSource.paginator = this.paginator;
+      //     this.userDataSource.sort = this.sort;
+      //   })
+      // );
 };
 
 
 ngAfterViewInit(): void {
-  // this.todoDataSource.paginator = this.paginator;
-  // this.todoDataSource.sort = this.sort;
+  this.dataSource.paginator = this.paginator!;
+  this.dataSource.sort = this.sort!;
   }
 
 

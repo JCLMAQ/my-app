@@ -42,6 +42,7 @@
         <mat-label>Filter</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
       </mat-form-field>
+      <!-- <mat-table [dataSource]="todoStore.items()" matSort> -->
       <mat-table [dataSource]="dataSource" matSort>
 
         <!-- Checkbox Column -->

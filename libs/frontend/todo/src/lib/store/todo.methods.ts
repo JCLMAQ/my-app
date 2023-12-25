@@ -1,4 +1,5 @@
 import { inject } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { tapResponse } from '@ngrx/operators';
 import {
   patchState,
@@ -36,6 +37,7 @@ export function withTodosMethods() {
         patchState(store, { isLoading: true, loaded: false });
 
         const items = await todoService.getItemsAsPromise();
+        const dataSource = new MatTableDataSource(await todoService.getItemsAsPromise());
 
         patchState(store, { items, isLoading: false, loaded: true });
       },
