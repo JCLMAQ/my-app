@@ -17,8 +17,7 @@ export function withTodosSelectors() {
         }
 
         return (done / total) * 100;
-      }),
-
+      })
     }
     ))
   );

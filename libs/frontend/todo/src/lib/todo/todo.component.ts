@@ -1,6 +1,6 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, ViewChild, inject } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, OnInit, ViewChild, inject } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -25,19 +25,19 @@ import { TodoStore } from '../store/todo.state';
 
 
 
-export class TodoComponent implements AfterViewInit{ // implements OnInit,  AfterViewInit {
+export class TodoComponent implements OnInit, AfterViewInit{
+ // implements OnInit,  AfterViewInit {
   // export class TodoComponent implements OnInit,  AfterViewInit {
   readonly todoStore = inject(TodoStore);
   readonly router = inject(Router)
 
 
-  selection = new SelectionModel<TodoInterface>(true, []);
-  displayedColumns: string[] = ['numSeq','title', 'content','tools'];
 
-  todosItems = this.todoStore.items();
-  todos = this.todoStore.items;
-  // dataSource!: MatTableDataSource<TodoInterface>;
-  dataSource = new MatTableDataSource<TodoInterface>(this.todosItems)
+  selection = new SelectionModel<TodoInterface>(true, []);
+  displayedColumns: string[] = ['numSeq','title', 'content', 'tools'];
+
+  todosItems!: TodoInterface[];
+  dataSource = new MatTableDataSource<TodoInterface>;
 
 
   index: number | undefined
@@ -56,13 +56,21 @@ export class TodoComponent implements AfterViewInit{ // implements OnInit,  Afte
   readonly error$ = this.todoStore.error();
 
 
-// ngOnInit(): void {
-//   this.dataSource = new MatTableDataSource(this.todos());
-//   console.log("dataSource - nginit: ",this.dataSource)
-//   console.log("Todos - nginit: ",this.todos())
-// }
+ngOnInit(): void {
+if (this.loaded$) {this.fetchData()}
 
+}
+
+fetchData(): void {
+  this.todosItems = this.todoStore.items();
+  this.dataSource = new MatTableDataSource(this.todosItems);
+  this.dataSource.paginator = this.paginator!;
+  this.dataSource.sort = this.sort!;
+  console.log("dataSource - nginit: ",this.dataSource)
+  console.log("Todos - nginit: ",this.todosItems)
+}
 ngAfterViewInit(): void {
+  this.dataSource = new MatTableDataSource(this.todosItems);
   this.dataSource.paginator = this.paginator!;
   this.dataSource.sort = this.sort!;
   }
@@ -128,7 +136,7 @@ virtualRemove(id: string) {
 // MatTable mgt
 // On click row action
 onRowClicked(row: number) {
-  // console.log('Row clicked: ', row);
+  console.log('Row clicked: ', row);
 }
 
 }
