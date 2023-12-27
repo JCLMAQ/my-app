@@ -47,6 +47,9 @@
       "@fe/core/error-handler": ["libs/frontend/ui/core/error-handler/src/index.ts"],
       "@fe/core/forms": ["libs/frontend/ui/core/forms/src/index.ts"],
       "@fe/core/http-client": ["libs/frontend/ui/core/http-client/src/index.ts"],
+      "@fe/shared/util-common": ["libs/frontend/shared/util-common/index.ts"],
+      "@fe/shared/util-logger": ["libs/frontend/shared/util-logger/index.ts"],
+      "@fe/shared/undo-redo": ["libs/frontend/shared/undo-redo.feature.ts"],
     }
   },
   "exclude": ["node_modules", "tmp"]

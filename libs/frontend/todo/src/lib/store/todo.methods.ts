@@ -33,10 +33,16 @@ export function withTodosMethods() {
       ),
       // Load Todo by Promise
       async loadAllTodosByPromise() {
+        // Setting the callState via an Updater
+        // patchState(store, setLoading());
         patchState(store, { isLoading: true, loaded: false });
         const items = await todoService.getItemsAsPromise();
         console.log("Items 0: ", items)
         patchState(store, { items, isLoading: false, loaded: true });
+        console.log("Items Loaded", )
+        // patchState(store, setAllEntities(items, { collection: 'todo'}))
+        // Setting the callState via an Updater
+        // patchState(store, setLoaded());
       },
       // Add todo (rxjs)
       addTodo: rxMethod<string>(
