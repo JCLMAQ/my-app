@@ -1,6 +1,6 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ViewChild, inject } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, OnInit, ViewChild, inject } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -23,24 +23,15 @@ import { TodoStore } from '../store/todo.state';
   providers: [TodoStore],
 })
 
-export class TodoComponent  { // implements OnInit,  AfterViewInit {
+export class TodoComponent implements OnInit, AfterViewInit { // implements OnInit,  AfterViewInit {
   // export class TodoComponent implements OnInit,  AfterViewInit {
   readonly todoStore = inject(TodoStore);
   readonly router = inject(Router)
 
-  constructor(){
-    console.log("Items 2: ", this.todoStore.items())
-      this.dataSource = new MatTableDataSource<TodoInterface>(this.todoStore.items());
-      console.log("dataSource: ", this.dataSource)
-      this.dataSource.paginator = this.paginator!;
-      this.dataSource.sort = this.sort!;
-  }
   dataSource!: MatTableDataSource<TodoInterface> ;
 
   selection = new SelectionModel<TodoInterface>(true, []);
   tableColumns: string[]= [ 'numSeq','title'];
-
-  todos?: TodoInterface[] | undefined;
 
   todosEntities = this.todoStore.entities();
   todosItems = this.todoStore.items();
@@ -60,47 +51,26 @@ export class TodoComponent  { // implements OnInit,  AfterViewInit {
   readonly loaded$ = this.todoStore.loaded();
   readonly error$ = this.todoStore.error();
 
-  // ngAfterContentInit(): void {
-  //   console.log("Items 2: ", this.todoStore.items())
-  //   this.dataSource = new MatTableDataSource<TodoInterface>(this.todoStore.items());
-  //   this.dataSource.paginator = this.paginator!;
-  //   this.dataSource.sort = this.sort!;
-  // }
-  // dataSource = new MatTableDataSource<TodoInterface>(this.todoStore.items());
-
-//   ngOnInit(): void{
-//   // this.dataSource = new MatTableDataSource(this.todoStore.entities());
-//   // // this.dataSource = this.todoStore.items();
-//   // console.log("Entities: ",this.todoStore.entities());
-//   // console.log("Items 1: ", this.todoStore.items())
-//   // //  this.dataSource = new MatTableDataSource(Object.values(this.todoStore.items()));
-//   // console.log("Data Source for MatTable:", this.dataSource)
-//   // this.dataSource.paginator = this.paginator!;
-//   // this.dataSource.sort = this.sort!;
+  ngOnInit(): void {
+  this.dataSource = new MatTableDataSource(this.todoStore.entities());
+  // this.dataSource = this.todoStore.items();
+  console.log("Entities: ",this.todoStore.entities());
+  console.log("Items 1: ", this.todoStore.items())
+  //  this.dataSource = new MatTableDataSource(Object.values(this.todoStore.items()));
+  console.log("Data Source for MatTable:", this.dataSource)
+  this.dataSource.paginator = this.paginator!;
+  this.dataSource.sort = this.sort!;
+};
 
 
-
-//   // this.store.select(usersFeature.selectAll)
-//       // .pipe(
-//       //   map((objectResult) => {
-//       //     this.items = Object.values(objectResult)
-//       //     this.userDataSource  =  new MatTableDataSource(this.items);
-//       //     this.userDataSource.paginator = this.paginator;
-//       //     this.userDataSource.sort = this.sort;
-//       //   })
-//       // );
-// };
+ngAfterViewInit(): void {
+  this.dataSource.paginator = this.paginator!;
+  this.dataSource.sort = this.sort!;
+  }
 
 
-// ngAfterViewInit(): void {
-//   this.dataSource.paginator = this.paginator!;
-//   this.dataSource.sort = this.sort!;
-//   }
-
-
-  // this.todos= this.todoStore.items();
   // addTodo() {
-  //   this.store.addTodo(this.form.value.todoValue);
+  //   this.todoStore.addTodo(this.form.value.todoValue);
   //   this.form.reset();
   // }
 

@@ -25,6 +25,7 @@ Base on: https://offering.solutions/blog/articles/2023/12/03/ngrx-signal-store-g
 // With Promises methods
 export const TodoStore = signalStore(
     { providedIn: 'root' },
+    withEntities<TodoInterface>(),
     withState(initialTodoState),
     withTodosSelectors(),
     withTodosMethods(),
@@ -36,8 +37,7 @@ export const TodoStore = signalStore(
       onDestroy() {
         console.log('on destroy');
       },
-    }),
-      withEntities<TodoInterface>(),
+    })
   );
 
 
