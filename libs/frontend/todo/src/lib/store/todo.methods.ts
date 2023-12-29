@@ -60,8 +60,26 @@ export function withTodosMethods() {
           })
         )
       ),
+      deleteTodo: rxMethod<TodoInterface>(
+        pipe(
+          switchMap((todo) => {
+            patchState(store, setLoading());
+            return todoService.deleteItem(todo).pipe(
+              tapResponse({
+                next: () => {
+                  patchState(store, {
+                    items: [...store.items().filter((x) => x.id !== todo.id)],
+                  });
+                },
+                error: console.error,
+                finalize: () => patchState(store, setLoaded() ),
+              })
+            );
+          })
+        )
+      ),
 
-      // Todo state to "done"
+      // Example: Todo state to "done"
       // moveToDone: rxMethod<TodoInterface>(
       //   pipe(
       //     switchMap((todo) => {
@@ -107,24 +125,7 @@ export function withTodosMethods() {
         },
       */
 
-      deleteTodo: rxMethod<TodoInterface>(
-        pipe(
-          switchMap((todo) => {
-            patchState(store, setLoading());
-            return todoService.deleteItem(todo).pipe(
-              tapResponse({
-                next: () => {
-                  patchState(store, {
-                    items: [...store.items().filter((x) => x.id !== todo.id)],
-                  });
-                },
-                error: console.error,
-                finalize: () => patchState(store, setLoaded() ),
-              })
-            );
-          })
-        )
-      ),
+
     }))
   );
 }

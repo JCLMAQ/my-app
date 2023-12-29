@@ -11,11 +11,9 @@ export function withTodosSelectors() {
       percentageDone: computed(() => {
         const done = items().filter((x) => x.todoState = 'DONE').length;
         const total = items().length;
-
         if (total === 0) {
           return 0;
         }
-
         return (done / total) * 100;
       })
     }

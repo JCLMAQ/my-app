@@ -42,9 +42,9 @@ export class TodoComponent implements OnInit, AfterViewInit{
 
 
   selection = new SelectionModel<TodoInterface>(true, []);
-  columnsToDisplay: string[] = ['numSeq','title'];
-  // columnsToDisplay: string[] = ['numSeq','title', 'content', 'tools'];
-  columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand', 'tools'];
+  // selectColumnsToDisplay: string[] = ['select'];
+  columnsToDisplay: string[] = ['select', 'numSeq','title'];
+  columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand',  'tools'];
   expandedElement!: TodoInterface | null;
 
   todosItems!: TodoInterface[];
@@ -61,10 +61,6 @@ export class TodoComponent implements OnInit, AfterViewInit{
 
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
   @ViewChild(MatSort) sort: MatSort | undefined;
-
-  readonly isLoading$ = this.todoStore.loading();
-  readonly loaded$ = this.todoStore.loaded();
-  readonly error$ = this.todoStore.error();
 
 constructor() {
   console.log("Constructor step")
@@ -114,6 +110,13 @@ ngAfterViewInit(): void {
       this.dataSource.data.forEach(row => this.selection.select(row));
 }
 
+checkboxLabel(row: TodoInterface): string {
+  if (!row) {
+    return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
+  }
+  return `${this.selection.isSelected(row) ? 'deselect' : 'select'}`;
+}
+
  // Filter the list
  applyFilter(event: Event) {
   const filterValue = (event.target as HTMLInputElement).value;
@@ -122,6 +125,9 @@ ngAfterViewInit(): void {
     this.dataSource.paginator.firstPage();
   }
 }
+
+
+
 
 onNavigate() {
 
