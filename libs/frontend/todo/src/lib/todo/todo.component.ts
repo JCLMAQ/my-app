@@ -1,3 +1,4 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { SelectionModel } from '@angular/cdk/collections';
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, OnInit, ViewChild, effect, inject } from '@angular/core';
@@ -19,12 +20,17 @@ import { TodoStore } from '../store/todo.state';
     ...MATERIAL,
   ],
   templateUrl: './todo.component.html',
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed,void', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
   styleUrl: './todo.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [TodoStore],
 })
-
-
 
 export class TodoComponent implements OnInit, AfterViewInit{
  // implements OnInit,  AfterViewInit {
@@ -36,7 +42,10 @@ export class TodoComponent implements OnInit, AfterViewInit{
 
 
   selection = new SelectionModel<TodoInterface>(true, []);
-  displayedColumns: string[] = ['numSeq','title', 'content', 'tools'];
+  columnsToDisplay: string[] = ['numSeq','title'];
+  // columnsToDisplay: string[] = ['numSeq','title', 'content', 'tools'];
+  columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand', 'tools'];
+  expandedElement!: TodoInterface | null;
 
   todosItems!: TodoInterface[];
   dataSource = new MatTableDataSource<TodoInterface>;
@@ -68,8 +77,6 @@ constructor() {
 
 ngOnInit(): void {
   console.log('ngOnInit step')
-// if (this.loaded$) {this.fetchData()}
-
 }
 
 fetchData(): void {
