@@ -1,6 +1,6 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, OnInit, ViewChild, inject } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, OnInit, ViewChild, effect, inject } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { MATERIAL } from '@fe/material';
 import { TodoInterface } from '../store/todo.model';
 import { TodoStore } from '../store/todo.state';
+// import { CallState } from '@fe/shared/util-common';
 
 
 @Component({
@@ -29,6 +30,7 @@ export class TodoComponent implements OnInit, AfterViewInit{
  // implements OnInit,  AfterViewInit {
   // export class TodoComponent implements OnInit,  AfterViewInit {
   readonly todoStore = inject(TodoStore);
+  // readonly callState = inject(CallState)
   readonly router = inject(Router)
 
 
@@ -51,13 +53,22 @@ export class TodoComponent implements OnInit, AfterViewInit{
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
   @ViewChild(MatSort) sort: MatSort | undefined;
 
-  readonly isLoading$ = this.todoStore.isLoading();
+  readonly isLoading$ = this.todoStore.loading();
   readonly loaded$ = this.todoStore.loaded();
   readonly error$ = this.todoStore.error();
 
+constructor() {
+  console.log("Constructor step")
+  effect(()=> {
+    this.todoStore.loaded();
+    console.log("Loaded Statute: ", this.todoStore.loaded())
+    this.fetchData();
+  })
+}
 
 ngOnInit(): void {
-if (this.loaded$) {this.fetchData()}
+  console.log('ngOnInit step')
+// if (this.loaded$) {this.fetchData()}
 
 }
 
@@ -69,11 +80,12 @@ fetchData(): void {
   console.log("dataSource - nginit: ",this.dataSource)
   console.log("Todos - nginit: ",this.todosItems)
 }
+
 ngAfterViewInit(): void {
   this.dataSource = new MatTableDataSource(this.todosItems);
   this.dataSource.paginator = this.paginator!;
   this.dataSource.sort = this.sort!;
-  }
+}
 
 
   // addTodo() {

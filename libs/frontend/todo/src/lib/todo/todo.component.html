@@ -1,54 +1,23 @@
 <p>todo works!</p>
 
-
-@if (todoStore.isLoading()) {
+@if (todoStore.loading()) {
   <h2>Loading...</h2>
+  <mat-progress-bar
+  mode="indeterminate"
+  class="loader"
+></mat-progress-bar>
+
   }
+<!--
+@if (todoStore.loaded()) {
+  <h2>Loaded...</h2>
+  } -->
 
 @if (todoStore.error()) {
   <div>{{ todoStore.error }}</div>
 }
-
-@for (todo of todoStore.items(); track todo ) {
-  <div>{{ todo.title }}</div>
-}
-
+<!-- <button mat-button (click)="fetchData()">Fetch</button> -->
 <div>
-  {{ todoStore.doneCount() }} / {{ todoStore.undoneCount() }}
-  {{ todoStore.percentageDone() }}
-</div>
-
-<div>Is Loading: {{todoStore.isLoading()}}</div>
-<div>Is Loaded :{{todoStore.loaded()}}</div>
-<div>Error : {{todoStore.error()}}</div>
-<button mat-button (click)="fetchData()">Fetch</button>
-<div>
-   <!--  First Mat-Table -->
-  <!-- <table mat-table class="mat-elevation-z8" [dataSource]="todoStore.items()">
-
-    <ng-container matColumnDef="numSeq">
-      <th mat-header-cell *matHeaderCellDef>#</th>
-      <td mat-cell *matCellDef="let item">{{item.numSeq}}</td>
-    </ng-container>
-
-
-    <ng-container matColumnDef="title">
-      <th mat-header-cell *matHeaderCellDef>Title</th>
-      <td mat-cell *matCellDef="let item">{{item.title}}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="content">
-      <th mat-header-cell *matHeaderCellDef>Content</th>
-      <td mat-cell *matCellDef="let item">{{item.content}}</td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef=" let row; columns: displayedColumns" (click)="onRowClicked(row)"></tr>
-
-  </table>
-</div> -->
-
-<!--  Second Mat-Table -->
 <div></div>
 <div class="main-div">
   <mat-card class="mat-elevation-z8" >
