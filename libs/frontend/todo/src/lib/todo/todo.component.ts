@@ -33,16 +33,12 @@ import { TodoStore } from '../store/todo.state';
 })
 
 export class TodoComponent implements OnInit, AfterViewInit{
- // implements OnInit,  AfterViewInit {
-  // export class TodoComponent implements OnInit,  AfterViewInit {
+
   readonly todoStore = inject(TodoStore);
-  // readonly callState = inject(CallState)
   readonly router = inject(Router)
 
-
-
   selection = new SelectionModel<TodoInterface>(true, []);
-  // selectColumnsToDisplay: string[] = ['select'];
+
   columnsToDisplay: string[] = ['select', 'numSeq','title'];
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand',  'tools'];
   expandedElement!: TodoInterface | null;
@@ -50,10 +46,8 @@ export class TodoComponent implements OnInit, AfterViewInit{
   todosItems!: TodoInterface[];
   dataSource = new MatTableDataSource<TodoInterface>;
 
-
   index: number | undefined
   routeToDetail = "todos/tododetail";
-
 
   mode: 'Edit' | 'View' | 'Update' | undefined ;
   master = false; // true : button is disable
@@ -76,12 +70,14 @@ ngOnInit(): void {
 }
 
 fetchData(): void {
-  this.todosItems = this.todoStore.items();
+  this.todosItems = this.todoStore.todoEntities();
+  // this.todosItems = this.todoStore.items();
   this.dataSource = new MatTableDataSource(this.todosItems);
   this.dataSource.paginator = this.paginator!;
   this.dataSource.sort = this.sort!;
   console.log("dataSource - nginit: ",this.dataSource)
   console.log("Todos - nginit: ",this.todosItems)
+  console.log('todoEntities: ', this.todoStore.todoEntities())
 }
 
 ngAfterViewInit(): void {
@@ -126,9 +122,6 @@ checkboxLabel(row: TodoInterface): string {
   }
 }
 
-
-
-
 onNavigate() {
 
 }
@@ -137,12 +130,11 @@ onNavigate() {
 // navigate(id: String, index: String) {
 //   this.router.navigate([this.routeToDetail, id, 'view']);
 // }
-navigate(todo: TodoInterface, index: string) {
-  // console.log("route transfert" , user)
-  this.router.navigate([this.routeToDetail,todo, 'view']);
+navigate( todo: TodoInterface ) {
+  this.router.navigate([this.routeToDetail, todo, 'view']);
 }
 
-navigateButton(id: string, mode: string) {
+navigateButton( id: string, mode: string ) {
   // mode: 'view' | 'update' | 'create';
     this.router.navigate([this.routeToDetail, id, mode]);
 }

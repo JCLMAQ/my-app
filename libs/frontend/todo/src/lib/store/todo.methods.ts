@@ -7,6 +7,7 @@ import {
   type,
   withMethods,
 } from '@ngrx/signals';
+import { setAllEntities, withEntities } from '@ngrx/signals/entities';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap } from 'rxjs';
 import { TodoService } from '../services/todo.service';
@@ -19,6 +20,8 @@ export function withTodosMethods() {
   return signalStoreFeature(
     { state: type<TodoStateInterface>() },
     withCallState(),
+    // withEntities<TodoInterface>(),
+    withEntities({ entity: type<TodoInterface>(), collection: 'todo'}),
     withMethods((store, todoService = inject(TodoService)) => ({
       // Load Todo with rxjs
       loadAllTodos: rxMethod<void>(
@@ -40,9 +43,9 @@ export function withTodosMethods() {
         patchState(store, setLoading());
         const items = await todoService.getItemsAsPromise();
         console.log("Items just fetched : ", items)
-        patchState(store, { items }, setLoaded());
+        patchState(store, { items },setLoaded());
         console.log("Items Loaded in the store: ", store)
-        // patchState(store, setAllEntities(items, { collection: 'todo'}))
+        patchState(store, setAllEntities(items, { collection: 'todo'}))
       },
       // Add todo (rxjs)
       addTodo: rxMethod<string>(

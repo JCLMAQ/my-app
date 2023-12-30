@@ -1,3 +1,4 @@
+import { withCallState } from '@fe/shared/util-common';
 import { signalStore, type, withHooks, withState } from '@ngrx/signals';
 import { withEntities } from '@ngrx/signals/entities';
 import { withTodosMethods } from './todo.methods';
@@ -19,16 +20,20 @@ export const initialTodoState: TodoStateInterface = {
 
 export const TodoStore = signalStore(
     { providedIn: 'root' },
-    withEntities({ entity: type<TodoInterface>, collection: 'todo'}),
+
+    withCallState(),
+    withEntities( {entity: type<TodoInterface>(), collection: 'todo'}),
+    // withEntities<TodoInterface>(),
     withState(initialTodoState),
     withTodosMethods(),
     withTodosSelectors(),
     withHooks({
-      async onInit({ loadAllTodosByPromise }) {
-        console.log('Store hoocks: just before data Fetching.');
-        await loadAllTodosByPromise();
-        console.log('Store hoocks: just after data Fetching');
-      },
+      // async onInit({ loadAllTodosByPromise }) {
+      //   console.log('Store hoocks: just before data Fetching.');
+      //   await loadAllTodosByPromise();
+      //   console.log('Store hoocks: just after data Fetching');
+      // },
+      onInit: (store) => store.loadAllTodosByPromise(),
       onDestroy() {
         console.log('on destroy');
       },
