@@ -72,7 +72,6 @@ ngOnInit(): void {
 
 fetchData(): void {
   this.todosItems = this.todoStore.todoEntities();
-  // this.todosItems = this.todoStore.items();
   this.dataSource = new MatTableDataSource(this.todosItems);
   this.dataSource.paginator = this.paginator!;
   this.dataSource.sort = this.sort!;
