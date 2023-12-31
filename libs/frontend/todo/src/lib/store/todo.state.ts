@@ -1,12 +1,11 @@
-import { withCallState } from '@fe/shared/util-common';
+import { withUndoRedo } from '@fe/shared/undo-redo';
+import { withCallState, withDataService } from '@fe/shared/util-common';
 import { signalStore, type, withHooks, withState } from '@ngrx/signals';
 import { withEntities } from '@ngrx/signals/entities';
 import { TodoService } from '../services/todo.service';
 import { withTodosMethods } from './todo.methods';
 import { TodoInterface } from './todo.model';
 import { withTodosSelectors } from './todo.selectors';
-// import { withUndoRedo } from '@fe/shared/undo-redo';
-import { withDataService } from '@fe/shared/util-common';
 
 export interface TodoStateInterface {
   items: TodoInterface[];
@@ -34,9 +33,9 @@ export const TodoStore = signalStore(
       filter: { },
       collection: 'todo'
     }),
-    // withUndoRedo({
-    //   collections: ['todo'],
-    // }),
+    withUndoRedo({
+      collections: ['todo'],
+    }),
     withHooks({
       // async onInit({ loadAllTodosByPromise }) {
       //   console.log('Store hoocks: just before data Fetching.');
