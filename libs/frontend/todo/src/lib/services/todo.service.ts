@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Injectable } from '@angular/core';
 // import { Todo } from '@prisma/client';
 
+import { DataService } from '@fe/shared/util-common';
 import { Observable, catchError, lastValueFrom, throwError } from 'rxjs';
 import { TodoInterface } from '../store/todo.model';
 
@@ -12,12 +13,17 @@ const httpOptions = {
 	})
 };
 
+export type TodoFilter = {
+  userId: string;
+  companyId: string;
+}
+
 const apiUrl = `api/`;
 
 @Injectable({
   providedIn: 'root',
 })
-export class TodoService {
+export class TodoService implements DataService<TodoInterface, TodoFilter> {
   // private readonly http = inject(HttpClient);
 
   private baseUrl = `api/todos`;
@@ -25,6 +31,10 @@ export class TodoService {
   constructor(
     private readonly http: HttpClient)
     { }
+
+  load(filter: TodoFilter): Promise<TodoInterface[]> {
+    return this.findPromise(filter.userId);
+  }
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {

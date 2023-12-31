@@ -1,3 +1,4 @@
+export * from '../undo-redo.feature';
 export * from './call-state.feature';
 export * from './data-service-feature';
 export * from './date-utils';

@@ -1,7 +1,7 @@
-import { patchState, signalStoreFeature, type, withComputed, withHooks, withMethods, withState } from "@ngrx/signals";
-import { Entity, Filter } from "./util-common";
-import { EntityId } from "@ngrx/signals/entities";
 import { effect, signal, untracked } from "@angular/core";
+import { patchState, signalStoreFeature, type, withComputed, withHooks, withMethods } from "@ngrx/signals";
+import { EntityId } from "@ngrx/signals/entities";
+import { Entity, Filter } from "./util-common";
 
 export type StackItem = {
     filter: Filter;
@@ -28,11 +28,11 @@ export function withUndoRedo(options = defaultUndoRedoOptions) {
     // internal state.
     //
     // Please see an alternative implementation
-    // that adds the feature's state to the 
+    // that adds the feature's state to the
     // Signal Store too in the branch
     // `arc-signal-custom-examples-undoredo-alternative``
     //
-    
+
     const undoStack: StackItem[] = [];
     const redoStack: StackItem[] = [];
 

@@ -46,6 +46,7 @@ export class TodoComponent implements OnInit, AfterViewInit{
   todosItems!: TodoInterface[];
   dataSource = new MatTableDataSource<TodoInterface>;
 
+
   index: number | undefined
   routeToDetail = "todos/tododetail";
 

@@ -31,6 +31,8 @@ import { provideMarkdown } from 'ngx-markdown';
 import { HttpLoaderFactory } from './app.component';
 import { appRoutes } from './app.routes';
 // import { reducers } from './reducers';
+import { provideLogger } from '@fe/shared/util-logger';
+import { loggerConfig } from './logger.config';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -76,6 +78,7 @@ export const appConfig: ApplicationConfig = {
     },
     provideAnimations(),
     provideMarkdown(),
+    provideLogger(loggerConfig),
   ],
 };
 

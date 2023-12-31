@@ -21,12 +21,20 @@ export const initialTodoState: TodoStateInterface = {
 export const TodoStore = signalStore(
     { providedIn: 'root' },
 
-    withCallState(),
+    withCallState({collection: 'todo'}),
     withEntities( {entity: type<TodoInterface>(), collection: 'todo'}),
     // withEntities<TodoInterface>(),
     withState(initialTodoState),
     withTodosMethods(),
     withTodosSelectors(),
+    // withDataService({
+    //   dataServiceType: TodoService,
+    //   filter: { },
+    //   collection: 'todo'
+    // }),
+    // withUndoRedo({
+    //   collections: ['todo'],
+    // }),
     withHooks({
       // async onInit({ loadAllTodosByPromise }) {
       //   console.log('Store hoocks: just before data Fetching.');
