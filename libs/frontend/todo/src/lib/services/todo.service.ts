@@ -1,9 +1,9 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 // import { Todo } from '@prisma/client';
 
 import { DataService } from '@fe/shared/util-common';
-import { Observable, catchError, lastValueFrom, throwError } from 'rxjs';
+import { Observable, catchError, firstValueFrom, lastValueFrom, throwError } from 'rxjs';
 import { TodoInterface } from '../store/todo.model';
 
 const httpOptions = {
@@ -18,7 +18,7 @@ export type TodoFilter = {
   companyId: string;
 }
 
-const apiUrl = `api/`;
+
 
 @Injectable({
   providedIn: 'root',
@@ -26,14 +26,30 @@ const apiUrl = `api/`;
 export class TodoService implements DataService<TodoInterface, TodoFilter> {
   // private readonly http = inject(HttpClient);
 
-  private baseUrl = `api/todos`;
+  private apiUrl = `api/`;
+  private baseUrl = `${this.apiUrl}todos`;
 
   constructor(
     private readonly http: HttpClient)
     { }
 
   load(filter: TodoFilter): Promise<TodoInterface[]> {
-    return this.findPromise(filter.userId);
+    return this.findAsPromise(filter.userId, filter.companyId);
+  }
+
+  private findAsPromise(userId: string, companyId: string): Promise<TodoInterface[]> {
+    return firstValueFrom(this.find(userId, companyId));
+  }
+
+  private find(
+    userId: string,
+    companyId: string,
+  ): Observable<TodoInterface[]> {
+    const url = [this.baseUrl, 'todo'].join('/');
+
+    const params = new HttpParams().set('userId', userId).set('companyId', companyId);
+    const headers = new HttpHeaders().set('Accept', 'application/json');
+    return this.http.get<TodoInterface[]>(url, { params, headers });
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -51,7 +67,9 @@ export class TodoService implements DataService<TodoInterface, TodoFilter> {
     return throwError(() => new Error('Something bad happened; please try again later.'));
   }
 
-
+  getItemsAsPromise(): Promise<TodoInterface[]>{
+    return lastValueFrom(this.getItems());
+  }
 
   getItems(): Observable<TodoInterface[]> {
     return this.http
@@ -60,9 +78,7 @@ export class TodoService implements DataService<TodoInterface, TodoFilter> {
         catchError(this.handleError));;
   }
 
-  getItemsAsPromise() {
-    return lastValueFrom(this.http.get<TodoInterface[]>(this.baseUrl, httpOptions));
-  }
+
 
   getItem(id: string) {
     return this.http.get<TodoInterface>(`${this.baseUrl}/${id}`);
