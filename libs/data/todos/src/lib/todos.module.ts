@@ -7,7 +7,11 @@ import { TodosService } from './todos.service';
 @Module({
   imports: [PrismaModule],
   controllers: [TodosController],
-  providers: [TodosRepository, TodosService],
-  exports: [TodosService],
+  providers: [
+    TodosRepository,
+    TodosService],
+  exports: [
+    TodosService
+  ],
 })
 export class TodosModule {}
