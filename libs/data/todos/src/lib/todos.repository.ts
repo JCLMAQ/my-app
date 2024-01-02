@@ -1,6 +1,6 @@
 import { PrismaService } from '@my-app/prisma';
 import { Injectable } from '@nestjs/common';
-import { Prisma, Todo } from '@prisma/client';
+import { Prisma, Task, Todo } from '@prisma/client';
 
 // Based on: https://www.tomray.dev/nestjs-prisma#seeding-data-with-prisma-studio
 @Injectable()
@@ -21,9 +21,10 @@ export class TodosRepository {
     cursor?: Prisma.TodoWhereUniqueInput;
     where?: Prisma.TodoWhereInput;
     orderBy?: Prisma.TodoOrderByWithRelationInput;
-  }): Promise<Todo[]> {
-    const { skip, take, cursor, where, orderBy } = params;
-    return this.prisma.todo.findMany({ skip, take, cursor, where, orderBy });
+    include?: Prisma.TodoInclude<>;
+  }): Promise<Todo[] & { Tasks: Task[]}> {
+    const { skip, take, cursor, where, orderBy, include } = params;
+    return this.prisma.todo.findMany({ skip, take, cursor, where, orderBy, include });
   }
 
   async updateTodo(params: {
@@ -41,9 +42,14 @@ export class TodosRepository {
   }
 
   async getAllTodos(): Promise<Todo[]> {
-    // const todosReturn = await this.prisma.todo.findMany()
-    // console.log(todosReturn)
     return this.prisma.todo.findMany()
+  }
+
+  async getAllTodosWithTasks(params: { include?: Prisma.TodoInclude; }): Promise<Todo[]> {
+    const { include } = params;
+    return this.prisma.todo.findMany({
+      include
+    })
   }
 
 }

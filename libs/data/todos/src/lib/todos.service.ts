@@ -1,6 +1,6 @@
 import { PrismaService } from '@my-app/prisma';
 import { Injectable } from '@nestjs/common';
-import { Todo, UserTodoLink } from '@prisma/client';
+import { Task, Todo, UserTodoLink } from '@prisma/client';
 import { TodosRepository } from './todos.repository';
 
 @Injectable()
@@ -36,7 +36,7 @@ export class TodosService {
             userId: userId,
             isAuthor: true,
             isAssigned: true,
-            comment: comment
+            comment
           }
         },
         orderTodo: 0,
@@ -58,13 +58,26 @@ export class TodosService {
     return todo;
   }
 
-  async getTodos() {
-    const todos = await this.repository.getTodos({});
+  async getTodos(params: {
+    // skip: undefined,
+    // take: undefined,
+    // cursor: undefined,
+    // orderBy: undefined,
+    where: {
+        Users: { userId: string },
+        Orgs: { orgId: string }
+    },
+    includes: { Tasks: true }
+  }) {
+    const todos = await this.repository.getTodos( params);
     return todos;
   }
 
   async getAllTodos(){
-    const todos = await this.repository.getAllTodos();
-    return todos;
+    return await this.repository.getAllTodos();
+  }
+  async getAllTodosWithTasks(params: { include?: Task}): Promise<Todo[]>{
+    const { include } = params;
+    return await this.getAllTodosWithTasks({ include});
   }
 }

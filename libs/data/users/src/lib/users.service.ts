@@ -192,7 +192,9 @@ return await this.prisma.user.findMany({
 })
 }
 
-async getOneUserByUniqueWithSecret(userWhereUniqueInput: Prisma.UserWhereUniqueInput): Promise<User & {userSecret: UserSecret | null }| null> {
+async getOneUserByUniqueWithSecret(
+  userWhereUniqueInput: Prisma.UserWhereUniqueInput
+  ): Promise<User & {userSecret: UserSecret | null }| null> {
   const user = await this.prisma.user.findUnique({
     where: userWhereUniqueInput,
     include: {
