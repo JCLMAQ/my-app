@@ -18,7 +18,12 @@ export class TodosService {
   //   return todosReturn
   // }
 
-  async createTodo(params: { content: Todo[`content`]; comment: UserTodoLink[`comment`]; title: Todo[`title`]; userId: UserTodoLink[`userId`]; orgId: Todo[`orgId`]}) {
+  async createTodo(params: {
+    content: Todo[`content`];
+    comment: UserTodoLink[`comment`];
+    title: Todo[`title`];
+    userId: UserTodoLink[`userId`];
+    orgId: Todo[`orgId`]}) {
     const { title , content, comment, userId, orgId } = params;
 
     // call repository layer
