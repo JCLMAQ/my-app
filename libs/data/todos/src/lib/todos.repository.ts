@@ -19,14 +19,18 @@ export class TodosRepository {
     skip?: number;
     take?: number;
     cursor?: Prisma.TodoWhereUniqueInput;
-    // where?: Prisma.UserTodoLinkListRelationFilter;
     orderBy?: Prisma.TodoOrderByWithRelationInput;
     include?: Prisma.TodoInclude;
-    where?: Prisma.TodoWhereUniqueInput
+    where?: Prisma.TodoWhereInput
   }): Promise<Todo[]> {
-  // }): Promise<Todo[] & { Tasks: Task[]}> {
-    const { skip, take, cursor, orderBy, include, where } = params;
-    return this.prisma.todo.findMany({ skip, take, cursor, orderBy, include, where});
+    return this.prisma.todo.findMany({...params});
+  }
+
+  async getOneTodo(params: {
+    include?:Prisma.TodoInclude;
+    where: Prisma.TodoWhereUniqueInput
+  }): Promise<Todo | null> {
+    return this.prisma.todo.findUnique({ ...params } )
   }
 
   async updateTodo(params: {
@@ -36,6 +40,7 @@ export class TodosRepository {
     const { where, data } = params;
     return this.prisma.todo.update({ where, data });
   }
+
   async deleteTodo(params: {
     where: Prisma.TodoWhereUniqueInput;
   }): Promise<Todo> {
@@ -43,14 +48,17 @@ export class TodosRepository {
     return this.prisma.todo.delete({ where });
   }
 
+
+  // For test purpose
   async getAllTodos(): Promise<Todo[]> {
     return this.prisma.todo.findMany()
   }
 
-  async getAllTodosWithTasks(params: { include?: Prisma.TodoInclude; }): Promise<Todo[]> {
-    const { include } = params;
+  async getAllTodosWithTasks(): Promise<Todo[]> {
     return this.prisma.todo.findMany({
-      include
+      include: {
+        Tasks: true
+      }
     })
   }
 
