@@ -17,6 +17,15 @@ export class TodosController {
       return todos
     }
 
+    @Public()
+    @Auth(AuthType.None)
+    @Get('todoswithtasks')
+    async getAllTodosWithTasks(): Promise<Todo[]>{
+      const todos: Todo[] = await this.todosService.getAllTodosWithTasks({})
+      console.log('from Todos controlors with tasks: ', todos)
+      return todos
+    }
+
     @Auth(AuthType.None)
     @Post(`todo`)
     async createTodo(@Body() data: {

@@ -58,20 +58,28 @@ export class TodosService {
     return todo;
   }
 
-  async getTodos(params: {
-    // skip: undefined,
-    // take: undefined,
-    // cursor: undefined,
-    // orderBy: undefined,
-    where: {
-        Users: { userId: string },
-        Orgs: { orgId: string }
-    },
-    includes: { Tasks: true }
-  }) {
-    const todos = await this.repository.getTodos( params);
-    return todos;
-  }
+  // async getTodos(params: {
+  //   skip: undefined,
+  //   take: undefined,
+  //   cursor: undefined,
+  //   orderBy: undefined,
+  //   where: {
+  //       Users: {
+  //         some: {
+  //           user: { userId: string },
+  //         },
+  //       }
+
+
+
+  //       Orgs: { orgId: string }
+  //   },
+  //   include: { Tasks: true }
+  // }) {
+  //   // const { skip, take, cursor, orderBy, include, where} = params
+  //   // const todos = await this.repository.getTodos( {skip, take, cursor, orderBy, include, where});
+  //   // return todos;
+  // }
 
   async getAllTodos(){
     return await this.repository.getAllTodos();
@@ -81,3 +89,41 @@ export class TodosService {
     return await this.getAllTodosWithTasks({ include});
   }
 }
+
+// The following query returns all Post records where at least one (some) category assignment (categories) refers to a category named "New category":
+
+// const getPosts = await prisma.post.findMany({
+//   where: {
+//     categories: {
+//       some: {
+//         category: {
+//           name: 'New Category',
+//         },
+//       },
+//     },
+//   },
+// })
+
+
+// model Post {
+//   id         Int                 @id @default(autoincrement())
+//   title      String
+//   categories CategoriesOnPosts[]
+// }
+
+// model Category {
+//   id    Int                 @id @default(autoincrement())
+//   name  String
+//   posts CategoriesOnPosts[]
+// }
+
+// model CategoriesOnPosts {
+//   post       Post     @relation(fields: [postId], references: [id])
+//   postId     Int // relation scalar field (used in the `@relation` attribute above)
+//   category   Category @relation(fields: [categoryId], references: [id])
+//   categoryId Int // relation scalar field (used in the `@relation` attribute above)
+//   assignedAt DateTime @default(now())
+//   assignedBy String
+
+//   @@id([postId, categoryId])
+// }
