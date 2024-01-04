@@ -62,35 +62,44 @@ export class TodosService {
       orderBy?: Prisma.TodoOrderByWithRelationInput,
       orgId?: Todo[`orgId`],
       ownerId?: Todo[`ownerId`],
-      withTasks: boolean
+      withTasks: string
     })
     {
       const { ownerId, orgId, withTasks} = params
-      return await this.repository.getTodos( { include: { Tasks: Boolean(withTasks)}, where: { ownerId, orgId }});
+      let withTasksboolean = true
+      if(withTasks === 'false') { withTasksboolean = false}
+      return await this.repository.getTodos( { include: { Tasks: withTasksboolean}, where: { ownerId, orgId }});
     }
 
   async getOneTodo(params: {
-    withTasks?: boolean,
+    withTasks?: string,
     todoId: Todo[`id`]
   }) {
     const {withTasks, todoId} = params
-    return await this.repository.getOneTodo({ include: { Tasks: Boolean(withTasks)}, where: { id: todoId}})
+    let withTasksboolean = true
+    if(withTasks === 'false') { withTasksboolean = false}
+    return await this.repository.getOneTodo({ include: { Tasks: withTasksboolean }, where: { id: todoId}})
   }
 
   async updateTodo( params: {
-    todoId: Todo[`id`],
+    where: Prisma.TodoWhereUniqueInput,
     data: Prisma.TodoUpdateInput,
-  })
+  }): Promise<Todo>
   {
-    const {todoId, data} = params;
-    return await this.repository.updateTodo({where: { id: todoId}, data});
+    const {where, data} = params;
+    return await this.repository.updateTodo({where, data});
   }
 
-  async deleteTodo(params: {
+  async softDeleteTodo( params: {
     todoId: Todo[`id`],
-  }) {
-    const {todoId} = params;
-    return await this.repository.deleteTodo({ where: { id: todoId }})
+  })
+  {
+    const { todoId } = params
+    return await this.repository.softDeleteTodo({where: { id: todoId}});
+  }
+
+  async deleteTodo(where: Prisma.TodoWhereUniqueInput) {
+    return await this.repository.deleteTodo(where)
   }
 
 

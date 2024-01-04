@@ -21,10 +21,17 @@ generator client {
 //     provider = "prisma-dbml-generator"
 // }
 
+generator crud {
+    provider = "prisma-crud-generator"
+    output = "./generated/#{model}"
+    strict = true
+}
 // generator crud {
-//     provider = "prisma-crud-generator"
-//     output = "./generated/#{model}"
-//     strict = true
+//   provider = "prisma-crud-generator"
+//   output = "./generated/#{model}"
+
+//   # dryRun = true / false
+//   # strict = true / false
 // }
 
 // generator nestjsDto {

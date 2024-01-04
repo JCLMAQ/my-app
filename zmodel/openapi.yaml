@@ -61625,6 +61625,51 @@ paths:
           explode: false
           schema:
             type: integer
+        - name: filter[isDeletedDT]
+          required: false
+          description: Equality filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lt]
+          required: false
+          description: Less-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lte]
+          required: false
+          description: Less-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gt]
+          required: false
+          description: Greater-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gte]
+          required: false
+          description: Greater-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
         - name: filter[isPublic]
           required: false
           description: Equality filter for "isPublic"
@@ -62517,6 +62562,51 @@ paths:
           explode: false
           schema:
             type: integer
+        - name: filter[isDeletedDT]
+          required: false
+          description: Equality filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lt]
+          required: false
+          description: Less-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lte]
+          required: false
+          description: Less-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gt]
+          required: false
+          description: Greater-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gte]
+          required: false
+          description: Greater-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
         - name: filter[isPublic]
           required: false
           description: Equality filter for "isPublic"
@@ -63045,6 +63135,51 @@ paths:
           explode: false
           schema:
             type: integer
+        - name: filter[isDeletedDT]
+          required: false
+          description: Equality filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lt]
+          required: false
+          description: Less-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lte]
+          required: false
+          description: Less-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gt]
+          required: false
+          description: Greater-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gte]
+          required: false
+          description: Greater-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
         - name: filter[isPublic]
           required: false
           description: Equality filter for "isPublic"
@@ -63784,6 +63919,51 @@ paths:
           explode: false
           schema:
             type: integer
+        - name: filter[isDeletedDT]
+          required: false
+          description: Equality filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lt]
+          required: false
+          description: Less-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lte]
+          required: false
+          description: Less-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gt]
+          required: false
+          description: Greater-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gte]
+          required: false
+          description: Greater-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
         - name: filter[isPublic]
           required: false
           description: Equality filter for "isPublic"
@@ -64312,6 +64492,51 @@ paths:
           explode: false
           schema:
             type: integer
+        - name: filter[isDeletedDT]
+          required: false
+          description: Equality filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lt]
+          required: false
+          description: Less-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lte]
+          required: false
+          description: Less-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gt]
+          required: false
+          description: Greater-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gte]
+          required: false
+          description: Greater-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
         - name: filter[isPublic]
           required: false
           description: Equality filter for "isPublic"
@@ -64934,6 +65159,51 @@ paths:
           explode: false
           schema:
             type: integer
+        - name: filter[isDeletedDT]
+          required: false
+          description: Equality filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lt]
+          required: false
+          description: Less-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lte]
+          required: false
+          description: Less-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gt]
+          required: false
+          description: Greater-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gte]
+          required: false
+          description: Greater-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
         - name: filter[isPublic]
           required: false
           description: Equality filter for "isPublic"
@@ -65462,6 +65732,51 @@ paths:
           explode: false
           schema:
             type: integer
+        - name: filter[isDeletedDT]
+          required: false
+          description: Equality filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lt]
+          required: false
+          description: Less-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lte]
+          required: false
+          description: Less-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gt]
+          required: false
+          description: Greater-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gte]
+          required: false
+          description: Greater-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
         - name: filter[isPublic]
           required: false
           description: Equality filter for "isPublic"
@@ -66084,6 +66399,51 @@ paths:
           explode: false
           schema:
             type: integer
+        - name: filter[isDeletedDT]
+          required: false
+          description: Equality filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lt]
+          required: false
+          description: Less-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lte]
+          required: false
+          description: Less-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gt]
+          required: false
+          description: Greater-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gte]
+          required: false
+          description: Greater-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
         - name: filter[isPublic]
           required: false
           description: Equality filter for "isPublic"
@@ -66612,6 +66972,51 @@ paths:
           explode: false
           schema:
             type: integer
+        - name: filter[isDeletedDT]
+          required: false
+          description: Equality filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lt]
+          required: false
+          description: Less-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lte]
+          required: false
+          description: Less-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gt]
+          required: false
+          description: Greater-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gte]
+          required: false
+          description: Greater-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
         - name: filter[isPublic]
           required: false
           description: Equality filter for "isPublic"
@@ -67796,6 +68201,51 @@ paths:
           explode: false
           schema:
             type: integer
+        - name: filter[isDeletedDT]
+          required: false
+          description: Equality filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lt]
+          required: false
+          description: Less-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lte]
+          required: false
+          description: Less-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gt]
+          required: false
+          description: Greater-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gte]
+          required: false
+          description: Greater-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
         - name: filter[isPublic]
           required: false
           description: Equality filter for "isPublic"
@@ -68686,6 +69136,51 @@ paths:
           explode: false
           schema:
             type: integer
+        - name: filter[isDeletedDT]
+          required: false
+          description: Equality filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lt]
+          required: false
+          description: Less-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lte]
+          required: false
+          description: Less-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gt]
+          required: false
+          description: Greater-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gte]
+          required: false
+          description: Greater-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
         - name: filter[isPublic]
           required: false
           description: Equality filter for "isPublic"
@@ -69212,6 +69707,51 @@ paths:
           explode: false
           schema:
             type: integer
+        - name: filter[isDeletedDT]
+          required: false
+          description: Equality filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lt]
+          required: false
+          description: Less-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lte]
+          required: false
+          description: Less-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gt]
+          required: false
+          description: Greater-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gte]
+          required: false
+          description: Greater-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
         - name: filter[isPublic]
           required: false
           description: Equality filter for "isPublic"
@@ -69949,6 +70489,51 @@ paths:
           explode: false
           schema:
             type: integer
+        - name: filter[isDeletedDT]
+          required: false
+          description: Equality filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lt]
+          required: false
+          description: Less-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lte]
+          required: false
+          description: Less-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gt]
+          required: false
+          description: Greater-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gte]
+          required: false
+          description: Greater-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
         - name: filter[isPublic]
           required: false
           description: Equality filter for "isPublic"
@@ -70475,6 +71060,51 @@ paths:
           explode: false
           schema:
             type: integer
+        - name: filter[isDeletedDT]
+          required: false
+          description: Equality filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lt]
+          required: false
+          description: Less-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lte]
+          required: false
+          description: Less-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gt]
+          required: false
+          description: Greater-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gte]
+          required: false
+          description: Greater-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
         - name: filter[isPublic]
           required: false
           description: Equality filter for "isPublic"
@@ -71095,6 +71725,51 @@ paths:
           explode: false
           schema:
             type: integer
+        - name: filter[isDeletedDT]
+          required: false
+          description: Equality filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lt]
+          required: false
+          description: Less-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lte]
+          required: false
+          description: Less-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gt]
+          required: false
+          description: Greater-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gte]
+          required: false
+          description: Greater-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
         - name: filter[isPublic]
           required: false
           description: Equality filter for "isPublic"
@@ -71621,6 +72296,51 @@ paths:
           explode: false
           schema:
             type: integer
+        - name: filter[isDeletedDT]
+          required: false
+          description: Equality filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lt]
+          required: false
+          description: Less-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lte]
+          required: false
+          description: Less-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gt]
+          required: false
+          description: Greater-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gte]
+          required: false
+          description: Greater-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
         - name: filter[isPublic]
           required: false
           description: Equality filter for "isPublic"
@@ -72920,6 +73640,51 @@ paths:
           explode: false
           schema:
             type: integer
+        - name: filter[isDeletedDT]
+          required: false
+          description: Equality filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lt]
+          required: false
+          description: Less-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lte]
+          required: false
+          description: Less-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gt]
+          required: false
+          description: Greater-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gte]
+          required: false
+          description: Greater-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
         - name: filter[isPublic]
           required: false
           description: Equality filter for "isPublic"
@@ -73796,6 +74561,51 @@ paths:
           explode: false
           schema:
             type: integer
+        - name: filter[isDeletedDT]
+          required: false
+          description: Equality filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lt]
+          required: false
+          description: Less-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lte]
+          required: false
+          description: Less-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gt]
+          required: false
+          description: Greater-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gte]
+          required: false
+          description: Greater-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
         - name: filter[isPublic]
           required: false
           description: Equality filter for "isPublic"
@@ -74308,6 +75118,51 @@ paths:
           explode: false
           schema:
             type: integer
+        - name: filter[isDeletedDT]
+          required: false
+          description: Equality filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lt]
+          required: false
+          description: Less-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lte]
+          required: false
+          description: Less-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gt]
+          required: false
+          description: Greater-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gte]
+          required: false
+          description: Greater-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
         - name: filter[isPublic]
           required: false
           description: Equality filter for "isPublic"
@@ -74914,6 +75769,51 @@ paths:
           explode: false
           schema:
             type: integer
+        - name: filter[isDeletedDT]
+          required: false
+          description: Equality filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lt]
+          required: false
+          description: Less-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lte]
+          required: false
+          description: Less-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gt]
+          required: false
+          description: Greater-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gte]
+          required: false
+          description: Greater-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
         - name: filter[isPublic]
           required: false
           description: Equality filter for "isPublic"
@@ -75426,6 +76326,51 @@ paths:
           explode: false
           schema:
             type: integer
+        - name: filter[isDeletedDT]
+          required: false
+          description: Equality filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lt]
+          required: false
+          description: Less-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lte]
+          required: false
+          description: Less-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gt]
+          required: false
+          description: Greater-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gte]
+          required: false
+          description: Greater-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
         - name: filter[isPublic]
           required: false
           description: Equality filter for "isPublic"
@@ -76032,6 +76977,51 @@ paths:
           explode: false
           schema:
             type: integer
+        - name: filter[isDeletedDT]
+          required: false
+          description: Equality filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lt]
+          required: false
+          description: Less-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lte]
+          required: false
+          description: Less-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gt]
+          required: false
+          description: Greater-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gte]
+          required: false
+          description: Greater-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
         - name: filter[isPublic]
           required: false
           description: Equality filter for "isPublic"
@@ -76544,6 +77534,51 @@ paths:
           explode: false
           schema:
             type: integer
+        - name: filter[isDeletedDT]
+          required: false
+          description: Equality filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lt]
+          required: false
+          description: Less-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lte]
+          required: false
+          description: Less-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gt]
+          required: false
+          description: Greater-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gte]
+          required: false
+          description: Greater-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
         - name: filter[isPublic]
           required: false
           description: Equality filter for "isPublic"
@@ -77150,6 +78185,51 @@ paths:
           explode: false
           schema:
             type: integer
+        - name: filter[isDeletedDT]
+          required: false
+          description: Equality filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lt]
+          required: false
+          description: Less-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lte]
+          required: false
+          description: Less-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gt]
+          required: false
+          description: Greater-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gte]
+          required: false
+          description: Greater-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
         - name: filter[isPublic]
           required: false
           description: Equality filter for "isPublic"
@@ -77662,6 +78742,51 @@ paths:
           explode: false
           schema:
             type: integer
+        - name: filter[isDeletedDT]
+          required: false
+          description: Equality filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lt]
+          required: false
+          description: Less-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lte]
+          required: false
+          description: Less-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gt]
+          required: false
+          description: Greater-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gte]
+          required: false
+          description: Greater-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
         - name: filter[isPublic]
           required: false
           description: Equality filter for "isPublic"
@@ -80327,6 +81452,51 @@ paths:
           explode: false
           schema:
             type: integer
+        - name: filter[isDeletedDT]
+          required: false
+          description: Equality filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lt]
+          required: false
+          description: Less-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lte]
+          required: false
+          description: Less-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gt]
+          required: false
+          description: Greater-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gte]
+          required: false
+          description: Greater-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
         - name: filter[isPublic]
           required: false
           description: Equality filter for "isPublic"
@@ -81314,6 +82484,51 @@ paths:
           explode: false
           schema:
             type: integer
+        - name: filter[isDeletedDT]
+          required: false
+          description: Equality filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lt]
+          required: false
+          description: Less-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lte]
+          required: false
+          description: Less-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gt]
+          required: false
+          description: Greater-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gte]
+          required: false
+          description: Greater-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
         - name: filter[isPublic]
           required: false
           description: Equality filter for "isPublic"
@@ -81937,6 +83152,51 @@ paths:
           explode: false
           schema:
             type: integer
+        - name: filter[isDeletedDT]
+          required: false
+          description: Equality filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lt]
+          required: false
+          description: Less-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$lte]
+          required: false
+          description: Less-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gt]
+          required: false
+          description: Greater-than filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
+        - name: filter[isDeletedDT$gte]
+          required: false
+          description: Greater-than or equal filter for "isDeletedDT"
+          in: query
+          style: form
+          explode: false
+          schema:
+            type: string
+            format: date-time
         - name: filter[isPublic]
           required: false
           description: Equality filter for "isPublic"
@@ -90815,21 +92075,25 @@ components:
         - next
       properties:
         first:
-          type: string
-          description: Link to the first page
-          nullable: true
+          oneOf:
+            - type: "null"
+            - type: string
+              description: Link to the first page
         last:
-          type: string
-          description: Link to the last page
-          nullable: true
+          oneOf:
+            - type: "null"
+            - type: string
+              description: Link to the last page
         prev:
-          type: string
-          description: Link to the previous page
-          nullable: true
+          oneOf:
+            - type: "null"
+            - type: string
+              description: Link to the previous page
         next:
-          type: string
-          description: Link to the next page
-          nullable: true
+          oneOf:
+            - type: "null"
+            - type: string
+              description: Link to the next page
     _errors:
       type: array
       description: An array of error objects
@@ -90890,8 +92154,9 @@ components:
       description: A to-one relationship
       properties:
         data:
-          $ref: "#/components/schemas/_resourceIdentifier"
-          nullable: true
+          oneOf:
+            - type: "null"
+            - $ref: "#/components/schemas/_resourceIdentifier"
     _toOneRelationshipWithLinks:
       type: object
       required:
@@ -90902,8 +92167,9 @@ components:
         links:
           $ref: "#/components/schemas/_relationLinks"
         data:
-          $ref: "#/components/schemas/_resourceIdentifier"
-          nullable: true
+          oneOf:
+            - type: "null"
+            - $ref: "#/components/schemas/_resourceIdentifier"
     _toManyRelationship:
       type: object
       required:
@@ -90944,13 +92210,14 @@ components:
             $ref: "#/components/schemas/_resourceIdentifier"
     _toOneRelationshipRequest:
       description: Input for manipulating a to-one relationship
-      type: object
-      required:
-        - data
-      properties:
-        data:
-          $ref: "#/components/schemas/_resourceIdentifier"
-      nullable: true
+      oneOf:
+        - type: "null"
+        - type: object
+          required:
+            - data
+          properties:
+            data:
+              $ref: "#/components/schemas/_resourceIdentifier"
     _toManyRelationshipResponse:
       description: Response for a to-many relationship
       allOf:
@@ -91052,25 +92319,42 @@ components:
               type: string
               format: date-time
             published:
-              type: boolean
+              oneOf:
+                - type: "null"
+                - type: boolean
             isPublic:
-              type: boolean
+              oneOf:
+                - type: "null"
+                - type: boolean
             isDeleted:
-              type: integer
+              oneOf:
+                - type: "null"
+                - type: integer
             isDeletedDT:
-              type: string
-              format: date-time
+              oneOf:
+                - type: "null"
+                - type: string
+                  format: date-time
             name:
               type: string
             description:
-              type: string
-            address: {}
+              oneOf:
+                - type: "null"
+                - type: string
+            address:
+              oneOf:
+                - type: "null"
+                - {}
             emailITAdmin:
               type: string
             webSite:
-              type: string
+              oneOf:
+                - type: "null"
+                - type: string
             mainOrgId:
-              type: string
+              oneOf:
+                - type: "null"
+                - type: string
         relationships:
           type: object
           properties:
@@ -91079,7 +92363,9 @@ components:
             OrgDomains:
               $ref: "#/components/schemas/_toManyRelationshipWithLinks"
             mainOrg:
-              $ref: "#/components/schemas/_toOneRelationshipWithLinks"
+              oneOf:
+                - type: "null"
+                - $ref: "#/components/schemas/_toOneRelationshipWithLinks"
             OrgEntity:
               $ref: "#/components/schemas/_toManyRelationshipWithLinks"
             Members:
@@ -91124,25 +92410,42 @@ components:
                   type: string
                   format: date-time
                 published:
-                  type: boolean
+                  oneOf:
+                    - type: "null"
+                    - type: boolean
                 isPublic:
-                  type: boolean
+                  oneOf:
+                    - type: "null"
+                    - type: boolean
                 isDeleted:
-                  type: integer
+                  oneOf:
+                    - type: "null"
+                    - type: integer
                 isDeletedDT:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 name:
                   type: string
                 description:
-                  type: string
-                address: {}
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                address:
+                  oneOf:
+                    - type: "null"
+                    - {}
                 emailITAdmin:
                   type: string
                 webSite:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
                 mainOrgId:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
             relationships:
               type: object
               properties:
@@ -91151,7 +92454,9 @@ components:
                 OrgDomains:
                   $ref: "#/components/schemas/_toManyRelationship"
                 mainOrg:
-                  $ref: "#/components/schemas/_toOneRelationship"
+                  oneOf:
+                    - type: "null"
+                    - $ref: "#/components/schemas/_toOneRelationship"
                 OrgEntity:
                   $ref: "#/components/schemas/_toManyRelationship"
                 Members:
@@ -91198,25 +92503,42 @@ components:
                   type: string
                   format: date-time
                 published:
-                  type: boolean
+                  oneOf:
+                    - type: "null"
+                    - type: boolean
                 isPublic:
-                  type: boolean
+                  oneOf:
+                    - type: "null"
+                    - type: boolean
                 isDeleted:
-                  type: integer
+                  oneOf:
+                    - type: "null"
+                    - type: integer
                 isDeletedDT:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 name:
                   type: string
                 description:
-                  type: string
-                address: {}
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                address:
+                  oneOf:
+                    - type: "null"
+                    - {}
                 emailITAdmin:
                   type: string
                 webSite:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
                 mainOrgId:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
             relationships:
               type: object
               properties:
@@ -91225,7 +92547,9 @@ components:
                 OrgDomains:
                   $ref: "#/components/schemas/_toManyRelationship"
                 mainOrg:
-                  $ref: "#/components/schemas/_toOneRelationship"
+                  oneOf:
+                    - type: "null"
+                    - $ref: "#/components/schemas/_toOneRelationship"
                 OrgEntity:
                   $ref: "#/components/schemas/_toManyRelationship"
                 Members:
@@ -91343,19 +92667,25 @@ components:
             isDeleted:
               type: integer
             isDeletedDT:
-              type: string
-              format: date-time
+              oneOf:
+                - type: "null"
+                - type: string
+                  format: date-time
             email:
               type: string
             description:
-              type: string
+              oneOf:
+                - type: "null"
+                - type: string
             orgId:
               type: string
         relationships:
           type: object
           properties:
             org:
-              $ref: "#/components/schemas/_toOneRelationshipWithLinks"
+              oneOf:
+                - type: "null"
+                - $ref: "#/components/schemas/_toOneRelationshipWithLinks"
             OrgEmailUseTos:
               $ref: "#/components/schemas/_toManyRelationshipWithLinks"
     OrgEmailCreateRequest:
@@ -91392,19 +92722,25 @@ components:
                 isDeleted:
                   type: integer
                 isDeletedDT:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 email:
                   type: string
                 description:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
                 orgId:
                   type: string
             relationships:
               type: object
               properties:
                 org:
-                  $ref: "#/components/schemas/_toOneRelationship"
+                  oneOf:
+                    - type: "null"
+                    - $ref: "#/components/schemas/_toOneRelationship"
                 OrgEmailUseTos:
                   $ref: "#/components/schemas/_toManyRelationship"
         meta:
@@ -91443,19 +92779,25 @@ components:
                 isDeleted:
                   type: integer
                 isDeletedDT:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 email:
                   type: string
                 description:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
                 orgId:
                   type: string
             relationships:
               type: object
               properties:
                 org:
-                  $ref: "#/components/schemas/_toOneRelationship"
+                  oneOf:
+                    - type: "null"
+                    - $ref: "#/components/schemas/_toOneRelationship"
                 OrgEmailUseTos:
                   $ref: "#/components/schemas/_toManyRelationship"
         meta:
@@ -91545,8 +92887,10 @@ components:
             isDeleted:
               type: integer
             isDeletedDT:
-              type: string
-              format: date-time
+              oneOf:
+                - type: "null"
+                - type: string
+                  format: date-time
             domainName:
               type: string
             extension:
@@ -91557,7 +92901,9 @@ components:
           type: object
           properties:
             org:
-              $ref: "#/components/schemas/_toOneRelationshipWithLinks"
+              oneOf:
+                - type: "null"
+                - $ref: "#/components/schemas/_toOneRelationshipWithLinks"
     OrgDomainCreateRequest:
       type: object
       description: Input for creating a "OrgDomain"
@@ -91593,8 +92939,10 @@ components:
                 isDeleted:
                   type: integer
                 isDeletedDT:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 domainName:
                   type: string
                 extension:
@@ -91605,7 +92953,9 @@ components:
               type: object
               properties:
                 org:
-                  $ref: "#/components/schemas/_toOneRelationship"
+                  oneOf:
+                    - type: "null"
+                    - $ref: "#/components/schemas/_toOneRelationship"
         meta:
           $ref: "#/components/schemas/_meta"
     OrgDomainUpdateRequest:
@@ -91642,8 +92992,10 @@ components:
                 isDeleted:
                   type: integer
                 isDeletedDT:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 domainName:
                   type: string
                 extension:
@@ -91654,7 +93006,9 @@ components:
               type: object
               properties:
                 org:
-                  $ref: "#/components/schemas/_toOneRelationship"
+                  oneOf:
+                    - type: "null"
+                    - $ref: "#/components/schemas/_toOneRelationship"
         meta:
           $ref: "#/components/schemas/_meta"
     OrgDomainResponse:
@@ -91736,41 +93090,75 @@ components:
               type: string
               format: date-time
             published:
-              type: boolean
+              oneOf:
+                - type: "null"
+                - type: boolean
             isPublic:
-              type: boolean
+              oneOf:
+                - type: "null"
+                - type: boolean
             isDeleted:
-              type: integer
+              oneOf:
+                - type: "null"
+                - type: integer
             isDeletedDT:
-              type: string
-              format: date-time
+              oneOf:
+                - type: "null"
+                - type: string
+                  format: date-time
             email:
               type: string
             lastName:
-              type: string
+              oneOf:
+                - type: "null"
+                - type: string
             firstName:
-              type: string
+              oneOf:
+                - type: "null"
+                - type: string
             title:
-              $ref: "#/components/schemas/Title"
+              oneOf:
+                - type: "null"
+                - $ref: "#/components/schemas/Title"
             nickName:
-              type: string
+              oneOf:
+                - type: "null"
+                - type: string
             Gender:
-              $ref: "#/components/schemas/Gender"
-            social: {}
+              oneOf:
+                - type: "null"
+                - $ref: "#/components/schemas/Gender"
+            social:
+              oneOf:
+                - type: "null"
+                - {}
             Language:
-              $ref: "#/components/schemas/Language"
+              oneOf:
+                - type: "null"
+                - $ref: "#/components/schemas/Language"
             dob:
-              type: string
-              format: date-time
-            address: {}
+              oneOf:
+                - type: "null"
+                - type: string
+                  format: date-time
+            address:
+              oneOf:
+                - type: "null"
+                - {}
             isValidated:
-              type: string
-              format: date-time
+              oneOf:
+                - type: "null"
+                - type: string
+                  format: date-time
             isSuspended:
-              type: string
-              format: date-time
+              oneOf:
+                - type: "null"
+                - type: string
+                  format: date-time
             managerId:
-              type: string
+              oneOf:
+                - type: "null"
+                - type: string
             Roles:
               type: array
               items:
@@ -91782,16 +93170,22 @@ components:
             isTfaEnable:
               type: boolean
             tfaSecret:
-              type: string
+              oneOf:
+                - type: "null"
+                - type: string
             passWordFaker:
-              type: string
+              oneOf:
+                - type: "null"
+                - type: string
         relationships:
           type: object
           properties:
             Orgs:
               $ref: "#/components/schemas/_toManyRelationshipWithLinks"
             manager:
-              $ref: "#/components/schemas/_toOneRelationshipWithLinks"
+              oneOf:
+                - type: "null"
+                - $ref: "#/components/schemas/_toOneRelationshipWithLinks"
             Team:
               $ref: "#/components/schemas/_toManyRelationshipWithLinks"
             Profiles:
@@ -91821,7 +93215,9 @@ components:
             ApiKeys:
               $ref: "#/components/schemas/_toManyRelationshipWithLinks"
             userSecret:
-              $ref: "#/components/schemas/_toOneRelationshipWithLinks"
+              oneOf:
+                - type: "null"
+                - $ref: "#/components/schemas/_toOneRelationshipWithLinks"
             followers:
               $ref: "#/components/schemas/_toManyRelationshipWithLinks"
             followings:
@@ -91859,41 +93255,75 @@ components:
                   type: string
                   format: date-time
                 published:
-                  type: boolean
+                  oneOf:
+                    - type: "null"
+                    - type: boolean
                 isPublic:
-                  type: boolean
+                  oneOf:
+                    - type: "null"
+                    - type: boolean
                 isDeleted:
-                  type: integer
+                  oneOf:
+                    - type: "null"
+                    - type: integer
                 isDeletedDT:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 email:
                   type: string
                 lastName:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
                 firstName:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
                 title:
-                  $ref: "#/components/schemas/Title"
+                  oneOf:
+                    - type: "null"
+                    - $ref: "#/components/schemas/Title"
                 nickName:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
                 Gender:
-                  $ref: "#/components/schemas/Gender"
-                social: {}
+                  oneOf:
+                    - type: "null"
+                    - $ref: "#/components/schemas/Gender"
+                social:
+                  oneOf:
+                    - type: "null"
+                    - {}
                 Language:
-                  $ref: "#/components/schemas/Language"
+                  oneOf:
+                    - type: "null"
+                    - $ref: "#/components/schemas/Language"
                 dob:
-                  type: string
-                  format: date-time
-                address: {}
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
+                address:
+                  oneOf:
+                    - type: "null"
+                    - {}
                 isValidated:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 isSuspended:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 managerId:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
                 Roles:
                   type: array
                   items:
@@ -91905,16 +93335,22 @@ components:
                 isTfaEnable:
                   type: boolean
                 tfaSecret:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
                 passWordFaker:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
             relationships:
               type: object
               properties:
                 Orgs:
                   $ref: "#/components/schemas/_toManyRelationship"
                 manager:
-                  $ref: "#/components/schemas/_toOneRelationship"
+                  oneOf:
+                    - type: "null"
+                    - $ref: "#/components/schemas/_toOneRelationship"
                 Team:
                   $ref: "#/components/schemas/_toManyRelationship"
                 Profiles:
@@ -91944,7 +93380,9 @@ components:
                 ApiKeys:
                   $ref: "#/components/schemas/_toManyRelationship"
                 userSecret:
-                  $ref: "#/components/schemas/_toOneRelationship"
+                  oneOf:
+                    - type: "null"
+                    - $ref: "#/components/schemas/_toOneRelationship"
                 followers:
                   $ref: "#/components/schemas/_toManyRelationship"
                 followings:
@@ -91983,41 +93421,75 @@ components:
                   type: string
                   format: date-time
                 published:
-                  type: boolean
+                  oneOf:
+                    - type: "null"
+                    - type: boolean
                 isPublic:
-                  type: boolean
+                  oneOf:
+                    - type: "null"
+                    - type: boolean
                 isDeleted:
-                  type: integer
+                  oneOf:
+                    - type: "null"
+                    - type: integer
                 isDeletedDT:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 email:
                   type: string
                 lastName:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
                 firstName:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
                 title:
-                  $ref: "#/components/schemas/Title"
+                  oneOf:
+                    - type: "null"
+                    - $ref: "#/components/schemas/Title"
                 nickName:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
                 Gender:
-                  $ref: "#/components/schemas/Gender"
-                social: {}
+                  oneOf:
+                    - type: "null"
+                    - $ref: "#/components/schemas/Gender"
+                social:
+                  oneOf:
+                    - type: "null"
+                    - {}
                 Language:
-                  $ref: "#/components/schemas/Language"
+                  oneOf:
+                    - type: "null"
+                    - $ref: "#/components/schemas/Language"
                 dob:
-                  type: string
-                  format: date-time
-                address: {}
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
+                address:
+                  oneOf:
+                    - type: "null"
+                    - {}
                 isValidated:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 isSuspended:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 managerId:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
                 Roles:
                   type: array
                   items:
@@ -92029,16 +93501,22 @@ components:
                 isTfaEnable:
                   type: boolean
                 tfaSecret:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
                 passWordFaker:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
             relationships:
               type: object
               properties:
                 Orgs:
                   $ref: "#/components/schemas/_toManyRelationship"
                 manager:
-                  $ref: "#/components/schemas/_toOneRelationship"
+                  oneOf:
+                    - type: "null"
+                    - $ref: "#/components/schemas/_toOneRelationship"
                 Team:
                   $ref: "#/components/schemas/_toManyRelationship"
                 Profiles:
@@ -92068,7 +93546,9 @@ components:
                 ApiKeys:
                   $ref: "#/components/schemas/_toManyRelationship"
                 userSecret:
-                  $ref: "#/components/schemas/_toOneRelationship"
+                  oneOf:
+                    - type: "null"
+                    - $ref: "#/components/schemas/_toOneRelationship"
                 followers:
                   $ref: "#/components/schemas/_toManyRelationship"
                 followings:
@@ -92194,11 +93674,17 @@ components:
             userId:
               type: string
             pwdHash:
-              type: string
+              oneOf:
+                - type: "null"
+                - type: string
             salt:
-              type: string
+              oneOf:
+                - type: "null"
+                - type: string
             isAdmin:
-              type: boolean
+              oneOf:
+                - type: "null"
+                - type: boolean
         relationships:
           type: object
           properties:
@@ -92233,11 +93719,17 @@ components:
                 userId:
                   type: string
                 pwdHash:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
                 salt:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
                 isAdmin:
-                  type: boolean
+                  oneOf:
+                    - type: "null"
+                    - type: boolean
             relationships:
               type: object
               properties:
@@ -92275,11 +93767,17 @@ components:
                 userId:
                   type: string
                 pwdHash:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
                 salt:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
                 isAdmin:
-                  type: boolean
+                  oneOf:
+                    - type: "null"
+                    - type: boolean
             relationships:
               type: object
               properties:
@@ -92370,8 +93868,10 @@ components:
             isDeleted:
               type: integer
             isDeletedDT:
-              type: string
-              format: date-time
+              oneOf:
+                - type: "null"
+                - type: string
+                  format: date-time
             orderProfile:
               type: integer
             bio:
@@ -92415,8 +93915,10 @@ components:
                 isDeleted:
                   type: integer
                 isDeletedDT:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 orderProfile:
                   type: integer
                 bio:
@@ -92462,8 +93964,10 @@ components:
                 isDeleted:
                   type: integer
                 isDeletedDT:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 orderProfile:
                   type: integer
                 bio:
@@ -92558,17 +94062,23 @@ components:
             isDeleted:
               type: integer
             isDeletedDT:
-              type: string
-              format: date-time
+              oneOf:
+                - type: "null"
+                - type: string
+                  format: date-time
             orderGroup:
               type: integer
             name:
               type: string
             description:
-              type: string
+              oneOf:
+                - type: "null"
+                - type: string
             isActiv:
-              type: string
-              format: date-time
+              oneOf:
+                - type: "null"
+                - type: string
+                  format: date-time
             orgId:
               type: string
         relationships:
@@ -92621,17 +94131,23 @@ components:
                 isDeleted:
                   type: integer
                 isDeletedDT:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 orderGroup:
                   type: integer
                 name:
                   type: string
                 description:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
                 isActiv:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 orgId:
                   type: string
             relationships:
@@ -92685,17 +94201,23 @@ components:
                 isDeleted:
                   type: integer
                 isDeletedDT:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 orderGroup:
                   type: integer
                 name:
                   type: string
                 description:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
                 isActiv:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 orgId:
                   type: string
             relationships:
@@ -92807,6 +94329,11 @@ components:
               type: boolean
             isDeleted:
               type: integer
+            isDeletedDT:
+              oneOf:
+                - type: "null"
+                - type: string
+                  format: date-time
             isPublic:
               type: boolean
             ownerId:
@@ -92818,11 +94345,15 @@ components:
             title:
               type: string
             content:
-              type: string
+              oneOf:
+                - type: "null"
+                - type: string
             todoState:
               $ref: "#/components/schemas/TodoState"
             mainTodoId:
-              type: string
+              oneOf:
+                - type: "null"
+                - type: string
         relationships:
           type: object
           properties:
@@ -92833,7 +94364,9 @@ components:
             groups:
               $ref: "#/components/schemas/_toManyRelationshipWithLinks"
             mainTodo:
-              $ref: "#/components/schemas/_toOneRelationshipWithLinks"
+              oneOf:
+                - type: "null"
+                - $ref: "#/components/schemas/_toOneRelationshipWithLinks"
             SubTodos:
               $ref: "#/components/schemas/_toManyRelationshipWithLinks"
             Users:
@@ -92875,6 +94408,11 @@ components:
                   type: boolean
                 isDeleted:
                   type: integer
+                isDeletedDT:
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 isPublic:
                   type: boolean
                 ownerId:
@@ -92886,11 +94424,15 @@ components:
                 title:
                   type: string
                 content:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
                 todoState:
                   $ref: "#/components/schemas/TodoState"
                 mainTodoId:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
             relationships:
               type: object
               properties:
@@ -92901,7 +94443,9 @@ components:
                 groups:
                   $ref: "#/components/schemas/_toManyRelationship"
                 mainTodo:
-                  $ref: "#/components/schemas/_toOneRelationship"
+                  oneOf:
+                    - type: "null"
+                    - $ref: "#/components/schemas/_toOneRelationship"
                 SubTodos:
                   $ref: "#/components/schemas/_toManyRelationship"
                 Users:
@@ -92943,6 +94487,11 @@ components:
                   type: boolean
                 isDeleted:
                   type: integer
+                isDeletedDT:
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 isPublic:
                   type: boolean
                 ownerId:
@@ -92954,11 +94503,15 @@ components:
                 title:
                   type: string
                 content:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
                 todoState:
                   $ref: "#/components/schemas/TodoState"
                 mainTodoId:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
             relationships:
               type: object
               properties:
@@ -92969,7 +94522,9 @@ components:
                 groups:
                   $ref: "#/components/schemas/_toManyRelationship"
                 mainTodo:
-                  $ref: "#/components/schemas/_toOneRelationship"
+                  oneOf:
+                    - type: "null"
+                    - $ref: "#/components/schemas/_toOneRelationship"
                 SubTodos:
                   $ref: "#/components/schemas/_toManyRelationship"
                 Users:
@@ -93250,6 +94805,11 @@ components:
               type: boolean
             isDeleted:
               type: integer
+            isDeletedDT:
+              oneOf:
+                - type: "null"
+                - type: string
+                  format: date-time
             isPublic:
               type: boolean
             ownerId:
@@ -93261,13 +94821,19 @@ components:
             title:
               type: string
             content:
-              type: string
+              oneOf:
+                - type: "null"
+                - type: string
             taskState:
               $ref: "#/components/schemas/TaskState"
             mainTaskId:
-              type: string
+              oneOf:
+                - type: "null"
+                - type: string
             todoId:
-              type: string
+              oneOf:
+                - type: "null"
+                - type: string
         relationships:
           type: object
           properties:
@@ -93278,13 +94844,17 @@ components:
             groups:
               $ref: "#/components/schemas/_toManyRelationshipWithLinks"
             mainTask:
-              $ref: "#/components/schemas/_toOneRelationshipWithLinks"
+              oneOf:
+                - type: "null"
+                - $ref: "#/components/schemas/_toOneRelationshipWithLinks"
             SubTasks:
               $ref: "#/components/schemas/_toManyRelationshipWithLinks"
             Users:
               $ref: "#/components/schemas/_toManyRelationshipWithLinks"
             todo:
-              $ref: "#/components/schemas/_toOneRelationshipWithLinks"
+              oneOf:
+                - type: "null"
+                - $ref: "#/components/schemas/_toOneRelationshipWithLinks"
     TaskCreateRequest:
       type: object
       description: Input for creating a "Task"
@@ -93320,6 +94890,11 @@ components:
                   type: boolean
                 isDeleted:
                   type: integer
+                isDeletedDT:
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 isPublic:
                   type: boolean
                 ownerId:
@@ -93331,13 +94906,19 @@ components:
                 title:
                   type: string
                 content:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
                 taskState:
                   $ref: "#/components/schemas/TaskState"
                 mainTaskId:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
                 todoId:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
             relationships:
               type: object
               properties:
@@ -93348,13 +94929,17 @@ components:
                 groups:
                   $ref: "#/components/schemas/_toManyRelationship"
                 mainTask:
-                  $ref: "#/components/schemas/_toOneRelationship"
+                  oneOf:
+                    - type: "null"
+                    - $ref: "#/components/schemas/_toOneRelationship"
                 SubTasks:
                   $ref: "#/components/schemas/_toManyRelationship"
                 Users:
                   $ref: "#/components/schemas/_toManyRelationship"
                 todo:
-                  $ref: "#/components/schemas/_toOneRelationship"
+                  oneOf:
+                    - type: "null"
+                    - $ref: "#/components/schemas/_toOneRelationship"
         meta:
           $ref: "#/components/schemas/_meta"
     TaskUpdateRequest:
@@ -93390,6 +94975,11 @@ components:
                   type: boolean
                 isDeleted:
                   type: integer
+                isDeletedDT:
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 isPublic:
                   type: boolean
                 ownerId:
@@ -93401,13 +94991,19 @@ components:
                 title:
                   type: string
                 content:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
                 taskState:
                   $ref: "#/components/schemas/TaskState"
                 mainTaskId:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
                 todoId:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
             relationships:
               type: object
               properties:
@@ -93418,13 +95014,17 @@ components:
                 groups:
                   $ref: "#/components/schemas/_toManyRelationship"
                 mainTask:
-                  $ref: "#/components/schemas/_toOneRelationship"
+                  oneOf:
+                    - type: "null"
+                    - $ref: "#/components/schemas/_toOneRelationship"
                 SubTasks:
                   $ref: "#/components/schemas/_toManyRelationship"
                 Users:
                   $ref: "#/components/schemas/_toManyRelationship"
                 todo:
-                  $ref: "#/components/schemas/_toOneRelationship"
+                  oneOf:
+                    - type: "null"
+                    - $ref: "#/components/schemas/_toOneRelationship"
         meta:
           $ref: "#/components/schemas/_meta"
     TaskResponse:
@@ -93699,6 +95299,11 @@ components:
               type: boolean
             isDeleted:
               type: integer
+            isDeletedDT:
+              oneOf:
+                - type: "null"
+                - type: string
+                  format: date-time
             isPublic:
               type: boolean
             ownerId:
@@ -93706,11 +95311,15 @@ components:
             orgId:
               type: string
             orderPost:
-              type: integer
+              oneOf:
+                - type: "null"
+                - type: integer
             title:
               type: string
             content:
-              type: string
+              oneOf:
+                - type: "null"
+                - type: string
         relationships:
           type: object
           properties:
@@ -93760,6 +95369,11 @@ components:
                   type: boolean
                 isDeleted:
                   type: integer
+                isDeletedDT:
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 isPublic:
                   type: boolean
                 ownerId:
@@ -93767,11 +95381,15 @@ components:
                 orgId:
                   type: string
                 orderPost:
-                  type: integer
+                  oneOf:
+                    - type: "null"
+                    - type: integer
                 title:
                   type: string
                 content:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
             relationships:
               type: object
               properties:
@@ -93822,6 +95440,11 @@ components:
                   type: boolean
                 isDeleted:
                   type: integer
+                isDeletedDT:
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 isPublic:
                   type: boolean
                 ownerId:
@@ -93829,11 +95452,15 @@ components:
                 orgId:
                   type: string
                 orderPost:
-                  type: integer
+                  oneOf:
+                    - type: "null"
+                    - type: integer
                 title:
                   type: string
                 content:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
             relationships:
               type: object
               properties:
@@ -93940,14 +95567,22 @@ components:
               type: string
               format: date-time
             published:
-              type: boolean
+              oneOf:
+                - type: "null"
+                - type: boolean
             isPublic:
-              type: boolean
+              oneOf:
+                - type: "null"
+                - type: boolean
             isDeleted:
-              type: integer
+              oneOf:
+                - type: "null"
+                - type: integer
             isDeletedDT:
-              type: string
-              format: date-time
+              oneOf:
+                - type: "null"
+                - type: string
+                  format: date-time
             orderCategory:
               type: integer
             name:
@@ -93987,14 +95622,22 @@ components:
                   type: string
                   format: date-time
                 published:
-                  type: boolean
+                  oneOf:
+                    - type: "null"
+                    - type: boolean
                 isPublic:
-                  type: boolean
+                  oneOf:
+                    - type: "null"
+                    - type: boolean
                 isDeleted:
-                  type: integer
+                  oneOf:
+                    - type: "null"
+                    - type: integer
                 isDeletedDT:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 orderCategory:
                   type: integer
                 name:
@@ -94036,14 +95679,22 @@ components:
                   type: string
                   format: date-time
                 published:
-                  type: boolean
+                  oneOf:
+                    - type: "null"
+                    - type: boolean
                 isPublic:
-                  type: boolean
+                  oneOf:
+                    - type: "null"
+                    - type: boolean
                 isDeleted:
-                  type: integer
+                  oneOf:
+                    - type: "null"
+                    - type: integer
                 isDeletedDT:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 orderCategory:
                   type: integer
                 name:
@@ -94134,18 +95785,28 @@ components:
               type: string
               format: date-time
             published:
-              type: boolean
+              oneOf:
+                - type: "null"
+                - type: boolean
             isPublic:
-              type: boolean
+              oneOf:
+                - type: "null"
+                - type: boolean
             isDeleted:
-              type: integer
+              oneOf:
+                - type: "null"
+                - type: integer
             isDeletedDT:
-              type: string
-              format: date-time
+              oneOf:
+                - type: "null"
+                - type: string
+                  format: date-time
             orderComment:
               type: integer
             content:
-              type: string
+              oneOf:
+                - type: "null"
+                - type: string
             postId:
               type: string
             authorId:
@@ -94188,18 +95849,28 @@ components:
                   type: string
                   format: date-time
                 published:
-                  type: boolean
+                  oneOf:
+                    - type: "null"
+                    - type: boolean
                 isPublic:
-                  type: boolean
+                  oneOf:
+                    - type: "null"
+                    - type: boolean
                 isDeleted:
-                  type: integer
+                  oneOf:
+                    - type: "null"
+                    - type: integer
                 isDeletedDT:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 orderComment:
                   type: integer
                 content:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
                 postId:
                   type: string
                 authorId:
@@ -94243,18 +95914,28 @@ components:
                   type: string
                   format: date-time
                 published:
-                  type: boolean
+                  oneOf:
+                    - type: "null"
+                    - type: boolean
                 isPublic:
-                  type: boolean
+                  oneOf:
+                    - type: "null"
+                    - type: boolean
                 isDeleted:
-                  type: integer
+                  oneOf:
+                    - type: "null"
+                    - type: integer
                 isDeletedDT:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 orderComment:
                   type: integer
                 content:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
                 postId:
                   type: string
                 authorId:
@@ -94352,6 +96033,11 @@ components:
               type: boolean
             isDeleted:
               type: integer
+            isDeletedDT:
+              oneOf:
+                - type: "null"
+                - type: string
+                  format: date-time
             isPublic:
               type: boolean
             ownerId:
@@ -94363,14 +96049,22 @@ components:
             storageName:
               type: string
             type:
-              type: string
+              oneOf:
+                - type: "null"
+                - type: string
             data:
-              type: string
+              oneOf:
+                - type: "null"
+                - type: string
             size:
-              type: integer
+              oneOf:
+                - type: "null"
+                - type: integer
             isArchived:
-              type: string
-              format: date-time
+              oneOf:
+                - type: "null"
+                - type: string
+                  format: date-time
         relationships:
           type: object
           properties:
@@ -94415,6 +96109,11 @@ components:
                   type: boolean
                 isDeleted:
                   type: integer
+                isDeletedDT:
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 isPublic:
                   type: boolean
                 ownerId:
@@ -94426,14 +96125,22 @@ components:
                 storageName:
                   type: string
                 type:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
                 data:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
                 size:
-                  type: integer
+                  oneOf:
+                    - type: "null"
+                    - type: integer
                 isArchived:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
             relationships:
               type: object
               properties:
@@ -94478,6 +96185,11 @@ components:
                   type: boolean
                 isDeleted:
                   type: integer
+                isDeletedDT:
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 isPublic:
                   type: boolean
                 ownerId:
@@ -94489,14 +96201,22 @@ components:
                 storageName:
                   type: string
                 type:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
                 data:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
                 size:
-                  type: integer
+                  oneOf:
+                    - type: "null"
+                    - type: integer
                 isArchived:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
             relationships:
               type: object
               properties:
@@ -94905,14 +96625,22 @@ components:
               type: string
               format: date-time
             published:
-              type: boolean
+              oneOf:
+                - type: "null"
+                - type: boolean
             isPublic:
-              type: boolean
+              oneOf:
+                - type: "null"
+                - type: boolean
             isDeleted:
-              type: integer
+              oneOf:
+                - type: "null"
+                - type: integer
             isDeletedDT:
-              type: string
-              format: date-time
+              oneOf:
+                - type: "null"
+                - type: string
+                  format: date-time
             caption:
               type: string
             user_id:
@@ -94952,14 +96680,22 @@ components:
                   type: string
                   format: date-time
                 published:
-                  type: boolean
+                  oneOf:
+                    - type: "null"
+                    - type: boolean
                 isPublic:
-                  type: boolean
+                  oneOf:
+                    - type: "null"
+                    - type: boolean
                 isDeleted:
-                  type: integer
+                  oneOf:
+                    - type: "null"
+                    - type: integer
                 isDeletedDT:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 caption:
                   type: string
                 user_id:
@@ -95001,14 +96737,22 @@ components:
                   type: string
                   format: date-time
                 published:
-                  type: boolean
+                  oneOf:
+                    - type: "null"
+                    - type: boolean
                 isPublic:
-                  type: boolean
+                  oneOf:
+                    - type: "null"
+                    - type: boolean
                 isDeleted:
-                  type: integer
+                  oneOf:
+                    - type: "null"
+                    - type: integer
                 isDeletedDT:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 caption:
                   type: string
                 user_id:
@@ -95103,8 +96847,10 @@ components:
             isDeleted:
               type: integer
             isDeletedDT:
-              type: string
-              format: date-time
+              oneOf:
+                - type: "null"
+                - type: string
+                  format: date-time
             type:
               type: string
             url:
@@ -95149,8 +96895,10 @@ components:
                 isDeleted:
                   type: integer
                 isDeletedDT:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 type:
                   type: string
                 url:
@@ -95195,8 +96943,10 @@ components:
                 isDeleted:
                   type: integer
                 isDeletedDT:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 type:
                   type: string
                 url:
@@ -95288,8 +97038,10 @@ components:
             isDeleted:
               type: integer
             isDeletedDT:
-              type: string
-              format: date-time
+              oneOf:
+                - type: "null"
+                - type: string
+                  format: date-time
             name:
               type: string
             value:
@@ -95331,8 +97083,10 @@ components:
                 isDeleted:
                   type: integer
                 isDeletedDT:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 name:
                   type: string
                 value:
@@ -95375,8 +97129,10 @@ components:
                 isDeleted:
                   type: integer
                 isDeletedDT:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 name:
                   type: string
                 value:
@@ -95466,8 +97222,10 @@ components:
             isDeleted:
               type: integer
             isDeletedDT:
-              type: string
-              format: date-time
+              oneOf:
+                - type: "null"
+                - type: string
+                  format: date-time
             useTo:
               type: string
             isActiv:
@@ -95514,8 +97272,10 @@ components:
                 isDeleted:
                   type: integer
                 isDeletedDT:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 useTo:
                   type: string
                 isActiv:
@@ -95563,8 +97323,10 @@ components:
                 isDeleted:
                   type: integer
                 isDeletedDT:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 useTo:
                   type: string
                 isActiv:
@@ -95661,8 +97423,10 @@ components:
             isDeleted:
               type: integer
             isDeletedDT:
-              type: string
-              format: date-time
+              oneOf:
+                - type: "null"
+                - type: string
+                  format: date-time
             domain:
               type: string
             allowed:
@@ -95701,8 +97465,10 @@ components:
                 isDeleted:
                   type: integer
                 isDeletedDT:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 domain:
                   type: string
                 allowed:
@@ -95743,8 +97509,10 @@ components:
                 isDeleted:
                   type: integer
                 isDeletedDT:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 domain:
                   type: string
                 allowed:
@@ -95832,8 +97600,10 @@ components:
             isDeleted:
               type: integer
             isDeletedDT:
-              type: string
-              format: date-time
+              oneOf:
+                - type: "null"
+                - type: string
+                  format: date-time
             userId:
               type: string
             tokenId:
@@ -95872,8 +97642,10 @@ components:
                 isDeleted:
                   type: integer
                 isDeletedDT:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 userId:
                   type: string
                 tokenId:
@@ -95914,8 +97686,10 @@ components:
                 isDeleted:
                   type: integer
                 isDeletedDT:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 userId:
                   type: string
                 tokenId:
@@ -96003,8 +97777,10 @@ components:
             isDeleted:
               type: integer
             isDeletedDT:
-              type: string
-              format: date-time
+              oneOf:
+                - type: "null"
+                - type: string
+                  format: date-time
             key:
               type: string
             uuid:
@@ -96053,8 +97829,10 @@ components:
                 isDeleted:
                   type: integer
                 isDeletedDT:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 key:
                   type: string
                 uuid:
@@ -96104,8 +97882,10 @@ components:
                 isDeleted:
                   type: integer
                 isDeletedDT:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 key:
                   type: string
                 uuid:
@@ -96206,8 +97986,10 @@ components:
             isDeleted:
               type: integer
             isDeletedDT:
-              type: string
-              format: date-time
+              oneOf:
+                - type: "null"
+                - type: string
+                  format: date-time
             scope:
               type: string
         relationships:
@@ -96248,8 +98030,10 @@ components:
                 isDeleted:
                   type: integer
                 isDeletedDT:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 scope:
                   type: string
             relationships:
@@ -96293,8 +98077,10 @@ components:
                 isDeleted:
                   type: integer
                 isDeletedDT:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 scope:
                   type: string
             relationships:
@@ -96387,14 +98173,20 @@ components:
             isDeleted:
               type: integer
             isDeletedDT:
-              type: string
-              format: date-time
+              oneOf:
+                - type: "null"
+                - type: string
+                  format: date-time
             tokenId:
-              type: string
+              oneOf:
+                - type: "null"
+                - type: string
             type:
               $ref: "#/components/schemas/TokenType"
             emailToken:
-              type: string
+              oneOf:
+                - type: "null"
+                - type: string
             valid:
               type: boolean
             expiration:
@@ -96442,14 +98234,20 @@ components:
                 isDeleted:
                   type: integer
                 isDeletedDT:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 tokenId:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
                 type:
                   $ref: "#/components/schemas/TokenType"
                 emailToken:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
                 valid:
                   type: boolean
                 expiration:
@@ -96498,14 +98296,20 @@ components:
                 isDeleted:
                   type: integer
                 isDeletedDT:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 tokenId:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
                 type:
                   $ref: "#/components/schemas/TokenType"
                 emailToken:
-                  type: string
+                  oneOf:
+                    - type: "null"
+                    - type: string
                 valid:
                   type: boolean
                 expiration:
@@ -96603,8 +98407,10 @@ components:
             isDeleted:
               type: integer
             isDeletedDT:
-              type: string
-              format: date-time
+              oneOf:
+                - type: "null"
+                - type: string
+                  format: date-time
             doneAt:
               type: string
               format: date-time
@@ -96661,8 +98467,10 @@ components:
                 isDeleted:
                   type: integer
                 isDeletedDT:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 doneAt:
                   type: string
                   format: date-time
@@ -96717,8 +98525,10 @@ components:
                 isDeleted:
                   type: integer
                 isDeletedDT:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 doneAt:
                   type: string
                   format: date-time
@@ -96818,14 +98628,22 @@ components:
               type: string
               format: date-time
             published:
-              type: boolean
+              oneOf:
+                - type: "null"
+                - type: boolean
             isPublic:
-              type: boolean
+              oneOf:
+                - type: "null"
+                - type: boolean
             isDeleted:
-              type: integer
+              oneOf:
+                - type: "null"
+                - type: integer
             isDeletedDT:
-              type: string
-              format: date-time
+              oneOf:
+                - type: "null"
+                - type: string
+                  format: date-time
             isValidated:
               type: boolean
             emailToken:
@@ -96863,14 +98681,22 @@ components:
                   type: string
                   format: date-time
                 published:
-                  type: boolean
+                  oneOf:
+                    - type: "null"
+                    - type: boolean
                 isPublic:
-                  type: boolean
+                  oneOf:
+                    - type: "null"
+                    - type: boolean
                 isDeleted:
-                  type: integer
+                  oneOf:
+                    - type: "null"
+                    - type: integer
                 isDeletedDT:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 isValidated:
                   type: boolean
                 emailToken:
@@ -96910,14 +98736,22 @@ components:
                   type: string
                   format: date-time
                 published:
-                  type: boolean
+                  oneOf:
+                    - type: "null"
+                    - type: boolean
                 isPublic:
-                  type: boolean
+                  oneOf:
+                    - type: "null"
+                    - type: boolean
                 isDeleted:
-                  type: integer
+                  oneOf:
+                    - type: "null"
+                    - type: integer
                 isDeletedDT:
-                  type: string
-                  format: date-time
+                  oneOf:
+                    - type: "null"
+                    - type: string
+                      format: date-time
                 isValidated:
                   type: boolean
                 emailToken:

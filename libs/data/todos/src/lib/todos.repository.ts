@@ -2,7 +2,10 @@ import { PrismaService } from '@my-app/prisma';
 import { Injectable } from '@nestjs/common';
 import { Prisma, Todo } from '@prisma/client';
 
-// Based on: https://www.tomray.dev/nestjs-prisma#seeding-data-with-prisma-studio
+/* Based on: https://www.tomray.dev/nestjs-prisma#seeding-data-with-prisma-studio
+We use the Repository design pattern - repository is a layer to encapsulate the logic required to access the database.
+It's also called a DAL (data access layer).
+*/
 @Injectable()
 export class TodosRepository {
 
@@ -23,6 +26,7 @@ export class TodosRepository {
     include?: Prisma.TodoInclude;
     where?: Prisma.TodoWhereInput
   }): Promise<Todo[]> {
+    console.log("repository params: ", params)
     return this.prisma.todo.findMany({...params});
   }
 
@@ -33,7 +37,7 @@ export class TodosRepository {
     return this.prisma.todo.findUnique({ ...params } )
   }
 
-  async updateTodo(params: {
+  async updateTodo(params: { // and soft delete
     where: Prisma.TodoWhereUniqueInput;
     data: Prisma.TodoUpdateInput;
   }): Promise<Todo> {
@@ -41,10 +45,17 @@ export class TodosRepository {
     return this.prisma.todo.update({ where, data });
   }
 
-  async deleteTodo(params: {
+  async softDeleteTodo(params: { // and soft delete
     where: Prisma.TodoWhereUniqueInput;
   }): Promise<Todo> {
     const { where } = params;
+    const data = { isDeletedDT: new(Date) };
+    return this.prisma.todo.update({ data, where });
+  }
+
+  async deleteTodo(
+    where: Prisma.TodoWhereUniqueInput
+): Promise<Todo> {
     return this.prisma.todo.delete({ where });
   }
 

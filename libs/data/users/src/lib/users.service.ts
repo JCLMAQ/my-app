@@ -4,7 +4,6 @@ import { Prisma, Role, User, UserSecret } from '@prisma/client';
 import { UsersRepository } from './users-repository';
 
 
-
 @Injectable()
 export class UsersService {
 
@@ -19,12 +18,9 @@ export class UsersService {
   CRUD using users repository
   */
 
-
-
 /*
 Specific CRUD for User
 */
-
 
 async createUser(data: Prisma.UserCreateInput): Promise<User> {
   if(!data.Roles) { data.Roles = [Role.USER] };

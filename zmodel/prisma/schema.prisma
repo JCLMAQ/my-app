@@ -12,6 +12,12 @@ generator client {
     provider = "prisma-client-js"
 }
 
+generator crud {
+    provider = "prisma-crud-generator"
+    output = "./generated/#{model}"
+    strict = true
+}
+
 enum TaskState {
     CREATION
     STANDBY
@@ -265,6 +271,7 @@ model Todo {
     published Boolean @default(true)
     /// @omit
     isDeleted Int @default(0)
+    isDeletedDT DateTime?
     isPublic Boolean @default(false)
     owner User @relation(fields: [ownerId], references: [id], onDelete: Cascade)
     ownerId String
@@ -311,6 +318,7 @@ model Task {
     published Boolean @default(true)
     /// @omit
     isDeleted Int @default(0)
+    isDeletedDT DateTime?
     isPublic Boolean @default(false)
     owner User @relation(fields: [ownerId], references: [id], onDelete: Cascade)
     ownerId String
@@ -358,6 +366,7 @@ model Post {
     published Boolean @default(true)
     /// @omit
     isDeleted Int @default(0)
+    isDeletedDT DateTime?
     isPublic Boolean @default(false)
     owner User @relation(fields: [ownerId], references: [id], onDelete: Cascade)
     ownerId String
@@ -424,6 +433,7 @@ model File {
     published Boolean @default(true)
     /// @omit
     isDeleted Int @default(0)
+    isDeletedDT DateTime?
     isPublic Boolean @default(false)
     owner User @relation(fields: [ownerId], references: [id], onDelete: Cascade)
     ownerId String

@@ -8,7 +8,7 @@ abstract model organizationBaseEntity {
     updatedAt DateTime @default(now()) @updatedAt()
     published Boolean @default(true)
     isDeleted Int @default(0) @omit
-
+    isDeletedDT DateTime?
     isPublic Boolean @default(false)
 
     owner User @relation(fields: [ownerId], references: [id], onDelete: Cascade)
