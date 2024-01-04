@@ -12,22 +12,24 @@ export class TodosService {
     private repository: TodosRepository
   ) {}
 
-  // async getAllTodos(): Promise<Todo[]> {
-  //   const todosReturn = await this.prisma.todo.findMany()
-  //   console.log(todosReturn)
-  //   return todosReturn
-  // }
+  async createOneTodoBis(
+    data: Prisma.TodoCreateInput )
+  {
+    return await this.repository.createOneTodoBis(data)
+  }
 
-  async createTodo(params: {
+  async createOneTodo(params: {
     content: Todo[`content`];
     comment: UserTodoLink[`comment`];
     title: Todo[`title`];
     userId: UserTodoLink[`userId`];
-    orgId: Todo[`orgId`]}) {
-    const { title , content, comment, userId, orgId } = params;
+    orgId: Todo[`orgId`]
+    mainTodoId: string | null
+  }) {
+    const { title , content, comment, userId, orgId, mainTodoId } = params;
 
     // call repository layer
-    const todo = await this.repository.createTodo({
+    const todo = await this.repository.createOneTodo({
       data: {
         title,
         content,
@@ -40,6 +42,11 @@ export class TodosService {
           }
         },
         orderTodo: 0,
+        mainTodo: {
+          connect: {
+            id: mainTodoId
+          }
+        },
         owner: {
           connect: {
             id: userId
@@ -72,13 +79,19 @@ export class TodosService {
     }
 
   async getOneTodo(params: {
-    withTasks?: string,
+    withSubTodos: string,
+    withTasks: string,
     todoId: Todo[`id`]
-  }) {
-    const {withTasks, todoId} = params
-    let withTasksboolean = true
-    if(withTasks === 'false') { withTasksboolean = false}
-    return await this.repository.getOneTodo({ include: { Tasks: withTasksboolean }, where: { id: todoId}})
+  }): Promise<Todo | null> {
+    const {withTasks, withSubTodos, todoId} = params
+    // let withTasksboolean = true
+    // if(withTasks === 'false') { withTasksboolean = false}
+    return await this.repository.getOneTodo({
+      include: {
+        Tasks: JSON.parse(withTasks),
+        SubTodos: JSON.parse(withSubTodos)
+      },
+      where: { id: todoId}})
   }
 
   async updateTodo( params: {

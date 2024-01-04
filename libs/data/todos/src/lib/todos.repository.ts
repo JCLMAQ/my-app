@@ -13,8 +13,12 @@ export class TodosRepository {
     private prisma: PrismaService,
   ) {}
 
-  async createTodo(params: { data: Prisma.TodoCreateInput }): Promise<Todo> {
+  async createOneTodo(params: { data: Prisma.TodoCreateInput }): Promise<Todo> {
     const { data } = params;
+    return this.prisma.todo.create({ data });
+  }
+
+  async createOneTodoBis(data: Prisma.TodoCreateInput ): Promise<Todo> {
     return this.prisma.todo.create({ data });
   }
 
@@ -33,7 +37,7 @@ export class TodosRepository {
   async getOneTodo(params: {
     include?:Prisma.TodoInclude;
     where: Prisma.TodoWhereUniqueInput
-  }): Promise<Todo | null> {
+  }): Promise<Todo | null > {
     return this.prisma.todo.findUnique({ ...params } )
   }
 
@@ -42,14 +46,17 @@ export class TodosRepository {
     data: Prisma.TodoUpdateInput;
   }): Promise<Todo> {
     const { where, data } = params;
-    return this.prisma.todo.update({ where, data });
+      return this.prisma.todo.update({ where, data });
   }
 
   async softDeleteTodo(params: { // and soft delete
     where: Prisma.TodoWhereUniqueInput;
   }): Promise<Todo> {
     const { where } = params;
-    const data = { isDeletedDT: new(Date) };
+    const data = {
+      isDeletedDT: new(Date),
+      isDeleted: Number(1)
+    };
     return this.prisma.todo.update({ data, where });
   }
 

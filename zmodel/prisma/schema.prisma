@@ -282,7 +282,7 @@ model Todo {
     title String
     content String?
     todoState TodoState @default(CREATION)
-    mainTodo Todo? @relation("MainSubTodo", fields: [mainTodoId], references: [id])
+    mainTodo Todo? @relation("MainSubTodo", fields: [mainTodoId], references: [id], onDelete: SetNull, onUpdate: Cascade)
     mainTodoId String? @map("mainTodo")
     SubTodos Todo[] @relation("MainSubTodo")
     Users UserTodoLink[]
@@ -290,9 +290,9 @@ model Todo {
 }
 
 model UserTodoLink {
-    user User @relation(fields: [userId], references: [id])
+    user User @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
     userId String
-    todo Todo @relation(fields: [todoId], references: [id])
+    todo Todo @relation(fields: [todoId], references: [id], onUpdate: Cascade, onDelete: Cascade)
     todoId String
     isAuthor Boolean @default(true)
     isAssigned Boolean @default(true)
@@ -333,7 +333,7 @@ model Task {
     mainTaskId String? @map("mainTask")
     SubTasks Task[] @relation("MainSubTask")
     Users UserTaskLink[]
-    todo Todo? @relation(fields: [todoId], references: [id], onDelete: Cascade)
+    todo Todo? @relation(fields: [todoId], references: [id], onUpdate: Cascade, onDelete: Cascade)
     todoId String?
 }
 

@@ -15,10 +15,18 @@ export class TodosController {
       orgId?: string;
       ownerId?: string;
       withTasks: string;
-    }): Promise<Todo[]>{
-      console.log("Data: ", data)
-      const todos: Todo[] = await this.todosService.getTodos( data )
-      return todos
+    }): Promise<Todo[]| unknown>{
+      try {
+        const todos: Todo[] = await this.todosService.getTodos( data )
+        return todos
+      }
+      catch (error) {
+        return {
+            answer: "bad news...",
+            success: false,
+            message: `${error}`
+        }
+      }
     }
 
     @Public()
@@ -26,29 +34,65 @@ export class TodosController {
     @Get('todo')
     async getOneTodo(@Body() data:  {
       todoId: string
-      withTasks?: string;
-    }): Promise<Todo | null>{
-      const todo = this.todosService.getOneTodo( data )
-      return todo
+      withTasks: string;
+      withSubTodos: string
+    }): Promise<Todo | unknown>{
+      try {
+        return await this.todosService.getOneTodo( data )
+      } catch (error) {
+        return {
+            answer: "bad news...",
+            success: false,
+            message: `${error}`
+        }
+      }
+    }
+
+
+
+    @Auth(AuthType.None)
+    @Post(`createtodobis`)
+    async createOneTodoBis(@Body() data: Prisma.TodoCreateInput ): Promise<Todo | unknown> {
+      try {
+        return await this.todosService.createOneTodoBis(
+          data
+        );
+      } catch (error) {
+        return {
+          answer: "bad news...",
+          success: false,
+          message: `${error}`
+        }
+      }
     }
 
     @Auth(AuthType.None)
     @Post(`createtodo`)
-    async createTodo(@Body() data: {
+    async createOneTodo(@Body() data: {
       title: string;
       content: string;
       comment: string;
       userId: string;
       orgId: string;
+      mainTodoId: string;
     }) {
-      const { title , content, comment, userId, orgId} = data;
-      return this.todosService.createTodo({
-        comment,
-        content,
-        title,
-        userId,
-        orgId
-      });
+      const { title , content, comment, userId, orgId, mainTodoId} = data;
+      try {
+        return await this.todosService.createOneTodo({
+          comment,
+          content,
+          title,
+          userId,
+          orgId,
+          mainTodoId
+        });
+      } catch (error) {
+        return {
+          answer: "bad news...",
+          success: false,
+          message: `${error}`
+        }
+      }
     }
 
     @Public()
@@ -56,11 +100,20 @@ export class TodosController {
     @Put('updatetodo/:id')
     async updateTodo(
       @Param('id') id: string,
-      @Body() data: Prisma.TodoUpdateInput): Promise<Todo | null>{
-      return this.todosService.updateTodo({
-        where: { id: String(id) },
-        data:  data ,
-        } )
+      @Body() data: Prisma.TodoUpdateInput): Promise<Todo | unknown>{
+        try {
+          return await this.todosService.updateTodo({
+            where: { id: String(id) },
+            data:  data ,
+            } )
+        } catch (error) {
+          return {
+            answer: "bad news...",
+            success: false,
+            message: `${error}`
+          }
+        }
+
     }
 
     @Public()
@@ -68,9 +121,17 @@ export class TodosController {
     @Delete('deletetodo/:id')
     async deleteTodo(
       @Param('id') id: string,
-      ): Promise<Todo | null>{
-        console.log("delete")
-      return this.todosService.deleteTodo({ id: String(id) } )
+      ): Promise<Todo | unknown>{
+        try {
+          return await this.todosService.deleteTodo({ id: String(id) } )
+        } catch (error) {
+          return {
+            answer: "bad news...",
+            success: false,
+            message: `${error}`
+          }
+        }
+
     }
 
     // For tests
