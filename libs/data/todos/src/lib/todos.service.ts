@@ -12,75 +12,43 @@ export class TodosService {
     private repository: TodosRepository
   ) {}
 
-  async createOneTodo(params: {
+   async createOneTodo(params: {
     content: Todo[`content`];
     comment: UserTodoLink[`comment`];
     title: Todo[`title`];
     userId: UserTodoLink[`userId`];
     orgId: Todo[`orgId`]
     mainTodoId: string | null
-  }) {
-    const { title , content, comment, userId, orgId, mainTodoId } = params;
-    console.log(params)
-    let data: Prisma.TodoCreateInput;
-    if (mainTodoId !== "") {
-      data = {
-        title,
-        content,
-        Users: {
-          create: {
-            userId: userId,
-            isAuthor: true,
-            isAssigned: true,
-            comment
+    }) {
+        const { title , content, comment, userId, orgId, mainTodoId } = params;
+        let data: Prisma.TodoCreateInput = {
+          title,
+          content,
+          Users: {
+            create: {
+              userId: userId,
+              isAuthor: true,
+              isAssigned: true,
+              comment
+            }
+          },
+          orderTodo: 0,
+          owner: {
+            connect: {
+              id: userId
+            }
+          },
+          org: {
+            connect: {
+              id: orgId
+            }
           }
-        },
-        orderTodo: 0,
-        owner: {
-          connect: {
-            id: userId
-          }
-        },
-        org: {
-          connect: {
-            id: orgId
-          }
-        },
-        mainTodo: {
-          connect: {
-            id: mainTodoId
-          }
-        }
-      };
-      const todo = await this.repository.createOneTodo({ data: data});
+        };
+      if (mainTodoId !== "") {
+        data = { ...data, mainTodo: { connect: { id: mainTodoId } } }
+      }
+      const todo = await this.repository.createOneTodo({ data: data });
       return todo;
-    } else {
-      data = {
-        title,
-        content,
-        Users: {
-          create: {
-            userId: userId,
-            isAuthor: true,
-            isAssigned: true,
-            comment
-          }
-        },
-        orderTodo: 0,
-        owner: {
-          connect: {
-            id: userId
-          }
-        },
-        org: {
-          connect: {
-            id: orgId
-          }
-        }
-      };
-      const todo = await this.repository.createOneTodo({ data: data});
-      return todo;
-    }
   }
 
   async getTodos(params: {
