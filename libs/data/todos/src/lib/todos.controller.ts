@@ -15,6 +15,7 @@ export class TodosController {
       orgId?: string;
       ownerId?: string;
       withTasks: string;
+      withUsers: string;
     }): Promise<Todo[]| unknown>{
       try {
         const todos: Todo[] = await this.todosService.getTodos( data )
@@ -35,7 +36,8 @@ export class TodosController {
     async getOneTodo(@Body() data:  {
       todoId: string
       withTasks: string;
-      withSubTodos: string
+      withSubTodos: string;
+      withUsers: string;
     }): Promise<Todo | unknown>{
       try {
         return await this.todosService.getOneTodo( data )

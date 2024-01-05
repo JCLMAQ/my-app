@@ -58,27 +58,37 @@ export class TodosService {
       orderBy?: Prisma.TodoOrderByWithRelationInput,
       orgId?: Todo[`orgId`],
       ownerId?: Todo[`ownerId`],
-      withTasks: string
+      withTasks: string;
+      withUsers: string;
     })
     {
-      const { ownerId, orgId, withTasks} = params
-      let withTasksboolean = true
+      const { ownerId, orgId, withTasks, withUsers} = params
+      let withTasksboolean = true;
+      let withUsersboolean = true
       if(withTasks === 'false') { withTasksboolean = false}
-      return await this.repository.getTodos( { include: { Tasks: withTasksboolean}, where: { ownerId, orgId }});
+      if(withUsers === 'false') { withUsersboolean = false}
+      return await this.repository.getTodos( {
+        include: {
+          Tasks: withTasksboolean,
+          Users: withUsersboolean
+        },
+        where: { ownerId, orgId }});
     }
 
   async getOneTodo(params: {
     withSubTodos: string,
     withTasks: string,
-    todoId: Todo[`id`]
+    withUsers: string,
+    todoId: Todo[`id`],
   }): Promise<Todo | null> {
-    const {withTasks, withSubTodos, todoId} = params
+    const {withTasks, withSubTodos, withUsers, todoId} = params
     // let withTasksboolean = true
     // if(withTasks === 'false') { withTasksboolean = false}
     return await this.repository.getOneTodo({
       include: {
         Tasks: JSON.parse(withTasks),
-        SubTodos: JSON.parse(withSubTodos)
+        SubTodos: JSON.parse(withSubTodos),
+        Users: JSON.parse(withUsers)
       },
       where: { id: todoId}})
   }

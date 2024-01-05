@@ -2,6 +2,7 @@ import { PrismaModule } from '@my-app/prisma';
 import { Global, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TasksController } from './tasks.controller';
+import { TasksRepository } from './tasks.repository';
 import { TasksService } from './tasks.service';
 
 @Global()
@@ -11,7 +12,9 @@ import { TasksService } from './tasks.service';
     ConfigModule
   ],
   controllers: [TasksController],
-  providers: [TasksService],
+  providers: [
+    TasksRepository,
+    TasksService],
   exports: [TasksService],
 })
 export class TasksModule {}
