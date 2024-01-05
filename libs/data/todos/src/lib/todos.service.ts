@@ -12,12 +12,6 @@ export class TodosService {
     private repository: TodosRepository
   ) {}
 
-  async createOneTodoBis(
-    data: Prisma.TodoCreateInput )
-  {
-    return await this.repository.createOneTodoBis(data)
-  }
-
   async createOneTodo(params: {
     content: Todo[`content`];
     comment: UserTodoLink[`comment`];
@@ -27,10 +21,10 @@ export class TodosService {
     mainTodoId: string | null
   }) {
     const { title , content, comment, userId, orgId, mainTodoId } = params;
-
-    // call repository layer
-    const todo = await this.repository.createOneTodo({
-      data: {
+    console.log(params)
+    let data: Prisma.TodoCreateInput;
+    if (mainTodoId !== "") {
+      data = {
         title,
         content,
         Users: {
@@ -42,11 +36,37 @@ export class TodosService {
           }
         },
         orderTodo: 0,
+        owner: {
+          connect: {
+            id: userId
+          }
+        },
+        org: {
+          connect: {
+            id: orgId
+          }
+        },
         mainTodo: {
           connect: {
             id: mainTodoId
           }
+        }
+      };
+      const todo = await this.repository.createOneTodo({ data: data});
+      return todo;
+    } else {
+      data = {
+        title,
+        content,
+        Users: {
+          create: {
+            userId: userId,
+            isAuthor: true,
+            isAssigned: true,
+            comment
+          }
         },
+        orderTodo: 0,
         owner: {
           connect: {
             id: userId
@@ -57,9 +77,10 @@ export class TodosService {
             id: orgId
           }
         }
-      },
-    });
-    return todo;
+      };
+      const todo = await this.repository.createOneTodo({ data: data});
+      return todo;
+    }
   }
 
   async getTodos(params: {

@@ -48,24 +48,6 @@ export class TodosController {
       }
     }
 
-
-
-    @Auth(AuthType.None)
-    @Post(`createtodobis`)
-    async createOneTodoBis(@Body() data: Prisma.TodoCreateInput ): Promise<Todo | unknown> {
-      try {
-        return await this.todosService.createOneTodoBis(
-          data
-        );
-      } catch (error) {
-        return {
-          answer: "bad news...",
-          success: false,
-          message: `${error}`
-        }
-      }
-    }
-
     @Auth(AuthType.None)
     @Post(`createtodo`)
     async createOneTodo(@Body() data: {

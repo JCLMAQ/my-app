@@ -18,10 +18,6 @@ export class TodosRepository {
     return this.prisma.todo.create({ data });
   }
 
-  async createOneTodoBis(data: Prisma.TodoCreateInput ): Promise<Todo> {
-    return this.prisma.todo.create({ data });
-  }
-
   async getTodos(params: {
     skip?: number;
     take?: number;
