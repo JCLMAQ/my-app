@@ -127,7 +127,7 @@ export class TasksController {
 
   @Public()
   @Auth(AuthType.None)
-  @Get('taskswithtasks')
+  @Get('taskswithsubtasks')
   async getAllTasksWithTasks(): Promise<Task[]>{
     return await this.tasksService.getAllTasksWithTasks()
   }
