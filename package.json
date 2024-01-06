@@ -23,6 +23,7 @@
     "dep-graph": "nx dep-graph",
     "help": "nx help",
     "zenstack:generate": "zenstack generate --schema zmodel/schema.zmodel",
+    "zenStack:repl": "npx zenstack repl",
     "zenstack:info": "zenstack info",
     "zenstack:init": "npx zenstack init -p pnpm",
     "start:prisma": "pnpm run prisma:generate && pnpm run prisma-migrate",
