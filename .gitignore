@@ -77,3 +77,6 @@ proxy.conf.json
 pnpm-lock.yaml
 
 .nx/cache
+
+# ZenStack
+.zenstack_repl_history

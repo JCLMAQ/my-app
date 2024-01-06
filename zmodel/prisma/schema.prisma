@@ -329,7 +329,7 @@ model Task {
     title String
     content String?
     taskState TaskState @default(CREATION)
-    mainTask Task? @relation("MainSubTask", fields: [mainTaskId], references: [id])
+    mainTask Task? @relation("MainSubTask", fields: [mainTaskId], references: [id], onDelete: SetNull, onUpdate: Cascade)
     mainTaskId String? @map("mainTask")
     SubTasks Task[] @relation("MainSubTask")
     Users UserTaskLink[]
