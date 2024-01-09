@@ -1,6 +1,6 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { OverlayContainer } from '@angular/cdk/overlay';
-import { Component, HostBinding, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, HostBinding, Inject, Injector, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSidenav } from '@angular/material/sidenav';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterLink, RouterOutlet } from '@angular/router';
@@ -22,6 +22,13 @@ import { StyleManager } from './style-manager.service';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
+
+export let AppInjector: Injector;
+export function setAppInject(injector: Injector) {
+  AppInjector = injector;
+}
+
+
 @Component({
     selector: 'my-app-root',
     templateUrl: './app.component.html',
@@ -69,6 +76,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
 
   constructor(
+    private injector: Injector,
     private router: Router,
     private styleManager: StyleManager,
     private dialog: MatDialog,
@@ -78,6 +86,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private i18nService: I18nService,
     @Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver
   ) {
+    setAppInject(this.injector);
     translateService.setDefaultLang(this.defaultLang);
     // translateService.use('en');
     translateService.addLangs(['en','fr']);

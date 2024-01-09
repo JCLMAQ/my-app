@@ -6,6 +6,6 @@ export * from './lib/simpledialog/simpledialog.component';
 export * from './lib/themeswitch/themeswitch.component';
 export * from './lib/themeswitch/themeswitch.service';
 // export * from './lib/validators/date-range.validator';
-
+export * from './lib/decorators/index';
 
 
