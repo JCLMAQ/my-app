@@ -6,7 +6,10 @@ import { MATERIAL } from '@fe/material';
 @Component({
   selector: 'confirmation-dialog',
   standalone: true,
-  imports: [CommonModule, MATERIAL],
+  imports: [
+    CommonModule,
+    ...MATERIAL
+  ],
   templateUrl: './confirmation-dialog.component.html',
   styleUrl: './confirmation-dialog.component.scss',
 })
