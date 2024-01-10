@@ -2,13 +2,13 @@
 // import { throwToolbarMixedModesError } from '@angular/material/toolbar';
 
 export class NavigableDS {
-  index = 0;
-  hasNext = false;
-  hasPrevious = false;
+  index: number = 0;
+  hasNext: boolean = false;
+  hasPrevious: boolean = false;
 
   constructor(
     private collection: any,
-    initialIndex = 0,
+    initialIndex: number = 0,
   ) {
     this.index = initialIndex;
     this.refresh();

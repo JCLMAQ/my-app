@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MATERIAL } from '../../../../../material/src/index';
+import { MATERIAL } from '@fe/material';
 
 @Component({
   selector: 'confirmation-dialog',

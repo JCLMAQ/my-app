@@ -51,7 +51,6 @@ export class AppComponent implements OnInit, OnDestroy {
     );
 
 
-
   title = 'my-app MonoRepo';
   loading : boolean = true;
   defaultLang = 'en'; // default
@@ -63,7 +62,7 @@ export class AppComponent implements OnInit, OnDestroy {
   isCollapsed = true;
 
   // Light-Dark theme switch variables
-  isDark: boolean = true;
+  isDark: boolean = false;
   theme: string = "ligt-theme";
 
 // Dark theme management

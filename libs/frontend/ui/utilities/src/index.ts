@@ -8,5 +8,6 @@ export * from './lib/themeswitch/themeswitch.component';
 export * from './lib/themeswitch/themeswitch.service';
 // export * from './lib/validators/date-range.validator';
 export * from './lib/decorators/index';
+export * from './lib/validators/customs.validator';
 
 
