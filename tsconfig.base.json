@@ -40,7 +40,9 @@
       "@fe/utilities": ["libs/frontend/ui/utilities/src/index.ts"],
       "@my-app/api-interfaces": ["zmodel/libs/api-interfaces/src/index.ts"],
       "@my-app/data/auths": ["libs/data/auths/src/index.ts"],
-      "@my-app/data/changestracking": ["libs/data/utilities/changestracking/src/index.ts"],
+      "@my-app/data/changestracking": [
+        "libs/data/utilities/changestracking/src/index.ts"
+      ],
       "@my-app/data/common": ["libs/data/common/src/index.ts"],
       "@my-app/data/db-config": ["libs/data/utilities/db-config/src/index.ts"],
       "@my-app/data/files": ["libs/data/utilities/files/src/index.ts"],
