@@ -3,7 +3,6 @@ import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/cor
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-// import * as MATERIAL from
 import { MATERIAL } from '@fe/material';
 import { Store, select } from '@ngrx/store';
 import { map } from 'rxjs';
@@ -30,12 +29,9 @@ import { createPasswordStrengthValidator } from '../validators/password-strength
 })
 export class UserProfileComponent implements OnInit {
 
-
   private errorMsg?: string;
 
   public user: UserInterface | undefined | null;
-
-
 
   form!: FormGroup;
   userId!: string;

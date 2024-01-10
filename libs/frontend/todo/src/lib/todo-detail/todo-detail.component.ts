@@ -31,7 +31,7 @@ export class TodoDetailComponent implements OnInit{
   form!: FormGroup;
   todoId!: string;
   isAddMode!: boolean;
-  // isAdmin!: boolean; // Needed to be sure that the user has an Id
+  isAdmin!: boolean; // Needed to be sure that the user has an Id
   loading = false;
   submitted = false;
   hidePassword = true;
@@ -54,4 +54,64 @@ export class TodoDetailComponent implements OnInit{
 
   }
 
+  reload(id: string | undefined) {
+
+    if (this.mode == 'update' || 'view') {
+    //   this.form.patchValue({...data.course})
+      this.form.patchValue({
+
+      });
+    } else if (this.mode == 'create' || this.isAddMode ) {
+      this.form = this.fb.group({
+          ...this.formControls,
+
+      });
+    }
+  }
+
+  save() {
+    const val = this.form.value;
+    if (this.mode == 'update') {
+        // this.usersService.updateUser(user.id, user);
+    } else if (this.mode == 'create') {
+
+        // this.usersService.createUser(user, {isOptimistic: false})
+
+
+    }
+    this.router.navigate(['users']);
+}
+
+  add() {}
+
+  create() {}
+
+  cancel() {}
+
+  remove() {}
+
+  reset() {}
+
+  virtualRemove() {}
+
+  next() {}
+
+  last() {}
+
+  first() {}
+
+  previous() {}
+
+  onReset() {
+    this.submitted = false;
+    this.form.reset();
+  }
+
+  backHome() {
+    this.router.navigate(['home']);
+  }
+
+  cancelRegister() {
+    this.router.navigate(['home'])
+  }
 }
