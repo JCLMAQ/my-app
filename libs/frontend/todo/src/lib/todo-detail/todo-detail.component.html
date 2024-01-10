@@ -2,20 +2,13 @@
   <mat-card class="user-card mat-elevation-z10">
     <mat-card-header>
       <mat-card-title>Todo</mat-card-title>
-      <mat-card-subtitle>User Id : {{todo?.id}}</mat-card-subtitle>
+      <mat-card-subtitle>Todo Id : {{todo?.id}}</mat-card-subtitle>
     </mat-card-header>
       <mat-card-content>
-        <mat-form-field  floatLabel="auto">
-          <mat-label>Standard form field</mat-label>
-          <input matInput placeholder="Placeholder">
-          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-          <mat-hint align="end">Hint</mat-hint>
-        </mat-form-field>
-        <br>
         <mat-form-field  >
-          <mat-label>Your email</mat-label>
-          <input matInput placeholder="Your email" formControlName="email" type="email" name="email">
-            <mat-icon matSuffix>email</mat-icon>
+          <mat-label>Title</mat-label>
+          <input matInput placeholder="Title" formControlName="title">
+            <mat-icon matSuffix>title</mat-icon>
             <mat-hint>Hint</mat-hint>
             <!-- @if (formField.email.errors?.emailExists) {
               <mat-error>
@@ -26,50 +19,22 @@
               } -->
         </mat-form-field>
         <mat-form-field >
-          <mat-label>Your NickName</mat-label>
-          <input matInput placeholder="Your NickName" formControlName="nickName">
-            <mat-hint>Hint</mat-hint>
-            <!-- @if (formField.nickName.errors?.required) {
-              <mat-error>The nickName is mandatory.</mat-error>
-              }
-            @if (formField.nickName.errors?.nickNameExists) {
-              <mat-error>This nickName is already being used.</mat-error>
-              }
-            @if (formField.nickName.errors?.minlength) {
-              <mat-error>
-                          Your NickName must have minimum {{formField.nickName.errors?.minlength.requiredLength}} chars,
-                          but it only has {{formField.nickName.errors?.minlength.actualLength}}.
-              </mat-error>
-              }
-            @if (formField.nickName.errors?.maxlength) {
-              <mat-error>
-                Your NickName must have maximum {{formField.nickName.errors?.maxlength.requiredLength}} chars,
-                but it has {{formField.nickName.errors?.maxlength.actualLength}}.
-              </mat-error>
-          } -->
-        </mat-form-field>
-         <br>
-        <mat-form-field >
-          <mat-label><Title></Title></mat-label>
-          <input matInput placeholder="Title fo the Todo" formControlName="title">
-            <!-- <mat-icon matSuffix>email</mat-icon> -->
-            <mat-hint>Hint</mat-hint>
-        </mat-form-field>
-         <mat-form-field >
           <mat-label>Content</mat-label>
-          <input matInput placeholder="Your First Name" formControlName="firstName">
+          <textarea matInput placeholder="Todo content" formControlName="content"></textarea>
             <mat-hint>Hint</mat-hint>
         </mat-form-field>
+
         <mat-form-field>
-          <mat-label>Date of Birth</mat-label>
-          <input matInput [matDatepicker]="dobDatePicker"
-                  formControlName="dob"
-                  placeholder="Date of birth">
-          <mat-datepicker-toggle matSuffix [for]="dobDatePicker"></mat-datepicker-toggle>
-          <mat-datepicker #dobDatePicker></mat-datepicker>
-      </mat-form-field>
+          <mat-label>Select</mat-label>
+          <mat-select>
+            <mat-option value="one">First option</mat-option>
+            <mat-option value="two">Second option</mat-option>
+          </mat-select>
+        </mat-form-field>
+
     </mat-card-content>
-    <mat-card-actions class="user-actions">
+
+    <mat-card-actions class="todo-actions">
       @if (isAdmin) {
         <button mat-icon-button matTooltip="Permanent Delete" [disabled]="!isAdmin" (click)="remove()">
           <mat-icon>delete_forever </mat-icon>
@@ -105,7 +70,7 @@
       <button mat-icon-button placeholder="Reload" matTooltip="Reset" (click)="reload(form.value.id)">
         <mat-icon>autorenew</mat-icon>
       </button>
-      <button mat-icon-button matTooltip="Back to list" [routerLink]="['/users']">
+      <button mat-icon-button matTooltip="Back to list" [routerLink]="['/todos']">
         <mat-icon>exit_to_app</mat-icon>
       </button>
       <!-- <button (click)="onSubmit()" mat-raised-button color="primary">Save</button> -->
@@ -114,5 +79,4 @@
       {{form.value | json}}
     </mat-card-footer>
   </mat-card>
-  </div>
-
+</div>

@@ -1,11 +1,21 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MATERIAL } from '@fe/material';
 import { TodoInterface } from '../store/todo.model';
 import { TodoStore } from '../store/todo.state';
+
+interface TodoForm
+  extends FormGroup<{
+    id: FormControl<string>;
+    title: FormControl<string>;
+    content: FormControl<string>;
+    todoState: FormControl<string>;
+    orderTodo: FormControl<number>;
+  }> {}
+
 
 @Component({
   selector: 'lib-todo-detail',
@@ -22,13 +32,16 @@ import { TodoStore } from '../store/todo.state';
   styleUrl: './todo-detail.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
+
+
 export class TodoDetailComponent implements OnInit{
 
   readonly todoStore = inject(TodoStore);
 
   public todo: TodoInterface | undefined | null;
 
-  form!: FormGroup;
+  form!: TodoForm;
+
   todoId!: string;
   isAddMode!: boolean;
   isAdmin!: boolean; // Needed to be sure that the user has an Id
@@ -62,10 +75,10 @@ export class TodoDetailComponent implements OnInit{
 
       });
     } else if (this.mode == 'create' || this.isAddMode ) {
-      this.form = this.fb.group({
-          ...this.formControls,
+      // this.form = this.fb.group({
+      //     ...this.formControls,
 
-      });
+      // });
     }
   }
 
@@ -79,7 +92,7 @@ export class TodoDetailComponent implements OnInit{
 
 
     }
-    this.router.navigate(['users']);
+    this.router.navigate(['todos']);
 }
 
   add() {}
@@ -109,9 +122,5 @@ export class TodoDetailComponent implements OnInit{
 
   backHome() {
     this.router.navigate(['home']);
-  }
-
-  cancelRegister() {
-    this.router.navigate(['home'])
   }
 }
