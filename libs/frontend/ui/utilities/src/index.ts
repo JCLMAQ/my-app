@@ -1,3 +1,4 @@
+export * from './lib/confirmation-dialog/confirmation-dialog.component';
 export * from './lib/geolocation/geolocation.component';
 export * from './lib/geolocation/geolocation.service';
 export * from './lib/lib.routes';

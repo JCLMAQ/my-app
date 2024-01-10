@@ -13,7 +13,7 @@ import { HttpClient } from '@angular/common/http';
 import { I18nService } from '@fe/i18n';
 import { LanguageSelectorComponent } from '@fe/language-selector';
 import { MATERIAL } from '@fe/material';
-import { GeolocationComponent } from '@fe/utilities';
+import { GeolocationComponent, setAppInject } from '@fe/utilities';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { map, shareReplay } from 'rxjs';
 import { environment } from '../environments/environment';
@@ -23,10 +23,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 
-export let AppInjector: Injector;
-export function setAppInject(injector: Injector) {
-  AppInjector = injector;
-}
+
 
 
 @Component({

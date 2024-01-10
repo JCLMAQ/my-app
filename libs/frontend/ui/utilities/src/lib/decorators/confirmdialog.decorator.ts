@@ -1,4 +1,6 @@
 // From: https://medium.com/@ddmytro787/practical-angular-decorators-2d516be1feb8
+// and https://blog.stackademic.com/confirmation-logic-using-decorator-and-material-dialog-angular-34e75458a5dd
+
 
 
 // export let AppInjector: Injector;
@@ -16,7 +18,10 @@ export class AppComponent {
   }
 }
 */
-
+import { MatDialog } from '@angular/material/dialog';
+import { filter, tap } from 'rxjs';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+import { AppInjector } from './app-injector';
 
 // 1. Define the function to be used as a decorator
 // NOTE: In this case, it is a factory decorator because we want to
@@ -30,7 +35,8 @@ export function Confirm(message: string) {
     // argument in the function as an identifier and replacing the string
     // for this
     descriptor.value = function (...args: any[]) {
-      AppInjector.get(MatDialog)?.open(ConfirmDialogComponent, {
+      AppInjector.get(MatDialog)
+        .open(ConfirmationDialogComponent, {
           minWidth: '400px',
           data: message.replace('{{id}}', `"${args[0]?.toString()}"`),
         })

@@ -1,6 +1,7 @@
-export * from './complete'
-export * from './confirmdialog'
-export * from './unsubscribe'
-export * from './validatefield'
-export * from './validateform'
+export * from './app-injector'
+export * from './complete.decorator'
+export * from './confirmdialog.decorator'
+export * from './unsubscribe.decorator'
+export * from './validatefield.decorator'
+export * from './validateform.decorator'
 

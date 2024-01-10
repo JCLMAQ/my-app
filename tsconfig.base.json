@@ -15,6 +15,29 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@fe/auth": ["libs/frontend/ui/auth/src/index.ts"],
+      "@fe/auth/data-access": ["libs/frontend/auth/data-access/src/index.ts"],
+      "@fe/auth/feature-auth": ["libs/frontend/auth/feature-auth/src/index.ts"],
+      "@fe/core/api-types": ["libs/frontend/ui/core/api-types/src/index.ts"],
+      "@fe/core/error-handler": [
+        "libs/frontend/ui/core/error-handler/src/index.ts"
+      ],
+      "@fe/core/forms": ["libs/frontend/ui/core/forms/src/index.ts"],
+      "@fe/core/http-client": [
+        "libs/frontend/ui/core/http-client/src/index.ts"
+      ],
+      "@fe/i18n": ["libs/frontend/ui/i18n/src/index.ts"],
+      "@fe/language-selector": ["libs/frontend/ui/i18n/src/index.ts"],
+      "@fe/material": ["libs/frontend/material/src/index.ts"],
+      "@fe/pages": ["libs/frontend/ui/pages/src/index.ts"],
+      "@fe/shared/undo-redo": ["libs/frontend/shared/undo-redo.feature.ts"],
+      "@fe/shared/util-common": ["libs/frontend/shared/util-common/index.ts"],
+      "@fe/shared/util-logger": ["libs/frontend/shared/util-logger/index.ts"],
+      "@fe/task": ["libs/frontend/task/src/index.ts"],
+      "@fe/todo": ["libs/frontend/todo/src/index.ts"],
+      "@fe/ui/auth": ["libs/frontend/ui/auth/src/index.ts"],
+      "@fe/user": ["libs/frontend/user/src/index.ts"],
+      "@fe/utilities": ["libs/frontend/ui/utilities/src/index.ts"],
       "@my-app/api-interfaces": ["zmodel/libs/api-interfaces/src/index.ts"],
       "@my-app/data/auths": ["libs/data/auths/src/index.ts"],
       "@my-app/data/changestracking": [
@@ -30,26 +53,7 @@
       "@my-app/data/time-util": ["libs/data/utilities/time-util/src/index.ts"],
       "@my-app/data/todos": ["libs/data/todos/src/index.ts"],
       "@my-app/data/users": ["libs/data/users/src/index.ts"],
-      "@my-app/prisma": ["libs/prisma/src/index.ts"],
-      "@fe/ui/auth": ["libs/frontend/ui/auth/src/index.ts"],
-      "@fe/i18n": ["libs/frontend/ui/i18n/src/index.ts"],
-      "@fe/language-selector": ["libs/frontend/ui/i18n/src/index.ts"],
-      "@fe/material": ["libs/frontend/material/src/index.ts"],
-      "@fe/pages": ["libs/frontend/ui/pages/src/index.ts"],
-      "@fe/task": ["libs/frontend/task/src/index.ts"],
-      "@fe/todo": ["libs/frontend/todo/src/index.ts"],
-      "@fe/user": ["libs/frontend/user/src/index.ts"],
-      "@fe/auth": ["libs/frontend/ui/auth/src/index.ts"],
-      "@fe/auth/feature-auth": ["libs/frontend/auth/feature-auth/src/index.ts"],
-      "@fe/auth/data-access": ["libs/frontend/auth/data-access/src/index.ts"] ,
-      "@fe/utilities": ["libs/frontend/ui/utilities/src/index.ts"],
-      "@fe/core/api-types": ["libs/frontend/ui/core/api-types/src/index.ts"],
-      "@fe/core/error-handler": ["libs/frontend/ui/core/error-handler/src/index.ts"],
-      "@fe/core/forms": ["libs/frontend/ui/core/forms/src/index.ts"],
-      "@fe/core/http-client": ["libs/frontend/ui/core/http-client/src/index.ts"],
-      "@fe/shared/util-common": ["libs/frontend/shared/util-common/index.ts"],
-      "@fe/shared/util-logger": ["libs/frontend/shared/util-logger/index.ts"],
-      "@fe/shared/undo-redo": ["libs/frontend/shared/undo-redo.feature.ts"],
+      "@my-app/prisma": ["libs/prisma/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
