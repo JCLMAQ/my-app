@@ -7,6 +7,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { MATERIAL } from '@fe/material';
+import { getState } from '@ngrx/signals';
 import { TodoInterface } from '../store/todo.model';
 import { TodoStore } from '../store/todo.state';
 // import { CallState } from '@fe/shared/util-common';
@@ -48,6 +49,7 @@ export class TodoComponent implements OnInit, AfterViewInit{
 
 
   index: number | undefined
+
   routeToDetail = "todos/tododetail";
 
   mode: 'Edit' | 'View' | 'Update' | undefined ;
@@ -63,6 +65,8 @@ constructor() {
     this.todoStore.loaded();
     console.log("Loaded Statute: ", this.todoStore.loaded())
     this.fetchData();
+    const state = getState(this.todoStore);
+    console.log('Todo state changed', state);
   })
 }
 
@@ -130,6 +134,7 @@ onNavigate() {
 // navigate(id: String, index: String) {
 //   this.router.navigate([this.routeToDetail, id, 'view']);
 // }
+
 navigate( todo: TodoInterface ) {
   this.router.navigate([this.routeToDetail, todo, 'view']);
 }

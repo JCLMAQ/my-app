@@ -2,10 +2,10 @@ import { Route } from '@angular/router';
 import { PageNotFoundComponent } from '@fe/pages';
 
 export const appRoutes: Route[] = [
-  {
-    path: 'todo',
-    loadChildren: () => import('@fe/todo').then((m) => m.todoRoutes),
-  },
+  // {
+  //   path: 'todo',
+  //   loadChildren: () => import('@fe/todo').then((m) => m.todoRoutes),
+  // },
   {
     path: 'tasks',
     loadChildren: () => import('@fe/task').then((m) => m.taskRoutes),
@@ -13,6 +13,10 @@ export const appRoutes: Route[] = [
   {
     path: 'todos',
     loadChildren: () => import('@fe/todo').then((m) => m.todoRoutes),
+  },
+  {
+    path: 'posts',
+    loadChildren: () => import('@fe/post').then((m) => m.postRoutes),
   },
   {
     path: 'users',

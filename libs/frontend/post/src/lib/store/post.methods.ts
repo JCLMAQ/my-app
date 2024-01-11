@@ -10,25 +10,25 @@ import {
 import { setAllEntities, withEntities } from '@ngrx/signals/entities';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap } from 'rxjs';
-import { TodoService } from '../services/todo.service';
-import { TodoInterface } from './todo.model';
-import { TodoStateInterface } from './todo.state';
+import { PostService } from '../services/post.service';
+import { PostInterface } from './post.model';
+import { PostStateInterface } from './post.state';
 
 // withCallState base on: https://www.angulararchitects.io/blog/the-new-ngrx-signal-store-for-angular-2-1-flavors/
 
-export function withTodosMethods() {
+export function withPostsMethods() {
   return signalStoreFeature(
-    { state: type<TodoStateInterface>() },
+    { state: type<PostStateInterface>() },
     withCallState(),
-    // withEntities<TodoInterface>(),
-    withEntities({ entity: type<TodoInterface>(), collection: 'todo'}),
-    withMethods((store, todoService = inject(TodoService)) => ({
-      // Load Todo with rxjs
-      loadAllTodos: rxMethod<void>(
+    // withEntities<PostInterface>(),
+    withEntities({ entity: type<PostInterface>(), collection: 'post'}),
+    withMethods((store, postService = inject(PostService)) => ({
+      // Load Post with rxjs
+      loadAllPosts: rxMethod<void>(
         pipe(
           switchMap(() => {
             patchState(store, setLoading());
-            return todoService.getItems().pipe(
+            return postService.getItems().pipe(
               tapResponse({
                 next: (items: any) => patchState(store, { items }),
                 error: console.error,
@@ -38,21 +38,21 @@ export function withTodosMethods() {
           })
         )
       ),
-      // Load Todo by Promise
-      async loadAllTodosByPromise() {
+      // Load Post by Promise
+      async loadAllPostsByPromise() {
         patchState(store, setLoading());
-        const items = await todoService.getItemsAsPromise();
+        const items = await postService.getItemsAsPromise();
         console.log("Items just fetched : ", items)
         patchState(store, { items },setLoaded());
         console.log("Items Loaded in the store: ", store)
-        patchState(store, setAllEntities(items, { collection: 'todo'}))
+        patchState(store, setAllEntities(items, { collection: 'post'}))
       },
-      // Add todo (rxjs)
-      addTodo: rxMethod<string>(
+      // Add post (rxjs)
+      addPost: rxMethod<string>(
         pipe(
           switchMap((value) => {
             patchState(store, setLoading( ));
-            return todoService.addItem(value).pipe(
+            return postService.addItem(value).pipe(
               tapResponse({
                 next: (item) =>
                   patchState(store, { items: [...store.items(), item] }),
@@ -63,15 +63,15 @@ export function withTodosMethods() {
           })
         )
       ),
-      deleteTodo: rxMethod<TodoInterface>(
+      deletePost: rxMethod<PostInterface>(
         pipe(
-          switchMap((todo) => {
+          switchMap((post) => {
             patchState(store, setLoading());
-            return todoService.deleteItem(todo).pipe(
+            return postService.deleteItem(post).pipe(
               tapResponse({
                 next: () => {
                   patchState(store, {
-                    items: [...store.items().filter((x) => x.id !== todo.id)],
+                    items: [...store.items().filter((x) => x.id !== post.id)],
                   });
                 },
                 error: console.error,
@@ -82,21 +82,21 @@ export function withTodosMethods() {
         )
       ),
 
-      // Example: Todo state to "done"
-      // moveToDone: rxMethod<TodoInterface>(
+      // Example: Post state to "done"
+      // moveToDone: rxMethod<PostInterface>(
       //   pipe(
-      //     switchMap((todo) => {
+      //     switchMap((post) => {
       //       patchState(store, { isLoading: true, loaded: false});
 
-      //       const toSend = { ...todo, todoState: 'DONE' };
+      //       const toSend = { ...post, postState: 'DONE' };
 
-      //       return todoService.updateItem(toSend).pipe(
+      //       return postService.updateItem(toSend).pipe(
       //         tapResponse({
-      //           next: (updatedTodo) => {
+      //           next: (updatedPost) => {
       //             const allItems = [...store.items()];
-      //             const index = allItems.findIndex((x) => x.id === todo.id);
+      //             const index = allItems.findIndex((x) => x.id === post.id);
 
-      //             allItems[index] = updatedTodo;
+      //             allItems[index] = updatedPost;
 
       //             patchState(store, {
       //               items: allItems,

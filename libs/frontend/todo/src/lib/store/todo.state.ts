@@ -1,5 +1,5 @@
-import { withUndoRedo } from '@fe/shared/undo-redo';
-import { withCallState, withDataService } from '@fe/shared/util-common';
+
+import { withCallState, withDataService, withLogger, withUndoRedo } from '@fe/shared/util-signal-store';
 import { signalStore, type, withHooks, withState } from '@ngrx/signals';
 import { withEntities } from '@ngrx/signals/entities';
 import { TodoService } from '../services/todo.service';
@@ -18,13 +18,17 @@ export const initialTodoState: TodoStateInterface = {
 
 // Base on: https://offering.solutions/blog/articles/2023/12/03/ngrx-signal-store-getting-started/
 // and also on: https://www.angulararchitects.io/blog/the-new-ngrx-signal-store-for-angular-2-1-flavors/
+// and : https://www.angulararchitects.io/blog/smarter-not-harder-simplifying-your-application-with-ngrx-signal-store-and-custom-features/
+
 
 export const TodoStore = signalStore(
     { providedIn: 'root' },
 
     withCallState({collection: 'todo'}),
     withEntities( {entity: type<TodoInterface>(), collection: 'todo'}),
-    // withEntities<TodoInterface>(),
+  //  withSelectedEntity(),
+    withLogger('todo'),
+
     withState(initialTodoState),
     withTodosMethods(),
     withTodosSelectors(),
@@ -47,6 +51,7 @@ export const TodoStore = signalStore(
         console.log('on destroy');
       },
     }),
+
   );
 
 

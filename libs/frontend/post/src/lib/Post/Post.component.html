@@ -1,0 +1,25 @@
+<p>Post works!</p>
+
+@if (postStore.loading()) {
+  <h2>Loading...</h2>
+      <mat-progress-bar
+          mode="indeterminate"
+          class="loader"
+        >
+      </mat-progress-bar>
+      }
+
+@if (postStore.loaded()) {
+  <h2>Loaded...</h2>
+  }
+
+@if (postStore.error()) {
+  <div>{{ postStore.error }}</div>
+}
+
+@for (item of postStore.items(); track item.title) {
+  <li> {{ item.title }} </li>
+  <!-- <li> {{ item.content }} </li> -->
+} @empty {
+  <li> There are no items. </li>
+}

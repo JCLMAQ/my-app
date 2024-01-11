@@ -2,7 +2,7 @@ import { Signal, effect, isSignal, signal, untracked } from "@angular/core";
 import { SignalStoreFeature, patchState, signalStoreFeature, withComputed, withHooks, withMethods } from "@ngrx/signals";
 import { EntityId, EntityMap, EntityState } from "@ngrx/signals/entities";
 import { EntitySignals, NamedEntitySignals } from "@ngrx/signals/entities/src/models";
-import { Entity, capitalize } from "./util-common";
+import { Entity, capitalize } from ".";
 
 export type StackItem = Record<string, unknown>;
 

@@ -1,5 +1,5 @@
 import { CreateSignalOptions, WritableSignal, signal } from '@angular/core';
-import { equal } from './immutable-equal';
+import { equal } from '../util-common/immutable-equal';
 
 export function patchSignal<T>(
   signal: WritableSignal<T>,

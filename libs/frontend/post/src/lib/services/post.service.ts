@@ -1,10 +1,10 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-// import { Todo } from '@prisma/client';
+// import { Post } from '@prisma/client';
 
 import { DataService } from '@fe/shared/util-signal-store';
 import { Observable, catchError, firstValueFrom, lastValueFrom, throwError } from 'rxjs';
-import { TodoInterface } from '../store/todo.model';
+import { PostInterface } from '../store/post.model';
 
 const httpOptions = {
 	headers: new HttpHeaders({
@@ -13,7 +13,7 @@ const httpOptions = {
 	})
 };
 
-export type TodoFilter = {
+export type PostFilter = {
   userId: string;
   companyId: string;
 }
@@ -23,33 +23,34 @@ export type TodoFilter = {
 @Injectable({
   providedIn: 'root',
 })
-export class TodoService implements DataService<TodoInterface, TodoFilter> {
+export class PostService implements DataService<PostInterface, PostFilter> {
   // private readonly http = inject(HttpClient);
 
   private apiUrl = `api/`;
-  private baseUrl = `${this.apiUrl}todos`;
+  // private baseUrl = `${this.apiUrl}posts`; //postswithrelated
+  private baseUrl = `${this.apiUrl}postswithrelated`;
 
   constructor(
     private readonly http: HttpClient)
     { }
 
-  load(filter: TodoFilter): Promise<TodoInterface[]> {
+  load(filter: PostFilter): Promise<PostInterface[]> {
     return this.findAsPromise(filter.userId, filter.companyId);
   }
 
-  private findAsPromise(userId: string, companyId: string): Promise<TodoInterface[]> {
+  private findAsPromise(userId: string, companyId: string): Promise<PostInterface[]> {
     return firstValueFrom(this.find(userId, companyId));
   }
 
   private find(
     userId: string,
     companyId: string,
-  ): Observable<TodoInterface[]> {
-    const url = [this.baseUrl, 'todo'].join('/');
+  ): Observable<PostInterface[]> {
+    const url = [this.baseUrl, 'post'].join('/');
 
     const params = new HttpParams().set('userId', userId).set('companyId', companyId);
     const headers = new HttpHeaders().set('Accept', 'application/json');
-    return this.http.get<TodoInterface[]>(url, { params, headers });
+    return this.http.get<PostInterface[]>(url, { params, headers });
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -67,13 +68,13 @@ export class TodoService implements DataService<TodoInterface, TodoFilter> {
     return throwError(() => new Error('Something bad happened; please try again later.'));
   }
 
-  getItemsAsPromise(): Promise<TodoInterface[]>{
+  getItemsAsPromise(): Promise<PostInterface[]>{
     return lastValueFrom(this.getItems());
   }
 
-  getItems(): Observable<TodoInterface[]> {
+  getItems(): Observable<PostInterface[]> {
     return this.http
-      .get<TodoInterface[]>(this.baseUrl, httpOptions)
+      .get<PostInterface[]>(this.baseUrl, httpOptions)
       .pipe(
         catchError(this.handleError));;
   }
@@ -81,18 +82,18 @@ export class TodoService implements DataService<TodoInterface, TodoFilter> {
 
 
   getItem(id: string) {
-    return this.http.get<TodoInterface>(`${this.baseUrl}/${id}`);
+    return this.http.get<PostInterface>(`${this.baseUrl}/${id}`);
   }
 
   addItem(value: string) {
-    return this.http.post<TodoInterface>(this.baseUrl, { value });
+    return this.http.post<PostInterface>(this.baseUrl, { value });
   }
 
-  updateItem(value: TodoInterface) {
-    return this.http.put<TodoInterface>(`${this.baseUrl}/${value?.id}`, value);
+  updateItem(value: PostInterface) {
+    return this.http.put<PostInterface>(`${this.baseUrl}/${value?.id}`, value);
   }
 
-  deleteItem(value: TodoInterface ) {
+  deleteItem(value: PostInterface ) {
     return this.http.delete(`${this.baseUrl}/${value?.id}`);
   }
 }
