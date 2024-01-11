@@ -19,7 +19,9 @@
 
 @for (item of postStore.items(); track item.title) {
   <li> {{ item.title }} </li>
-  <!-- <li> {{ item.content }} </li> -->
+  <!-- @for (cat of postStore.categories(); track cat.name) {
+  <li> {{ cat.name }} </li>
+  } -->
 } @empty {
   <li> There are no items. </li>
 }

@@ -53,7 +53,7 @@ export class PostComponent implements OnInit {
 
   fetchData(): void {
     this.postsItems = this.postStore.postEntities();
-    console.log("Todos - nginit: ",this.postsItems)
+    console.log("Posts - nginit: ",this.postsItems)
     console.log('postEntities: ', this.postStore.postEntities())
   }
 
