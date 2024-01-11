@@ -127,8 +127,8 @@ constructor(private postsService: PostsService) {}
   @Public()
   @Auth(AuthType.None)
   @Get('postswithrelated')
-  async getAllPostsWithPosts(): Promise<Posts[]>{
-    return await this.postsService.getAllPostsWithPosts()
+  async getAllPostsWithRelated(): Promise<Posts[]>{
+    return await this.postsService.getAllPostsWithRelated()
   }
 
 }

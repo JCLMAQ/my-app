@@ -48,6 +48,7 @@ export class PostService implements DataService<PostInterface, PostFilter> {
   ): Observable<PostInterface[]> {
     const url = [this.baseUrl, 'post'].join('/');
 
+
     const params = new HttpParams().set('userId', userId).set('companyId', companyId);
     const headers = new HttpHeaders().set('Accept', 'application/json');
     return this.http.get<PostInterface[]>(url, { params, headers });

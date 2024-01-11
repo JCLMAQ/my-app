@@ -64,7 +64,7 @@ export class PostsRepository {
     return this.prisma.post.findMany()
   }
 
-  async getAllPostsWithPosts(): Promise<Post[]> {
+  async getAllPostsWithRelated(): Promise<Post[]> {
     return this.prisma.post.findMany({
       include: {
         Categories: true,

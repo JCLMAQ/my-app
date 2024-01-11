@@ -19,7 +19,7 @@ export class PostsService {
     orgId: Post[`orgId`]
     }) {
         const { title , content, userId, orgId } = params;
-        let data: Prisma.PostCreateInput = {
+        const data: Prisma.PostCreateInput = {
           title,
           content,
           orderPost: 0,
@@ -108,9 +108,13 @@ export class PostsService {
     return await this.repository.getAllPosts();
   }
 
-async getAllPostsWithPosts(): Promise<Post[]>{
-    return await this.repository.getAllPostsWithPosts();
+// async getAllPostsWithRelated(){
+//     return await this.repository.getAllPostsWithRelated();
+//   }
+  async getAllPostsWithRelated(): Promise<Post[]>{
+    return await this.repository.getAllPostsWithRelated();
   }
+
 
 }
 
