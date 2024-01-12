@@ -14,10 +14,19 @@
   }
 
 @if (postStore.error()) {
-  <div>{{ postStore.error }}</div>
+  <div>{{ postStore.error() }}</div>
 }
 
 @for (item of postStore.items(); track item.title) {
+  <li> {{ item.title }} </li>
+  <!-- @for (cat of postStore.categories(); track cat.name) {
+  <li> {{ cat.name }} </li>
+  } -->
+} @empty {
+  <li> There are no items. </li>
+}
+
+@for (item of postsItems; track item.title) {
   <li> {{ item.title }} </li>
   <!-- @for (cat of postStore.categories(); track cat.name) {
   <li> {{ cat.name }} </li>

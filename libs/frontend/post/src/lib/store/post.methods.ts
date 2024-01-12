@@ -30,7 +30,7 @@ export function withPostsMethods() {
             patchState(store, setLoading());
             return postService.getItems().pipe(
               tapResponse({
-                next: (items: any) => patchState(store, { items }),
+                next: (items: PostInterface[] ) => patchState(store, { items }),
                 error: console.error,
                 finalize: () => patchState(store, setLoaded()),
               })
