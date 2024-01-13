@@ -105,7 +105,7 @@ constructor(private postsService: PostsService) {}
     @Param('id') id: string,
     ): Promise<Posts | unknown>{
       try {
-        return await this.postsService.deletePost({ id: String(id) } )
+        return await this.postsService.deletePost( {postId: String(id) } )
       } catch (error) {
         return {
           answer: "bad news...",

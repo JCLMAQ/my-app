@@ -17,8 +17,20 @@
   <div>{{ postStore.error() }}</div>
 }
 
+<form [formGroup]="addForm">
+  <input type="text" placeholder="Add Title..." formControlName="title" />
+  <input type="text" placeholder="Add Content..." formControlName="content" />
+</form>
+
+<button mat-icon-button matTooltip="Save changes" (click)="addPost()">
+  <mat-icon>check_circle</mat-icon>
+</button>
+      <!-- <button (click)="onSubmit()" mat-raised-button color="primary">Save</button> -->
+
+<div>Total: {{ postStore.postsCount() }}</div>
+
 @for (item of postStore.items(); track item.title) {
-  <li> {{ item.title }} </li>
+  <li> {{ item.title }} <span (click) = (postStore.deletePostByPromise(item)) >X</span></li>
   <!-- @for (cat of postStore.categories(); track cat.name) {
   <li> {{ cat.name }} </li>
   } -->
@@ -26,11 +38,11 @@
   <li> There are no items. </li>
 }
 
-@for (item of postsItems; track item.title) {
+<!-- @for (item of postsItems; track item.title) {
   <li> {{ item.title }} </li>
   <!-- @for (cat of postStore.categories(); track cat.name) {
   <li> {{ cat.name }} </li>
-  } -->
+  }
 } @empty {
   <li> There are no items. </li>
-}
+} -->

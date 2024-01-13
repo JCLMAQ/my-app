@@ -11,6 +11,7 @@ export class PostsRepository {
 
   async createOnePost(params: { data: Prisma.PostCreateInput }): Promise<Post> {
     const { data } = params;
+    console.log("PostRepository params: ", params)
     return this.prisma.post.create({ data });
   }
 
@@ -22,7 +23,7 @@ export class PostsRepository {
     include?: Prisma.PostInclude;
     where?: Prisma.PostWhereInput
   }): Promise<Post[]> {
-    console.log("repository params: ", params)
+    console.log("get posts repository params: ", params)
     return this.prisma.post.findMany({...params});
   }
 
@@ -38,6 +39,7 @@ export class PostsRepository {
     data: Prisma.PostUpdateInput;
   }): Promise<Post> {
     const { where, data } = params;
+    console.log("update Post - repository: ", params)
       return this.prisma.post.update({ where, data });
   }
 
@@ -52,9 +54,12 @@ export class PostsRepository {
     return this.prisma.post.update({ data, where });
   }
 
-  async deletePost(
-    where: Prisma.PostWhereUniqueInput
+  async deletePost(params: { // and soft delete
+    where: Prisma.PostWhereUniqueInput;
+  }
 ): Promise<Post> {
+  console.log("Delete a Post - repository: " , params)
+  const { where } = params;
     return this.prisma.post.delete({ where });
   }
 

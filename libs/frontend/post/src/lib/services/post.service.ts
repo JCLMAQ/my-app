@@ -28,7 +28,7 @@ export class PostService implements DataService<PostInterface, PostFilter> {
 
   private apiUrl = `api/`;
   // private baseUrl = `${this.apiUrl}posts`; //postswithrelated
-  private baseUrl = `${this.apiUrl}postswithrelated`;
+  private baseUrl = `${this.apiUrl}`;
 
   constructor(
     private readonly http: HttpClient)
@@ -75,7 +75,7 @@ export class PostService implements DataService<PostInterface, PostFilter> {
 
   getItems(): Observable<PostInterface[]> {
     return this.http
-      .get<PostInterface[]>(this.baseUrl, httpOptions)
+      .get<PostInterface[]>(`${this.baseUrl}/postswithrelated`, httpOptions)
       .pipe(
         catchError(this.handleError));;
   }
@@ -86,8 +86,25 @@ export class PostService implements DataService<PostInterface, PostFilter> {
     return this.http.get<PostInterface>(`${this.baseUrl}/${id}`);
   }
 
-  addItem(value: string) {
-    return this.http.post<PostInterface>(this.baseUrl, { value });
+  addItem(values: {
+    content: string;
+    title: string;
+    userId: string;
+    orgId: string
+    }) {
+      const result = this.http.post<PostInterface>(`${this.baseUrl}/createPost`, values );
+    return result
+  }
+
+  addItemAsPromise(values: {
+    content: string;
+    title: string;
+    userId: string;
+    orgId: string
+    }){
+    const itemCreated = lastValueFrom(this.http.post<PostInterface>(`${this.baseUrl}/createPost`, values ));
+    // const itemCreated = lastValueFrom(this.addItem(values));
+    return itemCreated
   }
 
   updateItem(value: PostInterface) {
@@ -95,6 +112,10 @@ export class PostService implements DataService<PostInterface, PostFilter> {
   }
 
   deleteItem(value: PostInterface ) {
-    return this.http.delete(`${this.baseUrl}/${value?.id}`);
+    return this.http.delete(`${this.baseUrl}/deletepost/${value?.id}`);
+  }
+
+  deleteItemAsPromise(value: PostInterface ) {
+    return lastValueFrom(this.deleteItem(value))
   }
 }

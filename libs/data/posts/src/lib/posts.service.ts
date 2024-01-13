@@ -35,6 +35,7 @@ export class PostsService {
           }
         };
       const post = await this.repository.createOnePost({ data: data });
+      console.log("Create a Post - service: ", post)
       return post;
   }
 
@@ -87,6 +88,7 @@ export class PostsService {
   }): Promise<Post>
   {
     const {where, data} = params;
+    console.log("update Post Service: ", params)
     return await this.repository.updatePost({where, data});
   }
 
@@ -98,8 +100,10 @@ export class PostsService {
     return await this.repository.softDeletePost({where: { id: postId}});
   }
 
-  async deletePost(where: Prisma.PostWhereUniqueInput) {
-    return await this.repository.deletePost(where)
+  async deletePost(params: { postId: Post[`id`],}) {
+    console.log("Delete a Post - service: " , params)
+    const { postId } = params;
+    return await this.repository.deletePost({where: { id: postId}})
   }
 
 
@@ -108,33 +112,10 @@ export class PostsService {
     return await this.repository.getAllPosts();
   }
 
-// async getAllPostsWithRelated(){
-//     return await this.repository.getAllPostsWithRelated();
-//   }
   async getAllPostsWithRelated(): Promise<Post[]>{
     return await this.repository.getAllPostsWithRelated();
   }
 
 
 }
-
-  // create(createPostDto: CreatePostDto) {
-  //   return 'This action adds a new post';
-  // }
-
-  // findAll() {
-  //   return `This action returns all posts`;
-  // }
-
-  // findOne(id: number) {
-  //   return `This action returns a #${id} post`;
-  // }
-
-  // update(id: number, updatePostDto: UpdatePostDto) {
-  //   return `This action updates a #${id} post`;
-  // }
-
-  // remove(id: number) {
-  //   return `This action removes a #${id} post`;
-  // }
 

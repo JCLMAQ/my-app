@@ -38,7 +38,7 @@ export function withPostsMethods() {
           })
         )
       ),
-      // Load Post by Promise
+      // Load Posts by Promise
       async loadAllPostsByPromise() {
         patchState(store, setLoading());
         const items = await postService.getItemsAsPromise();
@@ -47,8 +47,17 @@ export function withPostsMethods() {
         console.log("Items Loaded in the store: ", store)
         patchState(store, setAllEntities(items, { collection: 'post'}))
       },
+      // Delete Post by Promise
+      async deletePostByPromise(postToDelete: PostInterface) {
+        patchState(store, setLoading());
+        await postService.deleteItemAsPromise(postToDelete);
+        patchState(store, {
+          items: [...store.items().filter((x) => x.id !== postToDelete.id)],
+        });
+        patchState(store, setLoaded());
+      },
       // Add post (rxjs)
-      addPost: rxMethod<string>(
+      addPost: rxMethod(
         pipe(
           switchMap((value) => {
             patchState(store, setLoading( ));
@@ -63,6 +72,14 @@ export function withPostsMethods() {
           })
         )
       ),
+      async addPostByPromise(value) {
+        console.log("AddPost value: ", value)
+        patchState(store, setLoading( ));
+        const createdItem = await postService.addItemAsPromise(value);
+        console.log("Post created: ",createdItem);
+        patchState(store, { items: [...store.items(), createdItem] })
+        patchState(store, setLoaded())
+      },
       deletePost: rxMethod<PostInterface>(
         pipe(
           switchMap((post) => {

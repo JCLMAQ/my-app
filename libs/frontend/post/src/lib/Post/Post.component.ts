@@ -1,6 +1,7 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit, effect, inject } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MATERIAL } from '@fe/material';
 import { getState } from '@ngrx/signals';
@@ -13,6 +14,7 @@ import { PostStore } from '../store/post.state';
   standalone: true,
   imports: [
     CommonModule,
+    ReactiveFormsModule,
   ...MATERIAL
   ],
   templateUrl: './Post.component.html',
@@ -34,7 +36,11 @@ export class PostComponent implements OnInit {
 
   postsItems!: PostInterface[];
 
-  // this.postStore.
+  fb = inject(FormBuilder);
+  addForm = this.fb.nonNullable.group({
+    title: '',
+    content: ''
+  });
 
   constructor() {
     console.log("Constructor step")
@@ -57,6 +63,19 @@ export class PostComponent implements OnInit {
     console.log('postEntities: ', this.postStore.postEntities())
   }
 
-
+  addPost(): void {
+    const val = this.addForm.value;
+    console.log("Addform value: ", val)
+    const postToAdd=  {
+      title: this.addForm.getRawValue().title,
+      content: this.addForm.getRawValue().content,
+      userId:  "7c672043-24e4-45a9-909c-693ba5044785" ,
+      orgId: "b64d3148-b2b2-4d7d-8c3e-cde4673f9665",
+      orderPost: 0
+    }
+    console.log("Post Values to add: ", postToAdd)
+    this.postStore.addPostByPromise(postToAdd );
+    this.addForm.reset();
+  }
 
 }
