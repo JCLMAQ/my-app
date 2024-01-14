@@ -25,7 +25,7 @@ export const PostStore = signalStore(
   withPostsMethods(),
   withLogger('post'),
   withHooks({
-    onInit: (store) => store.loadAllPostsByPromise(),
+    onInit: (store) => store.loadAllPosts(),
     onDestroy() {
       console.log('on destroy');
     },

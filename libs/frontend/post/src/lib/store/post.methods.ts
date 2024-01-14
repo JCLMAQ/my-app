@@ -7,7 +7,7 @@ import {
   type,
   withMethods,
 } from '@ngrx/signals';
-import { setAllEntities, withEntities } from '@ngrx/signals/entities';
+import { removeEntity, setAllEntities, updateEntity, withEntities } from '@ngrx/signals/entities';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap } from 'rxjs';
 import { PostService } from '../services/post.service';
@@ -20,15 +20,73 @@ export function withPostsMethods() {
   return signalStoreFeature(
     { state: type<PostStateInterface>() },
     withCallState(),
-    // withEntities<PostInterface>(),
     withEntities({ entity: type<PostInterface>(), collection: 'post'}),
     withMethods((store, postService = inject(PostService)) => ({
+      // async load() {
+      //   const posts = await postService.findAll();
+      //   patchState(store, setAllEntities(posts));
+      // },
+
+      // async add(data: PostPartialInterface) {
+      //   const post = await postService.add(data);
+      //   patchState(store, addEntity(post));
+      // },
+
+      // async remove(id: string) {
+      //   await postService.remove(id);
+      //   patchState(store, removePostEntity(id));
+      // },
+
+      // async update(id: string, data: PostPartialInterface) {
+      //   await postService.update(id, data);
+      //   patchState(store, updatePostEntity({ id, changes: { data } }));
+      // },
+
+      // Load Posts by Promise
+      async loadAllPosts() {
+        patchState(store, setLoading());
+        const items = await postService.getItems();
+        console.log("Items just fetched : ", items)
+        patchState(store, setLoaded());
+        // patchState(store, { items },setLoaded());
+        console.log("Items Loaded in the store: ", store)
+        patchState(store, setAllEntities(items, { collection: 'post'}))
+      },
+      // Add Post By Promise
+      async addPost(value) {
+        console.log("AddPost value: ", value)
+        patchState(store, setLoading( ));
+        const createdItem = await postService.addItem(value);
+        console.log("Post created: ",createdItem);
+        patchState(store, { items: [...store.items(), createdItem] })
+        patchState(store, setLoaded())
+      },
+      // Update Post By Promise
+      async updatePost(data){
+        console.log("UpdatePost value: ", data)
+        patchState(store, setLoading( ));
+        const updatedItem = await postService.updateItem(data);
+        console.log("Post Updated: ",updatedItem);
+        patchState(store, updateEntity( id: updatedItem.id, change: updatedItem))
+      },
+      // Delete Post by Promise
+      async deletePost(postToDelete: PostInterface) {
+        patchState(store, setLoading());
+        await postService.deleteItem(postToDelete);
+        patchState(store, {
+          items: [...store.items().filter((x) => x.id !== postToDelete.id)],
+        });
+        patchState(store, removeEntity(postToDelete.id))
+        patchState(store, setLoaded());
+      },
+
+
       // Load Post with rxjs
-      loadAllPosts: rxMethod<void>(
+      loadAllPostsrxjs: rxMethod<void>(
         pipe(
           switchMap(() => {
             patchState(store, setLoading());
-            return postService.getItems().pipe(
+            return postService.getItemsrxjs().pipe(
               tapResponse({
                 next: (items: PostInterface[] ) => patchState(store, { items }),
                 error: console.error,
@@ -38,30 +96,13 @@ export function withPostsMethods() {
           })
         )
       ),
-      // Load Posts by Promise
-      async loadAllPostsByPromise() {
-        patchState(store, setLoading());
-        const items = await postService.getItemsAsPromise();
-        console.log("Items just fetched : ", items)
-        patchState(store, { items },setLoaded());
-        console.log("Items Loaded in the store: ", store)
-        patchState(store, setAllEntities(items, { collection: 'post'}))
-      },
-      // Delete Post by Promise
-      async deletePostByPromise(postToDelete: PostInterface) {
-        patchState(store, setLoading());
-        await postService.deleteItemAsPromise(postToDelete);
-        patchState(store, {
-          items: [...store.items().filter((x) => x.id !== postToDelete.id)],
-        });
-        patchState(store, setLoaded());
-      },
+
       // Add post (rxjs)
-      addPost: rxMethod(
+      addPostrxjs: rxMethod(
         pipe(
           switchMap((value) => {
             patchState(store, setLoading( ));
-            return postService.addItem(value).pipe(
+            return postService.addItemrxjs(value).pipe(
               tapResponse({
                 next: (item) =>
                   patchState(store, { items: [...store.items(), item] }),
@@ -72,19 +113,13 @@ export function withPostsMethods() {
           })
         )
       ),
-      async addPostByPromise(value) {
-        console.log("AddPost value: ", value)
-        patchState(store, setLoading( ));
-        const createdItem = await postService.addItemAsPromise(value);
-        console.log("Post created: ",createdItem);
-        patchState(store, { items: [...store.items(), createdItem] })
-        patchState(store, setLoaded())
-      },
-      deletePost: rxMethod<PostInterface>(
+
+      // Delete Post rxjs
+      deletePostrxjs: rxMethod<PostInterface>(
         pipe(
           switchMap((post) => {
             patchState(store, setLoading());
-            return postService.deleteItem(post).pipe(
+            return postService.deleteItemrxjs(post).pipe(
               tapResponse({
                 next: () => {
                   patchState(store, {
@@ -98,55 +133,6 @@ export function withPostsMethods() {
           })
         )
       ),
-
-      // Example: Post state to "done"
-      // moveToDone: rxMethod<PostInterface>(
-      //   pipe(
-      //     switchMap((post) => {
-      //       patchState(store, { isLoading: true, loaded: false});
-
-      //       const toSend = { ...post, postState: 'DONE' };
-
-      //       return postService.updateItem(toSend).pipe(
-      //         tapResponse({
-      //           next: (updatedPost) => {
-      //             const allItems = [...store.items()];
-      //             const index = allItems.findIndex((x) => x.id === post.id);
-
-      //             allItems[index] = updatedPost;
-
-      //             patchState(store, {
-      //               items: allItems,
-      //             });
-      //           },
-      //           error: console.error,
-      //           finalize: () => patchState(store, { isLoading: false, loaded: true }),
-      //         })
-      //       );
-      //     })
-      //   )
-      // ),
-
-      /* Example:
-          addPost(title: string) {
-          const newPost: PostInterface = {
-            id: crypto.randomUUID(),
-            title,
-          };
-          const updatedPosts = [...store.posts(), newPost];
-          patchState(store, { posts: updatedPosts });
-        },
-        removePost(id: string) {
-          const updatedPosts = store.posts().filter((post) => post.id !== id);
-          patchState(store, { posts: updatedPosts });
-        },
-        addPosts(posts: PostInterface[]) {
-          patchState(store, { posts });
-        },
-      */
-
-
     })),
-
   );
 }

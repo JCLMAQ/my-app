@@ -47,8 +47,6 @@ export class PostService implements DataService<PostInterface, PostFilter> {
     companyId: string,
   ): Observable<PostInterface[]> {
     const url = [this.baseUrl, 'post'].join('/');
-
-
     const params = new HttpParams().set('userId', userId).set('companyId', companyId);
     const headers = new HttpHeaders().set('Accept', 'application/json');
     return this.http.get<PostInterface[]>(url, { params, headers });
@@ -69,24 +67,51 @@ export class PostService implements DataService<PostInterface, PostFilter> {
     return throwError(() => new Error('Something bad happened; please try again later.'));
   }
 
-  getItemsAsPromise(): Promise<PostInterface[]>{
-    return lastValueFrom(this.getItems());
+  getItems(): Promise<PostInterface[]>{
+    return lastValueFrom(this.http
+      .get<PostInterface[]>(`${this.baseUrl}/postswithrelated`, httpOptions)
+      .pipe(
+        catchError(this.handleError)));
   }
 
-  getItems(): Observable<PostInterface[]> {
+  getItem(id: string) {
+    const item = lastValueFrom(this.http.get<PostInterface>(`${this.baseUrl}/post/${id}`))
+    return item;
+  }
+
+  addItem(values: {
+    content: string;
+    title: string;
+    userId: string;
+    orgId: string
+    }){
+    const itemCreated = lastValueFrom(this.http.post<PostInterface>(`${this.baseUrl}/createPost`, values ));
+    return itemCreated
+  }
+
+  updateItem(data: PostInterface) {
+    const itemUpdated = lastValueFrom(this.http.put<PostInterface>(`${this.baseUrl}/updatePost/${data?.id}`, data));
+    return itemUpdated
+  }
+
+  deleteItem(value: PostInterface ) {
+    const deletedItem = lastValueFrom(this.http.delete(`${this.baseUrl}/deletepost/${value?.id}`));
+    return deletedItem
+  }
+
+// Rxjs version
+  getItemsrxjs(): Observable<PostInterface[]> {
     return this.http
       .get<PostInterface[]>(`${this.baseUrl}/postswithrelated`, httpOptions)
       .pipe(
         catchError(this.handleError));;
   }
 
-
-
-  getItem(id: string) {
-    return this.http.get<PostInterface>(`${this.baseUrl}/${id}`);
+  getItemrxjs(id: string) {
+    return this.http.get<PostInterface>(`${this.baseUrl}/post/${id}`);
   }
 
-  addItem(values: {
+  addItemrxjs(values: {
     content: string;
     title: string;
     userId: string;
@@ -96,26 +121,9 @@ export class PostService implements DataService<PostInterface, PostFilter> {
     return result
   }
 
-  addItemAsPromise(values: {
-    content: string;
-    title: string;
-    userId: string;
-    orgId: string
-    }){
-    const itemCreated = lastValueFrom(this.http.post<PostInterface>(`${this.baseUrl}/createPost`, values ));
-    // const itemCreated = lastValueFrom(this.addItem(values));
-    return itemCreated
-  }
-
-  updateItem(value: PostInterface) {
-    return this.http.put<PostInterface>(`${this.baseUrl}/${value?.id}`, value);
-  }
-
-  deleteItem(value: PostInterface ) {
+  deleteItemrxjs(value: PostInterface ) {
     return this.http.delete(`${this.baseUrl}/deletepost/${value?.id}`);
   }
 
-  deleteItemAsPromise(value: PostInterface ) {
-    return lastValueFrom(this.deleteItem(value))
-  }
+
 }

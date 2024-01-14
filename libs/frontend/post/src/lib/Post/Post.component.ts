@@ -74,7 +74,7 @@ export class PostComponent implements OnInit {
       orderPost: 0
     }
     console.log("Post Values to add: ", postToAdd)
-    this.postStore.addPostByPromise(postToAdd );
+    this.postStore.addPost(postToAdd );
     this.addForm.reset();
   }
 

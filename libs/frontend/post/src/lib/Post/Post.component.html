@@ -29,8 +29,8 @@
 
 <div>Total: {{ postStore.postsCount() }}</div>
 
-@for (item of postStore.items(); track item.title) {
-  <li> {{ item.title }} <span (click) = (postStore.deletePostByPromise(item)) >X</span></li>
+@for (item of postStore.postEntities(); track item.title) {
+  <li> {{ item.title }} <span (click) = (postStore.deletePost(item)) >X</span></li>
   <!-- @for (cat of postStore.categories(); track cat.name) {
   <li> {{ cat.name }} </li>
   } -->
