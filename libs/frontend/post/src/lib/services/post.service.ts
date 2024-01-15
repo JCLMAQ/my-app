@@ -1,10 +1,8 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-// import { Post } from '@prisma/client';
-
 import { DataService } from '@fe/shared/util-signal-store';
 import { Observable, catchError, firstValueFrom, lastValueFrom, throwError } from 'rxjs';
-import { PostInterface, PostPartialInterface } from '../store/post.model';
+import { PostInterface, PostPartialInterface } from '../store/post.interface';
 
 const httpOptions = {
 	headers: new HttpHeaders({
@@ -17,8 +15,6 @@ export type PostFilter = {
   userId: string;
   companyId: string;
 }
-
-
 
 @Injectable({
   providedIn: 'root',
@@ -68,14 +64,19 @@ export class PostService implements DataService<PostInterface, PostFilter> {
   }
 
   getItems(): Promise<PostInterface[]>{
-    return lastValueFrom(this.http
+    const posts = lastValueFrom(this.http
       .get<PostInterface[]>(`${this.baseUrl}/posts`, httpOptions)
       .pipe(
         catchError(this.handleError)));
+        console.log("GetItems for Posts: ", posts)
+    return posts
   }
 
-  getItem(id: string) {
-    const item = lastValueFrom(this.http.get<PostInterface>(`${this.baseUrl}/post/${id}`))
+  getItem(id: string): Promise<PostInterface> {
+    const item = lastValueFrom(this.http
+      .get<PostInterface>(`${this.baseUrl}/post/${id}`)
+      .pipe(
+        catchError(this.handleError)));
     return item;
   }
 
@@ -85,45 +86,27 @@ export class PostService implements DataService<PostInterface, PostFilter> {
     ownerId: string;
     orgId: string
     }){
-    const itemCreated = lastValueFrom(this.http.post<PostInterface>(`${this.baseUrl}/createPost`, values ));
+    const itemCreated = lastValueFrom(this.http
+      .post<PostInterface>(`${this.baseUrl}/createPost`, values )
+      .pipe(
+        catchError(this.handleError)));
     return itemCreated
   }
 
   updateItem(data: PostPartialInterface) {
-    const itemUpdated: Promise<PostPartialInterface> = lastValueFrom(this.http.put<PostPartialInterface>(`${this.baseUrl}/updatePost/${data?.id}`, data));
+    const itemUpdated: Promise<PostPartialInterface> = lastValueFrom(this.http
+      .put<PostPartialInterface>(`${this.baseUrl}/updatePost/${data?.id}`, data)
+      .pipe(
+        catchError(this.handleError)));
     return itemUpdated
   }
 
   deleteItem(id: string ) {
-    const deletedItem = lastValueFrom(this.http.delete(`${this.baseUrl}/deletepost/${id}`));
+    const deletedItem = lastValueFrom(this.http
+      .delete(`${this.baseUrl}/deletepost/${id}`)
+      .pipe(
+        catchError(this.handleError)));
     return deletedItem
   }
-
-// Rxjs version
-  getItemsrxjs(): Observable<PostInterface[]> {
-    return this.http
-      .get<PostInterface[]>(`${this.baseUrl}/postswithrelated`, httpOptions)
-      .pipe(
-        catchError(this.handleError));;
-  }
-
-  getItemrxjs(id: string) {
-    return this.http.get<PostInterface>(`${this.baseUrl}/post/${id}`);
-  }
-
-  addItemrxjs(values: {
-    content: string;
-    title: string;
-    userId: string;
-    orgId: string
-    }) {
-      const result = this.http.post<PostInterface>(`${this.baseUrl}/createPost`, values );
-    return result
-  }
-
-  deleteItemrxjs(value: PostInterface ) {
-    return this.http.delete(`${this.baseUrl}/deletepost/${value?.id}`);
-  }
-
 
 }

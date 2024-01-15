@@ -1,8 +1,8 @@
 import { withCallState } from "@fe/shared/util-signal-store";
 import { signalStore, type, withHooks } from "@ngrx/signals";
 import { withEntities } from "@ngrx/signals/entities";
+import { PostInterface } from "./post.interface";
 import { withPostsMethods } from "./post.methods";
-import { PostInterface } from "./post.model";
 
 export interface PostStateInterface {
   // items: PostInterface[];
@@ -21,7 +21,7 @@ export const PostStore = signalStore(
 //  withSelectedEntity(),
 
   withHooks({
-    // onInit: (store) => store.loadAllPosts(),
+    onInit: (store) => store.load(),
     onDestroy() {
       console.log('on destroy');
     },

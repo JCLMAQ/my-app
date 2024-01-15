@@ -8,7 +8,7 @@ import {
 } from '@ngrx/signals';
 import { addEntity, removeEntity, setAllEntities, updateEntity, withEntities } from '@ngrx/signals/entities';
 import { PostService } from '../services/post.service';
-import { PostInterface, PostPartialInterface } from './post.model';
+import { PostInterface } from './post.interface';
 import { PostStateInterface } from './post.state';
 
 // withCallState base on: https://www.angulararchitects.io/blog/the-new-ngrx-signal-store-for-angular-2-1-flavors/
@@ -24,6 +24,7 @@ export function withPostsMethods() {
         patchState(store, setLoading());
         const posts = await postService.getItems();
         patchState(store, setAllEntities( posts, { collection: 'post'}));
+        console.log("getItems for Store: ", posts)
         patchState(store, setLoaded());
       },
 
@@ -35,6 +36,7 @@ export function withPostsMethods() {
         patchState(store, setLoading());
         const post = await postService.addItem(data);
         patchState(store, addEntity( post, { collection: 'post'}));
+        patchState(store, setLoaded());
       },
 
       async remove(id: string) {
@@ -44,7 +46,7 @@ export function withPostsMethods() {
         patchState(store, setLoaded());
       },
 
-      async update(id: string, data: PostPartialInterface) {
+      async update(id: string, data: PostInterface) {
         patchState(store, setLoading());
         await postService.updateItem(data);
         const changes = { title: data.title , content: data.content }

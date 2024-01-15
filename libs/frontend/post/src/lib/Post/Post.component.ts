@@ -5,7 +5,7 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MATERIAL } from '@fe/material';
 import { getState } from '@ngrx/signals';
-import { PostInterface } from '../store/post.model';
+import { PostInterface } from '../store/post.interface';
 import { PostStore } from '../store/post.state';
 
 
@@ -69,29 +69,14 @@ export class PostComponent implements OnInit {
     const data=  {
       title: val.title,
       content: val.content,
-      orgId: "",
-      ownerId: "",
+      orgId: "b64d3148-b2b2-4d7d-8c3e-cde4673f9665",
+      ownerId: "7c672043-24e4-45a9-909c-693ba5044785",
     }
       this.postStore.add( data);
   }
 
   deletePost() {
 
-
   }
-  // addPost(): void {
-  //   const val = this.addForm.value;
-  //   console.log("Addform value: ", val)
-  //   const postToAdd=  {
-  //     title: this.addForm.getRawValue().title,
-  //     content: this.addForm.getRawValue().content,
-  //     userId:  "7c672043-24e4-45a9-909c-693ba5044785" ,
-  //     orgId: "b64d3148-b2b2-4d7d-8c3e-cde4673f9665",
-  //     orderPost: 0
-  //   }
-  //   console.log("Post Values to add: ", postToAdd)
-  //   this.postStore.addPost(postToAdd );
-  //   this.addForm.reset();
-  // }
 
 }

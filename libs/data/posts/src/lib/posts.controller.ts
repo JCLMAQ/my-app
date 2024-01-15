@@ -57,15 +57,15 @@ constructor(private postsService: PostsService) {}
   async createOnePost(@Body() data: {
     title: string;
     content: string;
-    userId: string;
+    ownerId: string;
     orgId: string;
   }) {
-    const { title , content, userId, orgId } = data;
+    const { title , content, ownerId, orgId } = data;
     try {
       return await this.postsService.createOnePost({
         content,
         title,
-        userId,
+        ownerId,
         orgId,
       });
     } catch (error) {

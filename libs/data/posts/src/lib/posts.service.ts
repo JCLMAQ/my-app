@@ -15,17 +15,17 @@ export class PostsService {
    async createOnePost(params: {
     content: Post[`content`];
     title: Post[`title`];
-    userId: User[`id`];
+    ownerId: User[`id`];
     orgId: Post[`orgId`]
     }) {
-        const { title , content, userId, orgId } = params;
+        const { title , content, ownerId, orgId } = params;
         const data: Prisma.PostCreateInput = {
           title,
           content,
           orderPost: 0,
           owner: {
             connect: {
-              id: userId
+              id: ownerId
             }
           },
           org: {
