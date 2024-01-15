@@ -35,6 +35,9 @@
       "@fe/shared/util-signal-store": [
         "libs/frontend/shared/util-signal-store/index.ts"
       ],
+      "@fe/shared/util-http-interceptors": [
+        "libs/frontend/shared/util-http-interceptors/index.ts"
+      ],
       "@fe/task": ["libs/frontend/task/src/index.ts"],
       "@fe/todo": ["libs/frontend/todo/src/index.ts"],
       "@fe/ui/auth": ["libs/frontend/ui/auth/src/index.ts"],

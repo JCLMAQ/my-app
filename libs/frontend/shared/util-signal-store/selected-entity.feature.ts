@@ -3,7 +3,8 @@ import { signalStoreFeature, type, withComputed, withState } from '@ngrx/signals
 import { EntityId, EntityState } from '@ngrx/signals/entities';
 
 export type SelectedEntityState = { selectedEntityId: EntityId | null };
-
+// <Collection extends string>(config: {
+//   collection: Collection;}
 export function withSelectedEntity<Entity>() {
   return signalStoreFeature(
     { state: type<EntityState<Entity>>() },
