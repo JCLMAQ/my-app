@@ -26,7 +26,7 @@ export const TodoStore = signalStore(
 
     withCallState({collection: 'todo'}),
     withEntities( {entity: type<TodoInterface>(), collection: 'todo'}),
-  //  withSelectedEntity(),
+    // withSelectedEntity(),
     withLogger('todo'),
 
     withState(initialTodoState),
