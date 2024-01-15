@@ -1,3 +1,4 @@
+import { withDevtools } from "@angular-architects/ngrx-toolkit";
 import { effect } from "@angular/core";
 import { withCallState, withDataService, withLogger, withUndoRedo } from "@fe/shared/util-signal-store";
 import { signalStore, type, withHooks } from "@ngrx/signals";
@@ -17,6 +18,7 @@ export const initialPostState: PostStateInterface = {
 export const PostStore = signalStore(
   { providedIn: 'root' },
   // withState(initialPostState),
+  withDevtools('post'),
   withCallState({collection: 'post'}),
   withEntities( {entity: type<PostInterface>(), collection: 'post'}),
 

@@ -75,6 +75,8 @@ export class PostComponent implements OnInit {
       this.postStore.add( data);
   }
 
+  selected = this.postStore.selectedPostEntities()
+
   deletePost() {
 
   }

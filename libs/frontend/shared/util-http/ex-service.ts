@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Post } from "@prisma/client";
 import { ResourceService } from "./http-generic-service";
 
 // Post Service
