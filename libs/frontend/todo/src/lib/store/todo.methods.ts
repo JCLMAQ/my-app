@@ -7,7 +7,7 @@ import {
   type,
   withMethods,
 } from '@ngrx/signals';
-import { setAllEntities, withEntities } from '@ngrx/signals/entities';
+import { addEntity, setAllEntities, withEntities } from '@ngrx/signals/entities';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap } from 'rxjs';
 import { TodoService } from '../services/todo.service';
@@ -30,7 +30,8 @@ export function withTodosMethods() {
             patchState(store, setLoading());
             return todoService.getItems().pipe(
               tapResponse({
-                next: (items: any) => patchState(store, { items }),
+                // next: (items: any) => patchState(store, { items }),
+                next: (items) => patchState(store,  setAllEntities(items, { collection: 'todo'})),
                 error: console.error,
                 finalize: () => patchState(store, setLoaded()),
               })
@@ -55,7 +56,8 @@ export function withTodosMethods() {
             return todoService.addItem(value).pipe(
               tapResponse({
                 next: (item) =>
-                  patchState(store, { items: [...store.items(), item] }),
+                  // patchState(store, { items: [...store.items(), item] }),
+                  patchState(store, addEntity()),
                 error: console.error,
                 finalize: () => patchState(store, setLoaded()),
               })

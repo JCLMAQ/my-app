@@ -41,11 +41,6 @@ export const TodoStore = signalStore(
       collections: ['todo'],
     }),
     withHooks({
-      // async onInit({ loadAllTodosByPromise }) {
-      //   console.log('Store hoocks: just before data Fetching.');
-      //   await loadAllTodosByPromise();
-      //   console.log('Store hoocks: just after data Fetching');
-      // },
       onInit: (store) => store.loadAllTodosByPromise(),
       onDestroy() {
         console.log('on destroy');

@@ -11,7 +11,7 @@ import { removeEntity, setAllEntities, updateEntity, withEntities } from '@ngrx/
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap } from 'rxjs';
 import { PostService } from '../services/post.service';
-import { PostInterface } from './post.model';
+import { PostInterface, PostPartialInterface } from './post.model';
 import { PostStateInterface } from './post.state';
 
 // withCallState base on: https://www.angulararchitects.io/blog/the-new-ngrx-signal-store-for-angular-2-1-flavors/
@@ -49,8 +49,8 @@ export function withPostsMethods() {
         console.log("Items just fetched : ", items)
         patchState(store, setLoaded());
         // patchState(store, { items },setLoaded());
-        console.log("Items Loaded in the store: ", store)
         patchState(store, setAllEntities(items, { collection: 'post'}))
+        console.log("Items Loaded in the store: ", store)
       },
       // Add Post By Promise
       async addPost(value) {
@@ -59,15 +59,20 @@ export function withPostsMethods() {
         const createdItem = await postService.addItem(value);
         console.log("Post created: ",createdItem);
         patchState(store, { items: [...store.items(), createdItem] })
+        // patchState(store, addEntity({createdItem}))
         patchState(store, setLoaded())
       },
       // Update Post By Promise
-      async updatePost(data){
+      async updatePost(data: PostPartialInterface){
         console.log("UpdatePost value: ", data)
         patchState(store, setLoading( ));
         const updatedItem = await postService.updateItem(data);
+
+        const changes = (post: PostInterface) => ({ ...data });
+        patchState(store, updateEntity({ id, changes }));
+
         console.log("Post Updated: ",updatedItem);
-        patchState(store, updateEntity( id: updatedItem.id, change: updatedItem))
+        patchState(store, updateEntity( { updatedItem.id , changes}))
       },
       // Delete Post by Promise
       async deletePost(postToDelete: PostInterface) {

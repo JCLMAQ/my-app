@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 
 import { DataService } from '@fe/shared/util-signal-store';
 import { Observable, catchError, firstValueFrom, lastValueFrom, throwError } from 'rxjs';
-import { PostInterface } from '../store/post.model';
+import { PostInterface, PostPartialInterface } from '../store/post.model';
 
 const httpOptions = {
 	headers: new HttpHeaders({
@@ -89,8 +89,8 @@ export class PostService implements DataService<PostInterface, PostFilter> {
     return itemCreated
   }
 
-  updateItem(data: PostInterface) {
-    const itemUpdated = lastValueFrom(this.http.put<PostInterface>(`${this.baseUrl}/updatePost/${data?.id}`, data));
+  updateItem(data: PostPartialInterface) {
+    const itemUpdated: Promise<PostPartialInterface> = lastValueFrom(this.http.put<PostPartialInterface>(`${this.baseUrl}/updatePost/${data?.id}`, data));
     return itemUpdated
   }
 
