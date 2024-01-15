@@ -69,7 +69,7 @@ export class PostService implements DataService<PostInterface, PostFilter> {
 
   getItems(): Promise<PostInterface[]>{
     return lastValueFrom(this.http
-      .get<PostInterface[]>(`${this.baseUrl}/postswithrelated`, httpOptions)
+      .get<PostInterface[]>(`${this.baseUrl}/posts`, httpOptions)
       .pipe(
         catchError(this.handleError)));
   }
@@ -80,9 +80,9 @@ export class PostService implements DataService<PostInterface, PostFilter> {
   }
 
   addItem(values: {
-    content: string;
-    title: string;
-    userId: string;
+    content: string | null | undefined;
+    title: string| null | undefined;
+    ownerId: string;
     orgId: string
     }){
     const itemCreated = lastValueFrom(this.http.post<PostInterface>(`${this.baseUrl}/createPost`, values ));
@@ -94,8 +94,8 @@ export class PostService implements DataService<PostInterface, PostFilter> {
     return itemUpdated
   }
 
-  deleteItem(value: PostInterface ) {
-    const deletedItem = lastValueFrom(this.http.delete(`${this.baseUrl}/deletepost/${value?.id}`));
+  deleteItem(id: string ) {
+    const deletedItem = lastValueFrom(this.http.delete(`${this.baseUrl}/deletepost/${id}`));
     return deletedItem
   }
 

@@ -63,19 +63,35 @@ export class PostComponent implements OnInit {
     console.log('postEntities: ', this.postStore.postEntities())
   }
 
-  addPost(): void {
+  addPost() {
     const val = this.addForm.value;
     console.log("Addform value: ", val)
-    const postToAdd=  {
-      title: this.addForm.getRawValue().title,
-      content: this.addForm.getRawValue().content,
-      userId:  "7c672043-24e4-45a9-909c-693ba5044785" ,
-      orgId: "b64d3148-b2b2-4d7d-8c3e-cde4673f9665",
-      orderPost: 0
+    const data=  {
+      title: val.title,
+      content: val.content,
+      orgId: "",
+      ownerId: "",
     }
-    console.log("Post Values to add: ", postToAdd)
-    this.postStore.addPost(postToAdd );
-    this.addForm.reset();
+      this.postStore.add( data);
   }
+
+  deletePost() {
+
+
+  }
+  // addPost(): void {
+  //   const val = this.addForm.value;
+  //   console.log("Addform value: ", val)
+  //   const postToAdd=  {
+  //     title: this.addForm.getRawValue().title,
+  //     content: this.addForm.getRawValue().content,
+  //     userId:  "7c672043-24e4-45a9-909c-693ba5044785" ,
+  //     orgId: "b64d3148-b2b2-4d7d-8c3e-cde4673f9665",
+  //     orderPost: 0
+  //   }
+  //   console.log("Post Values to add: ", postToAdd)
+  //   this.postStore.addPost(postToAdd );
+  //   this.addForm.reset();
+  // }
 
 }

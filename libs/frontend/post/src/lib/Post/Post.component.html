@@ -27,10 +27,10 @@
 </button>
       <!-- <button (click)="onSubmit()" mat-raised-button color="primary">Save</button> -->
 
-<div>Total: {{ postStore.postsCount() }}</div>
+<!-- <div>Total: {{ postStore.postsCount() }}</div> -->
 
 @for (item of postStore.postEntities(); track item.title) {
-  <li> {{ item.title }} <span (click) = (postStore.deletePost(item)) >X</span></li>
+  <li> {{ item.title }} <span (click) = (postStore.remove(item.id)) >X</span></li>
   <!-- @for (cat of postStore.categories(); track cat.name) {
   <li> {{ cat.name }} </li>
   } -->
