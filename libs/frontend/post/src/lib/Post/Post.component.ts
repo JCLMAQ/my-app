@@ -35,7 +35,7 @@ export class PostComponent implements OnInit {
   readonly router = inject(Router)
 
   postsItems!: PostInterface[];
-
+  postSelected!: PostInterface;
   fb = inject(FormBuilder);
   addForm = this.fb.nonNullable.group({
     title: '',
@@ -75,7 +75,13 @@ export class PostComponent implements OnInit {
       this.postStore.add( data);
   }
 
-  selected = this.postStore.selectedPostEntities()
+  selectedPost(itemId: string) {
+    // this.postSelected = this.postStore.postEntities().findIndex(id: itemId)
+    const selected = this.postStore.selectedPostEntities();
+    console.log("selected Post: ", selected)
+    console.log("selected Post: ", this.postSelected)
+  }
+
 
   deletePost() {
 
