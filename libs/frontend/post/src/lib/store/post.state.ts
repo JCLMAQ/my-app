@@ -8,11 +8,13 @@ import { PostInterface } from "./post.interface";
 import { withPostsMethods } from "./post.methods";
 
 export interface PostStateInterface {
-  // items: PostInterface[];
+  posts: PostInterface[];
+  selectedPostId: string
 }
 
 export const initialPostState: PostStateInterface = {
-  // items: [],
+  posts: [],
+  selectedPostId: ""
 };
 
 export type SelectedEntityState = { selectedEntityId: EntityId | null };
@@ -22,6 +24,11 @@ export const PostStore = signalStore(
   // withState(initialPostState),
   withDevtools('post'),
   withCallState({collection: 'post'}),
+  withComputed((postStore) => ({
+    postsCount: computed(() => postStore.posts().length),
+    selectedUser: computed(() =>
+      postStore.posts().find(u => u.id === postStore.selectedPostId()))
+  })),
   withEntities( {entity: type<PostInterface>(), collection: 'post'}),
 
   withLogger('post'),
