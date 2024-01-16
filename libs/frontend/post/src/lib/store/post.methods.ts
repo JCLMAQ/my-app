@@ -9,13 +9,13 @@ import {
 import { addEntity, removeEntity, setAllEntities, updateEntity, withEntities } from '@ngrx/signals/entities';
 import { PostService } from '../services/post.service';
 import { PostInterface } from './post.interface';
-import { PostStateInterface } from './post.state';
+// import { PostStateInterface } from './post.state';
 
 // withCallState base on: https://www.angulararchitects.io/blog/the-new-ngrx-signal-store-for-angular-2-1-flavors/
 
 export function withPostsMethods() {
   return signalStoreFeature(
-    { state: type<PostStateInterface>() },
+    // { state: type<PostStateInterface>() },
     withCallState(),
     withEntities({ entity: type<PostInterface>(), collection: 'post'}),
     withMethods((store, postService = inject(PostService)) => ({
