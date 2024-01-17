@@ -195,6 +195,7 @@
     "prettier-plugin-prisma": "^5.0.0",
     "prisma": "^5.8.0",
     "prisma-dbml-generator": "^0.10.0",
+    "prisma-docs-generator": "^0.8.0",
     "prisma-json-schema-generator": "^5.1.1",
     "ts-jest": "29.1.1",
     "ts-node": "10.9.2",
