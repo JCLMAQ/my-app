@@ -28,7 +28,9 @@ export const TodoStore = signalStore(
     withEntities( {entity: type<TodoInterface>(), collection: 'todo'}),
     // withSelectedEntity(),
     withLogger('todo'),
-
+    // withComputed(({ postEntities }) => ({
+    //   selected: computed(() => postEntities().filter((f) => )),
+    // })),
     withState(initialTodoState),
     withTodosMethods(),
     withTodosSelectors(),

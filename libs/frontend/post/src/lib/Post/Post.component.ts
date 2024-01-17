@@ -34,6 +34,12 @@ export class PostComponent implements OnInit {
   readonly postStore = inject(PostStore);
   readonly router = inject(Router)
 
+selectedPostId = this.postStore.selectedPostIds();
+selectedPostEntities = this.postStore.selectedPostEntities();
+
+
+
+
   postsItems!: PostInterface[];
   postSelected!: PostInterface;
   fb = inject(FormBuilder);
@@ -78,6 +84,7 @@ export class PostComponent implements OnInit {
   selectedPost(itemId: string) {
     // this.postSelected = this.postStore.postEntities().findIndex(id: itemId)
     const selected = this.postStore.selectedPostEntities();
+    console.log("selected Item: ", itemId)
     console.log("selected Post: ", selected)
     console.log("selected Post: ", this.postSelected)
   }
