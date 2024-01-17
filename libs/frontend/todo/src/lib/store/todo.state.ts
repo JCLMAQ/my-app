@@ -8,11 +8,15 @@ import { TodoInterface } from './todo.model';
 import { withTodosSelectors } from './todo.selectors';
 
 export interface TodoStateInterface {
-  items: TodoInterface[];
+  items: TodoInterface[],
+  ownerId: string | null
+  orgId: string | null,
 }
 
 export const initialTodoState: TodoStateInterface = {
   items: [],
+  ownerId: null,
+  orgId: null
 };
 
 

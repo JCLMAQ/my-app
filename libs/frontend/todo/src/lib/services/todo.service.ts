@@ -14,8 +14,8 @@ const httpOptions = {
 };
 
 export type TodoFilter = {
-  userId: string;
-  companyId: string;
+  ownerId: string;
+  orgId: string;
 }
 
 
@@ -34,20 +34,20 @@ export class TodoService implements DataService<TodoInterface, TodoFilter> {
     { }
 
   load(filter: TodoFilter): Promise<TodoInterface[]> {
-    return this.findAsPromise(filter.userId, filter.companyId);
+    return this.findAsPromise(filter.ownerId, filter.orgId);
   }
 
-  private findAsPromise(userId: string, companyId: string): Promise<TodoInterface[]> {
-    return firstValueFrom(this.find(userId, companyId));
+  private findAsPromise(ownerId: string, orgId: string): Promise<TodoInterface[]> {
+    return firstValueFrom(this.find(ownerId, orgId));
   }
 
   private find(
-    userId: string,
-    companyId: string,
+    ownerId: string,
+    orgId: string,
   ): Observable<TodoInterface[]> {
     const url = [this.baseUrl, 'todo'].join('/');
 
-    const params = new HttpParams().set('userId', userId).set('companyId', companyId);
+    const params = new HttpParams().set('userId', ownerId).set('companyId', orgId);
     const headers = new HttpHeaders().set('Accept', 'application/json');
     return this.http.get<TodoInterface[]>(url, { params, headers });
   }

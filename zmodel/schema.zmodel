@@ -14,7 +14,8 @@ generator client {
 generator docs {
   provider = "node node_modules/prisma-docs-generator"
   output = "../doc"
-//  // /Users/jcl.maquinay/MonoRepo/my-app/zmodel/doc
+  // output = "/Users/jcl.maquinay/MonoRepo/my-app/zmodel/doc"
+ // /Users/jcl.maquinay/MonoRepo/my-app/zmodel/doc
 }
 
 // generator jsonSchema {

@@ -35,6 +35,9 @@ import { TodoStore } from '../store/todo.state';
 
 export class TodoComponent implements OnInit, AfterViewInit{
 
+orgId = "b64d3148-b2b2-4d7d-8c3e-cde4673f9665"
+ownerId = "7c672043-24e4-45a9-909c-693ba5044785"
+
   readonly todoStore = inject(TodoStore);
   readonly router = inject(Router)
 
