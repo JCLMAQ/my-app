@@ -40,7 +40,7 @@ export const TodoStore = signalStore(
     withTodosSelectors(),
     withDataService({
       dataServiceType: TodoService,
-      filter: { },
+      filter: { ownerId: null, orgId: null },
       collection: 'todo'
     }),
     withUndoRedo({
