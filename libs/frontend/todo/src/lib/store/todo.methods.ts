@@ -6,26 +6,27 @@ import {
   signalStoreFeature,
   type,
   withMethods,
+  withState,
 } from '@ngrx/signals';
 import { setAllEntities, withEntities } from '@ngrx/signals/entities';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap } from 'rxjs';
 import { TodoService } from '../services/todo.service';
 import { TodoInterface } from './todo.model';
-import { TodoStateInterface } from './todo.state';
+import { TodoStateInterface, initialTodoState } from './todo.state';
 
 // withCallState base on: https://www.angulararchitects.io/blog/the-new-ngrx-signal-store-for-angular-2-1-flavors/
 
 export function withTodosMethods() {
   return signalStoreFeature(
     { state: type<TodoStateInterface>() },
+    withState(initialTodoState),
     withCallState(),
-    // withEntities<TodoInterface>(),
     withEntities({ entity: type<TodoInterface>(), collection: 'todo'}),
     withMethods((store, todoService = inject(TodoService)) => ({
       async load() {
         patchState(store, setLoading());
-        const items = await todoService.load({ownerId, orgId});
+        const items = await todoService.getItemsAsPromise();
         console.log("Items just fetched : ", items)
         patchState(store, { items },setLoaded());
         console.log("Items Loaded in the store: ", store)

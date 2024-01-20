@@ -9,14 +9,19 @@ import { withTodosSelectors } from './todo.selectors';
 
 export interface TodoStateInterface {
   items: TodoInterface[],
-  ownerId: string | null
-  orgId: string | null,
+  filter: {
+    ownerId: string | null
+    orgId: string | null,
+  }
+
 }
 
 export const initialTodoState: TodoStateInterface = {
   items: [],
-  ownerId: null,
-  orgId: null
+  filter: {
+    ownerId: "test",
+    orgId: "test"
+  }
 };
 
 
@@ -40,14 +45,14 @@ export const TodoStore = signalStore(
     withTodosSelectors(),
     withDataService({
       dataServiceType: TodoService,
-      filter: { ownerId: null, orgId: null },
+      filter: { ownerId: "", orgId: "" },
       collection: 'todo'
     }),
     withUndoRedo({
       collections: ['todo'],
     }),
     withHooks({
-      onInit: (store) => store.loadAllTodosByPromise(),
+      onInit: (store) => store.load(),
       onDestroy() {
         console.log('on destroy');
       },

@@ -24,6 +24,7 @@ export type TodoFilter = {
   providedIn: 'root',
 })
 export class TodoService implements DataService<TodoInterface, TodoFilter> {
+  // export class TodoService implements DataService<TodoInterface, TodoFilter> {
   // private readonly http = inject(HttpClient);
 
   private apiUrl = `api/`;
