@@ -1,5 +1,8 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
+import { Injectable } from '@angular/core';
+// import { Todo } from '@prisma/client';
+
+import { DataService } from '@fe/shared/util-signal-store';
 import { Observable, catchError, firstValueFrom, lastValueFrom, throwError } from 'rxjs';
 import { TodoInterface } from '../store/todo.model';
 
@@ -20,16 +23,15 @@ export type TodoFilter = {
 @Injectable({
   providedIn: 'root',
 })
-export class TodoService {
+export class TodoService implements DataService<TodoInterface, TodoFilter> {
   // export class TodoService implements DataService<TodoInterface, TodoFilter> {
-  private readonly http = inject(HttpClient);
+  // private readonly http = inject(HttpClient);
 
   private apiUrl = `api/`;
-  private baseUrl = `${this.apiUrl}`;
+  private baseUrl = `${this.apiUrl}todos`;
 
   constructor(
-    // private readonly http: HttpClient
-    )
+    private readonly http: HttpClient)
     { }
 
   load(filter: TodoFilter): Promise<TodoInterface[]> {
@@ -46,7 +48,7 @@ export class TodoService {
   ): Observable<TodoInterface[]> {
     const url = [this.baseUrl, 'todo'].join('/');
 
-    const params = new HttpParams().set('ownerId', ownerId).set('orgId', orgId);
+    const params = new HttpParams().set('userId', ownerId).set('companyId', orgId);
     const headers = new HttpHeaders().set('Accept', 'application/json');
     return this.http.get<TodoInterface[]>(url, { params, headers });
   }

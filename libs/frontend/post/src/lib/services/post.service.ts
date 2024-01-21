@@ -12,8 +12,8 @@ const httpOptions = {
 };
 
 export type PostFilter = {
-  userId: string;
-  companyId: string;
+  ownerId: string;
+  orgId: string;
 }
 
 @Injectable({
@@ -31,19 +31,19 @@ export class PostService implements DataService<PostInterface, PostFilter> {
     { }
 
   load(filter: PostFilter): Promise<PostInterface[]> {
-    return this.findAsPromise(filter.userId, filter.companyId);
+    return this.findAsPromise(filter.ownerId, filter.orgId);
   }
 
-  private findAsPromise(userId: string, companyId: string): Promise<PostInterface[]> {
-    return firstValueFrom(this.find(userId, companyId));
+  private findAsPromise(ownerId: string, orgId: string): Promise<PostInterface[]> {
+    return firstValueFrom(this.find(ownerId, orgId));
   }
 
   private find(
-    userId: string,
-    companyId: string,
+    ownerId: string,
+    orgId: string,
   ): Observable<PostInterface[]> {
-    const url = [this.baseUrl, 'post'].join('/');
-    const params = new HttpParams().set('ownerId', userId).set('orgId', companyId);
+    const url = [this.baseUrl, 'posts'].join('/');
+    const params = new HttpParams().set('ownerId', ownerId).set('orgId', orgId);
     const headers = new HttpHeaders().set('Accept', 'application/json');
     return this.http.get<PostInterface[]>(url, { params, headers });
   }
