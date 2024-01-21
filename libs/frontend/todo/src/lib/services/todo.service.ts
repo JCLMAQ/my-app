@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable, catchError, firstValueFrom, lastValueFrom, throwError } from 'rxjs';
-import { TodoInterface } from '../store/todo.model';
+import { TodoInterface, TodoPartialInterface, } from '../store/todo.model';
 
 const httpOptions = {
 	headers: new HttpHeaders({
@@ -32,20 +32,19 @@ export class TodoService {
     )
     { }
 
-  load(filter: TodoFilter): Promise<TodoInterface[]> {
-    return this.findAsPromise(filter.ownerId, filter.orgId);
+  load(): Promise<TodoInterface[]> {
+    return this.findAsPromise();
   }
 
-  private findAsPromise(ownerId: string, orgId: string): Promise<TodoInterface[]> {
-    return firstValueFrom(this.find(ownerId, orgId));
+  private findAsPromise(): Promise<TodoInterface[]> {
+    return firstValueFrom(this.find());
   }
 
-  private find(
-    ownerId: string,
-    orgId: string,
-  ): Observable<TodoInterface[]> {
-    const url = [this.baseUrl, 'todo'].join('/');
-
+  private find(): Observable<TodoInterface[]> {
+    const url = [this.baseUrl, 'todos'].join('/');
+    const ownerId = "";
+    const orgId = "";
+    // const params = new HttpParams()
     const params = new HttpParams().set('ownerId', ownerId).set('orgId', orgId);
     const headers = new HttpHeaders().set('Accept', 'application/json');
     return this.http.get<TodoInterface[]>(url, { params, headers });
@@ -66,32 +65,76 @@ export class TodoService {
     return throwError(() => new Error('Something bad happened; please try again later.'));
   }
 
-  getItemsAsPromise(): Promise<TodoInterface[]>{
-    return lastValueFrom(this.getItems());
-  }
+  // getItemsAsPromise(): Promise<TodoInterface[]>{
+  //   return lastValueFrom(this.getItems());
+  // }
 
-  getItems(): Observable<TodoInterface[]> {
-    return this.http
-      .get<TodoInterface[]>(this.baseUrl, httpOptions)
+  // getItems(): Observable<TodoInterface[]> {
+  //   return this.http
+  //     .get<TodoInterface[]>(`${this.baseUrl}/todos`, httpOptions)
+  //     .pipe(
+  //       catchError(this.handleError));;
+  // }
+
+  // getItem(id: string) {
+  //   return this.http.get<TodoInterface>(`${this.baseUrl}/todo/${id}`);
+  // }
+
+  // addItem(value: string) {
+  //   return this.http.todo<TodoInterface>(this.baseUrl, { value });
+  // }
+
+  // updateItem(value: TodoInterface) {
+  //   return this.http.put<TodoInterface>(`${this.baseUrl}/${value?.id}`, value);
+  // }
+
+  // deleteItem(value: TodoInterface ) {
+  //   return this.http.delete(`${this.baseUrl}/${value?.id}`);
+  // }
+
+  getItems(): Promise<TodoInterface[]>{
+    const todos = lastValueFrom(this.http
+      .get<TodoInterface[]>(`${this.baseUrl}/todos`, httpOptions)
       .pipe(
-        catchError(this.handleError));;
+        catchError(this.handleError)));
+        console.log("GetItems for Todos: ", todos)
+    return todos
   }
 
-
-
-  getItem(id: string) {
-    return this.http.get<TodoInterface>(`${this.baseUrl}/${id}`);
+  getItem(id: string): Promise<TodoInterface> {
+    const item = lastValueFrom(this.http
+      .get<TodoInterface>(`${this.baseUrl}/todo/${id}`)
+      .pipe(
+        catchError(this.handleError)));
+    return item;
   }
 
-  addItem(value: string) {
-    return this.http.post<TodoInterface>(this.baseUrl, { value });
+  addItem(values: {
+    content: string | null | undefined;
+    title: string| null | undefined;
+    ownerId: string;
+    orgId: string
+    }){
+    const itemCreated = lastValueFrom(this.http
+      .post<TodoInterface>(`${this.baseUrl}/createTodo`, values )
+      .pipe(
+        catchError(this.handleError)));
+    return itemCreated
   }
 
-  updateItem(value: TodoInterface) {
-    return this.http.put<TodoInterface>(`${this.baseUrl}/${value?.id}`, value);
+  updateItem(data: TodoPartialInterface) {
+    const itemUpdated: Promise<TodoPartialInterface> = lastValueFrom(this.http
+      .put<TodoPartialInterface>(`${this.baseUrl}/updateTodo/${data?.id}`, data)
+      .pipe(
+        catchError(this.handleError)));
+    return itemUpdated
   }
 
-  deleteItem(value: TodoInterface ) {
-    return this.http.delete(`${this.baseUrl}/${value?.id}`);
+  deleteItem(id: string ) {
+    const deletedItem = lastValueFrom(this.http
+      .delete(`${this.baseUrl}/deletetodo/${id}`)
+      .pipe(
+        catchError(this.handleError)));
+    return deletedItem
   }
 }

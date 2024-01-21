@@ -58,15 +58,15 @@ export class TodosService {
       orderBy?: Prisma.TodoOrderByWithRelationInput,
       orgId?: Todo[`orgId`],
       ownerId?: Todo[`ownerId`],
-      withTasks: string;
-      withUsers: string;
+      withTasks?: string;
+      withUsers?: string;
     })
     {
       const { ownerId, orgId, withTasks, withUsers} = params
-      let withTasksboolean = true;
-      let withUsersboolean = true
-      if(withTasks === 'false') { withTasksboolean = false}
-      if(withUsers === 'false') { withUsersboolean = false}
+      let withTasksboolean = false;
+      let withUsersboolean = false;
+      if(withTasks === 'true') { withTasksboolean = true}
+      if(withUsers === 'true') { withUsersboolean = true}
       return await this.repository.getTodos( {
         include: {
           Tasks: withTasksboolean,

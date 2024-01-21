@@ -14,8 +14,8 @@ export class TodosController {
     async getUserTodos(@Body() data:  {
       orgId?: string;
       ownerId?: string;
-      withTasks: string;
-      withUsers: string;
+      withTasks?: string;
+      withUsers?: string;
     }): Promise<Todo[]| unknown>{
       try {
         const todos: Todo[] = await this.todosService.getTodos( data )
