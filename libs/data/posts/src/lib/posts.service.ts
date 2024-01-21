@@ -46,9 +46,9 @@ export class PostsService {
       orderBy?: Prisma.PostOrderByWithRelationInput,
       orgId?: Post[`orgId`],
       ownerId?: Post[`ownerId`],
-      withCategories: string,
-      withComments: string,
-      withLikedBys: string
+      withCategories?: string,
+      withComments?: string,
+      withLikedBys?: string
     })
     {
       const { ownerId, orgId, withCategories, withComments, withLikedBys} = params
@@ -64,13 +64,12 @@ export class PostsService {
       });
     }
 
-  async getOnePost(params: {
+  async getOnePost(postId: string, data: {
     withCategories: string,
     withComments: string,
     withLikedBys: string
-    postId: Post[`id`]
   }): Promise<Post | null> {
-    const {withCategories, withComments, withLikedBys, postId} = params
+    const {withCategories, withComments, withLikedBys} = data
     // let withPostsboolean = true
     // if(withPosts === 'false') { withPostsboolean = false}
     return await this.repository.getOnePost({

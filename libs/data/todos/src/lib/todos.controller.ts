@@ -32,15 +32,14 @@ export class TodosController {
 
     @Public()
     @Auth(AuthType.None)
-    @Get('todo')
-    async getOneTodo(@Body() data:  {
-      todoId: string
+    @Get('todo/:id')
+    async getOneTodo(@Param('id') todoId: string, @Body() data:  {
       withTasks: string;
       withSubTodos: string;
       withUsers: string;
     }): Promise<Todo | unknown>{
       try {
-        return await this.todosService.getOneTodo( data )
+        return await this.todosService.getOneTodo(todoId, data )
       } catch (error) {
         return {
             answer: "bad news...",

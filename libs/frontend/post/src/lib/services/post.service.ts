@@ -30,20 +30,18 @@ export class PostService implements DataService<PostInterface, PostFilter> {
     private readonly http: HttpClient)
     { }
 
-  load(filter: PostFilter): Promise<PostInterface[]> {
-    return this.findAsPromise(filter.ownerId, filter.orgId);
+  load(): Promise<PostInterface[]> {
+    return this.findAsPromise();
   }
 
-  private findAsPromise(ownerId: string, orgId: string): Promise<PostInterface[]> {
-    return firstValueFrom(this.find(ownerId, orgId));
+  private findAsPromise(): Promise<PostInterface[]> {
+    return firstValueFrom(this.find());
   }
 
-  private find(
-    ownerId: string,
-    orgId: string,
-  ): Observable<PostInterface[]> {
+  private find(): Observable<PostInterface[]> {
     const url = [this.baseUrl, 'posts'].join('/');
-    const params = new HttpParams().set('ownerId', ownerId).set('orgId', orgId);
+    const params = new HttpParams();
+    // const params = new HttpParams().set('ownerId', ownerId).set('orgId', orgId);
     const headers = new HttpHeaders().set('Accept', 'application/json');
     return this.http.get<PostInterface[]>(url, { params, headers });
   }

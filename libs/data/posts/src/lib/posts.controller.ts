@@ -15,9 +15,9 @@ constructor(private postsService: PostsService) {}
   async getUserPosts(@Body() data:  {
     orgId?: string;
     ownerId?: string;
-    withCategories: string,
-    withComments: string,
-    withLikedBys: string
+    withCategories?: string,
+    withComments?: string,
+    withLikedBys?: string
   }): Promise<Posts[]| unknown>{
     try {
       const posts: Posts[] = await this.postsService.getPosts( data )
@@ -34,15 +34,14 @@ constructor(private postsService: PostsService) {}
 
   @Public()
   @Auth(AuthType.None)
-  @Get('post')
-  async getOnePost(@Body() data:  {
-    postId: string
+  @Get('post/:id')
+  async getOnePost(@Param('id') postId: string, @Body() data:  {
     withCategories: string,
     withComments: string,
     withLikedBys: string
   }): Promise<Posts | unknown>{
     try {
-      return await this.postsService.getOnePost( data )
+      return await this.postsService.getOnePost( postId, data )
     } catch (error) {
       return {
           answer: "bad news...",

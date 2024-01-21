@@ -17,15 +17,14 @@ import { PostInterface } from './post.interface';
 export function withPostsMethods() {
   return signalStoreFeature(
     // { state: type<PostStateInterface>() },
-    {state}
     withCallState(),
     withEntities({ entity: type<PostInterface>(), collection: 'post'}),
     withMethods((store, postService = inject(PostService)) => ({
 
       async load() {
         patchState(store, setLoading());
-        const posts = await postService.load(filter: store.filter);
-        patchState(store, setAllEntities( posts, { collection: 'post'}));
+        const posts = await postService.load();
+        patchState(store, setAllEntities(posts, { collection: 'post'}));
         console.log("getItems for Store: ", posts)
         patchState(store, setLoaded());
       },

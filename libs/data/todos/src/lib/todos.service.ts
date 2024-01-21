@@ -75,13 +75,12 @@ export class TodosService {
         where: { ownerId, orgId }});
     }
 
-  async getOneTodo(params: {
+  async getOneTodo(todoId: string, params: {
     withSubTodos: string,
     withTasks: string,
     withUsers: string,
-    todoId: Todo[`id`],
   }): Promise<Todo | null> {
-    const {withTasks, withSubTodos, withUsers, todoId} = params
+    const {withTasks, withSubTodos, withUsers} = params
     // let withTasksboolean = true
     // if(withTasks === 'false') { withTasksboolean = false}
     return await this.repository.getOneTodo({
