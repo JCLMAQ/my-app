@@ -1,5 +1,4 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { SelectionModel } from '@angular/cdk/collections';
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, OnInit, ViewChild, effect, inject } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
@@ -41,7 +40,7 @@ ownerId = "7c672043-24e4-45a9-909c-693ba5044785"
   readonly todoStore = inject(TodoStore);
   readonly router = inject(Router)
 
-  selection = new SelectionModel<TodoInterface>(true, []);
+  // selection = new SelectionModel<TodoInterface>(true, []);
 
   columnsToDisplay: string[] = ['select', 'numSeq','title'];
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand',  'tools'];
@@ -102,22 +101,22 @@ ngAfterViewInit(): void {
  // Selection
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
-    const numSelected = this.selection.selected.length;
+    const numSelected = this.todoStore.selection().selected.length;
     const numRows = this.dataSource.data.length;
     return numSelected === numRows;
   }
  /** Selects all rows if they are not all selected; otherwise clear selection. */
  masterToggle() {
   this.isAllSelected() ?
-      this.selection.clear() :
-      this.dataSource.data.forEach(row => this.selection.select(row));
+      this.todoStore.selection().clear() :
+      this.dataSource.data.forEach(row => this.todoStore.selection().select(row));
 }
 
 checkboxLabel(row: TodoInterface): string {
   if (!row) {
     return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
   }
-  return `${this.selection.isSelected(row) ? 'deselect' : 'select'}`;
+  return `${this.todoStore.selection().isSelected(row) ? 'deselect' : 'select'}`;
 }
 
  // Filter the list
