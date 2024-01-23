@@ -1,10 +1,11 @@
 
 // import { withCallState } from '@angular-architects/ngrx-toolkit';
 import { SelectionModel } from '@angular/cdk/collections';
+import { computed } from '@angular/core';
 import { withCallState, withLogger } from '@fe/shared/util-signal-store';
-import { signalStore, withHooks, withState } from '@ngrx/signals';
+import { signalStore, withComputed, withHooks, withState } from '@ngrx/signals';
 import { withTodosMethods } from './todo.methods';
-import { TodoInterface } from './todo.model';
+import { TodoInterface, TodoPartialInterface } from './todo.model';
 
 export interface TodoStateInterface {
   items: TodoInterface[],
@@ -13,6 +14,7 @@ export interface TodoStateInterface {
     orgId: string | null,
   },
   selectedId: string | null,
+  selectedItem: TodoPartialInterface,
   selectedIds: string [],
   selection: SelectionModel<TodoInterface>
 
@@ -24,6 +26,7 @@ export const initialTodoState: TodoStateInterface = {
     ownerId: "test",
     orgId: "test"
   },
+  selectedItem: {},
   selectedId: "",
   selectedIds: [],
   selection: new SelectionModel<TodoInterface>(true, [])
@@ -52,7 +55,9 @@ export const TodoStore = signalStore(
     //   filter: { ownerId: "", orgId: "" },
     //   collection: 'todo'
     // }),
-
+    withComputed(({ items, selectedId }) => ({
+      selectedItem: computed(() => items().find((x) => x.id === selectedId())),
+    })),
     withHooks({
       onInit: (store) => store.load(),
       onDestroy() {

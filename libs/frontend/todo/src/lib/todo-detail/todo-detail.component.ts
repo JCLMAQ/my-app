@@ -4,16 +4,16 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule }
 import { DateAdapter } from '@angular/material/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MATERIAL } from '@fe/material';
-import { TodoInterface } from '../store/todo.model';
+import { TodoPartialInterface } from '../store/todo.model';
 import { TodoStore } from '../store/todo.state';
 
 interface TodoForm
   extends FormGroup<{
-    id: FormControl<string>;
-    title: FormControl<string>;
-    content: FormControl<string>;
-    todoState: FormControl<string>;
-    orderTodo: FormControl<number>;
+    id: FormControl<string| undefined | null>;
+    title?: FormControl<string | undefined | null>;
+    content?: FormControl<string| undefined | null>;
+    todoState?: FormControl<string| undefined | null>;
+    orderTodo?: FormControl<number| undefined | null>;
   }> {}
 
 
@@ -38,17 +38,15 @@ export class TodoDetailComponent implements OnInit{
 
   readonly todoStore = inject(TodoStore);
 
-  public todo: TodoInterface | undefined | null;
+  public todo: TodoPartialInterface | undefined | null;
 
-  form!: TodoForm;
+  form!: FormGroup;
 
   todoId!: string;
-  isAddMode!: boolean;
-  isAdmin!: boolean; // Needed to be sure that the user has an Id
-  loading = false;
+
   submitted = false;
-  hidePassword = true;
   mode: 'create' | 'update' | 'view' | undefined;
+  isAdmin: boolean = false
   formControls = {};
 
   constructor(
@@ -60,21 +58,52 @@ export class TodoDetailComponent implements OnInit{
   ) {
     this.mode = 'view'
   }
+
   ngOnInit(): void {
     this.todoId = this.route.snapshot.params['id'];
+    this.todoStore.selectedId()=== this.todoId;
+    this.todo = this.todoStore.selectedItem()
     // this.isAddMode = !this.userId; // Only for User profil
     this.mode = this.route.snapshot.params['mode'];
+
+    this.formControls = {
+      title: ['', []],
+      content: ['',[]]
+    }
+
+    this.todo = this.todoStore.items().find((todo)=> todo.id === this.todoId);
+
+    if (this.mode === 'update' || this.mode ===  'view'){
+      this.form = this.fb.group(this.formControls);
+
+      this.todo = this.todoStore.todoEntities().find((todo)=> todo.id === this.todoId);
+      console.log("this.todo init: ", this.todo)
+      this.form.patchValue({
+        id: this.todoId,
+        title: this.todo?.title,
+        content: this.todo?.content
+      });
+      // if(this.mode == 'view' ) { this.form.disable()}
+    } else
+        if (this.mode == 'create' ) {
+        // this.form = this.fb.group({
+        //     ...this.formControls,
+        // });
+      }
 
   }
 
   reload(id: string | undefined) {
 
-    if (this.mode == 'update' || 'view') {
-    //   this.form.patchValue({...data.course})
+    if(this.mode === 'update' || this.mode ===  'view') {
+      this.todo = this.todoStore.items().find((todo)=> todo.id === id)
+      // this.form.patchValue({...this.todo})
       this.form.patchValue({
-
+        id: this.todo?.id,
+        title: this.todo?.title,
+        content: this.todo?.content
       });
-    } else if (this.mode == 'create' || this.isAddMode ) {
+    } else if (this.mode == 'create'  ) {
       // this.form = this.fb.group({
       //     ...this.formControls,
 
