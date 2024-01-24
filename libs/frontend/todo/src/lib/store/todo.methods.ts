@@ -25,10 +25,11 @@ export function withTodosMethods() {
       async load() {
         patchState(store, setLoading());
         const items = await todoService.load();
-        console.log("Items just fetched : ", items)
+      console.log("Store methods - Items just fetched : ", items)
         patchState(store, { items },setLoaded());
-        console.log("Items Loaded in the store: ", store)
-        patchState(store, setAllEntities(items, { collection: 'todo'}))
+      console.log("Store methods - Items Loaded in the store")
+        patchState(store, setAllEntities( items, { collection: 'todo'}))
+      console.log("Store methods - Entities Loaded in the store")
       },
 
       async add(data: {

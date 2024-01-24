@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, effect, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MATERIAL } from '@fe/material';
-import { TodoPartialInterface } from '../store/todo.model';
+import { patchState } from '@ngrx/signals';
+import { TodoInterface, TodoPartialInterface } from '../store/todo.model';
 import { TodoStore } from '../store/todo.state';
 
 interface TodoForm
@@ -27,7 +28,7 @@ interface TodoForm
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [TodoStore],
   templateUrl: './todo-detail.component.html',
   styleUrl: './todo-detail.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -44,10 +45,14 @@ export class TodoDetailComponent implements OnInit{
 
   todoId!: string;
 
+  todosItems!: TodoInterface[];
+
   submitted = false;
   mode: 'create' | 'update' | 'view' | undefined;
   isAdmin: boolean = false
-  formControls = {};
+  formControls = {title: ['', []],
+  content: ['',[]]};
+
 
   constructor(
     private fb: FormBuilder,
@@ -56,58 +61,53 @@ export class TodoDetailComponent implements OnInit{
     private dateAdapter: DateAdapter<Date>,
     // private alertService: AlertService,
   ) {
-    this.mode = 'view'
+    effect(()=> {
+      this.fetchData();
+    //   const state = getState(this.todoStore);
+    // console.log('Effect contructor - Todo state changed effects - details', state);
+    })
+    patchState(this.todoStore, { selectedId: this.todoId});
+    console.log("Contructor - After Effect: Selected id Post Store: ", this.todoStore.selectedId())
+    console.log("Contructor - After Effect:Selected Post: ", this.todoStore.selectedItem())
+
+
+  console.log("this.todo after-effect: ", this.todo)
+  }
+
+  fetchData(): void {
+    this.todosItems = this.todoStore.todoEntities();
+  console.log('todoEntities fetched - details: ', this.todoStore.todoEntities())
+    this.todo = this.todoStore.todoEntities().find((todo)=> todo.id === this.todoId);
+  console.log('todoEntity fetched - details: ', this.todo);
+    this.reload(this.todoId)
+    // this.todoStore.selectedId()=== this.todoId;
+    // this.todo = this.todoStore.selectedItem()
   }
 
   ngOnInit(): void {
     this.todoId = this.route.snapshot.params['id'];
-    this.todoStore.selectedId()=== this.todoId;
-    this.todo = this.todoStore.selectedItem()
-    // this.isAddMode = !this.userId; // Only for User profil
     this.mode = this.route.snapshot.params['mode'];
-
+  // console.log("ng init todoID: ",this.todoId);
+  // console.log("ng init mode: ",this.mode);
     this.formControls = {
       title: ['', []],
       content: ['',[]]
     }
-
-    this.todo = this.todoStore.items().find((todo)=> todo.id === this.todoId);
-
-    if (this.mode === 'update' || this.mode ===  'view'){
-      this.form = this.fb.group(this.formControls);
-
-      this.todo = this.todoStore.todoEntities().find((todo)=> todo.id === this.todoId);
-      console.log("this.todo init: ", this.todo)
-      this.form.patchValue({
-        id: this.todoId,
-        title: this.todo?.title,
-        content: this.todo?.content
-      });
-      // if(this.mode == 'view' ) { this.form.disable()}
-    } else
-        if (this.mode == 'create' ) {
-        // this.form = this.fb.group({
-        //     ...this.formControls,
-        // });
-      }
-
+    this.form = this.fb.group(this.formControls);
+  console.log("End of ngInit ")
   }
 
   reload(id: string | undefined) {
-
     if(this.mode === 'update' || this.mode ===  'view') {
-      this.todo = this.todoStore.items().find((todo)=> todo.id === id)
-      // this.form.patchValue({...this.todo})
       this.form.patchValue({
         id: this.todo?.id,
         title: this.todo?.title,
         content: this.todo?.content
       });
     } else if (this.mode == 'create'  ) {
-      // this.form = this.fb.group({
-      //     ...this.formControls,
-
-      // });
+      this.form = this.fb.group({
+          ...this.formControls,
+      });
     }
   }
 

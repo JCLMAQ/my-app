@@ -61,7 +61,7 @@
       <!-- <button (click)="onSubmit()" mat-raised-button color="primary">Save</button> -->
     </mat-card-actions>
     <mat-card-footer class="form-val">
-      {{form.value | json}} / {{this.todo}}
+      {{this.todoStore.selectedId()}} / {{form.value | json}} /
     </mat-card-footer>
   </mat-card>
 </div>
