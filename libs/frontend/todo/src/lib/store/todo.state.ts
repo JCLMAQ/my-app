@@ -2,10 +2,10 @@
 // import { withCallState } from '@angular-architects/ngrx-toolkit';
 import { SelectionModel } from '@angular/cdk/collections';
 import { computed } from '@angular/core';
-import { withCallState, withLogger } from '@fe/shared/util-signal-store';
+import { withLogger } from '@fe/shared/util-signal-store';
 import { signalStore, withComputed, withHooks, withState } from '@ngrx/signals';
 import { withTodosMethods } from './todo.methods';
-import { TodoInterface, TodoPartialInterface } from './todo.model';
+import { TodoInterface } from './todo.model';
 
 export interface TodoStateInterface {
   items: TodoInterface[],
@@ -14,10 +14,9 @@ export interface TodoStateInterface {
     orgId: string | null,
   },
   selectedId: string | null,
-  selectedItem: TodoPartialInterface,
+  selectedItemRow: TodoInterface | null,
   selectedIds: string [],
   selection: SelectionModel<TodoInterface>
-
 }
 
 export const initialTodoState: TodoStateInterface = {
@@ -26,8 +25,8 @@ export const initialTodoState: TodoStateInterface = {
     ownerId: "test",
     orgId: "test"
   },
-  selectedItem: {},
-  selectedId: "",
+  selectedItemRow: null,
+  selectedId: null,
   selectedIds: [],
   selection: new SelectionModel<TodoInterface>(true, [])
 
@@ -40,7 +39,7 @@ export const initialTodoState: TodoStateInterface = {
 export const TodoStore = signalStore(
     { providedIn: 'root' },
 
-    withCallState({collection: 'todo'}),
+    // withCallState({collection: 'todo'}),
     // withEntities( {entity: type<TodoInterface>(), collection: 'todo'}),
     // withSelectedEntity(),
     withLogger('todo'),

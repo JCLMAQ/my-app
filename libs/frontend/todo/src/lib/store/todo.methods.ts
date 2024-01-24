@@ -5,7 +5,7 @@ import {
   signalStoreFeature,
   type,
   withMethods,
-  withState,
+  withState
 } from '@ngrx/signals';
 import { addEntity, removeEntity, setAllEntities, updateEntity, withEntities } from '@ngrx/signals/entities';
 import { TodoService } from '../services/todo.service';
@@ -17,6 +17,7 @@ export function withTodosMethods() {
   return signalStoreFeature(
     { state: type<TodoStateInterface>() },
     withCallState(),
+    // withCallState({collection: 'todo'}),
     withState(initialTodoState),
     withUndoRedo(),
     withEntities({ entity: type<TodoInterface>(), collection: 'todo'}),
@@ -58,6 +59,11 @@ export function withTodosMethods() {
       patchState(store, setLoaded());
     },
 
+    onNavigateToDetail(id: string, selectedTodo: TodoInterface | undefined) {
+      patchState(store, { selectedId: id });
+      patchState(store, { selectedItemRow: selectedTodo })
+      patchState(store, )
+    }
     })),
 
   )

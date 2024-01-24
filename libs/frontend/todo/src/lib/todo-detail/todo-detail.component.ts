@@ -45,7 +45,7 @@ export class TodoDetailComponent implements OnInit{
 
   todoId!: string;
 
-  todosItems!: TodoInterface[];
+  todosEntities!: TodoInterface[];
 
   submitted = false;
   mode: 'create' | 'update' | 'view' | undefined;
@@ -75,10 +75,11 @@ export class TodoDetailComponent implements OnInit{
   }
 
   fetchData(): void {
-    this.todosItems = this.todoStore.todoEntities();
+    this.todosEntities = this.todoStore.todoEntities();
+    console.log("C'EST ICI:", this.todoStore.selectedId())
   console.log('todoEntities fetched - details: ', this.todoStore.todoEntities())
     this.todo = this.todoStore.todoEntities().find((todo)=> todo.id === this.todoId);
-  console.log('todoEntity fetched - details: ', this.todo);
+  console.log('todo fetched result - details: ', this.todo);
     this.reload(this.todoId)
     // this.todoStore.selectedId()=== this.todoId;
     // this.todo = this.todoStore.selectedItem()

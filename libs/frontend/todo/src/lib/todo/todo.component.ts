@@ -43,12 +43,12 @@ ownerId = "7c672043-24e4-45a9-909c-693ba5044785"
   // selection = new SelectionModel<TodoInterface>(true, []);
 
   columnsToDisplay: string[] = ['select', 'numSeq','title'];
-  columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand',  'tools'];
+  // columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand',  'tools'];
+  columnsToDisplayWithExpand = [...this.columnsToDisplay,  'tools'];
   expandedElement!: TodoInterface | null;
 
-  todosItems!: TodoInterface[];
+  todosEntities!: TodoInterface[];
   dataSource = new MatTableDataSource<TodoInterface>;
-
 
   index: number | undefined
 
@@ -77,17 +77,17 @@ ngOnInit(): void {
 }
 
 fetchData(): void {
-  this.todosItems = this.todoStore.todoEntities();
-  this.dataSource = new MatTableDataSource(this.todosItems);
+  this.todosEntities = this.todoStore.todoEntities();
+  this.dataSource = new MatTableDataSource(this.todosEntities);
   this.dataSource.paginator = this.paginator!;
   this.dataSource.sort = this.sort!;
-  console.log("dataSource - nginit: ",this.dataSource)
-  console.log("Todos - nginit: ",this.todosItems)
-  console.log('todoEntities: ', this.todoStore.todoEntities())
+  // console.log("dataSource - nginit: ",this.dataSource)
+  // console.log("Todos - nginit: ",this.todosEntities)
+  // console.log('todoEntities: ', this.todoStore.todoEntities())
 }
 
 ngAfterViewInit(): void {
-  this.dataSource = new MatTableDataSource(this.todosItems);
+  this.dataSource = new MatTableDataSource(this.todosEntities);
   this.dataSource.paginator = this.paginator!;
   this.dataSource.sort = this.sort!;
 }
@@ -106,7 +106,7 @@ ngAfterViewInit(): void {
     return numSelected === numRows;
   }
  /** Selects all rows if they are not all selected; otherwise clear selection. */
- masterToggle() {
+  masterToggle() {
   this.isAllSelected() ?
       this.todoStore.selection().clear() :
       this.dataSource.data.forEach(row => this.todoStore.selection().select(row));
@@ -128,25 +128,17 @@ checkboxLabel(row: TodoInterface): string {
   }
 }
 
-onNavigate() {
-
-}
-
-// Goto the detail page for view only
-// navigate(id: String, index: String) {
-//   this.router.navigate([this.routeToDetail, id, 'view']);
-// }
-
-navigate( todo: TodoInterface ) {
-  this.router.navigate([this.routeToDetail, todo, 'view']);
-}
-
 navigateButton( id: string, mode: string ) {
   // mode: 'view' | 'update' | 'create';
+  const selectedTodo = this.todoStore.todoEntities().find((todo)=> todo.id === id);
+  this.todoStore.onNavigateToDetail(id, selectedTodo)
+  getState(this.todoStore);
+    // patchState(this.todoStore, { selectedId: id });
+    // patchState(this.todoStore, { selectedItemRow: selectedTodo })
     this.router.navigate([this.routeToDetail, id, mode]);
 }
 
-addOneUser() {
+addOne() {
   this.router.navigate([this.routeToDetail, '', 'create']);
 }
 // Delete the selected item
