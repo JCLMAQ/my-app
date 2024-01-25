@@ -6,7 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { MATERIAL } from '@fe/material';
-import { getState } from '@ngrx/signals';
+import { getState, patchState } from '@ngrx/signals';
 import { TodoInterface } from '../store/todo.model';
 import { TodoStore } from '../store/todo.state';
 // import { CallState } from '@fe/shared/util-common';
@@ -29,7 +29,7 @@ import { TodoStore } from '../store/todo.state';
   ],
   styleUrl: './todo.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [TodoStore],
+  // providers: [TodoStore],
 })
 
 export class TodoComponent implements OnInit, AfterViewInit{
@@ -130,10 +130,11 @@ checkboxLabel(row: TodoInterface): string {
 
 navigateButton( id: string, mode: string ) {
   // mode: 'view' | 'update' | 'create';
-  const selectedTodo = this.todoStore.todoEntities().find((todo)=> todo.id === id);
-  this.todoStore.onNavigateToDetail(id, selectedTodo)
+  // const selectedTodo = this.todoStore.todoEntities().find((todo)=> todo.id === id);
+  // this.todoStore.onNavigateToDetail(id, selectedTodo)
+  patchState(this.todoStore, { selectedId: id });
   getState(this.todoStore);
-    // patchState(this.todoStore, { selectedId: id });
+
     // patchState(this.todoStore, { selectedItemRow: selectedTodo })
     this.router.navigate([this.routeToDetail, id, mode]);
 }

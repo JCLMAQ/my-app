@@ -28,7 +28,7 @@ interface TodoForm
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [TodoStore],
+  // providers: [TodoStore],
   templateUrl: './todo-detail.component.html',
   styleUrl: './todo-detail.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -61,6 +61,8 @@ export class TodoDetailComponent implements OnInit{
     private dateAdapter: DateAdapter<Date>,
     // private alertService: AlertService,
   ) {
+    this.todoId = this.route.snapshot.params['id'];
+    this.mode = this.route.snapshot.params['mode'];
     effect(()=> {
       this.fetchData();
     //   const state = getState(this.todoStore);
@@ -77,6 +79,7 @@ export class TodoDetailComponent implements OnInit{
   fetchData(): void {
     this.todosEntities = this.todoStore.todoEntities();
     console.log("C'EST ICI:", this.todoStore.selectedId())
+    console.log("C'EST ICI BIS:", this.todoStore.selectedItem())
   console.log('todoEntities fetched - details: ', this.todoStore.todoEntities())
     this.todo = this.todoStore.todoEntities().find((todo)=> todo.id === this.todoId);
   console.log('todo fetched result - details: ', this.todo);
