@@ -71,7 +71,6 @@ export class TodoDetailComponent implements OnInit{
 
   fetchData(): void {
     this.reload()
-    // this.reload(this.todoId)
   }
 
   ngOnInit(): void {
@@ -86,7 +85,6 @@ export class TodoDetailComponent implements OnInit{
   }
 
   reload() {
-    // reload(id: string | undefined) {
     if(this.mode === 'update' || this.mode ===  'view') {
       this.form.patchValue({
         id: this.todoStore.selectedItem()?.id,

@@ -65,10 +65,8 @@ constructor() {
   console.log("Constructor step")
   effect(()=> {
     this.todoStore.todoLoaded();
-    console.log("Loaded Statute: ", this.todoStore.todoLoaded())
     this.fetchData();
-    const state = getState(this.todoStore);
-    console.log('Todo state changed', state);
+    getState(this.todoStore);
   })
 }
 
@@ -120,9 +118,6 @@ checkboxLabel(row: TodoInterface): string {
 }
 
 navigateButton( id: string, mode: string ) {
-  // mode: 'view' | 'update' | 'create';
-  const todoItem = this.todoStore.selectedItem()
-  this.todoStore.selection().toggle(todoItem!)
     this.router.navigate([this.routeToDetail, id, mode]);
 }
 
