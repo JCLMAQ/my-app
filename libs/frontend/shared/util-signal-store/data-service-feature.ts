@@ -3,7 +3,7 @@ import { SignalStoreFeature, patchState, signalStoreFeature, withComputed, withM
 import { EntityId, setAllEntities } from "@ngrx/signals/entities";
 import { EntityState, NamedEntitySignals } from "@ngrx/signals/entities/src/models";
 import { StateSignal } from "@ngrx/signals/src/state-signal";
-import { CallState, getCallStateKeys, setLoaded, setLoading } from "./call-state.feature";
+import { CallState, getCallStateKeys, setLoaded, setLoading } from "./call-state-4ds.feature";
 
 export type Filter = Record<string, unknown>;
 export type Entity = { id: EntityId };

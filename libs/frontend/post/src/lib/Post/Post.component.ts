@@ -27,15 +27,15 @@ import { PostStore } from '../store/post.state';
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ],
-  providers: [PostStore],
+  // providers: [PostStore],
 })
 export class PostComponent implements OnInit {
 
   readonly postStore = inject(PostStore);
   readonly router = inject(Router)
 
-selectedPostId = this.postStore.selectedPostIds();
-selectedPostEntities = this.postStore.selectedPostEntities();
+selectedPostId = this.postStore.selectedId();
+selectedPostEntities = this.postStore.postEntities();
 
 
 
@@ -51,8 +51,8 @@ selectedPostEntities = this.postStore.selectedPostEntities();
   constructor() {
     console.log("Constructor step")
     effect(()=> {
-      this.postStore.loaded();
-      console.log("Loaded Statute: ", this.postStore.loaded())
+      this.postStore.postLoaded();
+      console.log("Loaded Statute: ", this.postStore.postLoaded())
       this.fetchData();
       const state = getState(this.postStore);
       console.log('posts state changed', state);
@@ -83,7 +83,7 @@ selectedPostEntities = this.postStore.selectedPostEntities();
 
   selectedPost(itemId: string) {
     // this.postSelected = this.postStore.postEntities().findIndex(id: itemId)
-    const selected = this.postStore.selectedPostEntities();
+    const selected = this.postStore.selectedIds();
     console.log("selected Item: ", itemId)
     console.log("selected Post: ", selected)
     console.log("selected Post: ", this.postSelected)

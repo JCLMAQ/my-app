@@ -1,6 +1,6 @@
 <p>Post works!</p>
 
-@if (postStore.loading()) {
+@if (postStore.postLoading()) {
   <h2>Loading...</h2>
       <mat-progress-bar
           mode="indeterminate"
@@ -9,12 +9,12 @@
       </mat-progress-bar>
       }
 
-@if (postStore.loaded()) {
+@if (postStore.postLoaded()) {
   <h2>Loaded...</h2>
   }
 
-@if (postStore.error()) {
-  <div>{{ postStore.error() }}</div>
+@if (postStore.postError()) {
+  <div>{{ postStore.postError() }}</div>
 }
 
 <form [formGroup]="addForm">

@@ -1,6 +1,6 @@
 <h2>Todo</h2>
 
-@if (todoStore.loading()) {
+@if (todoStore.todoLoading()) {
   <h2>Loading...</h2>
   <mat-progress-bar
   mode="indeterminate"
@@ -13,8 +13,8 @@
   <h2>Loaded...</h2>
   } -->
 
-@if (todoStore.error()) {
-  <div>{{ todoStore.error() }}</div>
+@if (todoStore.todoError()) {
+  <div>{{ todoStore.todoError() }}</div>
 }
 <!-- <button mat-button (click)="fetchData()">Fetch</button> -->
 <div>

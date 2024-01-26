@@ -64,8 +64,8 @@ ownerId = "7c672043-24e4-45a9-909c-693ba5044785"
 constructor() {
   console.log("Constructor step")
   effect(()=> {
-    this.todoStore.loaded();
-    console.log("Loaded Statute: ", this.todoStore.loaded())
+    this.todoStore.todoLoaded();
+    console.log("Loaded Statute: ", this.todoStore.todoLoaded())
     this.fetchData();
     const state = getState(this.todoStore);
     console.log('Todo state changed', state);

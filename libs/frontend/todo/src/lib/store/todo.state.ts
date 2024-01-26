@@ -2,7 +2,7 @@
 // import { withCallState } from '@angular-architects/ngrx-toolkit';
 import { SelectionModel } from '@angular/cdk/collections';
 import { computed } from '@angular/core';
-import { withCallState, withLogger } from '@fe/shared/util-signal-store';
+import { withLogger, withUndoRedo } from '@fe/shared/util-signal-store';
 import { signalStore, withComputed, withHooks, withState } from '@ngrx/signals';
 import { withTodosMethods } from './todo.methods';
 import { TodoInterface } from './todo.model';
@@ -27,7 +27,6 @@ export const initialTodoState: TodoStateInterface = {
   selectedId: null,
   selectedIds: [],
   selection: new SelectionModel<TodoInterface>(true, [])
-
 };
 
 // Base on: https://offering.solutions/blog/articles/2023/12/03/ngrx-signal-store-getting-started/
@@ -36,23 +35,15 @@ export const initialTodoState: TodoStateInterface = {
 
 export const TodoStore = signalStore(
     { providedIn: 'root' },
-
-    withCallState({collection: 'todo'}),
-    // withEntities( {entity: type<TodoInterface>(), collection: 'todo'}),
-    // withSelectedEntity(),
     withLogger('todo'),
-
     withState(initialTodoState),
     withTodosMethods(),
-    // withTodosSelectors(),
-    // withDataService({
-    //   dataServiceType: TodoService,
-    //   filter: { ownerId: "", orgId: "" },
-    //   collection: 'todo'
-    // }),
     withComputed(({ items, selectedId }) => ({
       selectedItem: computed(() => items().find((x) => x.id === selectedId())),
     })),
+    withUndoRedo({
+      collections: ['todo'],
+    }),
     withHooks({
       onInit:
         (store) =>  store.load(),
