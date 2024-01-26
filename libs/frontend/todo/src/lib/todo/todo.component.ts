@@ -6,7 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { MATERIAL } from '@fe/material';
-import { getState, patchState } from '@ngrx/signals';
+import { getState } from '@ngrx/signals';
 import { TodoInterface } from '../store/todo.model';
 import { TodoStore } from '../store/todo.state';
 // import { CallState } from '@fe/shared/util-common';
@@ -81,9 +81,6 @@ fetchData(): void {
   this.dataSource = new MatTableDataSource(this.todosEntities);
   this.dataSource.paginator = this.paginator!;
   this.dataSource.sort = this.sort!;
-  // console.log("dataSource - nginit: ",this.dataSource)
-  // console.log("Todos - nginit: ",this.todosEntities)
-  // console.log('todoEntities: ', this.todoStore.todoEntities())
 }
 
 ngAfterViewInit(): void {
@@ -91,12 +88,6 @@ ngAfterViewInit(): void {
   this.dataSource.paginator = this.paginator!;
   this.dataSource.sort = this.sort!;
 }
-
-
-  // addTodo() {
-  //   this.todoStore.addTodo(this.form.value.todoValue);
-  //   this.form.reset();
-  // }
 
  // Selection
   /** Whether the number of selected elements matches the total number of rows. */
@@ -130,21 +121,24 @@ checkboxLabel(row: TodoInterface): string {
 
 navigateButton( id: string, mode: string ) {
   // mode: 'view' | 'update' | 'create';
-  // const selectedTodo = this.todoStore.todoEntities().find((todo)=> todo.id === id);
-  // this.todoStore.onNavigateToDetail(id, selectedTodo)
-  patchState(this.todoStore, { selectedId: id });
-  getState(this.todoStore);
-
-    // patchState(this.todoStore, { selectedItemRow: selectedTodo })
+  const todoItem = this.todoStore.selectedItem()
+  this.todoStore.selection().toggle(todoItem!)
     this.router.navigate([this.routeToDetail, id, mode]);
 }
 
 addOne() {
   this.router.navigate([this.routeToDetail, '', 'create']);
 }
+
+  // addTodo() {
+  //   this.todoStore.addTodo(this.form.value.todoValue);
+  //   this.form.reset();
+  // }
+
+
 // Delete the selected item
 async remove( id: string ) {
-  // const user = this.userEntityService.delete(user.id = id)
+
 }
 
 virtualRemove(id: string) {
@@ -157,5 +151,3 @@ onRowClicked(row: number) {
 }
 
 }
-
-

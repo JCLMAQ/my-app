@@ -24,13 +24,12 @@ export function withTodosMethods() {
 
     withMethods((store, todoService = inject(TodoService)) => ({
       async load() {
-        patchState(store, setLoading());
-        const items = await todoService.load();
-      console.log("Store methods - Items just fetched : ", items)
-        patchState(store, { items },setLoaded());
-      console.log("Store methods - Items Loaded in the store")
-        patchState(store, setAllEntities( items, { collection: 'todo'}))
-      console.log("Store methods - Entities Loaded in the store")
+        if (!store.loaded()) {
+          patchState(store, setLoading());
+          const items = await todoService.load();
+          patchState(store, { items },setLoaded());
+          patchState(store, setAllEntities( items, { collection: 'todo'}))
+        }
       },
 
       async add(data: {
@@ -38,33 +37,27 @@ export function withTodosMethods() {
         title: string| undefined | null;
         ownerId: string;
         orgId: string }) {
-      patchState(store, setLoading());
-      const todo = await todoService.addItem(data);
-      patchState(store, addEntity( todo, { collection: 'todo'}));
-      patchState(store, setLoaded());
-    },
+        patchState(store, setLoading());
+        const todo = await todoService.addItem(data);
+        patchState(store, addEntity( todo, { collection: 'todo'}));
+        patchState(store, setLoaded());
+      },
 
-    async remove(id: string) {
-      patchState(store, setLoading());
-      await todoService.deleteItem(id);
-      patchState(store, removeEntity( id, { collection: 'todo'}));
-      patchState(store, setLoaded());
-    },
+      async remove(id: string) {
+        patchState(store, setLoading());
+        await todoService.deleteItem(id);
+        patchState(store, removeEntity( id, { collection: 'todo'}));
+        patchState(store, setLoaded());
+      },
 
-    async update(id: string, data: TodoInterface) {
-      patchState(store, setLoading());
-      await todoService.updateItem(data);
-      const changes = { title: data.title , content: data.content }
-      patchState(store, updateEntity({ id, changes }, { collection: 'todo'}));
-      patchState(store, setLoaded());
-    },
+      async update(id: string, data: TodoInterface) {
+        patchState(store, setLoading());
+        await todoService.updateItem(data);
+        const changes = { title: data.title , content: data.content }
+        patchState(store, updateEntity({ id, changes }, { collection: 'todo'}));
+        patchState(store, setLoaded());
+      },
 
-    onNavigateToDetail(id: string, selectedTodo: TodoInterface | undefined) {
-      patchState(store, { selectedId: id });
-      patchState(store, { selectedItemRow: selectedTodo })
-      patchState(store, )
-    }
     })),
-
   )
 }

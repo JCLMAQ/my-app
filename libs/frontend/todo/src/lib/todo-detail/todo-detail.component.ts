@@ -65,34 +65,18 @@ export class TodoDetailComponent implements OnInit{
     this.mode = this.route.snapshot.params['mode'];
     effect(()=> {
       this.fetchData();
-    //   const state = getState(this.todoStore);
-    // console.log('Effect contructor - Todo state changed effects - details', state);
     })
     patchState(this.todoStore, { selectedId: this.todoId});
-    console.log("Contructor - After Effect: Selected id Post Store: ", this.todoStore.selectedId())
-    console.log("Contructor - After Effect:Selected Post: ", this.todoStore.selectedItem())
-
-
-  console.log("this.todo after-effect: ", this.todo)
   }
 
   fetchData(): void {
-    this.todosEntities = this.todoStore.todoEntities();
-    console.log("C'EST ICI:", this.todoStore.selectedId())
-    console.log("C'EST ICI BIS:", this.todoStore.selectedItem())
-  console.log('todoEntities fetched - details: ', this.todoStore.todoEntities())
-    this.todo = this.todoStore.todoEntities().find((todo)=> todo.id === this.todoId);
-  console.log('todo fetched result - details: ', this.todo);
-    this.reload(this.todoId)
-    // this.todoStore.selectedId()=== this.todoId;
-    // this.todo = this.todoStore.selectedItem()
+    this.reload()
+    // this.reload(this.todoId)
   }
 
   ngOnInit(): void {
     this.todoId = this.route.snapshot.params['id'];
     this.mode = this.route.snapshot.params['mode'];
-  // console.log("ng init todoID: ",this.todoId);
-  // console.log("ng init mode: ",this.mode);
     this.formControls = {
       title: ['', []],
       content: ['',[]]
@@ -101,12 +85,13 @@ export class TodoDetailComponent implements OnInit{
   console.log("End of ngInit ")
   }
 
-  reload(id: string | undefined) {
+  reload() {
+    // reload(id: string | undefined) {
     if(this.mode === 'update' || this.mode ===  'view') {
       this.form.patchValue({
-        id: this.todo?.id,
-        title: this.todo?.title,
-        content: this.todo?.content
+        id: this.todoStore.selectedItem()?.id,
+        title: this.todoStore.selectedItem()?.title,
+        content: this.todoStore.selectedItem()?.content
       });
     } else if (this.mode == 'create'  ) {
       this.form = this.fb.group({
@@ -118,11 +103,9 @@ export class TodoDetailComponent implements OnInit{
   save() {
     const val = this.form.value;
     if (this.mode == 'update') {
-        // this.usersService.updateUser(user.id, user);
     } else if (this.mode == 'create') {
 
-        // this.usersService.createUser(user, {isOptimistic: false})
-
+ // todo
 
     }
     this.router.navigate(['todos']);

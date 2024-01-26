@@ -52,7 +52,8 @@
       <button mat-icon-button matTooltip="Last record" (click)="last()">
         <mat-icon>last_page</mat-icon>
       </button>
-      <button mat-icon-button placeholder="Reload" matTooltip="Reset" (click)="reload(form.value.id)">
+      <button mat-icon-button placeholder="Reload" matTooltip="Reset" (click)="reload()">
+        <!-- <button mat-icon-button placeholder="Reload" matTooltip="Reset" (click)="reload(form.value.id)"> -->
         <mat-icon>autorenew</mat-icon>
       </button>
       <button mat-icon-button matTooltip="Back to list" [routerLink]="['/todos']">
@@ -65,3 +66,4 @@
     </mat-card-footer>
   </mat-card>
 </div>
+<div>Selected Items: {{todoStore.selection().selected.length}}</div>
