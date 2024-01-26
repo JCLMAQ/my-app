@@ -2,7 +2,7 @@
 // import { withCallState } from '@angular-architects/ngrx-toolkit';
 import { SelectionModel } from '@angular/cdk/collections';
 import { computed } from '@angular/core';
-import { withLogger, withUndoRedo } from '@fe/shared/util-signal-store';
+import { withLogger } from '@fe/shared/util-signal-store';
 import { signalStore, withComputed, withHooks, withState } from '@ngrx/signals';
 import { withTodosMethods } from './todo.methods';
 import { TodoInterface } from './todo.model';
@@ -41,9 +41,6 @@ export const TodoStore = signalStore(
     withComputed(({ items, selectedId }) => ({
       selectedItem: computed(() => items().find((x) => x.id === selectedId())),
     })),
-    withUndoRedo({
-      collections: ['todo'],
-    }),
     withHooks({
       onInit:
         (store) =>  store.load(),

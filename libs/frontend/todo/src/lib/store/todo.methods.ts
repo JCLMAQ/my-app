@@ -1,5 +1,5 @@
 import { inject } from '@angular/core';
-import { setLoaded, setLoading, withCallState } from '@fe/shared/util-signal-store';
+import { setLoaded, setLoading, withCallState, withUndoRedo } from '@fe/shared/util-signal-store';
 import {
   patchState,
   signalStoreFeature,
@@ -17,7 +17,6 @@ export function withTodosMethods() {
   return signalStoreFeature(
     { state: type<TodoStateInterface>() },
     withState(initialTodoState),
-    // withUndoRedo(),
     withEntities({ entity: type<TodoInterface>(), collection: 'todo'}),
     withCallState({collection: 'todo'}),
     withMethods((store, todoService = inject(TodoService)) => ({
@@ -58,5 +57,8 @@ export function withTodosMethods() {
       },
 
     })),
+    withUndoRedo({
+      collections: ['todo'],
+    }),
   )
 }
