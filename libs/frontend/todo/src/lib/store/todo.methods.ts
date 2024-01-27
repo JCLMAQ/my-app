@@ -56,6 +56,10 @@ export function withTodosMethods() {
         patchState(store, setLoaded('todo'));
       },
 
+      addSelected(row: TodoInterface, selectedRow: boolean) {
+        patchState(store, { selectedRowIds: { ...selectedRowIds(), [row.id]: selectedRow}} )
+      }
+
     })),
     withUndoRedo({
       collections: ['todo'],

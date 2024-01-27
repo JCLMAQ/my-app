@@ -67,3 +67,10 @@
   </mat-card>
 </div>
 <div>Selected Items: {{todoStore.selection().selected.length}}</div>
+<div>Collection : {{todoStore.selection().selected | json}}</div>
+<div>Selected entries : {{todoStore.selection().selected.entries.length }}</div>
+<!-- <div>{{ todoStore.selection().selected | json }}</div> -->
+<!-- <div>Collection : {{todoStore.selectedIds() | json}}</div> -->
+<span> Selected Items: {{todoStore.selectedItems()}} | json </span>
+<br>
+<span> Selected Entries {{todoStore.selection().selected.entries }} </span>

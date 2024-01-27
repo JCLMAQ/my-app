@@ -14,7 +14,7 @@ export interface TodoStateInterface {
     orgId: string | null,
   },
   selectedId: string | null,
-  selectedIds: string [],
+  selectedRowIds: Record<string, boolean>,
   selection: SelectionModel<TodoInterface>
 }
 
@@ -25,8 +25,8 @@ export const initialTodoState: TodoStateInterface = {
     orgId: "test"
   },
   selectedId: null,
-  selectedIds: [],
-  selection: new SelectionModel<TodoInterface>(true, [])
+  selectedRowIds: {},
+  selection: new SelectionModel<TodoInterface>(true, []),
 };
 
 // Base on: https://offering.solutions/blog/articles/2023/12/03/ngrx-signal-store-getting-started/
@@ -38,8 +38,9 @@ export const TodoStore = signalStore(
     withLogger('todo'),
     withState(initialTodoState),
     withTodosMethods(),
-    withComputed(({ items, selectedId }) => ({
+    withComputed(({ items, selection, selectedId }) => ({
       selectedItem: computed(() => items().find((x) => x.id === selectedId())),
+      selectedItems: computed(() => selection().selected.entries)
     })),
     withHooks({
       onInit:

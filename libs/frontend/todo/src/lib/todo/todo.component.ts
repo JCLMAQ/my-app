@@ -66,7 +66,9 @@ constructor() {
   effect(()=> {
     this.todoStore.todoLoaded();
     this.fetchData();
-    getState(this.todoStore);
+    const state = getState(this.todoStore);
+      console.log('Todo state changed', state);
+    // getState(this.todoStore);
   })
 }
 
@@ -108,7 +110,9 @@ checkboxLabel(row: TodoInterface): string {
   return `${this.todoStore.selection().isSelected(row) ? 'deselect' : 'select'}`;
 }
 
- // Filter the list
+selectItem(element: TodoInterface) {
+  this.todoStore.selection().isSelected(element)
+} // Filter the list
  applyFilter(event: Event) {
   const filterValue = (event.target as HTMLInputElement).value;
   this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -118,6 +122,7 @@ checkboxLabel(row: TodoInterface): string {
 }
 
 navigateButton( id: string, mode: string ) {
+
     this.router.navigate([this.routeToDetail, id, mode]);
 }
 

@@ -45,7 +45,7 @@ export class TodoDetailComponent implements OnInit{
 
   todoId!: string;
 
-  todosEntities!: TodoInterface[];
+  todosCollection!: TodoInterface[];
 
   submitted = false;
   mode: 'create' | 'update' | 'view' | undefined;
@@ -71,6 +71,12 @@ export class TodoDetailComponent implements OnInit{
 
   fetchData(): void {
     this.reload()
+    const totalSelected = this.todoStore.selection().selected.entries
+    console.log(totalSelected)
+    console.log(this.todoStore.selectedItems())
+
+
+
   }
 
   ngOnInit(): void {
@@ -81,6 +87,7 @@ export class TodoDetailComponent implements OnInit{
       content: ['',[]]
     }
     this.form = this.fb.group(this.formControls);
+
   console.log("End of ngInit ")
   }
 
@@ -95,7 +102,8 @@ export class TodoDetailComponent implements OnInit{
       this.form = this.fb.group({
           ...this.formControls,
       });
-    }
+    };
+
   }
 
   save() {
@@ -121,7 +129,9 @@ export class TodoDetailComponent implements OnInit{
 
   virtualRemove() {}
 
-  next() {}
+  next() {
+    this.todoStore.selection.length
+  }
 
   last() {}
 

@@ -44,6 +44,7 @@
                   </th>
                   <td mat-cell *matCellDef="let element">
                     <mat-checkbox (click)="$event.stopPropagation()"
+                                  (click)="selectItem(element)"
                                   (change)="$event ? todoStore.selection().toggle(element) : null"
                                   [checked]="todoStore.selection().isSelected(element)">
                     </mat-checkbox>
@@ -140,8 +141,14 @@
     <!-- <span>Showing {{selection().selected.length}} items</span> -->
     @if (todoStore.selection().selected.length) {
       <span class="selected-text"> ({{todoStore.selection().selected.length}} items selected)</span>
+      <!-- <span> {{todoStore.todoCollection()}}  </span> -->
+      <span> {{todoStore.selection().selected | json}}  </span>
     }
     <br>
     <span> {{dataSource.data.length}} data length </span>
+    <br>
+    <span> Selected Items: {{todoStore.selectedItems()}} | json </span>
+    <span> Selected Entries {{todoStore.selection().selected.entries }} | json </span>
+
   </div>
 </div>
