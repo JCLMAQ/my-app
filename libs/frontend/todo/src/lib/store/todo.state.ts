@@ -37,11 +37,13 @@ export const TodoStore = signalStore(
     { providedIn: 'root' },
     withLogger('todo'),
     withState(initialTodoState),
-    withTodosMethods(),
-    withComputed(({ items, selection, selectedId }) => ({
+    withComputed(({ items, selection, selectedId, selectedRowIds }) => ({
       selectedItem: computed(() => items().find((x) => x.id === selectedId())),
+      selectedItemIndex: computed(()=> selectedRowIds().findIndex((x) => x === selectedId()) ),
       selectedItems: computed(() => selection().selected.entries)
     })),
+    withTodosMethods(),
+
     withHooks({
       onInit:
         (store) =>  store.load(),

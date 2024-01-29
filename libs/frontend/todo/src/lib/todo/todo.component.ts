@@ -112,11 +112,6 @@ ngAfterViewInit(): void {
     return `${this.todoStore.selection().isSelected(row) ? 'deselect' : 'select'}`;
   }
 
-  // selectUnselectItem(element: TodoInterface) {
-  //   const idSelected = element.id;
-  //   this.todoStore.toggleSelected(idSelected)
-  // }
-
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -126,6 +121,8 @@ ngAfterViewInit(): void {
   }
 
   navigateButton( id: string, mode: string ) {
+
+      this.todoStore.selectedItemUpdate(id);
       this.router.navigate([this.routeToDetail, id, mode]);
   }
 

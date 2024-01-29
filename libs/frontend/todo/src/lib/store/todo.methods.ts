@@ -66,6 +66,21 @@ export function withTodosMethods() {
           patchState(store, { selectedRowIds: updateSelectedRowId })
         }
       },
+
+      newSelectedItem(newSelectedItemIndex: number) {
+        const selectedId = store.selectedRowIds()[newSelectedItemIndex]
+        patchState(store,{ selectedId })
+      },
+
+      selectedItemUpdate(selectedId){
+        const allSelectedRowId = store.selectedRowIds();
+        const existSelectedRowId = allSelectedRowId.filter( item => item === selectedId)
+        if(!existSelectedRowId) {
+          patchState(store, { selectedRowIds: [ ...store.selectedRowIds(), selectedId] })
+        };
+        patchState(store,{ selectedId })
+      }
+
     })),
     withUndoRedo({
       collections: ['todo'],

@@ -4,7 +4,7 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule }
 import { DateAdapter } from '@angular/material/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MATERIAL } from '@fe/material';
-import { patchState } from '@ngrx/signals';
+import { patchState, signalState } from '@ngrx/signals';
 import { TodoInterface, TodoPartialInterface } from '../store/todo.model';
 import { TodoStore } from '../store/todo.state';
 
@@ -16,7 +16,6 @@ interface TodoForm
     todoState?: FormControl<string| undefined | null>;
     orderTodo?: FormControl<number| undefined | null>;
   }> {}
-
 
 @Component({
   selector: 'lib-todo-detail',
@@ -37,6 +36,11 @@ interface TodoForm
 
 export class TodoDetailComponent implements OnInit{
 
+   state = signalState({
+    currentPosition: 0,
+    lastItemPosition: 0
+   });
+
   readonly todoStore = inject(TodoStore);
 
   public todo: TodoPartialInterface | undefined | null;
@@ -50,8 +54,11 @@ export class TodoDetailComponent implements OnInit{
   submitted = false;
   mode: 'create' | 'update' | 'view' | undefined;
   isAdmin: boolean = false
-  formControls = {title: ['', []],
-  content: ['',[]]};
+  formControls = {
+    title: ['', []],
+    content: ['',[]]
+  };
+
 
 
   constructor(
@@ -66,17 +73,16 @@ export class TodoDetailComponent implements OnInit{
     effect(()=> {
       this.fetchData();
     })
+    // this.initNavButton();
     patchState(this.todoStore, { selectedId: this.todoId});
+    this.initNavButton();
   }
 
   fetchData(): void {
-    this.reload()
+    this.reload();
     const totalSelected = this.todoStore.selection().selected.entries
     console.log(totalSelected)
     console.log(this.todoStore.selectedItems())
-
-
-
   }
 
   ngOnInit(): void {
@@ -106,6 +112,8 @@ export class TodoDetailComponent implements OnInit{
 
   }
 
+
+
   save() {
     const val = this.form.value;
     if (this.mode == 'update') {
@@ -129,15 +137,51 @@ export class TodoDetailComponent implements OnInit{
 
   virtualRemove() {}
 
-  next() {
-    this.todoStore.selection.length
+// Navigation
+  initNavButton() {
+    const currentPosition = this.todoStore.selectedRowIds().findIndex(p => p === this.todoId );
+    const lastItemPosition = this.todoStore.selectedRowIds().length
+    patchState(this.state, {
+      currentPosition,
+      lastItemPosition
+    })
+
   }
 
-  last() {}
+  next() {
+    const currentPosition = this.state.currentPosition() + 1
+    if(currentPosition > this.state.lastItemPosition()) {
+      patchState(this.state, { currentPosition: currentPosition - 1 })
+    } else {
+      patchState(this.state, { currentPosition: currentPosition })
+    };
+    this.todoStore.newSelectedItem(this.state.currentPosition())
+    this.reload();
+  }
 
-  first() {}
+  last() {
+    const lastPostion = this.state.lastItemPosition();
+    patchState(this.state, { currentPosition: lastPostion });
+    this.todoStore.newSelectedItem(this.state.currentPosition())
+    this.reload();
+  }
 
-  previous() {}
+  first() {
+    patchState(this.state, { currentPosition: 0 });
+    this.todoStore.newSelectedItem(this.state.currentPosition())
+    this.reload();
+  }
+
+  previous() {
+    const currentPosition = this.state.currentPosition() - 1
+    if(currentPosition < 0 ) {
+      patchState(this.state, { currentPosition: 0 })
+    } else {
+      patchState(this.state, { currentPosition: currentPosition })
+    };
+    this.todoStore.newSelectedItem(this.state.currentPosition())
+    this.reload();
+  }
 
   onReset() {
     this.submitted = false;
