@@ -66,7 +66,6 @@ export function withTodosMethods() {
           patchState(store, { selectedRowIds: updateSelectedRowId })
         }
       },
-
     })),
     withUndoRedo({
       collections: ['todo'],

@@ -112,10 +112,10 @@ ngAfterViewInit(): void {
     return `${this.todoStore.selection().isSelected(row) ? 'deselect' : 'select'}`;
   }
 
-  selectUnselectItem(element: TodoInterface) {
-    const idSelected = element.id;
-    this.todoStore.toggleSelected(idSelected)
-  }
+  // selectUnselectItem(element: TodoInterface) {
+  //   const idSelected = element.id;
+  //   this.todoStore.toggleSelected(idSelected)
+  // }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
