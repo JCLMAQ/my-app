@@ -14,7 +14,7 @@ export interface TodoStateInterface {
     orgId: string | null,
   },
   selectedId: string | null,
-  selectedRowIds: Record<string, boolean>,
+  selectedRowIds: Array<string>,
   selection: SelectionModel<TodoInterface>
 }
 
@@ -25,7 +25,7 @@ export const initialTodoState: TodoStateInterface = {
     orgId: "test"
   },
   selectedId: null,
-  selectedRowIds: {},
+  selectedRowIds: [],
   selection: new SelectionModel<TodoInterface>(true, []),
 };
 

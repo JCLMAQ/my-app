@@ -111,8 +111,10 @@ checkboxLabel(row: TodoInterface): string {
 }
 
 selectItem(element: TodoInterface) {
-  this.todoStore.selection().isSelected(element)
-} // Filter the list
+  const idSelected = element.id;
+  this.todoStore.toggleSelected(idSelected)
+}
+
  applyFilter(event: Event) {
   const filterValue = (event.target as HTMLInputElement).value;
   this.dataSource.filter = filterValue.trim().toLowerCase();

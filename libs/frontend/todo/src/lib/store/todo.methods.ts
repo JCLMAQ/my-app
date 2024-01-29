@@ -56,9 +56,18 @@ export function withTodosMethods() {
         patchState(store, setLoaded('todo'));
       },
 
-      addSelected(row: TodoInterface, selectedRow: boolean) {
-        patchState(store, { selectedRowIds: { ...selectedRowIds(), [row.id]: selectedRow}} )
-      }
+      toggleSelected( selectedRowId: string) {
+        const allSelectedRowId = store.selectedRowIds();
+        const existSelectedRowId = allSelectedRowId.filter( item => item === selectedRowId)
+        if(existSelectedRowId.length === 0) {
+          // Ad the item id
+          patchState(store, { selectedRowIds: [ ...store.selectedRowIds(), selectedRowId] })
+        } else {
+          // remove the item id
+          const updateSelectedRowId = allSelectedRowId.filter( item => item !== selectedRowId)
+          patchState(store, { selectedRowIds: updateSelectedRowId })
+        }
+      },
 
     })),
     withUndoRedo({
