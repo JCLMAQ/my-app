@@ -98,39 +98,40 @@ ngAfterViewInit(): void {
   }
  /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
-  this.isAllSelected() ?
+      this.isAllSelected() ?
       this.todoStore.selection().clear() :
       this.dataSource.data.forEach(row => this.todoStore.selection().select(row));
+      // Update
+      this.dataSource.data.forEach(row => this.todoStore.toggleSelected(row.id));
 }
 
-checkboxLabel(row: TodoInterface): string {
-  if (!row) {
-    return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
+  checkboxLabel(row: TodoInterface): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
+    }
+    return `${this.todoStore.selection().isSelected(row) ? 'deselect' : 'select'}`;
   }
-  return `${this.todoStore.selection().isSelected(row) ? 'deselect' : 'select'}`;
-}
 
-selectItem(element: TodoInterface) {
-  const idSelected = element.id;
-  this.todoStore.toggleSelected(idSelected)
-}
-
- applyFilter(event: Event) {
-  const filterValue = (event.target as HTMLInputElement).value;
-  this.dataSource.filter = filterValue.trim().toLowerCase();
-  if (this.dataSource.paginator) {
-    this.dataSource.paginator.firstPage();
+  selectUnselectItem(element: TodoInterface) {
+    const idSelected = element.id;
+    this.todoStore.toggleSelected(idSelected)
   }
-}
 
-navigateButton( id: string, mode: string ) {
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
 
-    this.router.navigate([this.routeToDetail, id, mode]);
-}
+  navigateButton( id: string, mode: string ) {
+      this.router.navigate([this.routeToDetail, id, mode]);
+  }
 
-addOne() {
-  this.router.navigate([this.routeToDetail, '', 'create']);
-}
+  addOne() {
+    this.router.navigate([this.routeToDetail, '', 'create']);
+  }
 
   // addTodo() {
   //   this.todoStore.addTodo(this.form.value.todoValue);
@@ -139,17 +140,17 @@ addOne() {
 
 
 // Delete the selected item
-async remove( id: string ) {
+  async remove( id: string ) {
 
-}
+  }
 
-virtualRemove(id: string) {
+  virtualRemove(id: string) {
 
-}
+  }
 // MatTable mgt
 // On click row action
-onRowClicked(row: number) {
-  console.log('Row clicked: ', row);
-}
+  onRowClicked(row: number) {
+    console.log('Row clicked: ', row);
+  }
 
 }
