@@ -61,9 +61,11 @@ export function withTodosMethods() {
         const existSelectedRowId = allSelectedRowId.filter( item => item === selectedRowId)
         if(existSelectedRowId.length === 0) {
           patchState(store, { selectedRowIds: [ ...store.selectedRowIds(), selectedRowId] })
+          patchState(store, { selectedId: selectedRowId })
         } else {
           const updateSelectedRowId = allSelectedRowId.filter( item => item !== selectedRowId)
           patchState(store, { selectedRowIds: updateSelectedRowId })
+          patchState(store, { selectedId: "" })
         }
       },
 
