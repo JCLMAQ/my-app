@@ -122,7 +122,7 @@ ngAfterViewInit(): void {
 
   navigateButton( id: string, mode: string ) {
 
-      this.todoStore.selectedItemUpdate(id);
+      // this.todoStore.selectedItemUpdate(id);
       this.router.navigate([this.routeToDetail, id, mode]);
   }
 

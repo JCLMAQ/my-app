@@ -10,12 +10,12 @@ import { TodoStore } from '../store/todo.state';
 
 interface TodoForm
   extends FormGroup<{
-    id: FormControl<string| undefined | null>;
+    id: FormControl<string | undefined | null>;
     title?: FormControl<string | undefined | null>;
-    content?: FormControl<string| undefined | null>;
-    todoState?: FormControl<string| undefined | null>;
-    orderTodo?: FormControl<number| undefined | null>;
-  }> {}
+    content?: FormControl<string | undefined | null>;
+    todoState?: FormControl<string | undefined | null>;
+    orderTodo?: FormControl<number | undefined | null>;
+  }> { }
 
 @Component({
   selector: 'lib-todo-detail',
@@ -34,12 +34,12 @@ interface TodoForm
 })
 
 
-export class TodoDetailComponent implements OnInit{
+export class TodoDetailComponent implements OnInit {
 
-   state = signalState({
+  state = signalState({
     currentPosition: 0,
     lastItemPosition: 0
-   });
+  });
 
   readonly todoStore = inject(TodoStore);
 
@@ -56,7 +56,7 @@ export class TodoDetailComponent implements OnInit{
   isAdmin: boolean = false
   formControls = {
     title: ['', []],
-    content: ['',[]]
+    content: ['', []]
   };
 
 
@@ -70,11 +70,11 @@ export class TodoDetailComponent implements OnInit{
   ) {
     this.todoId = this.route.snapshot.params['id'];
     this.mode = this.route.snapshot.params['mode'];
-    effect(()=> {
+    effect(() => {
       this.fetchData();
     })
     // this.initNavButton();
-    patchState(this.todoStore, { selectedId: this.todoId});
+    patchState(this.todoStore, { selectedId: this.todoId });
     this.initNavButton();
   }
 
@@ -90,23 +90,23 @@ export class TodoDetailComponent implements OnInit{
     this.mode = this.route.snapshot.params['mode'];
     this.formControls = {
       title: ['', []],
-      content: ['',[]]
+      content: ['', []]
     }
     this.form = this.fb.group(this.formControls);
 
-  console.log("End of ngInit ")
+    console.log("End of ngInit ")
   }
 
   reload() {
-    if(this.mode === 'update' || this.mode ===  'view') {
+    if (this.mode === 'update' || this.mode === 'view') {
       this.form.patchValue({
         id: this.todoStore.selectedItem()?.id,
         title: this.todoStore.selectedItem()?.title,
         content: this.todoStore.selectedItem()?.content
       });
-    } else if (this.mode == 'create'  ) {
+    } else if (this.mode == 'create') {
       this.form = this.fb.group({
-          ...this.formControls,
+        ...this.formControls,
       });
     };
 
@@ -119,38 +119,46 @@ export class TodoDetailComponent implements OnInit{
     if (this.mode == 'update') {
     } else if (this.mode == 'create') {
 
- // todo
+      // todo
 
     }
     this.router.navigate(['todos']);
-}
+  }
 
-  add() {}
+  add() { }
 
-  create() {}
+  create() { }
 
-  cancel() {}
+  cancel() { }
 
-  remove() {}
+  remove() { }
 
-  reset() {}
+  reset() { }
 
-  virtualRemove() {}
+  virtualRemove() { }
 
-// Navigation
+  // Navigation
   initNavButton() {
-    const currentPosition = this.todoStore.selectedRowIds().findIndex(p => p === this.todoId );
-    const lastItemPosition = this.todoStore.selectedRowIds().length
+    let currentPosition = 0;
+    let lastItemPosition = 0;
+    if(this.todoStore.selection().selected.length <= 1 ) {
+      currentPosition = this.todoStore.todoEntities().findIndex(p => p.id === this.todoId);
+      lastItemPosition = this.todoStore.todoEntities().length;
+    } else {
+      currentPosition = this.todoStore.selection().selected.findIndex(p => p.id === this.todoId);
+      // const currentPosition = this.todoStore.selectedRowIds().findIndex(p => p === this.todoId);
+      lastItemPosition = this.todoStore.selection().selected.length;
+      // const lastItemPosition = this.todoStore.selectedRowIds().length;
+    }
     patchState(this.state, {
       currentPosition,
       lastItemPosition
     })
-
   }
 
   next() {
     const currentPosition = this.state.currentPosition() + 1
-    if(currentPosition > this.state.lastItemPosition()) {
+    if (currentPosition > this.state.lastItemPosition()) {
       patchState(this.state, { currentPosition: currentPosition - 1 })
     } else {
       patchState(this.state, { currentPosition: currentPosition })
@@ -174,7 +182,7 @@ export class TodoDetailComponent implements OnInit{
 
   previous() {
     const currentPosition = this.state.currentPosition() - 1
-    if(currentPosition < 0 ) {
+    if (currentPosition < 0) {
       patchState(this.state, { currentPosition: 0 })
     } else {
       patchState(this.state, { currentPosition: currentPosition })

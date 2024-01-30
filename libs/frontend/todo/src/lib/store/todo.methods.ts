@@ -70,17 +70,24 @@ export function withTodosMethods() {
       },
 
       newSelectedItem(newSelectedItemIndex: number) {
-        const selectedId = store.selectedRowIds()[newSelectedItemIndex]
-        patchState(store,{ selectedId })
+        const selectionId = store.selection().selected[newSelectedItemIndex]
+        // const selectedId = store.selectedRowIds()[newSelectedItemIndex]
+        patchState(store,{ selectedId: selectionId.id })
       },
 
-      selectedItemUpdate(selectedId){
+      selectedItemUpdate(selectedRowId){
         const allSelectedRowId = store.selectedRowIds();
-        const existSelectedRowId = allSelectedRowId.filter( item => item === selectedId)
-        if(!existSelectedRowId) {
-          patchState(store, { selectedRowIds: [ ...store.selectedRowIds(), selectedId] })
-        };
-        patchState(store,{ selectedId })
+        if(allSelectedRowId.length > 0 ) {
+          const existSelectedRowId = allSelectedRowId.filter( item => item === selectedRowId);
+          if(existSelectedRowId.length === 0) {
+            patchState(store, { selectedRowIds: [ ...store.selectedRowIds(), selectedRowId] })
+          };
+          patchState(store, { selectedRowIds: [ ...store.selectedRowIds()] })
+          patchState(store,{ selectedId: selectedRowId })
+        } else {
+          patchState(store, { selectedRowIds: [ ...store.selectedRowIds(), selectedRowId] });
+          patchState(store,{ selectedId: selectedRowId })
+        }
       }
 
     })),

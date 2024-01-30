@@ -90,7 +90,7 @@
               <mat-icon>edit</mat-icon>
             </button>
               <button mat-icon-button aria-label="expand row" (click)="todoStore.selection().toggle(element)"
-                                                              (click)="todoStore.toggleSelected(element.id)"
+                                                              (click)="todoStore.selectedItemUpdate(element.id)"
                                                               (click)="navigateButton(element.id, 'view')">
               <mat-icon>remove_red_eye</mat-icon>
             </button>
