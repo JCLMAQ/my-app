@@ -23,7 +23,7 @@
           }
         ],
         "assets": ["apps/backend/src/assets"],
-        "webpackConfig": "apps/backend/webpack.config.js",
+        "webpackConfig": "apps/backend/webpack.config.js"
       },
       "configurations": {
         "production": {
@@ -52,9 +52,8 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/backend/**/*.ts"]
+        "lintFilePatterns": ["{projectRoot}/**/*.ts"]
       }
     },
     "test": {

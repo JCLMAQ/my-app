@@ -44,7 +44,7 @@ export const TodoStore = signalStore(
     })),
     withTodosMethods(),
 
-    withHooks({
+     withHooks({
       onInit:
         (store) =>  store.load(),
       onDestroy() {
