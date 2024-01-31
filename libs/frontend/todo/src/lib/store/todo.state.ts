@@ -1,11 +1,12 @@
 
 // import { withCallState } from '@angular-architects/ngrx-toolkit';
 import { SelectionModel } from '@angular/cdk/collections';
-import { computed } from '@angular/core';
 import { withLogger } from '@fe/shared/util-signal-store';
-import { signalStore, withComputed, withHooks, withState } from '@ngrx/signals';
+import { signalStore, withHooks, withState } from '@ngrx/signals';
+import { withNavigationMethods } from './todo-navigation.methods';
 import { withTodosMethods } from './todo.methods';
 import { TodoInterface } from './todo.model';
+import { withTodosSelectors } from './todo.selectors';
 
 export interface TodoStateInterface {
   items: TodoInterface[],
@@ -14,7 +15,7 @@ export interface TodoStateInterface {
     orgId: string | null,
   },
   selectedId: string | null,
-  selectedRowIds: Array<string>,
+  selectedIds: string[],
   selection: SelectionModel<TodoInterface>
 }
 
@@ -25,7 +26,7 @@ export const initialTodoState: TodoStateInterface = {
     orgId: "test"
   },
   selectedId: null,
-  selectedRowIds: [],
+  selectedIds: [],
   selection: new SelectionModel<TodoInterface>(true, []),
 };
 
@@ -37,14 +38,10 @@ export const TodoStore = signalStore(
     { providedIn: 'root' },
     withLogger('todo'),
     withState(initialTodoState),
-    withComputed(({ items, selection, selectedId, selectedRowIds }) => ({
-      selectedItem: computed(() => items().find((x) => x.id === selectedId())),
-      selectedItemIndex: computed(()=> selectedRowIds().findIndex((x) => x === selectedId()) ),
-      selectedItems: computed(() => selection().selected.entries)
-    })),
+    withTodosSelectors(),
     withTodosMethods(),
-
-     withHooks({
+    withNavigationMethods(),
+    withHooks({
       onInit:
         (store) =>  store.load(),
       onDestroy() {

@@ -40,16 +40,25 @@
       <button mat-icon-button matTooltip="Save changes"  [disabled]="mode==='view'" (click)="save()">
         <mat-icon>check_circle</mat-icon>
       </button>
-      <button mat-icon-button matTooltip="First record" (click)="first()">
+      <button mat-icon-button matTooltip="First record"
+                                  [disabled]="!todoStore.navigation.isFirst()"
+                                  (click)="first()">
         <mat-icon>first_page</mat-icon>
       </button>
-      <button mat-icon-button matTooltip="Previous record" (click)="previous()">
+      <button mat-icon-button matTooltip="Previous record"
+                                  [disabled]="!todoStore.navigation.hasPrevious()"
+                                  (click)="previous()">
         <mat-icon>skip_previous</mat-icon>
       </button>
-      <button mat-icon-button matTooltip="Next record" (click)="next()">
+      <button mat-icon-button matTooltip="Next record"
+                                  [disabled]="!todoStore.navigation.hasNext()"
+
+                                  (click)="next()">
         <mat-icon>skip_next</mat-icon>
       </button>
-      <button mat-icon-button matTooltip="Last record" (click)="last()">
+      <button mat-icon-button matTooltip="Last record"
+                                  [disabled]="todoStore.navigation.isLast()"
+                                  (click)="last()">
         <mat-icon>last_page</mat-icon>
       </button>
       <button mat-icon-button placeholder="Reload" matTooltip="Reset" (click)="reload()">
@@ -66,8 +75,10 @@
     </mat-card-footer>
   </mat-card>
 </div>
+<div>Current Position : {{todoStore.currentPosition()}}</div>
+<div>Last Position : {{todoStore.lastPosition()}}</div>
 <div>Selected Items: {{todoStore.selection().selected.length}}</div>
 <div>Selection : {{todoStore.selection().selected | json}}</div>
 <div>SelectedItem Index: {{todoStore.selectedItemIndex()}}</div>
 <div>Selected entries : {{todoStore.selection().selected.entries.length }}</div>
-<div>SelectedRowIds : {{todoStore.selectedRowIds() | json}}</div>
+<div>SelectedRowIds : {{todoStore.selectedIds() | json}}</div>

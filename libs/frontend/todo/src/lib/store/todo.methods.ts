@@ -57,35 +57,36 @@ export function withTodosMethods() {
       },
 
       toggleSelected( selectedRowId: string) {
-        const allSelectedRowId = store.selectedRowIds();
+        const allSelectedRowId = store.selectedIds();
         const existSelectedRowId = allSelectedRowId.filter( item => item === selectedRowId)
         if(existSelectedRowId.length === 0) {
-          patchState(store, { selectedRowIds: [ ...store.selectedRowIds(), selectedRowId] })
+          patchState(store, { selectedIds: [ ...store.selectedIds(), selectedRowId] })
           patchState(store, { selectedId: selectedRowId })
         } else {
           const updateSelectedRowId = allSelectedRowId.filter( item => item !== selectedRowId)
-          patchState(store, { selectedRowIds: updateSelectedRowId })
+          patchState(store, { selectedIds: updateSelectedRowId })
           patchState(store, { selectedId: "" })
         }
       },
 
       newSelectedItem(newSelectedItemIndex: number) {
+
         const selectionId = store.selection().selected[newSelectedItemIndex]
-        // const selectedId = store.selectedRowIds()[newSelectedItemIndex]
+        // const selectedId = store.selectedIds()[newSelectedItemIndex]
         patchState(store,{ selectedId: selectionId.id })
       },
 
       selectedItemUpdate(selectedRowId){
-        const allSelectedRowId = store.selectedRowIds();
+        const allSelectedRowId = store.selectedIds();
         if(allSelectedRowId.length > 0 ) {
           const existSelectedRowId = allSelectedRowId.filter( item => item === selectedRowId);
           if(existSelectedRowId.length === 0) {
-            patchState(store, { selectedRowIds: [ ...store.selectedRowIds(), selectedRowId] })
+            patchState(store, { selectedIds: [ ...store.selectedIds(), selectedRowId] })
           };
-          patchState(store, { selectedRowIds: [ ...store.selectedRowIds()] })
+          patchState(store, { selectedIds: [ ...store.selectedIds()] })
           patchState(store,{ selectedId: selectedRowId })
         } else {
-          patchState(store, { selectedRowIds: [ ...store.selectedRowIds(), selectedRowId] });
+          patchState(store, { selectedIds: [ ...store.selectedIds(), selectedRowId] });
           patchState(store,{ selectedId: selectedRowId })
         }
       }

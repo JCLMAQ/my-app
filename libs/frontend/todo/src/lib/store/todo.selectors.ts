@@ -5,7 +5,10 @@ import { TodoStateInterface } from './todo.state';
 export function withTodosSelectors() {
   return signalStoreFeature(
     { state: type<TodoStateInterface>() },
-    withComputed(({ items }) => ({
+    withComputed(({ items, selection, selectedId, selectedIds }) => ({
+      selectedItem: computed(() => items().find((x) => x.id === selectedId())),
+      selectedItemIndex: computed(()=> selectedIds().findIndex((x) => x === selectedId()) ),
+      selectedItems: computed(() => selection().selected.entries),
       doneCount: computed(() => items().filter((x) => x.todoState === 'DONE').length),
       undoneCount: computed(() => items().filter((x) => x.todoState !== 'DONE').length),
       percentageDone: computed(() => {
