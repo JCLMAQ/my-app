@@ -119,7 +119,7 @@ export function withNavigationMethods() {
 
         first() {
           const currentPosition = 0;
-          this.navStateMgt( currentPosition);
+          this.navStateMgt( currentPosition );
         },
 
         previous() {

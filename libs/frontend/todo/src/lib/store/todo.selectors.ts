@@ -9,6 +9,7 @@ export function withTodosSelectors() {
       selectedItem: computed(() => items().find((x) => x.id === selectedId())),
       selectedItemIndex: computed(()=> selectedIds().findIndex((x) => x === selectedId()) ),
       selectedItems: computed(() => selection().selected.entries),
+      lastPostionIndex: computed(() => items().length - 1),
       doneCount: computed(() => items().filter((x) => x.todoState === 'DONE').length),
       undoneCount: computed(() => items().filter((x) => x.todoState !== 'DONE').length),
       percentageDone: computed(() => {

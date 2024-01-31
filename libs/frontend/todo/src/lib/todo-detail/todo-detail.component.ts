@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit, effect, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
@@ -82,10 +82,11 @@ export class TodoDetailComponent implements OnInit {
   ) {
     this.todoId = this.route.snapshot.params['id'];
     this.mode = this.route.snapshot.params['mode'];
-    effect(() => {
-      this.fetchData();
-    })
+    // effect(() => {
+    //   this.fetchData();
+    // })
     // this.initNavButton();
+    // patchState(this.todoStore, { lastPosition: this.todoStore.items().length - 1 });
     patchState(this.todoStore, { selectedId: this.todoId });
     this.todoStore.initNavButton(this.todoId);
   }
@@ -106,15 +107,18 @@ export class TodoDetailComponent implements OnInit {
     }
     this.form = this.fb.group(this.formControls);
 
+    patchState(this.todoStore, { selectedId: this.todoId });
+    this.todoStore.initNavButton(this.todoId);
+    this.reload()
     console.log("End of ngInit ")
   }
 
   reload() {
     if (this.mode === 'update' || this.mode === 'view') {
       this.form.patchValue({
-        id: this.todoItem?.id,
-        title: this.todoItem?.title,
-        content: this.todoItem?.content
+        id: this.todoStore.selectedItem()?.id,
+        title: this.todoStore.selectedItem()?.title,
+        content: this.todoStore.selectedItem()?.content
       });
     } else if (this.mode == 'create') {
       this.form = this.fb.group({
@@ -160,7 +164,7 @@ export class TodoDetailComponent implements OnInit {
   }
 
   first() {
-    this.todoStore.filter();
+    this.todoStore.first();
     this.reload();
   }
 
