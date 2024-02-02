@@ -68,7 +68,6 @@ constructor() {
     this.fetchData();
     const state = getState(this.todoStore);
       console.log('Todo state changed', state);
-    // getState(this.todoStore);
   })
 }
 
@@ -121,8 +120,7 @@ ngAfterViewInit(): void {
   }
 
   navigateButton( id: string, mode: string ) {
-
-      // this.todoStore.selectedItemUpdate(id);
+    // this.todoStore.initNavButton(id);
       this.router.navigate([this.routeToDetail, id, mode]);
   }
 

@@ -4,19 +4,18 @@ import {
   patchState,
   signalStoreFeature,
   type,
-  withMethods,
-  withState
+  withMethods
 } from '@ngrx/signals';
 import { addEntity, removeEntity, setAllEntities, updateEntity, withEntities } from '@ngrx/signals/entities';
 import { TodoService } from '../services/todo.service';
 import { TodoInterface } from './todo.model';
-import { TodoStateInterface, initialTodoState } from './todo.state';
+import { TodoStateInterface } from './todo.state';
 // withCallState base on: https://www.angulararchitects.io/blog/the-new-ngrx-signal-store-for-angular-2-1-flavors/
 
 export function withTodosMethods() {
   return signalStoreFeature(
     { state: type<TodoStateInterface>() },
-    withState(initialTodoState),
+    // withState(initialTodoState),
     withEntities({ entity: type<TodoInterface>(), collection: 'todo'}),
     withCallState({collection: 'todo'}),
     withMethods((store, todoService = inject(TodoService)) => ({

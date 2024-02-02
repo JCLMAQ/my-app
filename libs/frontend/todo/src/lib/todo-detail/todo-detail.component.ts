@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, effect, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MATERIAL } from '@fe/material';
-import { patchState } from '@ngrx/signals';
+import { getState, patchState } from '@ngrx/signals';
 import { TodoInterface, TodoPartialInterface } from '../store/todo.model';
 import { TodoStore } from '../store/todo.state';
 
@@ -36,24 +36,6 @@ interface TodoForm
 
 export class TodoDetailComponent implements OnInit {
 
-  // state = signalState({
-  //   currentPosition: 0,
-  //   lastPosition: 0,
-  //   navigation: {
-  //     hasNext: false,
-  //     hasPrevious: false,
-  //     isFirst: false,
-  //     isLast: false
-  //   }
-  // });
-
-  // currentPosition = 0;
-  // lastPosition = 0;
-  // hasNext = false;
-  // hasPrevious = false;
-  // isFirst = false;
-  // isLast = false;
-
   readonly todoStore = inject(TodoStore);
 
   public todo: TodoPartialInterface | undefined | null;
@@ -62,6 +44,7 @@ export class TodoDetailComponent implements OnInit {
 
   todoId!: string | undefined;
   todoItem: TodoInterface | undefined;
+  todoItems: TodoInterface[] | undefined;
 
   submitted = false;
   mode: 'create' | 'update' | 'view' | undefined;
@@ -71,7 +54,20 @@ export class TodoDetailComponent implements OnInit {
     content: ['', []]
   };
 
+  currentPosition =  0
+  lastPosition = 0;
 
+  navigation: {
+    hasNext: boolean
+    hasPrevious: boolean
+    isFirst: boolean
+    isLast: boolean
+  } = {
+      hasNext: false,
+      hasPrevious: false,
+      isFirst: false,
+      isLast: false
+    }
 
   constructor(
     private fb: FormBuilder,
@@ -80,40 +76,50 @@ export class TodoDetailComponent implements OnInit {
     private dateAdapter: DateAdapter<Date>,
     // private alertService: AlertService,
   ) {
+    console.log("Start of constructor ")
     this.todoId = this.route.snapshot.params['id'];
     this.mode = this.route.snapshot.params['mode'];
-    // effect(() => {
-    //   this.fetchData();
-    // })
-    // this.initNavButton();
-    // patchState(this.todoStore, { lastPosition: this.todoStore.items().length - 1 });
-    patchState(this.todoStore, { selectedId: this.todoId });
-    this.todoStore.initNavButton(this.todoId);
-  }
-
-  fetchData(): void {
-
-    const totalSelected = this.todoStore.selection().selected.entries
-    console.log(totalSelected)
-    console.log(this.todoStore.selectedItems())
-  }
-
-  ngOnInit(): void {
-    this.todoId = this.route.snapshot.params['id'];
-    this.mode = this.route.snapshot.params['mode'];
-    this.formControls = {
-      title: ['', []],
-      content: ['', []]
-    }
     this.form = this.fb.group(this.formControls);
 
     patchState(this.todoStore, { selectedId: this.todoId });
-    this.todoStore.initNavButton(this.todoId);
-    this.reload()
+    console.log('Constructor todo page state changed (1): ', getState(this.todoStore));
+    effect(() => {
+      // this.fetchData();
+      this.reload();
+      const state = getState(this.todoStore);
+      console.log('Constructor effect todo page state changed: ', state);
+    });
+    // this.todoStore.initNavButton(this.todoId);
+    // patchState(this.todoStore, { selectedId: this.todoId });
+
+    // this.todoStore.initNavButton(this.todoId);
+    // if(this.todoStore.todoLoaded()){
+    //   this.todoStore.initNavButton(this.todoId);
+    // }
+
+    // patchState(this.todoStore, { lastPosition: this.todoStore.items().length - 1 });
+    // patchState(this.todoStore, { selectedId: this.todoId });
+    // this.todoStore.initNavButton(this.todoId);
+    console.log("End of constructor ")
+  }
+
+  fetchData(): void {
+    console.log("Start of fetchData ", this.todoItems)
+    this.todoItems = this.todoStore.todoEntities();
+    console.log("End of fetchData ", this.todoItems)
+  }
+
+  ngOnInit(): void {
+    console.log("Start of ngInit ")
+
+    console.log('ngInit todo page state changed: ', getState(this.todoStore));
+
     console.log("End of ngInit ")
   }
 
+
   reload() {
+    this.positionCompute();
     if (this.mode === 'update' || this.mode === 'view') {
       this.form.patchValue({
         id: this.todoStore.selectedItem()?.id,
@@ -153,23 +159,36 @@ export class TodoDetailComponent implements OnInit {
 
   virtualRemove() { }
 
+  positionCompute() {
+    this.currentPosition = this.todoStore.items().findIndex(item => item.id === this.todoId)
+
+    this.lastPosition = this.todoStore.items().length - 1;
+
+  }
+
+
   next() {
-    this.todoStore.next();
+    this.positionCompute();
+
+    this.todoStore.next(this.currentPosition, this.lastPosition);
     this.reload();
   }
 
   last() {
-    this.todoStore.last()
+    this.positionCompute();
+    this.todoStore.last(this.lastPosition)
     this.reload();
   }
 
   first() {
-    this.todoStore.first();
+    this.positionCompute();
+    this.todoStore.first(this.lastPosition);
     this.reload();
   }
 
   previous() {
-    this.todoStore.previous();
+    this.positionCompute();
+    this.todoStore.previous(this.currentPosition, this.lastPosition);
     this.reload();
   }
 
