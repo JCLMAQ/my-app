@@ -1,3 +1,20 @@
+@if (todoStore.todoLoading()) {
+  <h2>Loading...</h2>
+  <mat-progress-bar
+  mode="indeterminate"
+  class="loader"
+></mat-progress-bar>
+
+  }
+
+@if (todoStore.todoLoaded()) {
+  <h2>Loaded...</h2>
+  }
+
+@if (todoStore.todoError()) {
+  <div>{{ todoStore.todoError() }}</div>
+}
+
 <div [formGroup]="form">
   <mat-card class="todo-card mat-elevation-z10">
     <mat-card-header>
