@@ -76,14 +76,14 @@ export class TodoDetailComponent implements OnInit {
     // private alertService: AlertService,
   ) {
     console.log("Start of constructor ")
-    // this.todoId = this.route.snapshot.params['id'];
+    this.todoId = this.route.snapshot.params['id'];
     this.mode = this.route.snapshot.params['mode'];
     this.form = this.fb.group(this.formControls);
 
     patchState(this.todoStore, { selectedId: this.todoId });
     console.log('Constructor todo page state changed (1): ', getState(this.todoStore));
     effect(() => {
-      this.fetchData();
+      // this.fetchData();
       this.reload();
       const state = getState(this.todoStore);
       console.log('Constructor effect todo page state changed: ', state);

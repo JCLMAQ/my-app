@@ -6,7 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { MATERIAL } from '@fe/material';
-import { getState, patchState } from '@ngrx/signals';
+import { getState } from '@ngrx/signals';
 import { TodoInterface } from '../store/todo.model';
 import { TodoStore } from '../store/todo.state';
 // import { CallState } from '@fe/shared/util-common';
@@ -52,7 +52,7 @@ ownerId = "7c672043-24e4-45a9-909c-693ba5044785"
 
   index: number | undefined
 
-  routeToDetail = "todos/todo";
+  routeToDetail = "todos/tododetail";
 
   mode: 'Edit' | 'View' | 'Update' | undefined ;
   master = false; // true : button is disable
@@ -121,11 +121,7 @@ ngAfterViewInit(): void {
 
   navigateButton( id: string, mode: string ) {
     // this.todoStore.initNavButton(id);
-    patchState(this.todoStore, { selectedId: id });
-    patchState(this.todoStore, { lastPosition: this.todoStore.items().length - 1 });
-
-      this.router.navigate([this.routeToDetail, mode]);
-      // this.router.navigate([this.routeToDetail, id, mode]);
+      this.router.navigate([this.routeToDetail, id, mode]);
   }
 
   addOne() {
