@@ -37,7 +37,6 @@ export const initialTodoState: TodoStateInterface = {
 export const TodoStore = signalStore(
     { providedIn: 'root' },
     withLogger('todo'),
-
     withState(initialTodoState),
     withTodosSelectors(),
     withTodosMethods(),

@@ -1,4 +1,3 @@
-import { withDevtools } from '@angular-architects/ngrx-toolkit';
 import { inject } from '@angular/core';
 import { setLoaded, setLoading, withCallState, withUndoRedo } from '@fe/shared/util-signal-store';
 import {
@@ -18,7 +17,6 @@ export function withTodosMethods() {
   return signalStoreFeature(
     { state: type<TodoStateInterface>() },
     withState(initialTodoState),
-    withDevtools('todo'),
     withEntities({ entity: type<TodoInterface>(), collection: 'todo'}),
     withCallState({collection: 'todo'}),
     withMethods((store, todoService = inject(TodoService)) => ({
