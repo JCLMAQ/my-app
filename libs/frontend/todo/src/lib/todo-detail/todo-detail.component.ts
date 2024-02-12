@@ -26,7 +26,7 @@ interface TodoForm extends FormGroup<{
     FormsModule,
     ReactiveFormsModule
   ],
-  // providers: [TodoStore],
+  providers: [TodoStore],
   templateUrl: './todo-detail.component.html',
   styleUrl: './todo-detail.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

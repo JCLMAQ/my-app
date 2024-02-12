@@ -34,7 +34,7 @@ export const initialTodoState: TodoStateInterface = {
 // and : https://www.angulararchitects.io/blog/smarter-not-harder-simplifying-your-application-with-ngrx-signal-store-and-custom-features/
 
 export const TodoStore = signalStore(
-    { providedIn: 'root' },
+    // { providedIn: 'root' },
     // withLogger('todo'),
     withState(initialTodoState),
     withTodosSelectors(),
@@ -43,9 +43,9 @@ export const TodoStore = signalStore(
     withHooks({
       onInit:
         (store) =>  store.load(),
-      onDestroy() {
-        console.log('on destroy');
-      },
+      // onDestroy() {
+      //   console.log('on destroy');
+      // },
     }),
 
   );

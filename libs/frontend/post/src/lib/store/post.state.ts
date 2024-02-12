@@ -30,7 +30,7 @@ export const initialPostState: PostStateInterface = {
 // export type SelectedEntityState = { selectedEntityId: EntityId | null };
 
 export const PostStore = signalStore(
-  { providedIn: 'root' },
+  // { providedIn: 'root' },
   withLogger('post'),
   withState(initialPostState),
   withDevtools('post'),

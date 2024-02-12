@@ -29,7 +29,7 @@ import { TodoStore } from '../store/todo.state';
   ],
   styleUrl: './todo.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  // providers: [TodoStore],
+  providers: [TodoStore],
 })
 
 export class TodoComponent implements OnInit, AfterViewInit{
@@ -70,6 +70,8 @@ constructor() {
       console.log('Todo state changed', state);
   })
 }
+
+
 
 ngOnInit(): void {
   console.log('ngOnInit step')
