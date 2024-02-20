@@ -44,6 +44,7 @@
       "@fe/ui/auth": ["libs/frontend/ui/auth/src/index.ts"],
       "@fe/user": ["libs/frontend/user/src/index.ts"],
       "@fe/utilities": ["libs/frontend/ui/utilities/src/index.ts"],
+
       "@my-app/api-interfaces": ["zmodel/libs/api-interfaces/src/index.ts"],
       "@my-app/data/auths": ["libs/data/auths/src/index.ts"],
       "@my-app/data/changestracking": [
