@@ -15,10 +15,10 @@ export class AppService {
     return 'Hello ' + userIp + '!';
 }
 
-getData() {
-  const userIp = this.cls.get('ip');
-  return 'Welcome to backend!'+ userIp + ' ! ';
-}
+  getData() {
+    const userIp = this.cls.get('ip');
+    return 'Welcome to backend!'+ userIp + ' ! ';
+  }
   // getData(): { message: string } {
   //   const userIp = this.cls.get('ip');
   //   return { message: 'Welcome to backend!'+ userIp + ' ! ' };

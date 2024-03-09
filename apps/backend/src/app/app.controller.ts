@@ -15,6 +15,7 @@ export class AppController {
   @Public() // from module iam
   @Auth(AuthType.None)
   */
+  @Auth(AuthType.None)
   @Get()
   getData() {
     return this.appService.getData();
